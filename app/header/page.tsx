@@ -1,22 +1,27 @@
+import { AppBar, Button, Toolbar, Typography } from "@mui/material";
 import Link from "next/link";
 
 export const Header = () => {
   return (
-    <header className="bg-gray-800 text-white p-4">
-      <nav className="flex justify-between items-center">
-        <Link href="/">
-          <h1 className="text-xl font-bold">Bread&Butter</h1>
-        </Link>
-        <ul className="flex gap-4">
-          <li>
-            <Link href="/admin">👤</Link>
-          </li>
-          <li>
-            <Link href="/cart">🛒</Link>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <AppBar
+      position="static"
+      sx={{
+        padding: 4,
+        bgcolor: "background.default",
+      }}
+    >
+      <Toolbar>
+        <Typography variant="h3" sx={{ flexGrow: 1 }} component={Link} href="/">
+          Bread&Butter
+        </Typography>
+        <Button color="inherit" component={Link} href="/admin">
+          👤
+        </Button>
+        <Button color="inherit" component={Link} href="/cart">
+          🛒
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 
