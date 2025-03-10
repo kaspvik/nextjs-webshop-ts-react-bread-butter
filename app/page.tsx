@@ -25,7 +25,15 @@ export default function Home() {
         columns={{ xs: 4, sm: 8, md: 12 }}
       >
         {products.map((product: Product) => (
-          <Link href="/product/page" key={product.id}>
+          <Link
+            href="/product/page/{"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Grid key={product.id} size={{ xs: 2, sm: 4, md: 6, lg: 8 }}>
               <ProductCard key={product.id} product={product} />
             </Grid>

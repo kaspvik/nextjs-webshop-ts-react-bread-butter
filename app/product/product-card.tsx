@@ -13,7 +13,7 @@ type ProductCardProps = {
 
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minHeight: 300 }}>
       <CardMedia
         sx={{ height: 250 }}
         image={product.image}
@@ -31,7 +31,12 @@ export default async function ProductCard({ product }: ProductCardProps) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Köp</Button>
+        <Button
+          size="small"
+          sx={{ backgroundColor: "#9C8173", color: "#FAF2E9" }}
+        >
+          Köp
+        </Button>
       </CardActions>
     </Card>
   );
