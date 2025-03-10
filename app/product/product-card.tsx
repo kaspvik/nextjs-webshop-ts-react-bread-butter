@@ -5,17 +5,20 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { products } from "@/data";
 import { Product } from "@/data";
-import Link from "next/link";
 
-export default function ProductCard() {
+type ProductCardProps = {
+  product: Product;
+};
+
+export default async function ProductCard({ product }: ProductCardProps) {
   return (
-   
-    {products.map((product:Product) => (
-      <Link href="/product/page" key={product.id}>
-    <Card sx={{ maxWidth: 345 }} >
-      <CardMedia sx={{ height: 140 }} image="" title={product.title} />
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        sx={{ height: 140 }}
+        image={product.image}
+        title={product.title}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {product.title}
@@ -31,7 +34,5 @@ export default function ProductCard() {
         <Button size="small">Köp</Button>
       </CardActions>
     </Card>
-    </Link>
-    ))}
   );
 }
