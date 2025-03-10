@@ -16,17 +16,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <header>
-              <Link href="/">
+              <Link href='/'>
                 <h1>NextJS webbshop</h1>
               </Link>
             </header>
-            {children}
+            <main>{children}</main>
             <footer>
               <p>© 2024</p>
             </footer>
