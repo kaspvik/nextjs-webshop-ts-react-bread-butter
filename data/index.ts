@@ -61,7 +61,8 @@ export const products: Product[] = [
     articleNumber: "3456",
     image: "/images/surdegslimpavete.png",
     title: "Surdegslimpa Vete",
-    description: "Häll vete i en påse, hur gott är inte detta bröd!?",
+    description:
+      "Häll vete i en påse, hur gott är inte detta bröd!? Jättegott.",
     price: 60,
     weight: 620,
   },
@@ -95,5 +96,16 @@ export const products: Product[] = [
     description: "Vårt prisvinnande valnötsbröd låter det vattnas i munnen!",
     price: 65,
     weight: 650,
+  },
+  {
+    id: "1357",
+    articleNumber: "1357",
+    image:
+      "https://images.pexels.com/photos/31009555/pexels-photo-31009555/free-photo-of-rustikt-brod-med-keramiska-burkar-pa-traskiva.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    title: "Surdegsfralla",
+    description:
+      "En vanlig j*vla fralla, fast bättre, såklart. Ha smör på, det blir gott.",
+    price: 45,
+    weight: 450,
   },
 ];

@@ -27,16 +27,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <CssBaseline />
             <Header />
 
-            <main
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                minHeight: "100vh",
-              }}
-            >
-              {children}
-            </main>
+            <main>{children}</main>
 
             <Footer />
           </ThemeProvider>
