@@ -27,6 +27,10 @@ export default function RootLayout({ children }: PropsWithChildren) {
             <CssBaseline />
             <Header />
 
+
+            <main>{children}</main>
+
+
             <main
               style={{
                 display: "flex",
@@ -35,8 +39,9 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 minHeight: "100vh",
               }}
             >
-              {children}
+    
             </main>
+
             <Footer />
           </ThemeProvider>
         </AppRouterCacheProvider>
