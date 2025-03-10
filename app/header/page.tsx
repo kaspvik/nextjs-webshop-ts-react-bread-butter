@@ -4,10 +4,11 @@ import Link from "next/link";
 export const Header = () => {
   return (
     <AppBar
-      position="static"
+      position="sticky"
       sx={{
         padding: 4,
         bgcolor: "background.default",
+        zIndex: 1100,
       }}
     >
       <Toolbar>
