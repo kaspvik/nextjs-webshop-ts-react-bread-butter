@@ -1,10 +1,13 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Inter } from "next/font/google";
-import Link from "next/link";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
+
+import Header from "./header/page";
+
 import Footer from "./footer/page";
+
 import theme from "./theme";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,16 +25,15 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <header>
-              <Link href="/">
-                <h1>NextJS webbshop</h1>
-              </Link>
+            <Header />
+           
+            {children}
+            <footer>
+
             </header>
             <main>{children}</main>
             <Footer />
-            {/* <footer>
-              <p>© 2024</p>
-            </footer> */}
+           
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
