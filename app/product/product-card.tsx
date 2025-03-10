@@ -15,7 +15,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
-        sx={{ height: 140 }}
+        sx={{ height: 250 }}
         image={product.image}
         title={product.title}
       />
