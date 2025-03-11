@@ -12,11 +12,13 @@ import Paper from "@mui/material/Paper";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
+    backgroundColor: theme.palette.background,
+    color: theme.palette.text,
+    fontSize: 20,
+    fontWeight: "400",
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }));
 
@@ -48,8 +50,7 @@ export default function ConfirmationPage() {
       sx={{
         display: "flex",
         justifyContent: "center",
-        alignItems: "center",
-
+        alignItems: "flexStart",
         minHeight: "100vh",
       }}
     >
@@ -63,8 +64,27 @@ export default function ConfirmationPage() {
           borderRadius: "0.5rem",
           margin: "2rem 0",
           width: "100%",
+          height: "100%",
         }}
       >
+        <Typography variant="h1" component="div" sx={{ textAlign: "center" }}>
+          Tack för din beställning!
+        </Typography>
+        <Typography
+          variant="h1"
+          component="p"
+          sx={{ textAlign: "center", fontSize: "1.25rem", padding: "1.5rem" }}
+        >
+          Ditt ordernummer: 157462400
+        </Typography>
+
+        <Typography
+          variant="h2"
+          component="p"
+          sx={{ fontSize: "2rem", fontWeight: "400", mb: "1.5rem" }}
+        >
+          Din beställning:{" "}
+        </Typography>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
