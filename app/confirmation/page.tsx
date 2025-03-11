@@ -1,47 +1,46 @@
+"use client";
 import { Box, Container, Typography } from "@mui/material";
-import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
-import { products } from "@/data";
-import { Product } from "@/data";
+import { styled } from "@mui/material/styles";
 
-const columns: GridColDef<(typeof rows)[number]>[] = [
-  { field: "articleNumber", headerName: "Art.nr.", width: 90 },
-  {
-    field: "title",
-    headerName: "Produkt",
-    width: 150,
-    editable: false,
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
   },
-  {
-    field: "quantity",
-    headerName: "Antal",
-    type: "number",
-    width: 150,
-    editable: false,
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
   },
-  {
-    field: "price",
-    headerName: "Pris",
-    type: "number",
-    width: 110,
-    editable: false,
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
   },
-  {
-    field: "sum",
-    headerName: "Summa",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 160,
-    valueGetter: (value, row) =>
-      row.quantity && row.price
-        ? `${(row.quantity * row.price).toFixed(2)} kr`
-        : "",
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
   },
+}));
+
+function createData(title: string, quantity: number, price: number) {
+  return { title, quantity, price };
+}
+
+const rows = [
+  createData("Rustikt rågbröd", 3, 50),
+  createData("Levain", 2, 65),
+  createData("Brytbröd", 1, 40),
 ];
 
-const rows: GridRowsProp = [
-  { articleNumber: "1234", title: "Rustikt rågbröd", quantity: 2, price: 50 },
-  { articleNumber: "2345", title: "Levain", quantity: 4, price: 65 },
-];
+const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
 
 export default function ConfirmationPage() {
   return (
@@ -66,20 +65,40 @@ export default function ConfirmationPage() {
           width: "100%",
         }}
       >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
-              },
-            },
-          }}
-          pageSizeOptions={[5]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell>Produkt</StyledTableCell>
+                <StyledTableCell align="right">Antal</StyledTableCell>
+                <StyledTableCell align="right">Pris</StyledTableCell>
+                <StyledTableCell align="right">Summa</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <StyledTableRow key={row.title}>
+                  <StyledTableCell component="th" scope="row">
+                    {row.title}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">
+                    {row.quantity}
+                  </StyledTableCell>
+                  <StyledTableCell align="right">{row.price}</StyledTableCell>
+                  <StyledTableCell align="right">
+                    {(row.quantity * row.price).toFixed(2)}
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+              <StyledTableRow>
+                <StyledTableCell colSpan={3} align="right"></StyledTableCell>
+                <StyledTableCell align="right">
+                  <strong>{totalSum.toFixed(2)} kr</strong>
+                </StyledTableCell>
+              </StyledTableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Box>
     </Container>
   );
