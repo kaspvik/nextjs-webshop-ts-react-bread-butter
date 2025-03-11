@@ -12,7 +12,17 @@ export const Header = () => {
       }}
     >
       <Toolbar>
-        <Typography variant="h3" sx={{ flexGrow: 1 }} component={Link} href="/">
+        <Typography
+          variant="h1"
+          sx={{
+            flexGrow: 1,
+            textDecoration: "none",
+            color: "text.primary",
+            fontSize: "3rem",
+          }}
+          component={Link}
+          href="/"
+        >
           Bread&Butter
         </Typography>
         <Button color="inherit" component={Link} href="/admin">
