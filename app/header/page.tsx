@@ -25,10 +25,20 @@ export const Header = () => {
         >
           Bread&Butter
         </Typography>
-        <Button color="inherit" component={Link} href="/admin">
+        <Button
+          color="inherit"
+          component={Link}
+          href="/admin"
+          data-cy="admin-link"
+        >
           👤
         </Button>
-        <Button color="inherit" component={Link} href="/cart">
+        <Button
+          color="inherit"
+          component={Link}
+          href="/cart"
+          data-cy="cart-link"
+        >
           🛒
         </Button>
       </Toolbar>
