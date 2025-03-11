@@ -32,14 +32,19 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(title: string, quantity: number, price: number) {
-  return { title, quantity, price };
+function createData(
+  image: string,
+  title: string,
+  quantity: number,
+  price: number
+) {
+  return { image, title, quantity, price };
 }
 
 const rows = [
-  createData("Rustikt rågbröd", 3, 50),
-  createData("Levain", 2, 65),
-  createData("Brytbröd", 1, 40),
+  createData("/images/rustiktragbrod.png", "Rustikt rågbröd", 3, 50),
+  createData("/images/levain.png", "Levain", 2, 65),
+  createData("/images/brytbrod.png", "Brytbröd", 1, 40),
 ];
 
 const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
@@ -96,7 +101,25 @@ export default function ConfirmationPage() {
             <TableBody>
               {rows.map((row) => (
                 <StyledTableRow key={row.title}>
-                  <StyledTableCell component="th" scope="row">
+                  <StyledTableCell
+                    component="th"
+                    scope="row"
+                    sx={{
+                      fontWeight: "bold",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                    }}
+                  >
+                    <img
+                      src={row.image}
+                      alt={row.title}
+                      style={{
+                        width: "50px",
+                        height: "50px",
+                        borderRadius: "50%",
+                      }}
+                    ></img>
                     {row.title}
                   </StyledTableCell>
                   <StyledTableCell align="right">
@@ -109,7 +132,9 @@ export default function ConfirmationPage() {
                 </StyledTableRow>
               ))}
               <StyledTableRow>
-                <StyledTableCell colSpan={3} align="right"></StyledTableCell>
+                <StyledTableCell colSpan={3} align="right">
+                  <strong>Totalt</strong>
+                </StyledTableCell>
                 <StyledTableCell align="right">
                   <strong>{totalSum.toFixed(2)} kr</strong>
                 </StyledTableCell>
