@@ -35,7 +35,7 @@ export default function Home() {
         >
           {products.map((product: Product) => (
             <Link
-              href="/product/page/{"
+              href={"/product/" + product.id}
               style={{
                 textDecoration: "none",
                 color: "inherit",
