@@ -14,24 +14,26 @@ const ProductPage = () => {
   }
 
   return (
-    <Box
-      sx={{
-        padding: 4,
-        bgcolor: "background.paper",
-      }}
-    >
-      <h1>{product.title}</h1>
-      <Image
-        src={product.image.replace("public/", "/")}
-        alt={product.title}
-        width={400}
-        height={600}
-      />
+    <main>
+      <Box
+        sx={{
+          padding: 4,
+          bgcolor: "background.paper",
+        }}
+      >
+        <h1>{product.title}</h1>
+        <Image
+          src={product.image.replace("public/", "/")}
+          alt={product.title}
+          width={400}
+          height={600}
+        />
 
-      <p>{product.description}</p>
-      <p>Pris: {product.price} kr</p>
-      <p>Vikt: {product.weight} g</p>
-    </Box>
+        <p data-cy="product-description">{product.description}</p>
+        <p data-cy="product-price">Pris: {product.price} kr</p>
+        <p>Vikt: {product.weight} g</p>
+      </Box>
+    </main>
   );
 };
 
