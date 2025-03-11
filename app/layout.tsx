@@ -1,6 +1,6 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Inter } from "next/font/google";
+import { Roboto, Lobster_Two } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 
@@ -10,7 +10,17 @@ import Footer from "./footer/page";
 
 import theme from "./theme";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
+});
+const lobster = Lobster_Two({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
@@ -21,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={[roboto.variable, lobster.className].join(" ")}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />

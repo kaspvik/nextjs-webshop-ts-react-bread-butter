@@ -60,9 +60,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
           border: "2px solid #9C8173",
           borderRadius: "0.25rem",
           padding: "0.5rem",
-          margin: "0.5rem",
+          margin: "auto",
           zIndex: 1,
-          minWidth: "90%",
+          maxWidth: "80%",
         }}
       >
         <Typography gutterBottom variant="h6" component="div">

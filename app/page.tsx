@@ -31,7 +31,7 @@ export default function Home() {
           direction="row"
           sx={{ justifyContent: "center", alignItems: "center" }}
           spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ xs: 12, sm: 6, md: 4 }}
         >
           {products.map((product: Product) => (
             <Link
@@ -43,7 +43,7 @@ export default function Home() {
                 justifyContent: "center",
               }}
             >
-              <Grid key={product.id} size={{ xs: 2, sm: 4, md: 6, lg: 8 }}>
+              <Grid key={product.id}>
                 <ProductCard key={product.id} product={product} />
               </Grid>
             </Link>
