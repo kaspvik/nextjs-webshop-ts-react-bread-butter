@@ -1,5 +1,7 @@
 import { Box, Container, Typography } from "@mui/material";
-import Grid from "@mui/material/Grid2";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { products } from "@/data";
+import { Product } from "@/data";
 
 export default function ConfirmationPage() {
   return (
@@ -44,9 +46,8 @@ export default function ConfirmationPage() {
         </Typography>
         <Grid
           container
-          direction="row"
+          direction={"row"}
           sx={{ justifyContent: "space-between", alignItems: "center" }}
-          spacing={{ xs: 2, md: 3, lg: 12 }}
           columns={{ xs: 12, sm: 6, md: 4 }}
         >
           <Grid>
@@ -81,6 +82,11 @@ export default function ConfirmationPage() {
               Summa
             </Typography>
           </Grid>
+          {products.map((product: Product) => (
+            <Grid key={product.id}>
+              <p>{product.title}</p>
+            </Grid>
+          ))}
         </Grid>
       </Box>
     </Container>
