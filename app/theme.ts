@@ -3,7 +3,9 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   typography: {
-    fontFamily: "var(--font-roboto)",
+    h2: {
+      fontFamily: "var(--font-roboto)",
+    },
     h1: {
       fontSize: 32,
       fontFamily: "var(--font-lobster)",
