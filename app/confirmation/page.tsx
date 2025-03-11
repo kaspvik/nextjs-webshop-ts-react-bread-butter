@@ -48,23 +48,21 @@ export default function ConfirmationPage() {
   return (
     <Container
       sx={{
+        flex: "1",
         display: "flex",
         justifyContent: "center",
         alignItems: "flexStart",
-        minHeight: "100vh",
       }}
     >
       <Box
         component="main"
         sx={{
-          flexGrow: 1,
           padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
           bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
           border: "2px solid #9C8173",
           borderRadius: "0.5rem",
           margin: "2rem 0",
           width: "100%",
-          height: "100%",
         }}
       >
         <Typography variant="h1" component="div" sx={{ textAlign: "center" }}>
@@ -119,6 +117,10 @@ export default function ConfirmationPage() {
             </TableBody>
           </Table>
         </TableContainer>
+        <Typography sx={{ marginTop: "2rem" }}>
+          Separat kvitto kommer skickas till din e-mail. Tack för att du har
+          handlat på Bread & Butter!
+        </Typography>
       </Box>
     </Container>
   );
