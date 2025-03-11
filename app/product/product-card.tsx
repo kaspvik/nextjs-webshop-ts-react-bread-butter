@@ -16,6 +16,7 @@ type ProductCardProps = {
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
+      data-cy="product"
       sx={{
         width: "100%",
         maxWidth: 345,
