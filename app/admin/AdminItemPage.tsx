@@ -1,5 +1,5 @@
+import { Product } from "@/data";
 import { Box, Button, Container } from "@mui/material";
-import { Product } from "@prisma/client";
 
 export default function AdminItem(product: Product){
     return (
@@ -17,6 +17,7 @@ export default function AdminItem(product: Product){
                 <p>{product.articleNumber}</p>
                 <p>{product.price}</p>
                 <p>{product.description}</p>
+                <p>{product.weight}</p>
                 <textarea name="Beskrivning" id="Textbox" placeholder="Skriv information om produkten här"></textarea>
             </Box>
             <Box sx={{
