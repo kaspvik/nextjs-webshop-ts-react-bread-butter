@@ -1,7 +1,47 @@
 import { Box, Container, Typography } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowsProp } from "@mui/x-data-grid";
 import { products } from "@/data";
 import { Product } from "@/data";
+
+const columns: GridColDef<(typeof rows)[number]>[] = [
+  { field: "articleNumber", headerName: "Art.nr.", width: 90 },
+  {
+    field: "title",
+    headerName: "Produkt",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "quantity",
+    headerName: "Antal",
+    type: "number",
+    width: 150,
+    editable: false,
+  },
+  {
+    field: "price",
+    headerName: "Pris",
+    type: "number",
+    width: 110,
+    editable: false,
+  },
+  {
+    field: "sum",
+    headerName: "Summa",
+    description: "This column has a value getter and is not sortable.",
+    sortable: false,
+    width: 160,
+    valueGetter: (value, row) =>
+      row.quantity && row.price
+        ? `${(row.quantity * row.price).toFixed(2)} kr`
+        : "",
+  },
+];
+
+const rows: GridRowsProp = [
+  { articleNumber: "1234", title: "Rustikt rågbröd", quantity: 2, price: 50 },
+  { articleNumber: "2345", title: "Levain", quantity: 4, price: 65 },
+];
 
 export default function ConfirmationPage() {
   return (
@@ -26,68 +66,20 @@ export default function ConfirmationPage() {
           width: "100%",
         }}
       >
-        <Typography variant="h1" component="div" sx={{ textAlign: "center" }}>
-          Tack för din beställning!
-        </Typography>
-        <Typography
-          variant="h1"
-          component="p"
-          sx={{ textAlign: "center", fontSize: "1.25rem", padding: "1.5rem" }}
-        >
-          Ditt ordernummer: 157462400
-        </Typography>
-
-        <Typography
-          variant="h2"
-          component="p"
-          sx={{ fontSize: "2rem", fontWeight: "400", mb: "1.5rem" }}
-        >
-          Din beställning:{" "}
-        </Typography>
-        <Grid
-          container
-          direction={"row"}
-          sx={{ justifyContent: "space-between", alignItems: "center" }}
-          columns={{ xs: 12, sm: 6, md: 4 }}
-        >
-          <Grid>
-            <Typography
-              variant="h2"
-              sx={{ fontSize: "1.5rem", fontWeight: "400" }}
-            >
-              Produkt
-            </Typography>
-          </Grid>
-          <Grid>
-            <Typography
-              variant="h2"
-              sx={{ fontSize: "1.5rem", fontWeight: "400" }}
-            >
-              Antal
-            </Typography>
-          </Grid>
-          <Grid>
-            <Typography
-              variant="h2"
-              sx={{ fontSize: "1.5rem", fontWeight: "400" }}
-            >
-              Pris
-            </Typography>
-          </Grid>
-          <Grid>
-            <Typography
-              variant="h2"
-              sx={{ fontSize: "1.5rem", fontWeight: "400" }}
-            >
-              Summa
-            </Typography>
-          </Grid>
-          {products.map((product: Product) => (
-            <Grid key={product.id}>
-              <p>{product.title}</p>
-            </Grid>
-          ))}
-        </Grid>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          initialState={{
+            pagination: {
+              paginationModel: {
+                pageSize: 5,
+              },
+            },
+          }}
+          pageSizeOptions={[5]}
+          checkboxSelection
+          disableRowSelectionOnClick
+        />
       </Box>
     </Container>
   );
