@@ -1,0 +1,97 @@
+"use client";
+import { products } from "@/data";
+import { Box, Card, Typography } from "@mui/material";
+import CardMedia from "@mui/material/CardMedia";
+import PublicNumberField from "../components/numberfield-component";
+
+export default function CartItem() {
+  const cartItem = products.find((p) => p.id === "1234");
+
+  return (
+    <Card
+      sx={{
+        maxWidth: 400,
+        position: "relative",
+        padding: 2,
+        pb: 1,
+        border: "2px solid #9C8173",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          paddingTop: "1rem",
+          paddingBottom: "1rem",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            mb: 1,
+          }}
+        >
+          <Box
+            sx={{
+              width: 86,
+              height: 86,
+              borderRadius: "50%",
+              border: "2px solid #9C8173",
+              padding: "4px",
+              mr: 2,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+              image={cartItem?.image}
+              title="levain"
+            />
+          </Box>
+
+          <Box
+            sx={{
+              paddingBottom: 0.5,
+            }}
+          >
+            <Typography
+              gutterBottom
+              variant="body1"
+              component="div"
+              sx={{ fontWeight: "bold", mb: 0.5, paddingBottom: 0.5 }}
+            >
+              {cartItem?.title}
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 0.5 }}>
+              {cartItem?.weight} gram
+            </Typography>
+            <Typography variant="body2" sx={{ fontWeight: "medium" }}>
+              {cartItem?.price} kr.
+            </Typography>
+          </Box>
+        </Box>
+
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 8,
+            right: 16,
+            zIndex: 1,
+          }}
+        >
+          <PublicNumberField />
+        </Box>
+      </Box>
+    </Card>
+  );
+}
