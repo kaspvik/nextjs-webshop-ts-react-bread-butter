@@ -77,6 +77,7 @@ export default function CustomerForm() {
             onChange={handleChange}
             error={error}
             helperText={error ? "Du måste fylla i ditt namn" : ""}
+            data-cy="customer-name-error"
           />
         </FormControl>
 
@@ -105,6 +106,7 @@ export default function CustomerForm() {
             onChange={handleChange}
             error={error}
             helperText={error ? "Du måste fylla i en adress" : ""}
+            data-cy="customer-address-error"
           />
         </FormControl>
         <Box
@@ -136,6 +138,11 @@ export default function CustomerForm() {
               id="zipcode"
               name="zipcode"
               placeholder="Postkod"
+              value={inputValue}
+              onChange={handleChange}
+              error={error}
+              helperText={error ? "Du måste fylla i en postkod" : ""}
+              data-cy="customer-zipcode-error"
             />
           </FormControl>
           <FormControl fullWidth>
@@ -159,6 +166,11 @@ export default function CustomerForm() {
               id="city"
               name="city"
               placeholder="Stad"
+              value={inputValue}
+              onChange={handleChange}
+              error={error}
+              helperText={error ? "Du måste fylla i en stad" : ""}
+              data-cy="customer-city-error"
             />
           </FormControl>
         </Box>
@@ -167,7 +179,7 @@ export default function CustomerForm() {
             display: "flex",
             gap: 2,
             width: "100%",
-            justifyContent: "space-between", // Ensure spacing
+            justifyContent: "space-between",
           }}
         >
           <FormControl fullWidth>
@@ -189,6 +201,10 @@ export default function CustomerForm() {
               }}
               id="date"
               placeholder="Datum"
+              value={inputValue}
+              onChange={handleChange}
+              error={error}
+              helperText={error ? "Fyll i en önskat leveransdatum" : ""}
             />{" "}
           </FormControl>
           <FormControl fullWidth>
@@ -210,6 +226,10 @@ export default function CustomerForm() {
               }}
               id="time"
               placeholder="Tid"
+              value={inputValue}
+              onChange={handleChange}
+              error={error}
+              helperText={error ? "Fyll i önskad leveranstid" : ""}
             />
           </FormControl>
         </Box>
@@ -238,6 +258,7 @@ export default function CustomerForm() {
             onChange={handleChange}
             error={error}
             helperText={error ? "Du måste fylla i en e-post adress" : ""}
+            data-cy="customer-email-error"
           />
         </FormControl>
         <FormControl fullWidth>
@@ -265,6 +286,7 @@ export default function CustomerForm() {
             onChange={handleChange}
             error={error}
             helperText={error ? "Du måste fylla i ett telefonnummer" : ""}
+            data-cy="customer-phone-error"
           />
         </FormControl>
       </Box>
