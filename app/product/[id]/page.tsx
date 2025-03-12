@@ -1,9 +1,10 @@
 "use client";
 
 import { products } from "@/data";
-import { Box } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 import { useParams } from "next/navigation";
+import AddToCartButton from "../add-to-cart-button";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -14,26 +15,53 @@ const ProductPage = () => {
   }
 
   return (
-    <main>
+    <Container
+      sx={{
+        py: 4,
+        my: { xs: 0, md: 6 },
+        px: { xs: 2, sm: 4, md: 6 },
+        maxWidth: "lg",
+        bgcolor: "background.paper",
+        borderRadius: { xs: "0", md: "0.25rem" },
+      }}
+    >
       <Box
+        component="main"
         sx={{
-          padding: 4,
-          bgcolor: "background.paper",
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          alignItems: { xs: "center", md: "flex-start" },
+          gap: 4,
         }}
       >
-        <h1>{product.title}</h1>
-        <Image
-          src={product.image.replace("public/", "/")}
-          alt={product.title}
-          width={400}
-          height={600}
-        />
+        <Box
+          sx={{
+            width: { xs: "60%", sm: "60%", md: "60%" },
+            maxWidth: "400px",
+          }}
+        >
+          <Image
+            src={product.image.replace("public/", "/")}
+            alt={product.title}
+            width={400}
+            height={600}
+            style={{ width: "100%", height: "auto" }}
+          />
+        </Box>
 
-        <p data-cy="product-description">{product.description}</p>
-        <p data-cy="product-price">Pris: {product.price} kr</p>
-        <p>Vikt: {product.weight} g</p>
+        <Box sx={{ flex: 1, maxWidth: "500px" }}>
+          <Typography variant="h1">{product.title}</Typography>
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            {product.description}
+          </Typography>
+          <Typography variant="h6" sx={{ mt: 2 }}>
+            Pris: {product.price} kr
+          </Typography>
+          <Typography variant="h6">Vikt: {product.weight} g</Typography>
+          <AddToCartButton />
+        </Box>
       </Box>
-    </main>
+    </Container>
   );
 };
 
