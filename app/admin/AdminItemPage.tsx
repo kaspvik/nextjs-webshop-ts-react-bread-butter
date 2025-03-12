@@ -32,7 +32,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       {/* Bild */}
       <Box
         component="img"
-        src="/images/rustiktragbrod.png"
+        src={product.image}
         alt={product.title}
         sx={{
           width: { xs: "120px", md: "150px" },
