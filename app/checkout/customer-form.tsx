@@ -2,6 +2,7 @@
 
 import {
   Box,
+  Container,
   FormControl,
   FormLabel,
   TextField,
@@ -30,194 +31,243 @@ export default function CustomerForm() {
   };
 
   return (
-    <Box
-      component="form"
-      sx={{
-        width: "100%",
-        maxWidth: "700px",
-        backgroundColor: "background.default",
-        mt: 2,
-        mx: "auto",
-        p: 3,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        gap: 2,
-      }}
-      noValidate
-      autoComplete="off"
-    >
-      <FormControl fullWidth>
-        <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-          Namn
-        </FormLabel>
-        <TextField
-          sx={{
-            mt: 2,
-            mb: 2,
-            backgroundColor: "background.paper",
-            borderRadius: "0.5rem",
-          }}
-          fullWidth
-          margin="normal"
-          id="name"
-          name="name"
-          placeholder="Ditt namn"
-          value={inputValue}
-          onChange={handleChange}
-          error={error}
-          helperText={error ? "Du måste fylla i ditt namn" : ""}
-        />
-      </FormControl>
+    <Container>
+      <Typography variant="h1" sx={{ textAlign: "center" }}>
+        Leverans & Betalning
+      </Typography>
+      <Box
+        component="form"
+        sx={{
+          width: "100%",
+          maxWidth: "500px",
+          backgroundColor: "background.default",
+          mt: 2,
+          mx: "auto",
+          p: 3,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: 2,
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <FormControl fullWidth>
+          <FormLabel
+            sx={{
+              textAlign: "left",
+              fontWeight: "bold",
+              color: "text.primary",
+            }}
+          >
+            Namn
+          </FormLabel>
+          <TextField
+            size="small"
+            slotProps={{ htmlInput: { "data-cy": "customer-name" } }}
+            sx={{
+              backgroundColor: "background.paper",
+              borderRadius: "0.5rem",
+            }}
+            fullWidth
+            id="name"
+            name="name"
+            placeholder="Ditt namn"
+            value={inputValue}
+            onChange={handleChange}
+            error={error}
+            helperText={error ? "Du måste fylla i ditt namn" : ""}
+          />
+        </FormControl>
 
-      <FormControl fullWidth>
-        <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-          Namn
-        </FormLabel>
-        <TextField
-          sx={{
-            mt: 2,
-            mb: 2,
-            backgroundColor: "background.paper",
-            borderRadius: "0.5rem",
-          }}
-          fullWidth
-          margin="normal"
-          id="address"
-          name="address"
-          placeholder="Leveransadress"
-          value={inputValue}
-          onChange={handleChange}
-          error={error}
-          helperText={error ? "Du måste fylla i en adress" : ""}
-        />
-      </FormControl>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 2,
-          width: "100%",
-          justifyContent: "space-between", // Ensure spacing
-        }}
-      >
         <FormControl fullWidth>
-          <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-            Namn
+          <FormLabel
+            sx={{
+              textAlign: "left",
+              fontWeight: "bold",
+              color: "text.primary",
+            }}
+          >
+            Adress
           </FormLabel>
           <TextField
+            size="small"
+            slotProps={{ htmlInput: { "data-cy": "customer-address" } }}
             sx={{
               backgroundColor: "background.paper",
               borderRadius: "0.5rem",
-              flex: 1,
             }}
-            error
-            id="zipcode"
-            name="zipcode"
-            placeholder="Postkod"
+            fullWidth
+            id="address"
+            name="address"
+            placeholder="Leveransadress"
+            value={inputValue}
+            onChange={handleChange}
+            error={error}
+            helperText={error ? "Du måste fylla i en adress" : ""}
+          />
+        </FormControl>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            width: "100%",
+            justifyContent: "space-between", // Ensure spacing
+          }}
+        >
+          <FormControl fullWidth>
+            <FormLabel
+              sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}
+            >
+              Postkod
+            </FormLabel>
+            <TextField
+              size="small"
+              slotProps={{ htmlInput: { "data-cy": "customer-zipcode" } }}
+              sx={{
+                backgroundColor: "background.paper",
+                borderRadius: "0.5rem",
+                flex: 1,
+              }}
+              id="zipcode"
+              name="zipcode"
+              placeholder="Postkod"
+            />
+          </FormControl>
+          <FormControl fullWidth>
+            <FormLabel
+              sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}
+            >
+              Stad
+            </FormLabel>
+            <TextField
+              size="small"
+              slotProps={{ htmlInput: { "data-cy": "customer-city" } }}
+              sx={{
+                backgroundColor: "background.paper",
+                borderRadius: "0.5rem",
+                flex: 1,
+              }}
+              id="city"
+              name="city"
+              placeholder="Stad"
+            />
+          </FormControl>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            width: "100%",
+            justifyContent: "space-between", // Ensure spacing
+          }}
+        >
+          <FormControl fullWidth>
+            <FormLabel
+              sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}
+            >
+              Leveransdatum
+            </FormLabel>
+            <TextField
+              size="small"
+              sx={{
+                backgroundColor: "background.paper",
+                borderRadius: "0.5rem",
+                flex: 1,
+              }}
+              id="date"
+              placeholder="Datum"
+            />{" "}
+          </FormControl>
+          <FormControl fullWidth>
+            <FormLabel
+              sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}
+            >
+              Tid
+            </FormLabel>
+            <TextField
+              size="small"
+              sx={{
+                backgroundColor: "background.paper",
+                borderRadius: "0.5rem",
+                flex: 1,
+              }}
+              id="time"
+              placeholder="Tid"
+            />
+          </FormControl>
+        </Box>
+        <FormControl fullWidth>
+          <FormLabel
+            sx={{
+              textAlign: "left",
+              fontWeight: "bold",
+              color: "text.primary",
+            }}
+          >
+            E-post
+          </FormLabel>
+          <TextField
+            size="small"
+            slotProps={{ htmlInput: { "data-cy": "customer-email" } }}
+            sx={{
+              backgroundColor: "background.paper",
+              borderRadius: "0.5rem",
+            }}
+            fullWidth
+            id="email"
+            name="email"
+            placeholder="E-post"
+            value={inputValue}
+            onChange={handleChange}
+            error={error}
+            helperText={error ? "Du måste fylla i en e-post adress" : ""}
           />
         </FormControl>
         <FormControl fullWidth>
-          <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-            Namn
+          <FormLabel
+            sx={{
+              textAlign: "left",
+              fontWeight: "bold",
+              color: "text.primary",
+            }}
+          >
+            Telefonnummer
           </FormLabel>
           <TextField
+            size="small"
+            slotProps={{ htmlInput: { "data-cy": "customer-phone" } }}
             sx={{
               backgroundColor: "background.paper",
               borderRadius: "0.5rem",
-              flex: 1,
             }}
-            error
-            id="city"
-            name="city"
-            placeholder="Stad"
-            helperText="Incorrect entry."
+            fullWidth
+            id="phone"
+            name="phone"
+            placeholder="Telefonnummer"
+            value={inputValue}
+            onChange={handleChange}
+            error={error}
+            helperText={error ? "Du måste fylla i ett telefonnummer" : ""}
           />
         </FormControl>
       </Box>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 2,
-          width: "100%",
-          justifyContent: "space-between", // Ensure spacing
-        }}
-      >
-        <FormControl fullWidth>
-          <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-            Namn
-          </FormLabel>
-          <TextField
-            sx={{
-              backgroundColor: "background.paper",
-              borderRadius: "0.5rem",
-              flex: 1,
-            }}
-            error
-            id="date"
-            placeholder="Datum"
-          />{" "}
-        </FormControl>
-        <FormControl fullWidth>
-          <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-            Namn
-          </FormLabel>
-          <TextField
-            sx={{
-              backgroundColor: "background.paper",
-              borderRadius: "0.5rem",
-              flex: 1,
-            }}
-            error
-            id="time"
-            placeholder="Tid"
-            helperText="Incorrect entry."
-          />
-        </FormControl>
-      </Box>
-      <FormControl fullWidth>
-        <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-          Namn
-        </FormLabel>
-        <TextField
-          sx={{
-            mt: 2,
-            mb: 2,
-            backgroundColor: "background.paper",
-            borderRadius: "0.5rem",
-          }}
-          fullWidth
-          margin="normal"
-          id="email"
-          name="email"
-          placeholder="E-post"
-          value={inputValue}
-          onChange={handleChange}
-          error={error}
-          helperText={error ? "Du måste fylla i en e-post adress" : ""}
-        />
-      </FormControl>
-      <FormControl fullWidth>
-        <FormLabel sx={{ textAlign: "left", fontWeight: "bold" }}>
-          Namn
-        </FormLabel>
-        <TextField
-          sx={{
-            mt: 2,
-            mb: 2,
-            backgroundColor: "background.paper",
-            borderRadius: "0.5rem",
-          }}
-          fullWidth
-          margin="normal"
-          id="phone"
-          name="phone"
-          placeholder="Telefonnummer"
-          value={inputValue}
-          onChange={handleChange}
-          error={error}
-          helperText={error ? "Du måste fylla i ett telefonnummer" : ""}
-        />
-      </FormControl>
-    </Box>
+    </Container>
   );
 }
