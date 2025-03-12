@@ -1,7 +1,6 @@
+import { Product, products } from "@/data";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { products } from "@/data";
-import { Product } from "@/data";
 import Link from "next/link";
 import ProductCard from "./product/product-card";
 
@@ -35,7 +34,7 @@ export default function Home() {
         >
           {products.map((product: Product) => (
             <Link
-              href="/product/page/{"
+              href={`/product/${product.id}`}
               style={{
                 textDecoration: "none",
                 color: "inherit",
@@ -44,7 +43,7 @@ export default function Home() {
               }}
             >
               <Grid key={product.id}>
-                <ProductCard key={product.id} product={product} />
+                <ProductCard product={product} />
               </Grid>
             </Link>
           ))}
