@@ -1,4 +1,7 @@
-import { AppBar, Button, Toolbar, Typography } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
+
 import Link from "next/link";
 
 export const Header = () => {
@@ -6,7 +9,7 @@ export const Header = () => {
     <AppBar
       position="sticky"
       sx={{
-        padding: 4,
+        padding: { xs: 2, sm: 3, md: 4 },
         bgcolor: "background.default",
         zIndex: 1100,
       }}
@@ -18,29 +21,31 @@ export const Header = () => {
             flexGrow: 1,
             textDecoration: "none",
             color: "text.primary",
-            fontSize: "3rem",
+            fontSize: { sx: 30, sm: 45, md: 60 },
           }}
           component={Link}
           href="/"
         >
           Bread&Butter
         </Typography>
-        <Button
-          color="inherit"
-          component={Link}
-          href="/admin"
-          data-cy="admin-link"
-        >
-          👤
-        </Button>
-        <Button
-          color="inherit"
-          component={Link}
-          href="/cart"
-          data-cy="cart-link"
-        >
-          🛒
-        </Button>
+        <Box>
+          <IconButton color="inherit" component={Link} href="/admin">
+            <AccountCircleIcon
+              sx={{
+                fontSize: { sx: 20, md: 40 },
+                mx: { xs: 1, sm: 2, md: 4 },
+              }}
+            />
+          </IconButton>
+          <IconButton color="inherit" component={Link} href="/cart">
+            <ShoppingCartIcon
+              sx={{
+                fontSize: { sx: 20, md: 40 },
+                mx: { sm: 2 },
+              }}
+            />
+          </IconButton>
+        </Box>
       </Toolbar>
     </AppBar>
   );
