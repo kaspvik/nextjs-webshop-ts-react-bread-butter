@@ -12,8 +12,8 @@ export default function CartItem() {
       sx={{
         maxWidth: 400,
         position: "relative",
-        padding: 2,
-        pb: 1,
+        padding: 1,
+        margin: 2,
         border: "2px solid #9C8173",
       }}
     >
@@ -21,8 +21,8 @@ export default function CartItem() {
         sx={{
           display: "flex",
           flexDirection: "row",
-          paddingTop: "1rem",
-          paddingBottom: "1rem",
+          paddingTop: 1,
+          paddingBottom: 1,
         }}
       >
         <Box
@@ -38,7 +38,7 @@ export default function CartItem() {
               height: 90,
               borderRadius: "50%",
               border: "2px solid #9C8173",
-              padding: "4px",
+              padding: 0.5,
               mr: 2,
               display: "flex",
               alignItems: "center",

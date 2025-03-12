@@ -24,15 +24,15 @@ export default function PublicNumberField() {
             alignItems: "center",
           }}
         >
-          <Typography variant="h5" sx={{ align: "center" }}>
+          <Typography variant="h6" sx={{ align: "center" }}>
             100 kr
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
             <NumberField.Decrement
               style={{
                 display: "flex",
-                width: "2.5rem",
-                height: "1.75rem",
+                width: "2rem",
+                height: "1.25rem",
                 alignItems: "center",
                 justifyContent: "center",
                 borderTopLeftRadius: "0.375rem",
@@ -49,11 +49,11 @@ export default function PublicNumberField() {
             </NumberField.Decrement>
             <NumberField.Input
               style={{
-                height: "1.75rem",
-                width: "4rem",
+                height: "1.25rem",
+                width: "3rem",
                 border: "1px solid #000000",
                 textAlign: "center",
-                fontSize: "1.2rem",
+                fontSize: "1rem",
                 backgroundColor: "#FAF2E9",
                 color: "#111827",
                 fontVariantNumeric: "tabular-nums",
@@ -63,8 +63,8 @@ export default function PublicNumberField() {
             <NumberField.Increment
               style={{
                 display: "flex",
-                width: "2.5rem",
-                height: "1.75rem",
+                width: "2rem",
+                height: "1.25rem",
                 alignItems: "center",
                 justifyContent: "center",
                 borderTopRightRadius: "0.375rem",
