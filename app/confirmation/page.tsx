@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Link, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
@@ -153,6 +153,8 @@ export default function ConfirmationPage() {
             justifyContent: "center", // Centrerar knappen horisontellt
             mt: 3, // Lägg till marginal om du vill
           }}
+          component={Link}
+          href="/"
         >
           <AddToCartButton label="Startsidan" />
         </Box>
