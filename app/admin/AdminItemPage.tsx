@@ -14,7 +14,7 @@ export default function AdminItem({ product }: ProductCardProps) {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); 
 
   return (
-    <Container
+    <Container data-cy="product"
       key={product.id}
       sx={{
         display: "flex",
@@ -45,16 +45,16 @@ export default function AdminItem({ product }: ProductCardProps) {
 
       {/* Produktinformation */}
       <Box sx={{ flex: 1, flexWrap:"wrap" }}>
-        <Typography variant="h6">{product.title}</Typography>
-        <Typography variant="body2">Art nr: {product.articleNumber}</Typography>
+        <Typography variant="h6" data-cy="product-title">{product.title}</Typography>
+        <Typography variant="body2" data-cy="product-id">{product.articleNumber}</Typography>
         <Typography variant="body2">Vikt: {product.weight} g</Typography>
-        <Typography variant="body2">Pris: {product.price} kr</Typography>
+        <Typography variant="body2" data-cy="product-price">{product.price} kr</Typography>
 
         {/* Beskrivning */}
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
           Beskrivning:
         </Typography>
-        <Typography variant="body2" sx={{border: "1px solid black", borderRadius:"4px", padding: 1}}>{product.description}</Typography >
+        <Typography variant="body2" sx={{border: "1px solid black", borderRadius:"4px", padding: 1}} data-cy="product-description">{product.description}</Typography >
         
       </Box>
 
