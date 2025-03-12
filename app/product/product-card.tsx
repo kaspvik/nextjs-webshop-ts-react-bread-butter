@@ -8,6 +8,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Product } from "@/data";
 import zIndex from "@mui/material/styles/zIndex";
+import AddToCartButton from "./add-to-cart-button";
 
 type ProductCardProps = {
   product: Product;
@@ -19,9 +20,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
       data-cy="product"
       sx={{
         width: "100%",
-        maxWidth: 345,
+        maxWidth: 340,
         minHeight: 490,
-        backgroundColor: "#FAF2E9",
+        backgroundColor: "background.paper",
         boxShadow: "none",
         display: "grid",
         position: "relative",
@@ -34,11 +35,11 @@ export default async function ProductCard({ product }: ProductCardProps) {
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "46%",
           left: "50%",
           width: "200px",
           height: "200px",
-          backgroundColor: "background.paper",
+          backgroundColor: "background.default",
           transform: "translate(-50%, -100%)",
           borderRadius: "0.25rem",
           zIndex: 0,
@@ -58,12 +59,14 @@ export default async function ProductCard({ product }: ProductCardProps) {
       />
       <CardContent
         sx={{
-          border: "2px solid #9C8173",
+          border: "2px solid",
+          borderColor: "text.secondary",
           borderRadius: "0.25rem",
-          padding: "0.5rem",
-          margin: "auto",
+          mx: "auto",
+          mt: "1rem",
+          mb: "1rem",
           zIndex: 1,
-          maxWidth: "80%",
+          maxWidth: "90%",
         }}
       >
         <Typography
@@ -89,17 +92,12 @@ export default async function ProductCard({ product }: ProductCardProps) {
           {product.price} kr
         </Typography>
         <CardActions>
-          <Button
-            data-cy="product-buy-button"
-            size="small"
-            sx={{
-              backgroundColor: "#9C8173",
-              color: "#FAF2E9",
-              mx: "auto",
-            }}
-          >
-            Köp
-          </Button>
+          <Box sx={{ mx: "auto" }}>
+            <AddToCartButton
+              label="Köp"
+              data-cy="product-buy-button"
+            ></AddToCartButton>
+          </Box>
         </CardActions>
       </CardContent>
     </Card>
