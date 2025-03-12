@@ -16,6 +16,7 @@ type ProductCardProps = {
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
+      data-cy="product"
       sx={{
         width: "100%",
         maxWidth: 345,
@@ -65,13 +66,23 @@ export default async function ProductCard({ product }: ProductCardProps) {
           maxWidth: "80%",
         }}
       >
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography
+          data-cy="product-title"
+          gutterBottom
+          variant="h6"
+          component="div"
+        >
           {product.title}
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+        <Typography
+          data-cy="product-description"
+          variant="body2"
+          sx={{ color: "text.secondary" }}
+        >
           {product.description}
         </Typography>
         <Typography
+          data-cy="product-price"
           variant="body2"
           sx={{ color: "text.primary", mt: "0.5rem" }}
         >
@@ -79,6 +90,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
         </Typography>
         <CardActions>
           <Button
+            data-cy="product-buy-button"
             size="small"
             sx={{
               backgroundColor: "#9C8173",
