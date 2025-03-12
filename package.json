@@ -17,6 +17,7 @@
     "studio": "prisma studio"
   },
   "dependencies": {
+    "@base-ui-components/react": "^1.0.0-alpha.6",
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
@@ -24,10 +25,11 @@
     "@mui/icons-material": "^6.4.7",
     "@mui/material": "^6.4.7",
     "@mui/material-nextjs": "^6.4.3",
-    "@mui/x-data-grid": "^7.27.3",
+    "@mui/styled-engine-sc": "^6.4.6",
     "next": "15.2.1",
     "react": "^19",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "styled-components": "^6.1.15"
   },
   "devDependencies": {
     "@plugga-tech/react-webshop-ts": "^1.1.12",

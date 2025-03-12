@@ -17,17 +17,21 @@ const ProductPage = () => {
   return (
     <Container
       sx={{
-        py: 4,
-        my: { xs: 0, md: 6 },
-        px: { xs: 2, sm: 4, md: 6 },
-        maxWidth: "lg",
-        bgcolor: "background.paper",
-        borderRadius: { xs: "0", md: "0.25rem" },
+        flex: "1",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "flexStart",
       }}
     >
       <Box
         component="main"
         sx={{
+          padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
+          bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
+          border: "2px solid #9C8173",
+          borderRadius: "0.5rem",
+          margin: "2rem 0",
+          width: "100%",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: { xs: "center", md: "flex-start" },
