@@ -2,13 +2,14 @@
 import { Box, Container, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import AddToCartButton from "../product/add-to-cart-button";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -146,6 +147,15 @@ export default function ConfirmationPage() {
           Separat kvitto kommer skickas till din e-mail. Tack för att du har
           handlat på Bread & Butter!
         </Typography>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center", // Centrerar knappen horisontellt
+            mt: 3, // Lägg till marginal om du vill
+          }}
+        >
+          <AddToCartButton label="Startsidan" />
+        </Box>
       </Box>
     </Container>
   );
