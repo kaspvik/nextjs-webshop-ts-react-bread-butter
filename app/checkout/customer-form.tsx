@@ -10,16 +10,16 @@ export default function CustomerForm() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
     if (event.target.value.trim() !== "") {
-      setError(false); // Remove error once user types something
+      setError(false); // Ta bort fel om användaren skriver i fältet
     }
   };
 
   const handleSubmit = () => {
     if (inputValue.trim() === "") {
-      setError(true); // Show error if input is empty
+      setError(true); // om fältet är tomt visas error
     } else {
-      setError(false); // No error if input is valid
-      alert("Form submitted!");
+      setError(false); // inget fel om det finns en input
+      alert("Skickat!");
     }
   };
 
@@ -28,20 +28,28 @@ export default function CustomerForm() {
       component="form"
       sx={{
         width: "100%",
-        maxwidth: 500,
+        maxWidth: "700px",
         backgroundColor: "background.default",
-        marginTop: "2rem",
+        mt: 2,
+        mx: "auto",
+        p: 3,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        gap: 2,
       }}
       noValidate
       autoComplete="off"
     >
       <TextField
         sx={{
-          margin: "1rem",
+          mt: 2,
+          mb: 2,
           backgroundColor: "background.paper",
           borderRadius: "0.5rem",
-          width: "90%",
         }}
+        fullWidth
+        margin="normal"
         id="name"
         name="name"
         placeholder="Ditt namn"
@@ -50,12 +58,19 @@ export default function CustomerForm() {
         error={error}
         helperText={error ? "This field is required" : ""}
       />
-      <div>
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          width: "100%",
+          justifyContent: "space-between", // Ensure spacing
+        }}
+      >
         <TextField
           sx={{
-            margin: "1rem",
             backgroundColor: "background.paper",
             borderRadius: "0.5rem",
+            flex: 1,
           }}
           error
           id="outlined-error"
@@ -64,9 +79,9 @@ export default function CustomerForm() {
         />
         <TextField
           sx={{
-            margin: "1rem",
             backgroundColor: "background.paper",
             borderRadius: "0.5rem",
+            flex: 1,
           }}
           error
           id="outlined-error-helper-text"
@@ -74,7 +89,7 @@ export default function CustomerForm() {
           defaultValue="Hello World"
           helperText="Incorrect entry."
         />
-      </div>
+      </Box>
     </Box>
   );
 }
