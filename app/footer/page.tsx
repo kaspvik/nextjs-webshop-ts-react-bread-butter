@@ -1,23 +1,21 @@
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
-export const Footer = () => {
+export default function Footer() {
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: "primary.main",
+        bgcolor: "primary.main",
         color: "text.primary",
         py: 2,
-        mt: "auto",
         textAlign: "center",
+        width: "100%",
+        marginTop: "auto",
       }}
     >
-      <Container>
-        <Typography variant="body1">
-          © {new Date().getFullYear()} Bread&Butter
-        </Typography>
-      </Container>
+      <Typography variant="body1">
+        © {new Date().getFullYear()} Bread & Butter
+      </Typography>
     </Box>
   );
-};
-export default Footer;
+}
