@@ -3,7 +3,7 @@
 import { Button } from "@mui/material";
 
 interface AddToCartButtonProps {
-  label?: string; // Gör så att label är valfri (default-text används om ingen skickas in)
+  label?: string;
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
