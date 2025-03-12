@@ -8,7 +8,7 @@ export default function CartPage() {
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
         gap: 2,
-        bgcolor: "background.paper",
+        bgcolor: { xs: "transparent", sm: "background.paper" },
         marginTop: 2,
         border: "2px solid #9C8173",
         height: { xs: "auto", sm: "500px" },
@@ -20,6 +20,7 @@ export default function CartPage() {
           overflowY: { xs: "visible", sm: "auto" },
           maxHeight: { xs: "none", sm: "100%" },
           width: "100%",
+          minWidth: "400px",
           pr: { xs: 0, sm: 2 },
         }}
       >
@@ -49,7 +50,9 @@ export default function CartPage() {
             display: "flex",
             justifyContent: "space-between",
             borderBottom: "2px solid #9C8173",
-            paddingBottom: 1,
+            paddingBottom: { xs: 3, sm: 1 },
+            paddingTop: { xs: 3, sm: 1 },
+            bgcolor: { xs: "background.paper", sm: "transparen" },
           }}
         >
           <Typography variant="h5" sx={{ paddingX: 2 }}>
