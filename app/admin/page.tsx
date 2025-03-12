@@ -1,11 +1,13 @@
+import { products } from "@/data";
 import { Container } from "@mui/material";
 import AdminItem from "./AdminItemPage";
 
 export default function AdminPage(){
     return (
-      <Container>
-        <h2>AdminPage</h2>
-        <AdminItem/>
+      <Container sx={{ display: "flex", flexDirection: "column", gap: 2, bgcolor: "background.paper" }}>
+        {products.map((product) => (
+        <AdminItem key={product.id} product={product} />
+      ))}
         </Container>
     )
 }
