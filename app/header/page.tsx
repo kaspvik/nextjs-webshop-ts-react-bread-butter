@@ -20,6 +20,7 @@ export const Header = () => {
           sx={{
             flexGrow: 1,
             textDecoration: "none",
+            textShadow: "3px 3px 6px rgba(255, 245, 203, 0.5)",
             color: "text.primary",
             fontSize: { sx: 30, sm: 45, md: 60 },
           }}
@@ -34,6 +35,7 @@ export const Header = () => {
               sx={{
                 fontSize: { sx: 20, md: 40 },
                 mx: { xs: 1, sm: 2, md: 4 },
+                color: "text.primary",
               }}
             />
           </IconButton>
@@ -42,6 +44,7 @@ export const Header = () => {
               sx={{
                 fontSize: { sx: 20, md: 40 },
                 mx: { sm: 2 },
+                color: "text.primary",
               }}
             />
           </IconButton>
