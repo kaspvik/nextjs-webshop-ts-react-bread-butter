@@ -34,8 +34,8 @@ export default function CartItem() {
         >
           <Box
             sx={{
-              width: 86,
-              height: 86,
+              width: 90,
+              height: 90,
               borderRadius: "50%",
               border: "2px solid #9C8173",
               padding: "4px",
