@@ -3,12 +3,10 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
 import { Roboto, Lobster_Two } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
-
 import Header from "./header/page";
-
 import Footer from "./footer/page";
-
 import theme from "./theme";
+import { Box } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -35,11 +33,21 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "100vh", // Makes sure page fills screen height
+              }}
+            >
+              <Header />
 
-            <main>{children}</main>
+              <Box component="main" sx={{ flex: "1" }}>
+                {children}
+              </Box>
 
-            <Footer />
+              <Footer />
+            </Box>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
