@@ -8,12 +8,13 @@ export default function AddProductButton(){
             flexDirection:"column",
             alignItems:"center",
             justifyContent:"center",
-            width:"400px",
+            width: {xs: "70%", md: "50%"},
             border:"1px solid black",
             padding: 2,
             borderRadius:"4px",
             gap: 1,
             marginTop: 2,
+            
         }}>
             <Fab >
                 <AddIcon data-cy="admin-add-product"/>
