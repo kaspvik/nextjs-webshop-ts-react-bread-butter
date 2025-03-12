@@ -24,6 +24,7 @@
     "@mui/icons-material": "^6.4.6",
     "@mui/material": "^6.4.6",
     "@mui/material-nextjs": "^6.4.3",
+    "@mui/x-data-grid": "^7.27.3",
     "next": "15.2.1",
     "react": "^19",
     "react-dom": "^19.0.0"
