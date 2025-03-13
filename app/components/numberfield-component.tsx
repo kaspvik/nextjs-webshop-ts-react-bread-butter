@@ -29,6 +29,7 @@ export default function PublicNumberField() {
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
             <NumberField.Decrement
+              data-cy="decrease-quantity-button"
               style={{
                 display: "flex",
                 width: "2rem",
@@ -61,6 +62,7 @@ export default function PublicNumberField() {
               }}
             />
             <NumberField.Increment
+              data-cy="increase-quantity-button"
               style={{
                 display: "flex",
                 width: "2rem",
