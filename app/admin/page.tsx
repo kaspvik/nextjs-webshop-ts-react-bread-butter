@@ -1,7 +1,7 @@
 import { products } from "@/data";
 import { Container } from "@mui/material";
 import AddProductButton from "./AddProductButton";
-import AdminItem from "./AdminItemPage";
+import AdminItem from "./AdminItem";
 
 export default function AdminPage(){
     return (

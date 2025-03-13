@@ -47,10 +47,19 @@ export default function DeleteButton({product}: ProductCardProps) {
       )}
 
       {/* Alert som visas vid klick */}
-      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="warning" sx={{ width: "100%" }}>
-          Är du säker på att du vill ta bort {product.title} ?
-          <Button>Ta bort</Button> 
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} >
+        <Alert onClose={handleClose} severity="warning" sx={{width: "100%", gap: 2}}>
+
+          <p>Är du säker på att du vill ta bort {product.title} ?</p>
+          
+          <Button data-cy="confirm-delete-button" sx={{
+            backgroundColor: "#FAF2E9",
+            color: "#9C8173",
+            padding: 1,
+            width: "100%",
+            border: "1px solid #9C8173",
+            "&:hover": { backgroundColor: "#E8DACD" },
+          }}>Ta bort</Button> {/*Knapp för att ta bort produkt */}
         </Alert>
       </Snackbar>
     </>
