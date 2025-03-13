@@ -34,7 +34,17 @@ export default function Home() {
         >
           {products.map((product: Product) => (
             <Grid key={product.id}>
-              <ProductCard product={product} />
+              <Link
+                href={`/product/${product.articleNumber}-${product.title}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <ProductCard product={product} />
+              </Link>
             </Grid>
           ))}
         </Grid>

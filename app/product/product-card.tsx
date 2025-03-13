@@ -14,16 +14,6 @@ import Link from "next/link";
 type ProductCardProps = {
   product: Product;
 };
-const slugify = (product: Product) => {
-  return `${product.articleNumber}-${product.title
-    .normalize("NFD") // Normalize accents (å, ä, ö → a, a, o)
-    .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
-    .replace(/å/g, "a")
-    .replace(/ä/g, "a")
-    .replace(/ö/g, "o")
-    .replace(/\s+/g, "-") // Replace spaces with dashes
-    .toLowerCase()}`;
-};
 
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
@@ -56,29 +46,21 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 0,
         }}
       />
-      <Link
-        href={`/product/${slugify(product)}`}
-        style={{
-          textDecoration: "none",
-          color: "inherit",
-          display: "flex",
-          justifyContent: "center",
+
+      <CardMedia
+        component="img"
+        sx={{
+          height: 250,
+          width: 150,
+          mx: "auto",
+          mt: "1rem",
+          borderRadius: "0.25rem",
+          zIndex: 1,
         }}
-      >
-        <CardMedia
-          component="img"
-          sx={{
-            height: 250,
-            width: 150,
-            mx: "auto",
-            mt: "1rem",
-            borderRadius: "0.25rem",
-            zIndex: 1,
-          }}
-          image={product.image}
-          alt={product.title}
-        />
-      </Link>
+        image={product.image}
+        alt={product.title}
+      />
+
       <CardContent
         sx={{
           border: "2px solid",
