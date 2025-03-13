@@ -1,9 +1,10 @@
 "use client"
 
 import { Product } from "@/data";
-import { Delete, Edit } from "@mui/icons-material";
-import { Box, Button, Container, IconButton, Typography, useMediaQuery } from "@mui/material";
+import { Box, Container, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/system";
+import DeleteButton from "./DeleteProductButton";
+import EditButton from "./EditAdminButton";
 
 type ProductCardProps = {
   product: Product;
@@ -68,49 +69,11 @@ export default function AdminItem({ product }: ProductCardProps) {
           gap: 1,
         }}
       >
-        {isSmallScreen ? (
-          <>
-            {/* Små ikoner på mobil */}
-            <IconButton data-cy="admin-edit-product" sx={{ color: "#9C8173" }}>
-              <Edit />
-            </IconButton>
-            <IconButton data-cy="admin-remove-product" sx={{ color: "#9C8173" }}>
-              <Delete />
-            </IconButton>
-          </>
-        ) : (
-          <>
-            {/* Större knappar på desktop */}
-            <Button
-              data-cy="admin-edit-product"
-              startIcon={<Edit />}
-              sx={{
-                backgroundColor: "#9C8173",
-                color: "#FAF2E9",
-                padding: "6px 16px",
-                width: "120px",
-                "&:hover": { backgroundColor: "#876C5A" },
-              }}
-            >
-              REDIGERA
-            </Button>
+        <EditButton onClick={() => console.log("Redigera produkt", product.id)} />
 
-            <Button
-              data-cy="admin-remove-product"
-              startIcon={<Delete />}
-              sx={{
-                backgroundColor: "#FAF2E9",
-                color: "#9C8173",
-                padding: "6px 16px",
-                width: "120px",
-                border: "1px solid #9C8173",
-                "&:hover": { backgroundColor: "#E8DACD" },
-              }}
-            >
-              TA BORT
-            </Button>
-          </>
-        )}
+        <DeleteButton onClick={() => console.log("Ta bort produkt", product.id)} />
+          
+        
       </Box>
     </Container>
   );
