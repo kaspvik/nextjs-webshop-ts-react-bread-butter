@@ -1,7 +1,10 @@
+"use client"
+
 import { Product } from "@/data";
 import { Delete } from "@mui/icons-material";
 import { Alert, Button, IconButton, Snackbar, useMediaQuery, useTheme } from "@mui/material";
 import { useState } from "react";
+import ConfirmDeleteProduct from "./confirm-delete-button";
 
 type ProductCardProps = {
   product: Product;
@@ -52,14 +55,9 @@ export default function DeleteButton({product}: ProductCardProps) {
 
           <p>Är du säker på att du vill ta bort {product.title} ?</p>
           
-          <Button data-cy="confirm-delete-button" sx={{
-            backgroundColor: "#FAF2E9",
-            color: "#9C8173",
-            padding: 1,
-            width: "100%",
-            border: "1px solid #9C8173",
-            "&:hover": { backgroundColor: "#E8DACD" },
-          }}>Ta bort</Button> {/*Knapp för att ta bort produkt */}
+          <ConfirmDeleteProduct product={product}/>
+          
+          {/*Knapp för att ta bort produkt */}
         </Alert>
       </Snackbar>
     </>

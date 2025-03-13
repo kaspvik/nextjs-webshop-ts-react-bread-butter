@@ -1,7 +1,7 @@
 import { db } from "@/prisma/db";
 import { Container } from "@mui/material";
-import AddProductButton from "./AddProductButton";
-import AdminItem from "./AdminItem";
+import AddProductButton from "./add-product-item";
+import AdminItem from "./admin-item";
 
 export default async function AdminPage(){
   const products = await db.product.findMany();
