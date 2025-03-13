@@ -14,6 +14,11 @@ export default function AdminItem({ product }: ProductCardProps) {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); 
 
+  const handleDeleteProduct = (id: string) => {
+    console.log(`Tar bort produkt med ID: ${id}`);
+    // Här kan du lägga till kod för att ta bort produkten från en API/databas eller state
+  };
+
   return (
     <Container data-cy="product"
       key={product.id}
@@ -26,7 +31,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         padding: 2,
         borderRadius: 2,
         boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
-        gap: 2,
+        gap: 1,
         
       }}
     >
@@ -63,15 +68,16 @@ export default function AdminItem({ product }: ProductCardProps) {
       <Box
         sx={{
           display: "flex",
-          flexDirection: isSmallScreen ? "row" : "column",
+          flexDirection: "column",
           alignSelf: "flex-start",
           justifyContent: "flex-start",
-          gap: 1,
+          gap: 2
+          
         }}
       >
         <EditButton onClick={() => console.log("Redigera produkt", product.id)} />
 
-        <DeleteButton onClick={() => console.log("Ta bort produkt", product.id)} />
+        <DeleteButton onDelete={() => handleDeleteProduct(product.id)} />
           
         
       </Box>

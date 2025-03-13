@@ -1,17 +1,28 @@
 import { Delete } from "@mui/icons-material";
-import { Button, IconButton, useMediaQuery, useTheme } from "@mui/material";
+import { Alert, Button, IconButton, useMediaQuery, useTheme } from "@mui/material";
 
-export default function DeleteButton({ onClick }: { onClick?: () => void }){
+interface DeleteButtonProps {
+  onDelete: () => void;
+}
+
+export default function DeleteButton({ onDelete }:DeleteButtonProps ){
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
+    const handleDelete = () => {
+      const isConfirmed = <Alert severity="warning">Är du säker på att du vill ta bort denna produkt?</Alert>
+      if (isConfirmed){
+        onDelete();
+      }
+    }
+
     return isSmallScreen ? (
-        <IconButton onClick={onClick} data-cy="admin-remove-product" sx={{ color: "#9C8173" }}>
+        <IconButton onClick={handleDelete} data-cy="admin-remove-product" sx={{ color: "#9C8173" }}>
       <Delete />
     </IconButton>
     ) : (
         <Button
-      onClick={onClick}
+      onClick={handleDelete}
       data-cy="admin-remove-product"
       startIcon={<Delete />}
       sx={{
