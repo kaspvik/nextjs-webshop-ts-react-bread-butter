@@ -9,9 +9,20 @@ import Typography from "@mui/material/Typography";
 import { Product } from "@/data";
 import zIndex from "@mui/material/styles/zIndex";
 import AddToCartButton from "./add-to-cart-button";
+import Link from "next/link";
 
 type ProductCardProps = {
   product: Product;
+};
+const slugify = (product: Product) => {
+  return `${product.articleNumber}-${product.title
+    .normalize("NFD") // Normalize accents (å, ä, ö → a, a, o)
+    .replace(/[\u0300-\u036f]/g, "") // Remove diacritics
+    .replace(/å/g, "a")
+    .replace(/ä/g, "a")
+    .replace(/ö/g, "o")
+    .replace(/\s+/g, "-") // Replace spaces with dashes
+    .toLowerCase()}`;
 };
 
 export default async function ProductCard({ product }: ProductCardProps) {
@@ -45,18 +56,29 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 0,
         }}
       />
-      <CardMedia
-        sx={{
-          height: 250,
-          width: 150,
-          mx: "auto",
-          mt: "1rem",
-          borderRadius: "0.25rem",
-          zIndex: 1,
+      <Link
+        href={`/product/${slugify(product)}`}
+        style={{
+          textDecoration: "none",
+          color: "inherit",
+          display: "flex",
+          justifyContent: "center",
         }}
-        image={product.image}
-        title={product.title}
-      />
+      >
+        <CardMedia
+          component="img"
+          sx={{
+            height: 250,
+            width: 150,
+            mx: "auto",
+            mt: "1rem",
+            borderRadius: "0.25rem",
+            zIndex: 1,
+          }}
+          image={product.image}
+          alt={product.title}
+        />
+      </Link>
       <CardContent
         sx={{
           border: "2px solid",

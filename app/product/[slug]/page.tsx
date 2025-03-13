@@ -6,11 +6,33 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import AddToCartButton from "../add-to-cart-button";
 
-const ProductPage = () => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+const normalizeTitle = (title: string) =>
+  title
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/å/g, "a")
+    .replace(/ä/g, "a")
+    .replace(/ö/g, "o")
+    .replace(/\s+/g, "-")
+    .toLowerCase();
 
-  if (!product) {
+const ProductPage = () => {
+  const { slug } = useParams();
+  console.log("Params:", useParams());
+
+  if (!slug || typeof slug !== "string") {
+    return <h1>Produkten hittades inte</h1>;
+  }
+
+  const match = slug.match(/^(\d+)-(.+)$/);
+  if (!match) return <h1>Produkten hittades inte</h1>;
+  // Ta ut articleNumber och title från slug
+  const [articleNumber, title] = match;
+
+  // hitta produkt med articleNumber
+  const product = products.find((p) => p.articleNumber === articleNumber);
+
+  if (!product || normalizeTitle(product.title) !== title) {
     return <h1>Produkten hittades inte</h1>;
   }
 
