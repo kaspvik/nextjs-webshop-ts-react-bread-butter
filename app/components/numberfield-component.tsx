@@ -1,15 +1,17 @@
 import { NumberField } from "@base-ui-components/react/number-field";
 import { Box, Typography } from "@mui/material";
 
-import React from "react";
+import React, { useState } from "react";
 
 export default function PublicNumberField() {
   const id = React.useId();
+  const [value, setValue] = useState(0);
+
   return (
     <Box sx={{ pt: 1, pb: 0.5, pl: 0.5, pr: 0.5, border: "1px solid white" }}>
       <NumberField.Root
         id={id}
-        defaultValue={0}
+        value={value}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -25,10 +27,11 @@ export default function PublicNumberField() {
           }}
         >
           <Typography variant="h6" sx={{ align: "center" }}>
-            100 kr
+            {value * 50} kr
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
             <NumberField.Decrement
+              onClick={() => setValue(value - 1)}
               data-cy="decrease-quantity-button"
               style={{
                 display: "flex",
@@ -62,6 +65,7 @@ export default function PublicNumberField() {
               }}
             />
             <NumberField.Increment
+              onClick={() => setValue(value + 1)}
               data-cy="increase-quantity-button"
               style={{
                 display: "flex",
