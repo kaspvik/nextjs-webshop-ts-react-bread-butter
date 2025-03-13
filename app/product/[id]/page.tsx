@@ -1,7 +1,8 @@
 "use client";
 
 import { products } from "@/data";
-import { Box, Container, Typography } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Container, IconButton, Link, Typography } from "@mui/material";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import AddToCartButton from "../add-to-cart-button";
@@ -23,11 +24,14 @@ const ProductPage = () => {
         alignItems: "flexStart",
       }}
     >
+      <IconButton component={Link} href="/">
+        <ArrowBackIcon sx={{ color: "text.primary", fontSize: 50 }} />
+      </IconButton>
       <Box
         component="main"
         sx={{
-          padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
-          bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
+          padding: 4,
+          bgcolor: "background.paper",
           border: "2px solid #9C8173",
           borderRadius: "0.5rem",
           margin: "2rem 0",
