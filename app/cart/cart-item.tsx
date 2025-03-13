@@ -13,7 +13,7 @@ export default function CartItem() {
         width: "100%",
         position: "relative",
         padding: 1,
-        margin: 2,
+        my: 2,
       }}
     >
       <Box

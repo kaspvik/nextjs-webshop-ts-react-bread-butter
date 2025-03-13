@@ -33,11 +33,11 @@ export default function CustomerForm() {
   };
 
   return (
-    <Container>
+    <Container sx={{ mb: 3 }}>
       <Typography variant="h1" sx={{ textAlign: "left", ml: 2 }}>
         Leverans & Betalning
       </Typography>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
+      <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <Box
           component="form"
           sx={{

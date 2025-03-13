@@ -90,7 +90,7 @@ export default function ConfirmationPage() {
           Din beställning:{" "}
         </Typography>
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <Table sx={{ minWidth: 700 }} aria-label="order-overview">
             <TableHead>
               <TableRow>
                 <StyledTableCell>Produkt</StyledTableCell>
