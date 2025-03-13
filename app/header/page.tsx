@@ -1,8 +1,10 @@
+"use client";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
 import Link from "next/link";
+import CartIconButton from "./cart-icon-button";
 
 export const Header = () => {
   return (
@@ -39,15 +41,7 @@ export const Header = () => {
               }}
             />
           </IconButton>
-          <IconButton color="inherit" component={Link} href="/cart">
-            <ShoppingCartIcon
-              sx={{
-                fontSize: { sx: 20, md: 40 },
-                mx: { sm: 2 },
-                color: "text.primary",
-              }}
-            />
-          </IconButton>
+          <CartIconButton />
         </Box>
       </Toolbar>
     </AppBar>
