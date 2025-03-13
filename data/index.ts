@@ -20,7 +20,7 @@ export interface CartItem extends Product {
 export const products: Product[] = [
   {
     id: "1234",
-    articleNumber: "Art nr: 1234",
+    articleNumber: "1234",
     image: "/images/rustiktragbrod.png",
     title: "Rustikt rågbröd",
     description:
@@ -30,7 +30,7 @@ export const products: Product[] = [
   },
   {
     id: "1356",
-    articleNumber: "Art Nr: 1356",
+    articleNumber: "1356",
     image: "/images/brytbrod.png",
     title: "Brytbröd",
     description:
@@ -40,7 +40,7 @@ export const products: Product[] = [
   },
   {
     id: "2345",
-    articleNumber: "Art Nr: 2345",
+    articleNumber: "2345",
     image: "/images/levain.png",
     title: "Levain",
     description: "Klassisk surdegs-Levain, precis så som du vill ha det",
@@ -49,7 +49,7 @@ export const products: Product[] = [
   },
   {
     id: "2346",
-    articleNumber: "Art Nr: 2346",
+    articleNumber: "2346",
     image: "/images/litenlevain.png",
     title: "Liten Levain",
     description: "Klassisk surdegs-Levain, den lite mindre modellen",
@@ -58,7 +58,7 @@ export const products: Product[] = [
   },
   {
     id: "3456",
-    articleNumber: "Art Nr: 3456",
+    articleNumber: "3456",
     image: "/images/surdegslimpavete.png",
     title: "Surdegslimpa Vete",
     description:
@@ -68,7 +68,7 @@ export const products: Product[] = [
   },
   {
     id: "4567",
-    articleNumber: "Art Nr: 4567",
+    articleNumber: "4567",
     image:
       "https://images.pexels.com/photos/2067430/pexels-photo-2067430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "Surdegsbaguette",
@@ -78,7 +78,7 @@ export const products: Product[] = [
   },
   {
     id: "5678",
-    articleNumber: "Art Nr: 5678",
+    articleNumber: "5678",
     image:
       "https://images.pexels.com/photos/7693917/pexels-photo-7693917.jpeg?auto=compress&cs=tinysrgb&w=600",
     title: "Frukostkombo",
@@ -89,7 +89,7 @@ export const products: Product[] = [
   },
   {
     id: "6789",
-    articleNumber: "Art Nr: 6789",
+    articleNumber: "6789",
     image:
       "https://images.pexels.com/photos/7175448/pexels-photo-7175448.jpeg?auto=compress&cs=tinysrgb&w=600",
     title: "Valnötsbröd",
@@ -99,7 +99,7 @@ export const products: Product[] = [
   },
   {
     id: "1357",
-    articleNumber: "Art Nr: 1357",
+    articleNumber: "1357",
     image:
       "https://images.pexels.com/photos/31009555/pexels-photo-31009555/free-photo-of-rustikt-brod-med-keramiska-burkar-pa-traskiva.jpeg?auto=compress&cs=tinysrgb&w=1200",
     title: "Surdegsfralla",

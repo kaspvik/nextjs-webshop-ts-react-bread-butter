@@ -1,8 +1,7 @@
 "use client"
 
 import { Product } from "@/data";
-import { Box, Container, Typography, useMediaQuery } from "@mui/material";
-import { useTheme } from "@mui/system";
+import { Box, Container, Typography } from "@mui/material";
 import DeleteButton from "./DeleteProductButton";
 import EditButton from "./EditAdminButton";
 
@@ -11,13 +10,6 @@ type ProductCardProps = {
 };
 
 export default function AdminItem({ product }: ProductCardProps) {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); 
-
-  const handleDeleteProduct = (id: string) => {
-    console.log(`Tar bort produkt med ID: ${id}`);
-    // Här kan du lägga till kod för att ta bort produkten från en API/databas eller state
-  };
 
   return (
     <Container data-cy="product"
@@ -52,7 +44,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       {/* Produktinformation */}
       <Box sx={{ flex: 1, flexWrap:"wrap" }}>
         <Typography variant="h6" data-cy="product-title">{product.title}</Typography>
-        <Typography variant="body2" data-cy="product-id">{product.articleNumber}</Typography>
+        <Typography variant="body2" data-cy="product-id">Art Nr:{product.articleNumber}</Typography>
         <Typography variant="body2">Vikt: {product.weight} g</Typography>
         <Typography variant="body2" data-cy="product-price">{product.price} kr</Typography>
 
@@ -60,7 +52,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
           Beskrivning:
         </Typography>
-        <Typography variant="body2" sx={{border: "1px solid black", borderRadius:"4px", padding: 1}} data-cy="product-description">{product.description}</Typography >
+        <Typography variant="body2" sx={{ borderColor:"text.secondary", borderRadius:"4px", }} data-cy="product-description">{product.description}</Typography >
         
       </Box>
 

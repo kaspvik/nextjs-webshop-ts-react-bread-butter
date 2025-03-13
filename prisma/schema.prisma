@@ -17,4 +17,5 @@ model Product {
   description   String
   image         String
   price         Float
+  weight        Int    @default(0)
 }
