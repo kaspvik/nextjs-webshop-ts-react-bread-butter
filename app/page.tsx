@@ -33,19 +33,19 @@ export default function Home() {
           columns={{ xs: 12, sm: 6, md: 4 }}
         >
           {products.map((product: Product) => (
-            <Link
-              href={`/product/${product.id}`}
-              style={{
-                textDecoration: "none",
-                color: "inherit",
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Grid key={product.id}>
+            <Grid key={product.id}>
+              <Link
+                href={`/product/${product.articleNumber}-${product.title}`}
+                style={{
+                  textDecoration: "none",
+                  color: "inherit",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
                 <ProductCard product={product} />
-              </Grid>
-            </Link>
+              </Link>
+            </Grid>
           ))}
         </Grid>
       </Box>
