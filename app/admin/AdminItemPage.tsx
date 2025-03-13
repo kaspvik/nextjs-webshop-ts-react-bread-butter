@@ -77,7 +77,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       >
         <EditButton onClick={() => console.log("Redigera produkt", product.id)} />
 
-        <DeleteButton onDelete={() => handleDeleteProduct(product.id)} />
+        <DeleteButton product={product} />
           
         
       </Box>
