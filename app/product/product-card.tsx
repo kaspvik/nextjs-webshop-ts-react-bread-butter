@@ -1,15 +1,11 @@
-import * as React from "react";
+import { Product } from "@/data";
+import { Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Product } from "@/data";
-import zIndex from "@mui/material/styles/zIndex";
 import AddToCartButton from "./add-to-cart-button";
-import Link from "next/link";
 
 type ProductCardProps = {
   product: Product;
