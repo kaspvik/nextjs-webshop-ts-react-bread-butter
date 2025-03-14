@@ -1,12 +1,12 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Roboto, Lobster_Two } from "next/font/google";
+import { Lobster_Two, Roboto } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
-import Header from "./header/page";
 import Footer from "./footer/page";
+import Header from "./header/page";
+import CartProvider from "./provider";
 import theme from "./theme";
-import { Box } from "@mui/material";
 
 const roboto = Roboto({
   weight: ["300", "400", "500", "700"],
@@ -33,21 +33,23 @@ export default function RootLayout({ children }: PropsWithChildren) {
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                minHeight: "100vh", // Makes sure page fills screen height
-              }}
-            >
-              <Header />
+            <CartProvider>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "100vh", // Makes sure page fills screen height
+                }}
+              >
+                <Header />
 
-              <Box component="main" sx={{ flex: "1" }}>
-                {children}
+                <Box component="main" sx={{ flex: "1" }}>
+                  {children}
+                </Box>
+
+                <Footer />
               </Box>
-
-              <Footer />
-            </Box>
+            </CartProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

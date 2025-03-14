@@ -1,15 +1,24 @@
-"use client";
-
 import { products } from "@/data";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Container, IconButton, Link, Typography } from "@mui/material";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import AddToCartButton from "../add-to-cart-button";
 
-const ProductPage = () => {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+interface Props {
+  params: Promise<{ slug: string }>;
+}
+
+const ProductPage = async ({ params }: Props) => {
+  const { slug } = await params;
+  if (!slug) {
+    return <h1>Produkten hittades inte</h1>;
+  }
+
+  // Ta ut articleNumber
+  const [articleNumber] = slug.split("-");
+
+  // hitta produkt med articleNumber
+  const product = products.find((p) => p.articleNumber === articleNumber);
 
   if (!product) {
     return <h1>Produkten hittades inte</h1>;

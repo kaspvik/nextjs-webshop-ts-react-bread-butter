@@ -35,6 +35,7 @@ export default async function Home() {
           columns={{ xs: 12, sm: 6, md: 4 }}
         >
           {products.map((product: Product) => (
+
             <Link
               key={product.id}
               href={`/product/${product.id}`}
@@ -46,9 +47,11 @@ export default async function Home() {
               }}
             >
               <Grid>
+
+
                 <ProductCard product={product} />
-              </Grid>
-            </Link>
+              </Link>
+            </Grid>
           ))}
         </Grid>
       </Box>

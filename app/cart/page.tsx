@@ -83,12 +83,28 @@ export default function CartPage() {
           <Box
             sx={{
               display: "flex",
-              justifyContent: { xs: "center", sm: "flex-end" },
+              flexDirection: { xs: "column", sm: "row" },
+              justifyContent: { xs: "center", sm: "space-between" },
+              alignItems: { xs: "center" },
               paddingTop: 2,
+              gap: 2,
               paddingBottom: { xs: 3, sm: 0 },
               bgcolor: { xs: "background.paper", sm: "transparent" },
             }}
           >
+            <Link href="/">
+              <Button
+                sx={{
+                  backgroundColor: "#FAF2E9",
+                  color: "#9C8173",
+                  padding: "6px 16px",
+                  border: "1px solid #9C8173",
+                  "&:hover": { backgroundColor: "#E8DACD" },
+                }}
+              >
+                FORTSÄTT HANDLA
+              </Button>
+            </Link>
             <Link href="/checkout">
               <Button
                 variant="contained"

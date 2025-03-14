@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import { Product } from "@/data";
 import zIndex from "@mui/material/styles/zIndex";
 import AddToCartButton from "./add-to-cart-button";
+import Link from "next/link";
 
 type ProductCardProps = {
   product: Product;
@@ -45,7 +46,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 0,
         }}
       />
+
       <CardMedia
+        component="img"
         sx={{
           height: 250,
           width: 150,
@@ -55,8 +58,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 1,
         }}
         image={product.image}
-        title={product.title}
+        alt={product.title}
       />
+
       <CardContent
         sx={{
           border: "2px solid",
