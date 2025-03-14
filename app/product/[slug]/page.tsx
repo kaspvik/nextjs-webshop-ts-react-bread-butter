@@ -33,34 +33,37 @@ const ProductPage = async ({ params }: Props) => {
         alignItems: "flexStart",
         position: "relative",
         overflow: "visible",
+        marginY: 2,
       }}
     >
-      <IconButton
-        component={Link}
-        href="/"
-        sx={{
-          position: "absolute",
-          top: { xs: "-5px", sm: "-5px", md: "-5px", lg: "-5px" }, // Flyttar knappen ovanför containern
-          left: { xs: "5px", sm: "15px", md: "-5px", lg: "15px" },
-          zIndex: 100, // Se till att den är över andra element
-        }}
-      >
-        {" "}
-        <ArrowBackIcon
+      <Box sx={{ paddingY: 5 }}>
+        <IconButton
+          component={Link}
+          href="/"
           sx={{
-            color: "text.primary",
-            fontSize: { xs: 30, sm: 30, md: 30 },
-          }}
-        />
-        <Typography
-          sx={{
-            color: "text.primary",
-            fontFamily: "var(--font-roboto)",
+            position: "absolute",
+            top: { xs: "-12px", sm: "-15px", md: "-15px", lg: "-12px" },
+            left: { xs: "5px", sm: "15px", md: "15px", lg: "15px" },
+            zIndex: 100,
           }}
         >
-          Tillbaka
-        </Typography>
-      </IconButton>
+          {" "}
+          <ArrowBackIcon
+            sx={{
+              color: "text.primary",
+              fontSize: { xs: 30, sm: 30, md: 30 },
+            }}
+          />
+          <Typography
+            sx={{
+              color: "text.primary",
+              fontFamily: "var(--font-roboto)",
+            }}
+          >
+            Tillbaka
+          </Typography>
+        </IconButton>
+      </Box>
 
       <Box
         component="main"
@@ -79,7 +82,7 @@ const ProductPage = async ({ params }: Props) => {
       >
         <Box
           sx={{
-            width: { xs: "60%", sm: "60%", md: "60%" },
+            width: { xs: "70%", sm: "70%", md: "70%" },
             maxWidth: "400px",
           }}
         >
