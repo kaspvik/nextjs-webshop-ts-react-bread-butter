@@ -1,13 +1,15 @@
 "use client";
-import { products } from "@/data";
 import { Delete } from "@mui/icons-material";
 import { Box, Button, Card, Typography } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import PublicNumberField from "../components/numberfield-component";
+import { CartItem } from "@/data";
 
-export default function CartItem() {
-  const cartItem = products.find((p) => p.id === "1234");
+interface Props {
+  cartItem: CartItem;
+}
 
+export default function CartItemComponent({ cartItem }: Props) {
   return (
     <Card
       sx={{
@@ -53,7 +55,7 @@ export default function CartItem() {
                 borderRadius: "50%",
                 objectFit: "cover",
               }}
-              image={cartItem?.image}
+              image={cartItem.image}
               title="levain"
             />
           </Box>
@@ -69,13 +71,13 @@ export default function CartItem() {
               component="div"
               sx={{ fontWeight: "bold", mb: 0.5, paddingBottom: 0.5 }}
             >
-              {cartItem?.title}
+              {cartItem.title}
             </Typography>
             <Typography variant="body2" sx={{ mb: 0.5 }}>
-              {cartItem?.weight} gram
+              {cartItem.weight} gram
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-              {cartItem?.price} kr.
+              {cartItem.price} kr.
             </Typography>
           </Box>
         </Box>
