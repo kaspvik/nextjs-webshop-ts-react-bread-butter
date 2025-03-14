@@ -1,4 +1,3 @@
-import { Product } from "@/data";
 import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
@@ -34,7 +33,7 @@ export default async function Home() {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 12, sm: 6, md: 4 }}
         >
-          {products.map((product: Product) => (
+          {products.map((product) => (
             <Link
               key={product.id}
               href={`/product/${product.articleNumber}-${product.title}`}
