@@ -6,7 +6,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 import Link from "next/link";
 import CartIconButton from "./cart-icon-button";
 
-export const Header = () => {
+const Header = () => {
   return (
     <AppBar
       position="sticky"
@@ -32,7 +32,12 @@ export const Header = () => {
           Bread&Butter
         </Typography>
         <Box>
-          <IconButton color="inherit" component={Link} href="/admin">
+          <IconButton
+            data-cy="admin-link"
+            color="inherit"
+            component={Link}
+            href="/admin"
+          >
             <AccountCircleIcon
               sx={{
                 fontSize: { sx: 20, md: 40 },
