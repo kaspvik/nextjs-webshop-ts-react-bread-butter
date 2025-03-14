@@ -96,6 +96,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
             <AddToCartButton
               label="Köp"
               data-cy="product-buy-button"
+              product={product}
             ></AddToCartButton>
           </Box>
         </CardActions>

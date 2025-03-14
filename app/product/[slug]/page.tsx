@@ -75,7 +75,7 @@ const ProductPage = async ({ params }: Props) => {
             Pris: {product.price} kr
           </Typography>
           <Typography variant="h6">Vikt: {product.weight} g</Typography>
-          <AddToCartButton />
+          <AddToCartButton product={product} />
         </Box>
       </Box>
     </Container>
