@@ -1,5 +1,3 @@
-"use client";
-
 import { Product } from "@/data";
 import { Box, Container, Typography } from "@mui/material";
 import DeleteButton from "./delete-product-item";
@@ -76,10 +74,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           gap: 2,
         }}
       >
-        <EditButton
-          onClick={() => console.log("Redigera produkt", product.id)}
-        />
-
+        <EditButton />
         <DeleteButton product={product} />
       </Box>
     </Container>
