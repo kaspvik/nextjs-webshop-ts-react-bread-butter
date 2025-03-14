@@ -1,14 +1,14 @@
 "use client";
 
-import { CartItem } from "@/data";
-import { createContext, PropsWithChildren, useState } from "react";
+import { CartItem, Product } from "@/data";
+import { createContext, PropsWithChildren, useContext, useState } from "react";
 
 interface ContextValues {
   cartItems: CartItem[];
   cartCount: number;
   totalPrice: number;
 
-  addToCart: (item: CartItem) => void;
+  addToCart: (item: Product) => void;
   removeFromCart: (itemId: string) => void;
   clearCart: () => void;
 }
@@ -20,7 +20,7 @@ export default function CartProvider(props: PropsWithChildren) {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   // functions
-  const addToCart = (item: CartItem) => {
+  const addToCart = (item: Product) => {
     setCartItems([]);
   };
 
@@ -51,3 +51,5 @@ export default function CartProvider(props: PropsWithChildren) {
     </CartContext.Provider>
   );
 }
+
+export const useCart = () => useContext(CartContext);
