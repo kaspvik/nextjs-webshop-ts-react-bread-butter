@@ -31,11 +31,30 @@ const ProductPage = async ({ params }: Props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "flexStart",
+        position: "relative",
+        overflow: "visible",
       }}
     >
-      <IconButton component={Link} href="/">
-        <ArrowBackIcon sx={{ color: "text.primary", fontSize: 50 }} />
+      <IconButton
+        component={Link}
+        href="/"
+        sx={{
+          position: "absolute",
+          top: { xs: "-5px", sm: "-5px", md: "-5px", lg: "-5px" }, // Flyttar knappen ovanför containern
+          left: { xs: "5px", sm: "15px", md: "-5px", lg: "15px" },
+          zIndex: 100, // Se till att den är över andra element
+        }}
+      >
+        {" "}
+        <ArrowBackIcon
+          sx={{
+            color: "text.primary",
+            fontSize: { xs: 30, sm: 30, md: 30 },
+          }}
+        />
+        Tillbaka
       </IconButton>
+
       <Box
         component="main"
         sx={{

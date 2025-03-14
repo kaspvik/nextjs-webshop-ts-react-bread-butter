@@ -156,7 +156,7 @@ export default function ConfirmationPage() {
           component={Link}
           href="/"
         >
-          <AddToCartButton label="Startsidan" />
+          <AddToCartButton label="Till Startsidan" />
         </Box>
       </Box>
     </Container>
