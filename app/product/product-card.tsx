@@ -1,11 +1,14 @@
-import { Product } from "@/data";
 import { Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+
 import AddToCartButton from "../components/add-to-cart-button";
+
+import { Product } from "@prisma/client";
+
 
 type ProductCardProps = {
   product: Product;
@@ -96,6 +99,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
             <AddToCartButton
               label="Köp"
               data-cy="product-buy-button"
+              product={product}
             ></AddToCartButton>
           </Box>
         </CardActions>
