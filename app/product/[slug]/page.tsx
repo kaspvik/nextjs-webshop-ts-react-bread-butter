@@ -1,4 +1,3 @@
-import PublicNumberField from "@/app/components/numberfield-component";
 import { products } from "@/data";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, Container, IconButton, Link, Typography } from "@mui/material";
@@ -74,13 +73,13 @@ const ProductPage = async ({ params }: Props) => {
             maxWidth: "500px",
             display: "flex",
             flexDirection: "column",
-            alignItems: { xs: "center", md: "flex-start" },
-            textAlign: { xs: "center", md: "left" },
+            alignItems: "flex-start",
+            textAlign: "left",
           }}
         >
           <Typography
             variant="h1"
-            sx={{ fontSize: { sx: 30, sm: 40, md: 50 } }}
+            sx={{ fontSize: { sx: 40, sm: 40, md: 50 } }}
           >
             {product.title}
           </Typography>
@@ -90,13 +89,20 @@ const ProductPage = async ({ params }: Props) => {
           <Typography variant="body1" sx={{ mt: 2 }}>
             {product.description}
           </Typography>
-          <Typography variant="h6" sx={{ py: 2 }}>
+          <Typography variant="h6" sx={{ py: 2, fontSize: "15px" }}>
             Vikt: {product.weight} g
           </Typography>
-          <Box sx={{ borderColor: "transparent" }}>
-            <PublicNumberField />
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-start" },
+              width: "100%",
+              mt: 2,
+            }}
+          >
+            <AddToCartButton />
           </Box>
-          <AddToCartButton />
         </Box>
       </Box>
     </Container>
