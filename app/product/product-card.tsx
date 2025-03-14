@@ -1,13 +1,10 @@
-import * as React from "react";
+import { Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Product } from "@/data";
-import zIndex from "@mui/material/styles/zIndex";
+import { Product } from "@prisma/client";
 import AddToCartButton from "./add-to-cart-button";
 
 type ProductCardProps = {
@@ -45,7 +42,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 0,
         }}
       />
+
       <CardMedia
+        component="img"
         sx={{
           height: 250,
           width: 150,
@@ -55,8 +54,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 1,
         }}
         image={product.image}
-        title={product.title}
+        alt={product.title}
       />
+
       <CardContent
         sx={{
           border: "2px solid",
@@ -96,6 +96,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
             <AddToCartButton
               label="Köp"
               data-cy="product-buy-button"
+              product={product}
             ></AddToCartButton>
           </Box>
         </CardActions>

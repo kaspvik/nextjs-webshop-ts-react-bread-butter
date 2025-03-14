@@ -1,10 +1,11 @@
-import { Product, products } from "@/data";
+import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
 import ProductCard from "./product/product-card";
 
-export default function Home() {
+export default async function Home() {
+  const products = await db.product.findMany();
   return (
     <Container
       sx={{
@@ -32,9 +33,10 @@ export default function Home() {
           spacing={{ xs: 2, md: 3 }}
           columns={{ xs: 12, sm: 6, md: 4 }}
         >
-          {products.map((product: Product) => (
+          {products.map((product) => (
             <Link
-              href={`/product/${product.id}`}
+              key={product.id}
+              href={`/product/${product.articleNumber}-${product.title}`}
               style={{
                 textDecoration: "none",
                 color: "inherit",
@@ -42,9 +44,7 @@ export default function Home() {
                 justifyContent: "center",
               }}
             >
-              <Grid key={product.id}>
-                <ProductCard product={product} />
-              </Grid>
+              <ProductCard product={product} />
             </Link>
           ))}
         </Grid>

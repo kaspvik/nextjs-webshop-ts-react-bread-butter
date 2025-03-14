@@ -1,16 +1,22 @@
 "use client";
 
 import { Button } from "@mui/material";
+import { Product } from "@prisma/client";
+import { useCart } from "../provider";
 
 interface AddToCartButtonProps {
   label?: string;
+  product: Product;
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   label = "Lägg i kundvagn",
+  product,
 }) => {
+  const { addToCart } = useCart();
   return (
     <Button
+      onClick={() => addToCart(product)}
       size="large"
       sx={{
         mt: 3,
