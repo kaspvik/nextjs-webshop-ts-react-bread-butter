@@ -52,7 +52,14 @@ const ProductPage = async ({ params }: Props) => {
             fontSize: { xs: 30, sm: 30, md: 30 },
           }}
         />
-        Tillbaka
+        <Typography
+          sx={{
+            color: "text.primary",
+            fontFamily: "var(--font-roboto)",
+          }}
+        >
+          Tillbaka
+        </Typography>
       </IconButton>
 
       <Box
