@@ -5,7 +5,7 @@ import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 import Footer from "./footer/page";
 import Header from "./header/page";
-import CartProvider from "./Provider";
+import CartProvider from "./provider";
 import theme from "./theme";
 
 const roboto = Roboto({
