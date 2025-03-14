@@ -1,6 +1,7 @@
 "use client";
 import { products } from "@/data";
-import { Box, Card, Typography } from "@mui/material";
+import { Delete } from "@mui/icons-material";
+import { Box, Button, Card, Typography } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import PublicNumberField from "../components/numberfield-component";
 
@@ -88,6 +89,17 @@ export default function CartItem() {
           }}
         >
           <PublicNumberField />
+        </Box>
+
+        <Box
+          sx={{
+            position: "absolute",
+            top: 10,
+            right: 0,
+            zIndex: 1,
+          }}
+        >
+          <Button startIcon={<Delete />}></Button>
         </Box>
       </Box>
     </Card>
