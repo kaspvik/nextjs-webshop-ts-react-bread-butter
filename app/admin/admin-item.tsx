@@ -1,7 +1,7 @@
 import { Product } from "@/data";
 import { Box, Container, Typography } from "@mui/material";
 import DeleteButton from "./delete-product-item";
-import EditButton from "./edit-admin-button";
+import EditProductForm from "./product/page";
 
 type ProductCardProps = {
   product: Product;
@@ -74,7 +74,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           gap: 2,
         }}
       >
-        <EditButton />
+        <EditProductForm product={product} />
         <DeleteButton product={product} />
       </Box>
     </Container>
