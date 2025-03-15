@@ -21,7 +21,26 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // functions
   const addToCart = (item: Product) => {
-    setCartItems([]);
+    setCartItems((prevItems) => {
+      const existingItemIndex = prevItems.findIndex(
+        (cartItem) => cartItem.id === item.id
+      );
+      if (existingItemIndex !== -1) {
+        const updatedItems = [...prevItems];
+
+        updatedItems[existingItemIndex] = {
+          ...updatedItems[existingItemIndex],
+          quantity: updatedItems[existingItemIndex].quantity + 1,
+        };
+        return updatedItems;
+      } else {
+        const newItem = {
+          ...item,
+          quantity: 1,
+        };
+        return [...prevItems, newItem];
+      }
+    });
   };
 
   const removeFromCart = (itemId: string) => {
@@ -32,8 +51,9 @@ export default function CartProvider(props: PropsWithChildren) {
     setCartItems([]);
   };
 
-  // derived values
+  //total items in cart
   const cartCount = 0;
+  //total price
   const totalPrice = 0;
 
   return (
