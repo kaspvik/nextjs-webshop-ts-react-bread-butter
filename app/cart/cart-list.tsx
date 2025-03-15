@@ -20,7 +20,7 @@ export default function CartList() {
       }}
     >
       {cartItems.map((cartItem) => (
-        <CartItemComponent cartItem={cartItem} />
+        <CartItemComponent key={cartItem.id} cartItem={cartItem} />
       ))}
     </Box>
   );

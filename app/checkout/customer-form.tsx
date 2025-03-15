@@ -9,29 +9,75 @@ import {
   Typography,
   Button,
   Divider,
+  Snackbar,
 } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "../provider";
+import { useRouter } from "next/navigation";
 
 export default function CustomerForm() {
-  const [inputValue, setInputValue] = useState("");
-  const [error, setError] = useState(false);
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
+  const [formData, setFormData] = useState({
+    name: "",
+    address: "",
+    zipcode: "",
+    city: "",
+    email: "",
+    phone: "",
+  });
+
+  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-    if (event.target.value.trim() !== "") {
-      setError(false); // Ta bort fel om användaren skriver i fältet
-    }
+    const { name, value } = event.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: value.trim() === "" }));
   };
 
-  const handleSubmit = () => {
-    if (inputValue.trim() === "") {
-      setError(true); // om fältet är tomt visas error
+  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    // skapa ett tomt error-objekt att lagra errors per fält i
+    const newErrors: { [key: string]: boolean } = {};
+    // hämtar varje inputfältsnamn och loopar igenom
+    Object.keys(formData).forEach((key) => {
+      // kollar om något fält är tomt (tom sträng)
+      if (formData[key as keyof typeof formData].trim() === "") {
+        //skapar i så fall ett error i det fältet
+        newErrors[key] = true;
+      }
+    });
+    console.log("Valideringsfel:", newErrors);
+
+    // om det fanns nåt fel
+    if (Object.keys(newErrors).length > 0) {
+      // uppdatera error statet så vi kan visa felmeddelanden
+      setErrors(newErrors);
+      console.log("Formuläret innehåller fel, avbryter!");
+
+      return;
     } else {
-      setError(false); // inget fel om det finns en input
-      alert("Beställning genomförd!");
+      console.log("Formuläret är korrekt! Visar bekräftelse... ✅");
+
+      // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
+
+      setOpen(true);
+      setTimeout(() => {
+        console.log("Navigerar till /confirmation...");
+
+        router.push("/confirmation");
+      }, 2000);
       clearCart();
+      //tömma formuläret
+      setFormData({
+        name: "",
+        address: "",
+        zipcode: "",
+        city: "",
+        email: "",
+        phone: "",
+      });
     }
   };
 
@@ -56,7 +102,6 @@ export default function CustomerForm() {
             gap: 2,
           }}
           noValidate
-          autoComplete="off"
         >
           <FormControl fullWidth>
             <FormLabel
@@ -79,10 +124,10 @@ export default function CustomerForm() {
               id="name"
               name="name"
               placeholder="Ditt namn"
-              value={inputValue}
+              value={formData.name}
               onChange={handleChange}
-              error={error}
-              helperText={error ? "Du måste fylla i ditt namn" : ""}
+              error={errors.name}
+              helperText={errors.name ? "Du måste fylla i ditt namn" : ""}
               data-cy="customer-name-error"
             />
           </FormControl>
@@ -108,10 +153,10 @@ export default function CustomerForm() {
               id="address"
               name="address"
               placeholder="Leveransadress"
-              value={inputValue}
+              value={formData.address}
               onChange={handleChange}
-              error={error}
-              helperText={error ? "Du måste fylla i en adress" : ""}
+              error={errors.address}
+              helperText={errors.address ? "Du måste fylla i en adress" : ""}
               data-cy="customer-address-error"
             />
           </FormControl>
@@ -144,10 +189,10 @@ export default function CustomerForm() {
                 id="zipcode"
                 name="zipcode"
                 placeholder="Postkod"
-                value={inputValue}
+                value={formData.zipcode}
                 onChange={handleChange}
-                error={error}
-                helperText={error ? "Du måste fylla i en postkod" : ""}
+                error={errors.zipcode}
+                helperText={errors.zipcode ? "Du måste fylla i en postkod" : ""}
                 data-cy="customer-zipcode-error"
               />
             </FormControl>
@@ -172,10 +217,10 @@ export default function CustomerForm() {
                 id="city"
                 name="city"
                 placeholder="Stad"
-                value={inputValue}
+                value={formData.city}
                 onChange={handleChange}
-                error={error}
-                helperText={error ? "Du måste fylla i en stad" : ""}
+                error={errors.city}
+                helperText={errors.city ? "Du måste fylla i en stad" : ""}
                 data-cy="customer-city-error"
               />
             </FormControl>
@@ -187,58 +232,7 @@ export default function CustomerForm() {
               width: "100%",
               justifyContent: "space-between",
             }}
-          >
-            <FormControl fullWidth>
-              <FormLabel
-                sx={{
-                  textAlign: "left",
-                  fontWeight: "bold",
-                  color: "text.primary",
-                }}
-              >
-                Leveransdatum
-              </FormLabel>
-              <TextField
-                size="small"
-                sx={{
-                  backgroundColor: "background.paper",
-                  borderRadius: "0.5rem",
-                  flex: 1,
-                }}
-                id="date"
-                placeholder="Datum"
-                value={inputValue}
-                onChange={handleChange}
-                error={error}
-                helperText={error ? "Fyll i en önskat leveransdatum" : ""}
-              />{" "}
-            </FormControl>
-            <FormControl fullWidth>
-              <FormLabel
-                sx={{
-                  textAlign: "left",
-                  fontWeight: "bold",
-                  color: "text.primary",
-                }}
-              >
-                Tid
-              </FormLabel>
-              <TextField
-                size="small"
-                sx={{
-                  backgroundColor: "background.paper",
-                  borderRadius: "0.5rem",
-                  flex: 1,
-                }}
-                id="time"
-                placeholder="Tid"
-                value={inputValue}
-                onChange={handleChange}
-                error={error}
-                helperText={error ? "Fyll i önskad leveranstid" : ""}
-              />
-            </FormControl>
-          </Box>
+          ></Box>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -260,10 +254,12 @@ export default function CustomerForm() {
               id="email"
               name="email"
               placeholder="E-post"
-              value={inputValue}
+              value={formData.email}
               onChange={handleChange}
-              error={error}
-              helperText={error ? "Du måste fylla i en e-post adress" : ""}
+              error={errors.email}
+              helperText={
+                errors.email ? "Du måste fylla i en e-post adress" : ""
+              }
               data-cy="customer-email-error"
             />
           </FormControl>
@@ -288,10 +284,12 @@ export default function CustomerForm() {
               id="phone"
               name="phone"
               placeholder="Telefonnummer"
-              value={inputValue}
+              value={formData.phone}
               onChange={handleChange}
-              error={error}
-              helperText={error ? "Du måste fylla i ett telefonnummer" : ""}
+              error={errors.phone}
+              helperText={
+                errors.phone ? "Du måste fylla i ett telefonnummer" : ""
+              }
               data-cy="customer-phone-error"
             />
           </FormControl>
@@ -319,7 +317,7 @@ export default function CustomerForm() {
 
           <Box display="flex" justifyContent="space-between">
             <Typography variant="body1">Leverans:</Typography>
-            <Typography variant="body1">adressen som fyllts i</Typography>
+            <Typography variant="body1">{formData.address}</Typography>
           </Box>
           <Divider sx={{ my: 1, borderColor: "rgba(255, 255, 255, 0.5)" }} />
 
@@ -339,6 +337,12 @@ export default function CustomerForm() {
           >
             Fortsätt till betalning
           </Button>
+          <Snackbar
+            open={open}
+            message="Beställning genomförd!"
+            autoHideDuration={2000}
+            onClose={() => setOpen(false)}
+          />
         </Box>
       </Box>
     </Container>
