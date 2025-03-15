@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Container,
@@ -9,6 +11,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import { useCart } from "../provider";
 
 function createData(
   image: string,
@@ -25,9 +28,13 @@ const rows = [
   createData("/images/brytbrod.png", "Brytbröd", 1, 40),
 ];
 
-const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
-
 export default function OrderOverview() {
+  const { cartItems } = useCart();
+  const totalSum = cartItems.reduce(
+    (sum, item) => sum + item.quantity * item.price,
+    0
+  );
+
   return (
     <Box sx={{ width: "100%", px: 6, py: 3 }}>
       <Typography variant="h1">Beställningsöversikt</Typography>
@@ -37,14 +44,14 @@ export default function OrderOverview() {
             <TableHead>
               <TableRow>
                 <TableCell>Produkt</TableCell>
-                <TableCell align="right">Pris/ styck</TableCell>
                 <TableCell align="right">Antal</TableCell>
+                <TableCell align="right">Pris/ styck</TableCell>
                 <TableCell align="right">Delsumma</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.title}>
+              {cartItems.map((item) => (
+                <TableRow key={item.id}>
                   <TableCell
                     component="th"
                     scope="row"
@@ -56,20 +63,20 @@ export default function OrderOverview() {
                     }}
                   >
                     <img
-                      src={row.image}
-                      alt={row.title}
+                      src={item.image}
+                      alt={item.title}
                       style={{
                         width: "50px",
                         height: "50px",
                         borderRadius: "50%",
                       }}
                     ></img>
-                    {row.title}
+                    {item.title}
                   </TableCell>
-                  <TableCell align="right">{row.quantity}</TableCell>
-                  <TableCell align="right">{row.price}</TableCell>
+                  <TableCell align="right">{item.quantity}</TableCell>
+                  <TableCell align="right">{item.price}</TableCell>
                   <TableCell align="right">
-                    {(row.quantity * row.price).toFixed(2)}
+                    {(item.quantity * item.price).toFixed(2)}
                   </TableCell>
                 </TableRow>
               ))}
