@@ -90,7 +90,7 @@ export default function CartItemComponent({ cartItem }: Props) {
             zIndex: 1,
           }}
         >
-          <PublicNumberField />
+          <PublicNumberField id={cartItem.id} price={cartItem.price} />
         </Box>
 
         <Box

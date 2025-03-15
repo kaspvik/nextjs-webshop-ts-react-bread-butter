@@ -1,6 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
 import CustomerForm from "./customer-form";
-import CartItem from "../cart/cart-item";
 import OrderOverview from "./order-overview";
 import CartList from "../cart/cart-list";
 
@@ -12,14 +11,16 @@ export default function CheckoutPage() {
         backgroundColor: "background.paper",
         mt: 3,
         mb: 3,
-        padding: 4,
+        padding: { xs: 0, sm: 2, md: 4 },
       }}
     >
-      <Typography variant="h1" sx={{ ml: 6 }}>
+      <Typography variant="h1" sx={{ ml: { xs: 1, sm: 3, md: 6 } }}>
         Kassa
       </Typography>
 
-      <Box sx={{ width: "100%", py: 3, px: 6, mx: "auto" }}>
+      <Box
+        sx={{ width: "100%", py: 3, px: { xs: 1, sm: 2, md: 6 }, mx: "auto" }}
+      >
         <CartList />
       </Box>
       <OrderOverview />
