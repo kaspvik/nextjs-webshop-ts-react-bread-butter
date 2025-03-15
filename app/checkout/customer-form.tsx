@@ -11,10 +11,12 @@ import {
   Divider,
 } from "@mui/material";
 import { useState } from "react";
+import { useCart } from "../provider";
 
 export default function CustomerForm() {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState(false);
+  const { totalSum, clearCart } = useCart();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -28,7 +30,8 @@ export default function CustomerForm() {
       setError(true); // om fältet är tomt visas error
     } else {
       setError(false); // inget fel om det finns en input
-      alert("Skickat!");
+      alert("Beställning genomförd!");
+      clearCart();
     }
   };
 
@@ -310,7 +313,7 @@ export default function CustomerForm() {
         >
           <Box display="flex" justifyContent="space-between">
             <Typography variant="body1">Delsumma:</Typography>
-            <Typography variant="body1">95kr</Typography>
+            <Typography variant="body1">{totalSum.toFixed(2)}</Typography>
           </Box>
           <Divider sx={{ my: 1, borderColor: "rgba(255, 255, 255, 0.5)" }} />
 
@@ -322,7 +325,9 @@ export default function CustomerForm() {
 
           <Box display="flex" justifyContent="space-between">
             <Typography variant="body1">Totalt:</Typography>
-            <Typography variant="body1">95kr</Typography>
+            <Typography variant="body1" fontWeight={700}>
+              {totalSum.toFixed(2)}
+            </Typography>
           </Box>
           <Divider sx={{ my: 1, borderColor: "rgba(255, 255, 255, 0.5)" }} />
 

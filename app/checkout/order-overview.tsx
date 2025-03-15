@@ -13,27 +13,8 @@ import {
 } from "@mui/material";
 import { useCart } from "../provider";
 
-function createData(
-  image: string,
-  title: string,
-  quantity: number,
-  price: number
-) {
-  return { image, title, quantity, price };
-}
-
-const rows = [
-  createData("/images/rustiktragbrod.png", "Rustikt rågbröd", 3, 50),
-  createData("/images/levain.png", "Levain", 2, 65),
-  createData("/images/brytbrod.png", "Brytbröd", 1, 40),
-];
-
 export default function OrderOverview() {
-  const { cartItems } = useCart();
-  const totalSum = cartItems.reduce(
-    (sum, item) => sum + item.quantity * item.price,
-    0
-  );
+  const { cartItems, totalSum } = useCart();
 
   return (
     <Box sx={{ width: "100%", px: 6, py: 3 }}>
