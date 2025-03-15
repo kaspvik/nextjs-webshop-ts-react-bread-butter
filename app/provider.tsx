@@ -13,6 +13,8 @@ interface ContextValues {
   cartItems: CartItem[];
   cartCount: number;
   totalSum: number;
+  //for the numberfield component
+  updateQuantity: (id: string, amount: number) => void;
 
   addToCart: (item: Product) => void;
   removeFromCart: (itemId: string) => void;
@@ -66,6 +68,16 @@ export default function CartProvider(props: PropsWithChildren) {
     setCartItems([]);
   };
 
+  const updateQuantity = (id: string, amount: number) => {
+    setCartItems((prevCart) =>
+      prevCart.map((item) =>
+        item.id === id
+          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : item
+      )
+    );
+  };
+
   const clearCart = () => {
     setCartItems([]);
     localStorage.removeItem("cartItems");
@@ -85,6 +97,7 @@ export default function CartProvider(props: PropsWithChildren) {
         cartItems,
         cartCount,
         totalSum,
+        updateQuantity,
         addToCart,
         removeFromCart,
         clearCart,
