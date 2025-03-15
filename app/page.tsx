@@ -6,6 +6,8 @@ import ProductCard from "./product/product-card";
 
 export default async function Home() {
   const products = await db.product.findMany();
+
+  const id = "test";
   return (
     <Container
       sx={{
@@ -17,6 +19,7 @@ export default async function Home() {
       }}
     >
       <Box
+        id={id}
         component="main"
         sx={{
           flexGrow: 1,

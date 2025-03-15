@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import CartItem from "./cart-item";
+import CartList from "./cart-list";
 
 export default function CartPage() {
   return (
@@ -32,21 +33,7 @@ export default function CartPage() {
           height: { xs: "auto", sm: "500px" },
         }}
       >
-        <Box
-          sx={{
-            flex: 1,
-            overflowY: { xs: "visible", sm: "auto" },
-            maxHeight: { xs: "none", sm: "100%" },
-            width: "100%",
-            minWidth: "400px",
-            pr: { xs: 0, sm: 2 },
-          }}
-        >
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-        </Box>
+        <CartList />
 
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <Divider orientation="vertical" flexItem />
