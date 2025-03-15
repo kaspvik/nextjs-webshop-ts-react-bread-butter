@@ -6,7 +6,12 @@ import Link from "next/link";
 
 const CartIconButton = () => {
   return (
-    <IconButton color="inherit" component={Link} href="/cart">
+    <IconButton
+      data-cy="cart-link"
+      color="inherit"
+      component={Link}
+      href="/checkout"
+    >
       <ShoppingCartIcon
         sx={{
           fontSize: { xs: 20, md: 40 },

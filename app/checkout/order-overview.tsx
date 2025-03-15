@@ -17,11 +17,11 @@ export default function OrderOverview() {
   const { cartItems, totalSum } = useCart();
 
   return (
-    <Box sx={{ width: "100%", px: 6, py: 3 }}>
+    <Box sx={{ width: "100%", px: { xs: 1, sm: 2, md: 6 }, py: 3 }}>
       <Typography variant="h1">Beställningsöversikt</Typography>
       <Box sx={{ backgroundColor: "background.default", mt: 2 }}>
         <TableContainer>
-          <Table sx={{ minWidth: 700 }}>
+          <Table sx={{ minWidth: 360 }}>
             <TableHead>
               <TableRow>
                 <TableCell>Produkt</TableCell>
@@ -65,7 +65,7 @@ export default function OrderOverview() {
                 <TableCell colSpan={3} align="right">
                   <strong>Totalt</strong>
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="right" data-cy="total-price">
                   <strong>{totalSum.toFixed(2)} kr</strong>
                 </TableCell>
               </TableRow>

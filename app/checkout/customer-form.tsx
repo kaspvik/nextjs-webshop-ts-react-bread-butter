@@ -10,6 +10,7 @@ import {
   Button,
   Divider,
   Snackbar,
+  FormHelperText,
 } from "@mui/material";
 import { useState } from "react";
 import { useCart } from "../provider";
@@ -83,12 +84,13 @@ export default function CustomerForm() {
 
   return (
     <Container sx={{ mb: 3 }}>
-      <Typography variant="h1" sx={{ textAlign: "left", ml: 2 }}>
+      <Typography variant="h1" sx={{ textAlign: "left", ml: { sx: 1, md: 2 } }}>
         Leverans & Betalning
       </Typography>
       <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <Box
           component="form"
+          data-cy="customer-form"
           sx={{
             width: "100%",
             maxWidth: "500px",
@@ -127,8 +129,13 @@ export default function CustomerForm() {
               value={formData.name}
               onChange={handleChange}
               error={errors.name}
-              helperText={errors.name ? "Du måste fylla i ditt namn" : ""}
-              data-cy="customer-name-error"
+              helperText={
+                errors.name ? (
+                  <FormHelperText data-cy="customer-name-error">
+                    {errors.name}
+                  </FormHelperText>
+                ) : null
+              }
             />
           </FormControl>
 
@@ -293,6 +300,20 @@ export default function CustomerForm() {
               data-cy="customer-phone-error"
             />
           </FormControl>
+          <Button
+            type="submit"
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{ color: "text.primary", mt: 3, width: 200, mx: "auto", py: 2 }}
+          >
+            Fortsätt till betalning
+          </Button>
+          <Snackbar
+            open={open}
+            message="Beställning genomförd!"
+            autoHideDuration={2000}
+            onClose={() => setOpen(false)}
+          />
         </Box>
         <Box
           component="div"
@@ -328,21 +349,6 @@ export default function CustomerForm() {
             </Typography>
           </Box>
           <Divider sx={{ my: 1, borderColor: "rgba(255, 255, 255, 0.5)" }} />
-
-          <Button
-            type="submit"
-            variant="contained"
-            onClick={handleSubmit}
-            sx={{ color: "text.primary", mt: 3, width: 300, mx: "auto", py: 2 }}
-          >
-            Fortsätt till betalning
-          </Button>
-          <Snackbar
-            open={open}
-            message="Beställning genomförd!"
-            autoHideDuration={2000}
-            onClose={() => setOpen(false)}
-          />
         </Box>
       </Box>
     </Container>
