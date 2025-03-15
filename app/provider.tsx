@@ -51,8 +51,9 @@ export default function CartProvider(props: PropsWithChildren) {
     setCartItems([]);
   };
 
-  // derived values
+  //total items in cart
   const cartCount = 0;
+  //total price
   const totalPrice = 0;
 
   return (
