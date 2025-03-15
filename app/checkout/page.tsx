@@ -2,6 +2,7 @@ import { Box, Container, Typography } from "@mui/material";
 import CustomerForm from "./customer-form";
 import CartItem from "../cart/cart-item";
 import OrderOverview from "./order-overview";
+import CartList from "../cart/cart-list";
 
 export default function CheckoutPage() {
   return (
@@ -19,8 +20,7 @@ export default function CheckoutPage() {
       </Typography>
 
       <Box sx={{ width: "100%", py: 3, px: 6, mx: "auto" }}>
-        <CartItem />
-        <CartItem />
+        <CartList />
       </Box>
       <OrderOverview />
       <CustomerForm />
