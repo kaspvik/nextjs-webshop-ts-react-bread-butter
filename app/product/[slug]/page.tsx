@@ -35,6 +35,7 @@ const ProductPage = async ({ params }: Props) => {
         overflow: "visible",
         marginY: 2,
       }}
+      data-cy="product"
     >
       <GoBackButton />
       <Box
@@ -105,7 +106,6 @@ const ProductPage = async ({ params }: Props) => {
           >
             <AddToCartButton product={product} />
           </Box>
-
         </Box>
       </Box>
     </Container>

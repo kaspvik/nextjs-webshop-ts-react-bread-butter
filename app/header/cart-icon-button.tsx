@@ -28,6 +28,7 @@ const CartIconButton = () => {
             right: 20,
           },
         }}
+        data-cy="cart-items-count-badge"
       >
         <ShoppingCartIcon
           sx={{

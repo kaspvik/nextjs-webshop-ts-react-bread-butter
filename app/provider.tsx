@@ -119,6 +119,7 @@ export default function CartProvider(props: PropsWithChildren) {
         onClose={() => setToastMessage(null)}
         message={toastMessage}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        data-cy="added-to-cart-toast"
       />
     </CartContext.Provider>
   );
