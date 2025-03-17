@@ -1,17 +1,25 @@
 import { NumberField } from "@base-ui-components/react/number-field";
 import { Box, Typography } from "@mui/material";
 
-import React, { useState } from "react";
+import { useCart } from "../provider";
 
-export default function PublicNumberField() {
-  const id = React.useId();
-  const [value, setValue] = useState(0);
+export default function PublicNumberField({
+  id,
+  price,
+}: {
+  id: string;
+  price: number;
+}) {
+  const { cartItems, updateQuantity } = useCart();
+  const cartItem = cartItems.find((cartItem) => cartItem.id === id); // find product in cart
+
+  const quantity = cartItem?.quantity || 1; // default to 1 if not found
 
   return (
     <Box sx={{ pt: 1, pb: 0.5, pl: 0.5, pr: 0.5, border: "1px solid white" }}>
       <NumberField.Root
         id={id}
-        value={value}
+        value={quantity}
         style={{
           display: "flex",
           flexDirection: "column",
@@ -27,11 +35,11 @@ export default function PublicNumberField() {
           }}
         >
           <Typography variant="h6" sx={{ align: "center" }}>
-            {value * 50} kr
+            {quantity * price} kr
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
             <NumberField.Decrement
-              onClick={() => setValue(value - 1)}
+              onClick={() => updateQuantity(id, -1)}
               data-cy="decrease-quantity-button"
               style={{
                 display: "flex",
@@ -65,7 +73,7 @@ export default function PublicNumberField() {
               }}
             />
             <NumberField.Increment
-              onClick={() => setValue(value + 1)}
+              onClick={() => updateQuantity(id, 1)}
               data-cy="increase-quantity-button"
               style={{
                 display: "flex",

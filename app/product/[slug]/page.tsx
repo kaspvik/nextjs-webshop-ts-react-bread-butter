@@ -1,8 +1,8 @@
+import GoBackButton from "@/app/components/go-back-button";
 import { products } from "@/data";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Box, Container, IconButton, Link, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import AddToCartButton from "../add-to-cart-button";
+import AddToCartButton from "../../components/add-to-cart-button";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -31,11 +31,12 @@ const ProductPage = async ({ params }: Props) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "flexStart",
+        position: "relative",
+        overflow: "visible",
+        marginY: 2,
       }}
     >
-      <IconButton component={Link} href="/">
-        <ArrowBackIcon sx={{ color: "text.primary", fontSize: 50 }} />
-      </IconButton>
+      <GoBackButton />
       <Box
         component="main"
         sx={{
@@ -54,7 +55,7 @@ const ProductPage = async ({ params }: Props) => {
       >
         <Box
           sx={{
-            width: { xs: "60%", sm: "60%", md: "60%" },
+            width: { xs: "70%", sm: "70%", md: "70%" },
             maxWidth: "400px",
           }}
         >
@@ -86,6 +87,7 @@ const ProductPage = async ({ params }: Props) => {
           <Typography variant="h6" sx={{ mt: 2 }}>
             Pris: {product.price} kr
           </Typography>
+
           <Typography variant="body1" sx={{ mt: 2 }}>
             {product.description}
           </Typography>
@@ -101,8 +103,9 @@ const ProductPage = async ({ params }: Props) => {
               mt: 2,
             }}
           >
-            <AddToCartButton />
+            <AddToCartButton product={product} />
           </Box>
+
         </Box>
       </Box>
     </Container>

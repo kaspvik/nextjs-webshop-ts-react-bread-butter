@@ -7,6 +7,8 @@ import {
   Typography,
 } from "@mui/material";
 import CartItem from "./cart-item";
+import CartList from "./cart-list";
+import CartSummary from "./cart-summary";
 
 export default function CartPage() {
   return (
@@ -29,24 +31,11 @@ export default function CartPage() {
           bgcolor: { xs: "transparent", sm: "background.paper" },
           marginTop: 2,
           border: { xs: "transparent", sm: "2px solid #9C8173" },
-          height: { xs: "auto", sm: "500px" },
+          borderRadius: "0.5rem",
+          height: { xs: "auto", sm: "700px" },
         }}
       >
-        <Box
-          sx={{
-            flex: 1,
-            overflowY: { xs: "visible", sm: "auto" },
-            maxHeight: { xs: "none", sm: "100%" },
-            width: "100%",
-            minWidth: "400px",
-            pr: { xs: 0, sm: 2 },
-          }}
-        >
-          <CartItem />
-          <CartItem />
-          <CartItem />
-          <CartItem />
-        </Box>
+        <CartList />
 
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
           <Divider orientation="vertical" flexItem />
@@ -63,58 +52,7 @@ export default function CartPage() {
             width: "100%",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              borderBottom: { xs: "none", sm: "2px solid #9C8173" },
-              paddingBottom: { xs: 3, sm: 1 },
-              paddingTop: { xs: 3, sm: 1 },
-              bgcolor: { xs: "background.paper", sm: "transparen" },
-            }}
-          >
-            <Typography variant="h5" sx={{ paddingX: 2 }}>
-              Delsumma:
-            </Typography>
-            <Typography data-cy="total-price" variant="h5" sx={{ paddingX: 2 }}>
-              300 kr
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
-              justifyContent: { xs: "center", sm: "space-between" },
-              alignItems: { xs: "center" },
-              paddingTop: 2,
-              gap: 2,
-              paddingBottom: { xs: 3, sm: 0 },
-              bgcolor: { xs: "background.paper", sm: "transparent" },
-            }}
-          >
-            <Link href="/">
-              <Button
-                sx={{
-                  backgroundColor: "#FAF2E9",
-                  color: "#9C8173",
-                  padding: "6px 16px",
-                  border: "1px solid #9C8173",
-                  "&:hover": { backgroundColor: "#E8DACD" },
-                }}
-              >
-                FORTSÄTT HANDLA
-              </Button>
-            </Link>
-            <Link href="/checkout">
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ color: "white" }}
-              >
-                FORTSÄTT TILL KASSAN
-              </Button>
-            </Link>
-          </Box>
+          <CartSummary />
         </Box>
       </Container>
     </Container>
