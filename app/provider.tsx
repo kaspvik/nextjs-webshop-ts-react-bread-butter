@@ -118,25 +118,25 @@ export default function CartProvider(props: PropsWithChildren) {
         onClose={() => setToastMessage(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         sx={{
-          width: "auto", // Se till att den inte är för bred
-          maxWidth: "350px", // Sätt en maxbredd för att kontrollera storleken
-          borderRadius: "0.5rem", // Justera hörnen för både Snackbar och Alert
-          boxShadow: "none", // Ta bort eventuell skugga
+          width: "auto",
+          maxWidth: "350px",
+          borderRadius: "0.5rem",
+          boxShadow: "none",
         }}
       >
         <Alert
           onClose={() => setToastMessage(null)}
-          severity="success" // Grön färg med en checkmark-ikon
-          variant="outlined" // Använd outlined variant
+          severity="success"
+          variant="outlined"
           sx={{
-            width: "100%", // Gör Alert lika bred som Snackbar
-            borderRadius: "0.5rem", // Runda hörnen
-            borderColor: "success.main", // Använd success-färgen för kantlinjen
-            color: "success.main", // Textfärg sätts till success-färgen
+            width: "100%",
+            borderRadius: "0.5rem",
+            borderColor: "success.main",
+            color: "success.main",
             backgroundColor: "white",
-            fontSize: "1rem", // Justera textstorlek
-            fontWeight: "bold", // Justera textens vikt
-            padding: "6px 16px", // Mindre padding för att matcha den gamla storleken
+            fontSize: "1rem",
+            fontWeight: "bold",
+            padding: "6px 16px",
           }}
         >
           <Typography variant="body1">{toastMessage}</Typography>
