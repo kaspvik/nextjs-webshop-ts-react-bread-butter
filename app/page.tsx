@@ -39,7 +39,9 @@ export default async function Home() {
           {products.map((product) => (
             <Link
               key={product.id}
-              href={`/product/${product.articleNumber}-${product.title}`}
+              href={`/product/${product.articleNumber}/${encodeURIComponent(
+                product.title
+              )}`}
               style={{
                 textDecoration: "none",
                 color: "inherit",
