@@ -10,6 +10,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 
+interface Props {
+  params: { orderNr: string };
+}
+
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.background,
@@ -41,10 +45,6 @@ function createData(
   return { image, title, quantity, price };
 }
 
-const generateOrderNumber = () => {
-  return `${Date.now()}`;
-};
-
 const rows = [
   createData("/images/rustiktragbrod.png", "Rustikt rågbröd", 3, 50),
   createData("/images/levain.png", "Levain", 2, 65),
@@ -53,8 +53,11 @@ const rows = [
 
 const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
 
-export default function ConfirmationPage() {
-  const orderNr = generateOrderNumber();
+export default async function ConfirmationPage({ params }: Props) {
+  const { orderNr } = await params;
+  if (!orderNr) {
+    return <h1>Beställningen hittades inte!</h1>;
+  }
   return (
     <Container
       sx={{

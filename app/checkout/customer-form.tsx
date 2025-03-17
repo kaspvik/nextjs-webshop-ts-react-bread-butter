@@ -59,6 +59,10 @@ export default function CustomerForm() {
     }
   };
 
+  const generateOrderNumber = () => {
+    return `${Date.now()}`;
+  };
+  const orderNr = generateOrderNumber();
   const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const result = customerSchema.safeParse(formData);
@@ -83,7 +87,7 @@ export default function CustomerForm() {
       setTimeout(() => {
         console.log("Navigerar till /confirmation...");
 
-        router.push("/confirmation");
+        router.push(`/confirmation/${orderNr}`);
       }, 2000);
       clearCart();
       //tömma formuläret
