@@ -3,24 +3,24 @@
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    FormLabel,
-    IconButton,
-    TextField,
-    Typography
+  Dialog,
+  DialogActions,
+  DialogContent,
+  FormLabel,
+  IconButton,
+  TextField,
+  Typography
 } from "@mui/material";
 import { Product } from "@prisma/client";
 import { useState } from "react";
-import EditButton from "./edit-admin-button";
+import EditButton from "../../buttons/edit-admin-button";
 
 
 interface Props {
   product: Product;
 }
 
-export default function EditProductForm({ product }: Props) {
+export default function EditProductForm( {product}: Props) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -71,7 +71,7 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.image}
+            defaultValue={product.image}
             type="url"
             fullWidth
             variant="outlined"
@@ -92,7 +92,7 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.title}
+            defaultValue={product.title}
             type="text"
             fullWidth
             variant="outlined"
@@ -113,7 +113,7 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.articleNumber}
+            defaultValue={product.articleNumber}
             type="number"
             fullWidth
             variant="outlined"
@@ -134,7 +134,7 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.weight}
+            defaultValue={product.weight}
             type="number"
             fullWidth
             variant="outlined"
@@ -155,7 +155,7 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.price}
+            defaultValue={product.price}
             type="number"
             fullWidth
             variant="outlined"
@@ -176,8 +176,8 @@ export default function EditProductForm({ product }: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.description}
-            type="number"
+            defaultValue={product.description}
+            type="text"
             fullWidth
             variant="outlined"
           />

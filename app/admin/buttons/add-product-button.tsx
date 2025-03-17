@@ -3,6 +3,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Container, Fab, Typography } from "@mui/material";
 
+
 export default function AddProductButton({ onClick }: { onClick?: () => void }) {
   return (
     <Container
@@ -26,10 +27,13 @@ export default function AddProductButton({ onClick }: { onClick?: () => void }) 
           color: "#FAF2E9",
         }}
         onClick={onClick}
-      >
+        >
+        
         <AddIcon data-cy="admin-add-product" />
+      
       </Fab>
       <Typography>Lägg till produkt</Typography>
+      
     </Container>
   );
 }

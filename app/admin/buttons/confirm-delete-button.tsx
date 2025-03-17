@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material";
 import { Product } from "@prisma/client";
-import { deleteProduct } from "./action";
+import { deleteProduct } from "../action";
 
 interface Props {
   product: Product;

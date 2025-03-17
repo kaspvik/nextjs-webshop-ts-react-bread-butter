@@ -1,25 +1,26 @@
-"use client"
+"use client";
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import {
-    Dialog,
-    DialogActions,
-    DialogContent,
-    FormLabel,
-    IconButton,
-    TextField,
-    Typography
+  Dialog,
+  DialogActions,
+  DialogContent,
+  FormControl,
+  FormLabel,
+  IconButton,
+  TextField,
+  Typography
 } from "@mui/material";
 import { Product } from "@prisma/client";
 import { useState } from "react";
-import AddProductButton from "./buttons/add-product-button";
+import EditButton from "../../buttons/edit-admin-button";
 
 interface Props {
   product: Product;
 }
 
-export default function AddProductForm(product: Product) {
+export default function EditProductForm(product: Props) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -31,10 +32,11 @@ export default function AddProductForm(product: Product) {
   };
   return (
     <>
-      <AddProductButton onClick={handleClickOpen} />
+      <EditButton onClick={handleClickOpen} />
 
       <Dialog
         open={open}
+        data-cy="product-form"
         onClose={handleClose}
         slotProps={{
           paper: {
@@ -51,11 +53,10 @@ export default function AddProductForm(product: Product) {
           justifyContent:"center",
           margin: 2,
           
-        }}>Lägg till en produkt</Typography>
+        }}>Redigera produkt</Typography>
         <DialogContent>
           
-          
-
+            <FormControl fullWidth>
           <FormLabel sx={{
                 textAlign: "left",
                 fontWeight: "bold",
@@ -70,12 +71,16 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.image}
+            defaultValue={product.product.image}
             type="url"
             fullWidth
             variant="outlined"
+            slotProps={{ htmlInput: { "data-cy": "product-image-error" } }}
           />
+          </FormControl>
 
+
+          <FormControl fullWidth>
             <FormLabel sx={{
                 textAlign: "left",
                 fontWeight: "bold",
@@ -91,11 +96,16 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.title}
+            defaultValue={product.product.title}
             type="text"
             fullWidth
             variant="outlined"
+            slotProps={{ htmlInput: { "data-cy": "product-title-error" } }}
           />
+
+          </FormControl>
+
+          <FormControl fullWidth>
 
           <FormLabel sx={{
                 textAlign: "left",
@@ -112,12 +122,16 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.articleNumber}
+            defaultValue={product.product.articleNumber}
             type="number"
             fullWidth
             variant="outlined"
           />
 
+        </FormControl>
+
+
+        <FormControl fullWidth>
           <FormLabel sx={{
                 textAlign: "left",
                 fontWeight: "bold",
@@ -133,11 +147,15 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.weight}
+            defaultValue={product.product.weight}
             type="number"
             fullWidth
             variant="outlined"
           />
+
+            </FormControl>
+
+            <FormControl fullWidth>
 
           <FormLabel sx={{
                 textAlign: "left",
@@ -154,11 +172,16 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.price}
+            defaultValue={product.product.price}
             type="number"
             fullWidth
             variant="outlined"
+            slotProps={{ htmlInput: { "data-cy": "product-price-error" } }}
           />
+
+            </FormControl>
+
+            <FormControl fullWidth>
 
           <FormLabel sx={{
                 textAlign: "left",
@@ -175,12 +198,21 @@ export default function AddProductForm(product: Product) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            defaultValue={product.description}
-            type="number"
+            defaultValue={product.product.description}
+            type="text"
             fullWidth
             variant="outlined"
+            slotProps={{ htmlInput: { "data-cy": "product-description-error" } }}
           />
+
+        </FormControl>
           
+
+
+
+
+
+
         </DialogContent>
         <DialogActions>
           <IconButton onClick={handleClose}>

@@ -1,7 +1,7 @@
 "use client"
 
-import { Container, Link } from "@mui/material";
-import AddProductButton from "./add-product-button";
+import { Container } from "@mui/material";
+import AddProductButton from "./buttons/add-product-button";
 
 
 export default function AdminLayout({ children }: { children: React.ReactNode }){
@@ -17,9 +17,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       }}
     > 
 
-    <Link href="/product/new">
+    
     <AddProductButton/>
-    </Link>
+    
     
     
     
