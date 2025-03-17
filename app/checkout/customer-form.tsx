@@ -39,39 +39,46 @@ export default function CustomerForm() {
     phone: "",
   });
 
-  const [errors, setErrors] = useState<{ [key: string]: boolean }>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    // uppdatera värdet när användaren skriveer i fältet
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: value.trim() === "" }));
+
+    // "slår upp" villken validering som gäller för det här fältet
+    const fieldSchema = customerSchema.shape[name as keyof typeof formData];
+    if (fieldSchema) {
+      // pga validera bara ett fält
+      const result = fieldSchema.safeParse(value);
+      // uppdatera errors att hålla error message
+      setErrors((prev) => ({
+        ...prev,
+        [name]: result.success ? "" : result.error.issues[0].message,
+      }));
+    }
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    // skapa ett tomt error-objekt att lagra errors per fält i
-    const newErrors: { [key: string]: boolean } = {};
-    // hämtar varje inputfältsnamn och loopar igenom
-    Object.keys(formData).forEach((key) => {
-      // kollar om något fält är tomt (tom sträng)
-      if (formData[key as keyof typeof formData].trim() === "") {
-        //skapar i så fall ett error i det fältet
-        newErrors[key] = true;
-      }
-    });
+    const result = customerSchema.safeParse(formData);
 
-    // om det fanns nåt fel
-    if (Object.keys(newErrors).length > 0) {
-      // uppdatera error statet så vi kan visa felmeddelanden
+    if (!result.success) {
+      // konvertera zod felen till objekt att lagra namnen på fälten
+      const newErrors: { [key: string]: string } = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        newErrors[field] = issue.message;
+      });
+
+      // om det fanns nåt fel
       setErrors(newErrors);
       console.log("Formuläret innehåller fel, avbryter!");
-
       return;
     } else {
       console.log("Formuläret är korrekt! Visar bekräftelse... ");
 
       // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
-
       setOpen(true);
       setTimeout(() => {
         console.log("Navigerar till /confirmation...");
@@ -171,7 +178,7 @@ export default function CustomerForm() {
               value={formData.address}
               onChange={handleChange}
               autoComplete="street-address"
-              error={errors.address}
+              error={Boolean(errors.address)}
               helperText={
                 errors.address ? (
                   <FormHelperText data-cy="customer-address-error">
@@ -213,7 +220,7 @@ export default function CustomerForm() {
                 value={formData.zipcode}
                 onChange={handleChange}
                 autoComplete="postal-code"
-                error={errors.zipcode}
+                error={Boolean(errors.zipcode)}
                 helperText={
                   errors.zipcode ? (
                     <FormHelperText data-cy="customer-zipcode-error">
@@ -247,7 +254,7 @@ export default function CustomerForm() {
                 value={formData.city}
                 onChange={handleChange}
                 autoComplete="address-level2"
-                error={errors.city}
+                error={Boolean(errors.city)}
                 helperText={
                   errors.city ? (
                     <FormHelperText data-cy="customer-city-error">
@@ -290,7 +297,7 @@ export default function CustomerForm() {
               value={formData.email}
               onChange={handleChange}
               autoComplete="email"
-              error={errors.email}
+              error={Boolean(errors.email)}
               helperText={
                 errors.email ? (
                   <FormHelperText data-cy="customer-email-error">
@@ -324,7 +331,7 @@ export default function CustomerForm() {
               value={formData.phone}
               onChange={handleChange}
               autoComplete="tel"
-              error={errors.phone}
+              error={Boolean(errors.phone)}
               helperText={
                 errors.phone ? (
                   <FormHelperText data-cy="customer-phone-error">
