@@ -49,7 +49,6 @@ export default function CustomerForm() {
         newErrors[key] = true;
       }
     });
-    console.log("Valideringsfel:", newErrors);
 
     // om det fanns nåt fel
     if (Object.keys(newErrors).length > 0) {
@@ -59,7 +58,7 @@ export default function CustomerForm() {
 
       return;
     } else {
-      console.log("Formuläret är korrekt! Visar bekräftelse... ✅");
+      console.log("Formuläret är korrekt! Visar bekräftelse... ");
 
       // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
 
@@ -125,14 +124,14 @@ export default function CustomerForm() {
               fullWidth
               id="name"
               name="name"
-              placeholder="Ditt namn"
               value={formData.name}
               onChange={handleChange}
-              error={errors.name}
+              error={Boolean(errors.name)}
+              autoComplete="name"
               helperText={
                 errors.name ? (
                   <FormHelperText data-cy="customer-name-error">
-                    {errors.name}
+                    {"Du måste fylla i ditt namn"}
                   </FormHelperText>
                 ) : null
               }
@@ -162,9 +161,15 @@ export default function CustomerForm() {
               placeholder="Leveransadress"
               value={formData.address}
               onChange={handleChange}
+              autoComplete="address"
               error={errors.address}
-              helperText={errors.address ? "Du måste fylla i en adress" : ""}
-              data-cy="customer-address-error"
+              helperText={
+                errors.address ? (
+                  <FormHelperText data-cy="customer-address-error">
+                    {"Du måste fylla i en adress"}
+                  </FormHelperText>
+                ) : null
+              }
             />
           </FormControl>
           <Box
@@ -198,9 +203,15 @@ export default function CustomerForm() {
                 placeholder="Postkod"
                 value={formData.zipcode}
                 onChange={handleChange}
+                autoComplete="zipcode"
                 error={errors.zipcode}
-                helperText={errors.zipcode ? "Du måste fylla i en postkod" : ""}
-                data-cy="customer-zipcode-error"
+                helperText={
+                  errors.zipcode ? (
+                    <FormHelperText data-cy="customer-zipcode-error">
+                      {"Du måste fylla i en postkod"}
+                    </FormHelperText>
+                  ) : null
+                }
               />
             </FormControl>
             <FormControl fullWidth>
@@ -226,9 +237,15 @@ export default function CustomerForm() {
                 placeholder="Stad"
                 value={formData.city}
                 onChange={handleChange}
+                autoComplete="city"
                 error={errors.city}
-                helperText={errors.city ? "Du måste fylla i en stad" : ""}
-                data-cy="customer-city-error"
+                helperText={
+                  errors.city ? (
+                    <FormHelperText data-cy="customer-city-error">
+                      {"Du måste fylla i en stad"}
+                    </FormHelperText>
+                  ) : null
+                }
               />
             </FormControl>
           </Box>
@@ -263,11 +280,15 @@ export default function CustomerForm() {
               placeholder="E-post"
               value={formData.email}
               onChange={handleChange}
+              autoComplete="email"
               error={errors.email}
               helperText={
-                errors.email ? "Du måste fylla i en e-post adress" : ""
+                errors.email ? (
+                  <FormHelperText data-cy="customer-email-error">
+                    {"Du måste fylla i en e-post adress"}
+                  </FormHelperText>
+                ) : null
               }
-              data-cy="customer-email-error"
             />
           </FormControl>
           <FormControl fullWidth>
@@ -293,11 +314,15 @@ export default function CustomerForm() {
               placeholder="Telefonnummer"
               value={formData.phone}
               onChange={handleChange}
+              autoComplete="phone"
               error={errors.phone}
               helperText={
-                errors.phone ? "Du måste fylla i ett telefonnummer" : ""
+                errors.phone ? (
+                  <FormHelperText data-cy="customer-phone-error">
+                    {"Du måste fylla i ett telefonnummer"}
+                  </FormHelperText>
+                ) : null
               }
-              data-cy="customer-phone-error"
             />
           </FormControl>
           <Button
