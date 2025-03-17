@@ -29,9 +29,9 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // läser in cartItems från LocalStorage vid varje omladdning av sidan
   useEffect(() => {
-    const storedCart = localStorage.getItem("cartItems");
-    if (storedCart) {
-      setCartItems(JSON.parse(storedCart));
+    const cart = localStorage.getItem("cartItems");
+    if (cart) {
+      setCartItems(JSON.parse(cart));
     }
   }, []);
 
@@ -64,16 +64,28 @@ export default function CartProvider(props: PropsWithChildren) {
     });
   };
 
-  const removeFromCart = (itemId: string) => {
-    setCartItems([]);
+  const removeFromCart = (id: string) => {
+    setCartItems((prevCart) =>
+      // skapa en array utan id't
+      prevCart.filter(
+        (item) =>
+          // behåll bara de items som INTE har det id som skickades in
+          item.id !== id
+      )
+    );
   };
 
   const updateQuantity = (id: string, amount: number) => {
+    // tar den befintliga cart och hämtar det senaste värdet för den
     setCartItems((prevCart) =>
+      // mappar ut de cartItems (item) som ligger i cart
       prevCart.map((item) =>
+        // kollar om något item i cart är samma som det vi skickade in
         item.id === id
-          ? { ...item, quantity: Math.max(1, item.quantity + amount) }
-          : item
+          ? // uppdaterar quantity: lägger ut allt i item, tar quantity och plussar på amount. Math.max ser till att den inte kan bli mindre än 1.
+            { ...item, quantity: Math.max(1, item.quantity + amount) }
+          : // om inget id matchar behåller vi item som det var
+            item
       )
     );
   };
