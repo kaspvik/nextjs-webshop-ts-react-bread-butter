@@ -1,7 +1,7 @@
 "use client";
 
 import { CartItem, Product } from "@/data";
-import { Box, Snackbar, Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import {
   createContext,
   PropsWithChildren,
@@ -112,26 +112,36 @@ export default function CartProvider(props: PropsWithChildren) {
       }}
     >
       {props.children}
-
       <Snackbar
         open={!!toastMessage}
         autoHideDuration={2000}
         onClose={() => setToastMessage(null)}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
         sx={{
-          borderColor: "success.main",
-          color: "success.main",
-          fontSize: "1rem",
-          fontWeight: "bold",
-          borderRadius: "0.5rem",
-          boxShadow: "none",
+          width: "auto", // Se till att den inte är för bred
+          maxWidth: "350px", // Sätt en maxbredd för att kontrollera storleken
+          borderRadius: "0.5rem", // Justera hörnen för både Snackbar och Alert
+          boxShadow: "none", // Ta bort eventuell skugga
         }}
-        message={
-          <Box>
-            <Typography variant="body1">{toastMessage}</Typography>
-          </Box>
-        }
-      />
+      >
+        <Alert
+          onClose={() => setToastMessage(null)}
+          severity="success" // Grön färg med en checkmark-ikon
+          variant="outlined" // Använd outlined variant
+          sx={{
+            width: "100%", // Gör Alert lika bred som Snackbar
+            borderRadius: "0.5rem", // Runda hörnen
+            borderColor: "success.main", // Använd success-färgen för kantlinjen
+            color: "success.main", // Textfärg sätts till success-färgen
+            backgroundColor: "white",
+            fontSize: "1rem", // Justera textstorlek
+            fontWeight: "bold", // Justera textens vikt
+            padding: "6px 16px", // Mindre padding för att matcha den gamla storleken
+          }}
+        >
+          <Typography variant="body1">{toastMessage}</Typography>
+        </Alert>
+      </Snackbar>
     </CartContext.Provider>
   );
 }
