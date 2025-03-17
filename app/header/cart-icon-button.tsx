@@ -24,15 +24,13 @@ export default function MyDrawer() {
 
   return (
     <>
-      {/* Cart Icon Button (ShoppingCartIcon) */}
       <IconButton
         data-cy="cart-link"
         onClick={toggleDrawer(true)}
         sx={{
-          position: "absolute",
-          top: 20,
-          right: 20,
-          zIndex: 1301,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
         <Badge
@@ -42,20 +40,20 @@ export default function MyDrawer() {
             "& .MuiBadge-badge": {
               backgroundColor: "background.paper",
               color: "text.primary",
-              fontSize: { xs: "0.8rem", md: "1rem" }, // Justera textstorleken i badgen
-              height: { xs: 16, sm: 18, md: 25 }, // Justera badge-storleken
+              fontSize: { xs: "0.8rem", md: "1rem" },
+              height: { xs: 16, sm: 18, md: 25 },
               minWidth: { xs: 15, md: 25 },
-              top: { xs: -2, md: 0 }, // Justera placeringen vertikalt
-              right: { xs: 0, sm: 15, md: 20 }, // Justera placeringen horisontellt
-              borderRadius: "50%", // Gör badgen rund
+              top: { xs: -2, md: 0 },
+              right: { xs: 0, sm: 15, md: 20 },
+              borderRadius: "50%",
             },
           }}
         >
           <ShoppingCartIcon
             sx={{
-              fontSize: { xs: 20, sm: 28, md: 40 }, // Justera storleken på ikonen
-              mx: { sm: 2 }, // Lägg till horisontellt mellanrum på smala skärmar
-              color: "text.primary", // Justera ikonens färg
+              fontSize: { xs: 23, sm: 28, md: 40 },
+              mx: { sm: 2 },
+              color: "text.primary",
             }}
           />
         </Badge>
@@ -78,16 +76,17 @@ export default function MyDrawer() {
         open={open}
         onClose={toggleDrawer(false)}
         sx={{
-          zIndex: 1301, // Ensure the drawer is on top of the backdrop
-          width: { xs: "90%", sm: 500 }, // Justera bredden för mobil och desktop
-          maxHeight: "80vh", // Begränsa maxhöjd för bättre upplevelse på mobil
-          overflowY: "auto", // Gör innehållet rullbart
+          zIndex: 1301,
+          width: { xs: "50%", sm: 400, md: 500 },
+          maxWidth: 320,
+          maxHeight: "80vh",
+          overflowY: "auto",
         }}
       >
         <Box
           sx={{
             width: "100%",
-            padding: 3,
+            paddingY: 3,
             backgroundColor: "background.paper",
             display: "flex",
             flexDirection: "column",
@@ -107,19 +106,21 @@ export default function MyDrawer() {
             <Close />
           </IconButton>
 
-          {/* Cart title */}
           <Typography
             variant="h5"
-            sx={{ marginBottom: 2, fontFamily: "var(--font-lobster)" }}
+            sx={{
+              marginBottom: 2,
+              fontFamily: "var(--font-lobster)",
+              paddingLeft: 2,
+            }}
           >
             Kundvagn
           </Typography>
 
-          {/* Cart Content (Cart List and Cart Summary) */}
           <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <CartList /> {/* Din CartList-komponent */}
+            <CartList />
             <Divider sx={{ marginY: 2 }} />
-            <CartSummary /> {/* Din CartSummary-komponent */}
+            <CartSummary />
           </Box>
         </Box>
       </Drawer>

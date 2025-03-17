@@ -31,7 +31,14 @@ const Header = () => {
         >
           Bread&Butter
         </Typography>
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: 2,
+          }}
+        >
           <IconButton
             data-cy="admin-link"
             color="inherit"
@@ -41,7 +48,6 @@ const Header = () => {
             <AccountCircleIcon
               sx={{
                 fontSize: { sx: 20, md: 40 },
-                mx: { xs: 1, sm: 2, md: 4 },
                 color: "text.primary",
               }}
             />
