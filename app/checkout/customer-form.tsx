@@ -15,6 +15,16 @@ import {
 import { useState } from "react";
 import { useCart } from "../provider";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+
+const customerSchema = z.object({
+  name: z.string().min(1, "Du måste fylla i ditt namn"),
+  address: z.string().min(1, "Du måste fylla i en adress"),
+  zipcode: z.string().regex(/^\d{5}$/, "Postkoden måste vara exakt 5 siffror"),
+  city: z.string().min(1, "Du måste fylla i en stad"),
+  email: z.string().email("Ogiltig e-postadress"),
+  phone: z.string().regex(/^\+?\d{7,15}$/, "Ogiltigt telefonnummer"),
+});
 
 export default function CustomerForm() {
   const router = useRouter();
@@ -102,7 +112,6 @@ export default function CustomerForm() {
             alignItems: "center",
             gap: 2,
           }}
-          noValidate
         >
           <FormControl fullWidth>
             <FormLabel
