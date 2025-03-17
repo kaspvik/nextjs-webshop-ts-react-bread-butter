@@ -5,8 +5,8 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
-  useState,
   useEffect,
+  useState,
 } from "react";
 
 interface ContextValues {
@@ -84,7 +84,7 @@ export default function CartProvider(props: PropsWithChildren) {
   };
 
   //total items in cart
-  const cartCount = 0;
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   //total price
   const totalSum = cartItems.reduce(
     (sum, item) => sum + item.quantity * item.price,
