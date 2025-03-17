@@ -161,7 +161,7 @@ export default function CustomerForm() {
               placeholder="Leveransadress"
               value={formData.address}
               onChange={handleChange}
-              autoComplete="address"
+              autoComplete="street-address"
               error={errors.address}
               helperText={
                 errors.address ? (
@@ -203,7 +203,7 @@ export default function CustomerForm() {
                 placeholder="Postkod"
                 value={formData.zipcode}
                 onChange={handleChange}
-                autoComplete="zipcode"
+                autoComplete="postal-code"
                 error={errors.zipcode}
                 helperText={
                   errors.zipcode ? (
@@ -237,7 +237,7 @@ export default function CustomerForm() {
                 placeholder="Stad"
                 value={formData.city}
                 onChange={handleChange}
-                autoComplete="city"
+                autoComplete="address-level2"
                 error={errors.city}
                 helperText={
                   errors.city ? (
@@ -314,7 +314,7 @@ export default function CustomerForm() {
               placeholder="Telefonnummer"
               value={formData.phone}
               onChange={handleChange}
-              autoComplete="phone"
+              autoComplete="tel"
               error={errors.phone}
               helperText={
                 errors.phone ? (
