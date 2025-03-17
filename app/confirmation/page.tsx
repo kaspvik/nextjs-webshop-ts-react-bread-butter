@@ -41,6 +41,10 @@ function createData(
   return { image, title, quantity, price };
 }
 
+const generateOrderNumber = () => {
+  return `${Date.now()}`;
+};
+
 const rows = [
   createData("/images/rustiktragbrod.png", "Rustikt rågbröd", 3, 50),
   createData("/images/levain.png", "Levain", 2, 65),
@@ -50,6 +54,7 @@ const rows = [
 const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
 
 export default function ConfirmationPage() {
+  const orderNr = generateOrderNumber();
   return (
     <Container
       sx={{
@@ -78,7 +83,7 @@ export default function ConfirmationPage() {
           component="p"
           sx={{ textAlign: "center", fontSize: "1.25rem", padding: "1.5rem" }}
         >
-          Ditt ordernummer: 157462400
+          Ditt ordernummer: {orderNr}
         </Typography>
 
         <Typography
