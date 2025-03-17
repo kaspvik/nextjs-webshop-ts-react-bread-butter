@@ -1,10 +1,12 @@
 "use client";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import Link from "next/link";
+import { useCart } from "../provider";
 
 const CartIconButton = () => {
+  const { cartCount } = useCart(); // Hämta antal varor i kundvagnen
   return (
     <IconButton
       data-cy="cart-link"
@@ -12,13 +14,29 @@ const CartIconButton = () => {
       component={Link}
       href="/checkout"
     >
-      <ShoppingCartIcon
+      <Badge
+        invisible={cartCount === 0}
+        badgeContent={cartCount}
         sx={{
-          fontSize: { xs: 20, md: 40 },
-          mx: { sm: 2 },
-          color: "text.primary",
+          "& .MuiBadge-badge": {
+            backgroundColor: "background.paper",
+            color: "text.primary",
+            fontSize: "0.85rem",
+            height: 22,
+            minWidth: 20,
+            top: 0,
+            right: 20,
+          },
         }}
-      />
+      >
+        <ShoppingCartIcon
+          sx={{
+            fontSize: { xs: 20, md: 40 },
+            mx: { sm: 2 },
+            color: "text.primary",
+          }}
+        />
+      </Badge>
     </IconButton>
   );
 };
