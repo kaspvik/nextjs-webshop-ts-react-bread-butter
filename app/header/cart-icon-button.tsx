@@ -21,17 +21,18 @@ const CartIconButton = () => {
           "& .MuiBadge-badge": {
             backgroundColor: "background.paper",
             color: "text.primary",
-            fontSize: "0.85rem",
-            height: 22,
-            minWidth: 20,
-            top: 0,
-            right: 20,
+            fontSize: { xs: "0.8rem", md: "1rem" },
+            height: { xs: 16, sm: 18, md: 25 },
+            minWidth: { xs: 15, md: 25 },
+            top: { xs: -2, md: 0 },
+            right: { xs: 0, sm: 15, md: 20 },
+            borderRadius: "50%",
           },
         }}
       >
         <ShoppingCartIcon
           sx={{
-            fontSize: { xs: 20, md: 40 },
+            fontSize: { xs: 20, sm: 28, md: 40 },
             mx: { sm: 2 },
             color: "text.primary",
           }}
