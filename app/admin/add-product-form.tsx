@@ -1,26 +1,26 @@
-"use client";
+"use client"
 
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import {
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  FormLabel,
-  IconButton,
-  TextField,
-  Typography
+    Dialog,
+    DialogActions,
+    DialogContent,
+    FormLabel,
+    IconButton,
+    TextField,
+    Typography
 } from "@mui/material";
 import { Product } from "@prisma/client";
 import { useState } from "react";
-import EditButton from "../edit-admin-button";
+import { createProduct } from "./action";
+import AddProductButton from "./add-product-button";
 
 interface Props {
   product: Product;
 }
 
-export default function EditProductForm(product: Props) {
+export default function AddProductForm(product: Product) {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -32,7 +32,7 @@ export default function EditProductForm(product: Props) {
   };
   return (
     <>
-      <EditButton onClick={handleClickOpen} />
+      <AddProductButton onClick={handleClickOpen} />
 
       <Dialog
         open={open}
@@ -43,6 +43,7 @@ export default function EditProductForm(product: Props) {
             onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
               handleClose();
+              createProduct();
             },
           },
         }}
@@ -52,12 +53,9 @@ export default function EditProductForm(product: Props) {
           justifyContent:"center",
           margin: 2,
           
-        }}>Redigera produkt</Typography>
+        }}>Lägg till en produkt</Typography>
         <DialogContent>
-          <DialogContentText>
-            I följande formulär kan du redigera en produkt. Vill du istället
-            lägga till en ny produkt använda gärna plus-tecknet.
-          </DialogContentText>
+          
           
 
           <FormLabel sx={{
@@ -74,7 +72,7 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.image}
+            defaultValue={product.image}
             type="url"
             fullWidth
             variant="outlined"
@@ -95,7 +93,7 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.title}
+            defaultValue={product.title}
             type="text"
             fullWidth
             variant="outlined"
@@ -116,7 +114,7 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.articleNumber}
+            defaultValue={product.articleNumber}
             type="number"
             fullWidth
             variant="outlined"
@@ -137,7 +135,7 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.weight}
+            defaultValue={product.weight}
             type="number"
             fullWidth
             variant="outlined"
@@ -158,7 +156,7 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.price}
+            defaultValue={product.price}
             type="number"
             fullWidth
             variant="outlined"
@@ -179,18 +177,12 @@ export default function EditProductForm(product: Props) {
             margin="normal"
             id="imageURL"
             name="imageURL"
-            label={product.product.description}
+            defaultValue={product.description}
             type="number"
             fullWidth
             variant="outlined"
           />
           
-
-
-
-
-
-
         </DialogContent>
         <DialogActions>
           <IconButton onClick={handleClose}>

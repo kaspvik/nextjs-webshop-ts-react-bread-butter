@@ -1,9 +1,8 @@
 import { db } from "@/prisma/db";
 import { Container } from "@mui/material";
-import AddProductButton from "./add-product-item";
 import AdminItem from "./admin-item";
 
-export default async function AdminPage() {
+export default async function AdminPage(){
   const products = await db.product.findMany();
   return (
     <Container
@@ -15,7 +14,7 @@ export default async function AdminPage() {
         marginTop: 2,
       }}
     >
-      <AddProductButton />
+
       {products.map((product) => (
         <AdminItem key={product.id} product={product} />
       ))}

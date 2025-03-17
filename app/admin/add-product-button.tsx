@@ -3,7 +3,7 @@
 import AddIcon from "@mui/icons-material/Add";
 import { Container, Fab, Typography } from "@mui/material";
 
-export default function AddProductButton() {
+export default function AddProductButton({ onClick }: { onClick?: () => void }) {
   return (
     <Container
       sx={{
@@ -25,6 +25,7 @@ export default function AddProductButton() {
           backgroundColor: "#9C8173",
           color: "#FAF2E9",
         }}
+        onClick={onClick}
       >
         <AddIcon data-cy="admin-add-product" />
       </Fab>
