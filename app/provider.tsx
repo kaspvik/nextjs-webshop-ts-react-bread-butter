@@ -1,7 +1,7 @@
 "use client";
 
 import { CartItem, Product } from "@/data";
-import { Snackbar } from "@mui/material";
+import { Box, Snackbar, Typography } from "@mui/material";
 import {
   createContext,
   PropsWithChildren,
@@ -117,9 +117,20 @@ export default function CartProvider(props: PropsWithChildren) {
         open={!!toastMessage}
         autoHideDuration={2000}
         onClose={() => setToastMessage(null)}
-        message={toastMessage}
         anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        data-cy="added-to-cart-toast"
+        sx={{
+          borderColor: "success.main",
+          color: "success.main",
+          fontSize: "1rem",
+          fontWeight: "bold",
+          borderRadius: "0.5rem",
+          boxShadow: "none",
+        }}
+        message={
+          <Box>
+            <Typography variant="body1">{toastMessage}</Typography>
+          </Box>
+        }
       />
     </CartContext.Provider>
   );
