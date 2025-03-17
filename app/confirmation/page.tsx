@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Container, Link, Typography, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
@@ -9,7 +9,6 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import AddToCartButton from "../components/add-to-cart-button";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -156,7 +155,7 @@ export default function ConfirmationPage() {
           component={Link}
           href="/"
         >
-          <AddToCartButton label="Till Startsidan" />
+          <Button>Till startsidan</Button>
         </Box>
       </Box>
     </Container>

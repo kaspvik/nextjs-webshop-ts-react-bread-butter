@@ -193,7 +193,7 @@ export default function CustomerForm() {
               display: "flex",
               gap: 2,
               width: "100%",
-              justifyContent: "space-between", // Ensure spacing
+              justifyContent: "space-between",
             }}
           >
             <FormControl fullWidth>
