@@ -46,6 +46,7 @@ const ProductPage = async ({ params }: Props) => {
           borderRadius: "0.5rem",
           margin: "2rem 0",
           width: "100%",
+          justifyContent: "center",
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           alignItems: { xs: "center", md: "flex-start" },
@@ -67,16 +68,44 @@ const ProductPage = async ({ params }: Props) => {
           />
         </Box>
 
-        <Box sx={{ flex: 1, maxWidth: "500px" }}>
-          <Typography variant="h1">{product.title}</Typography>
-          <Typography variant="body1" sx={{ mt: 2 }}>
-            {product.description}
+        <Box
+          sx={{
+            flex: 1,
+            maxWidth: "500px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            textAlign: "left",
+          }}
+        >
+          <Typography
+            variant="h1"
+            sx={{ fontSize: { sx: 40, sm: 40, md: 50 } }}
+          >
+            {product.title}
           </Typography>
           <Typography variant="h6" sx={{ mt: 2 }}>
             Pris: {product.price} kr
           </Typography>
-          <Typography variant="h6">Vikt: {product.weight} g</Typography>
-          <AddToCartButton product={product} />
+
+          <Typography variant="body1" sx={{ mt: 2 }}>
+            {product.description}
+          </Typography>
+          <Typography variant="h6" sx={{ py: 2, fontSize: "15px" }}>
+            Vikt: {product.weight} g
+          </Typography>
+
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: { xs: "center", md: "flex-start" },
+              width: "100%",
+              mt: 2,
+            }}
+          >
+            <AddToCartButton product={product} />
+          </Box>
+
         </Box>
       </Box>
     </Container>
