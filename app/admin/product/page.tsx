@@ -7,9 +7,10 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  DialogTitle,
+  FormLabel,
   IconButton,
   TextField,
+  Typography
 } from "@mui/material";
 import { Product } from "@prisma/client";
 import { useState } from "react";
@@ -41,31 +42,155 @@ export default function EditProductForm(product: Props) {
             component: "form",
             onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              const formData = new FormData(event.currentTarget);
               handleClose();
             },
           },
         }}
       >
-        <DialogTitle>Redigera produkt</DialogTitle>
+        <Typography variant="h1" sx={{
+          display:"flex",
+          justifyContent:"center",
+          margin: 2,
+          
+        }}>Redigera produkt</Typography>
         <DialogContent>
           <DialogContentText>
             I följande formulär kan du redigera en produkt. Vill du istället
             lägga till en ny produkt använda gärna plus-tecknet.
           </DialogContentText>
+          
+
+          <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Bildadress
+          </FormLabel>
+
           <TextField
             title="Bildadress"
             autoFocus
             required
-            margin="dense"
-            id="name"
-            name="email"
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
             label={product.product.image}
             type="url"
             fullWidth
-            variant="standard"
+            variant="outlined"
           />
-          <p>{product.product.title}</p>
+
+            <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Title
+              </FormLabel>
+
+
+          <TextField
+            title="Titel"
+            autoFocus
+            required
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
+            label={product.product.title}
+            type="text"
+            fullWidth
+            variant="outlined"
+          />
+
+          <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Art Nr
+              </FormLabel>
+
+
+          <TextField
+            title="Artikelnummer"
+            autoFocus
+            required
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
+            label={product.product.articleNumber}
+            type="number"
+            fullWidth
+            variant="outlined"
+          />
+
+          <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Vikt i gram
+              </FormLabel>
+
+
+          <TextField
+            title="Vikt"
+            autoFocus
+            required
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
+            label={product.product.weight}
+            type="number"
+            fullWidth
+            variant="outlined"
+          />
+
+          <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Pris i kronor
+              </FormLabel>
+
+
+          <TextField
+            title="Pris"
+            autoFocus
+            required
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
+            label={product.product.price}
+            type="number"
+            fullWidth
+            variant="outlined"
+          />
+
+          <FormLabel sx={{
+                textAlign: "left",
+                fontWeight: "bold",
+                color: "text.primary",
+              }}> Beskriving
+              </FormLabel>
+
+
+          <TextField
+            title="Beskrivning"
+            autoFocus
+            required
+            margin="normal"
+            id="imageURL"
+            name="imageURL"
+            label={product.product.description}
+            type="number"
+            fullWidth
+            variant="outlined"
+          />
+          
+
+
+
+
+
+
         </DialogContent>
         <DialogActions>
           <IconButton onClick={handleClose}>
