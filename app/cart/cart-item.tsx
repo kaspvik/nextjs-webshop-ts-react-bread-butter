@@ -4,12 +4,15 @@ import { Box, Button, Card, Typography } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import PublicNumberField from "../components/numberfield-component";
 import { CartItem } from "@/data";
+import { useCart } from "../provider";
 
 interface Props {
   cartItem: CartItem;
 }
 
 export default function CartItemComponent({ cartItem }: Props) {
+  const { removeFromCart } = useCart();
+
   return (
     <Card
       sx={{
@@ -101,7 +104,10 @@ export default function CartItemComponent({ cartItem }: Props) {
             zIndex: 1,
           }}
         >
-          <Button startIcon={<Delete />}></Button>
+          <Button
+            onClick={() => removeFromCart(cartItem.id)}
+            startIcon={<Delete />}
+          ></Button>
         </Box>
       </Box>
     </Card>
