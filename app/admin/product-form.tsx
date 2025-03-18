@@ -75,14 +75,12 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Bildadress"
-        autoFocus
-        required
         margin="normal"
         id="imageURL"
         type="url"
         fullWidth
         variant="outlined"
-        {...form.register("image")}
+        slotProps={{ htmlInput: { "data-cy": "product-image" } }}
       />
 
       <FormLabel

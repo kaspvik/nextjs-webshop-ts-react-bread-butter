@@ -10,7 +10,6 @@ export async function createProduct(product: Prisma.ProductCreateInput) {
   await db.product.create({ data: product });
   revalidatePath("/");
   redirect("/admin");
-
 }
 
 export async function deleteProduct(id: string) {
