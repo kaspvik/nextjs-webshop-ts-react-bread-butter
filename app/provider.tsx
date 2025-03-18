@@ -103,7 +103,7 @@ export default function CartProvider(props: PropsWithChildren) {
   };
 
   //total items in cart
-  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartCount = cartItems.length;
   //total price
   const totalSum = cartItems.reduce(
     (sum, item) => sum + item.quantity * item.price,

@@ -49,15 +49,14 @@ export default function MyDrawer() {
               borderRadius: "50%",
             },
           }}
-        >
-          <ShoppingCartIcon
-            sx={{
-              fontSize: { xs: 23, sm: 28, md: 40 },
-              mx: { sm: 2 },
-              color: "text.primary",
-            }}
-          />
-        </Badge>
+        />
+        <ShoppingCartIcon
+          sx={{
+            fontSize: { xs: 23, sm: 28, md: 40 },
+            mx: { sm: 2 },
+            color: "text.primary",
+          }}
+        />
       </IconButton>
 
       {/* Backdrop for darkened background */}
