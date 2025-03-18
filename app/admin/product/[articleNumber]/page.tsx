@@ -16,7 +16,7 @@ export default async function EditProductPage({ params }: Props) {
   if (!product) return <main>404</main>;
   return (
     <Dialog open>
-      <ProductForm key={product.articleNumber} product={product} />
+      <ProductForm product={product} />
     </Dialog>
   );
 }

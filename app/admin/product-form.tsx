@@ -14,7 +14,7 @@ import { Prisma, Product } from "@prisma/client";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
-import { createProduct } from "./action";
+import { createProduct, updateProduct } from "./action";
 
 const ProductSchema = z.object({
   weight: z.coerce.number().optional(),
@@ -31,12 +31,22 @@ interface Props {
 export default function ProductForm({ product }: Props) {
   const isEdit = Boolean(product);
   const form = useForm<Prisma.ProductCreateInput>({
-    defaultValues: product,
+    defaultValues: product || {
+      title: "",
+      description: "",
+      image: "",
+      price: 0,
+      weight: undefined,
+    },
     resolver: zodResolver(ProductSchema),
   });
   const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
-    await createProduct(data);
-    form.reset();
+    if (isEdit) {
+      await updateProduct(product!.articleNumber, data);
+    } else {
+      await createProduct(data);
+      form.reset();
+    }
   };
 
   return (
@@ -107,7 +117,7 @@ export default function ProductForm({ product }: Props) {
         {...form.register("title")}
       />
 
-      <FormLabel
+      {/* <FormLabel
         sx={{
           textAlign: "left",
           fontWeight: "bold",
@@ -121,14 +131,13 @@ export default function ProductForm({ product }: Props) {
       <TextField
         title="Artikelnummer"
         autoFocus
-        required
         margin="normal"
         id="imageURL"
         type="number"
         fullWidth
         variant="outlined"
         {...form.register("articleNumber")}
-      />
+      /> */}
 
       <FormLabel
         sx={{

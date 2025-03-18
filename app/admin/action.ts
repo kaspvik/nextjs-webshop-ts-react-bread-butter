@@ -16,3 +16,15 @@ export async function deleteProduct(id: string) {
   await db.product.delete({ where: { id: id } });
   revalidatePath("/");
 }
+
+export async function updateProduct(
+  articleNumber: string,
+  data: Prisma.ProductUpdateInput
+) {
+  await db.product.update({
+    where: { articleNumber },
+    data,
+  });
+  revalidatePath("/");
+  redirect("/admin");
+}
