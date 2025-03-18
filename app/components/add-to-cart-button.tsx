@@ -13,10 +13,18 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
   label = "Lägg i kundvagn",
   product,
 }) => {
-  const { addToCart } = useCart();
+  const { addToCart, showToast } = useCart();
+
+  const handleAddToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    addToCart(product);
+    showToast("Produkten har lagts i kundvagnen!");
+  };
+
   return (
     <Button
-      onClick={() => addToCart(product)}
+      onClick={handleAddToCart}
       size="large"
       sx={{
         mt: 3,
@@ -26,7 +34,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
       }}
       data-cy="product-buy-button"
     >
-      {label} {/* Använd den dynamiska texten här */}
+      {label}
     </Button>
   );
 };

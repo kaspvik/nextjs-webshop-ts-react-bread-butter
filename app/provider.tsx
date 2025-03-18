@@ -1,6 +1,7 @@
 "use client";
 
 import { CartItem, Product } from "@/data";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import {
   createContext,
   PropsWithChildren,
@@ -15,10 +16,10 @@ interface ContextValues {
   totalSum: number;
   //for the numberfield component
   updateQuantity: (id: string, amount: number) => void;
-
   addToCart: (item: Product) => void;
   removeFromCart: (itemId: string) => void;
   clearCart: () => void;
+  showToast: (message: string) => void;
 }
 
 const CartContext = createContext({} as ContextValues);
@@ -26,6 +27,7 @@ const CartContext = createContext({} as ContextValues);
 export default function CartProvider(props: PropsWithChildren) {
   // state
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [toastMessage, setToastMessage] = useState<string | null>(null); // Snackbar state
 
   // läser in cartItems från LocalStorage vid varje omladdning av sidan
   useEffect(() => {
@@ -39,6 +41,10 @@ export default function CartProvider(props: PropsWithChildren) {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+  };
 
   // methods
   const addToCart = (item: Product) => {
@@ -62,6 +68,7 @@ export default function CartProvider(props: PropsWithChildren) {
         return [...prevItems, newItem];
       }
     });
+    showToast("Produkten har lagts i kundvagnen!");
   };
 
   const removeFromCart = (id: string) => {
@@ -113,9 +120,40 @@ export default function CartProvider(props: PropsWithChildren) {
         addToCart,
         removeFromCart,
         clearCart,
+        showToast,
       }}
     >
       {props.children}
+      <Snackbar
+        open={!!toastMessage}
+        autoHideDuration={2000}
+        onClose={() => setToastMessage(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
+        sx={{
+          width: "auto",
+          maxWidth: "350px",
+          borderRadius: "0.5rem",
+          boxShadow: "none",
+        }}
+      >
+        <Alert
+          onClose={() => setToastMessage(null)}
+          severity="success"
+          variant="outlined"
+          sx={{
+            width: "100%",
+            borderRadius: "0.5rem",
+            borderColor: "success.main",
+            color: "success.main",
+            backgroundColor: "white",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            padding: "6px 16px",
+          }}
+        >
+          <Typography variant="body1">{toastMessage}</Typography>
+        </Alert>
+      </Snackbar>
     </CartContext.Provider>
   );
 }

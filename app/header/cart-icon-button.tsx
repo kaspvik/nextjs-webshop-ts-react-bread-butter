@@ -29,6 +29,7 @@ const CartIconButton = () => {
             borderRadius: "50%",
           },
         }}
+        data-cy="cart-items-count-badge"
       >
         <ShoppingCartIcon
           sx={{
