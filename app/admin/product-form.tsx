@@ -1,17 +1,28 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SaveIcon from "@mui/icons-material/Save";
 import {
   Box,
-  DialogActions,
-  DialogContent,
   FormLabel,
   IconButton,
   TextField,
   Typography,
 } from "@mui/material";
-import { Product } from "@prisma/client";
+import { Prisma, Product } from "@prisma/client";
+import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+import z from "zod";
+import { createProduct } from "./action";
+
+const ProductSchema = z.object({
+  weight: z.coerce.number().optional(),
+  description: z.string().min(1),
+  title: z.string().min(1),
+  image: z.string().url(),
+  price: z.coerce.number().min(1),
+});
 
 interface Props {
   product?: Product;
@@ -19,12 +30,27 @@ interface Props {
 
 export default function ProductForm({ product }: Props) {
   const isEdit = Boolean(product);
-  const form = useForm<Product>({
+  const form = useForm<Prisma.ProductCreateInput>({
     defaultValues: product,
+    resolver: zodResolver(ProductSchema),
   });
+  const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
+    await createProduct(data);
+    form.reset();
+  };
 
   return (
-    <Box component="form">
+    <Box
+      component="form"
+      onSubmit={form.handleSubmit(onSubmit)}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        padding: 2,
+        width: 350,
+      }}
+      data-cy="product-form"
+    >
       <Typography
         variant="h1"
         sx={{
@@ -35,159 +61,163 @@ export default function ProductForm({ product }: Props) {
       >
         Lägg till en produkt
       </Typography>
-      <DialogContent>
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Bildadress
-        </FormLabel>
 
-        <TextField
-          title="Bildadress"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.image}
-          type="url"
-          fullWidth
-          variant="outlined"
-        />
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Bildadress
+      </FormLabel>
 
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Title
-        </FormLabel>
+      <TextField
+        title="Bildadress"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="url"
+        fullWidth
+        variant="outlined"
+        {...form.register("image")}
+      />
 
-        <TextField
-          title="Titel"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.title}
-          type="text"
-          fullWidth
-          variant="outlined"
-        />
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Title
+      </FormLabel>
 
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Art Nr
-        </FormLabel>
+      <TextField
+        title="Titel"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="text"
+        fullWidth
+        variant="outlined"
+        slotProps={{ htmlInput: { "data-cy": "product-title" } }}
+        {...form.register("title")}
+      />
 
-        <TextField
-          title="Artikelnummer"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.articleNumber}
-          type="number"
-          fullWidth
-          variant="outlined"
-        />
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Art Nr
+      </FormLabel>
 
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Vikt i gram
-        </FormLabel>
+      <TextField
+        title="Artikelnummer"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="number"
+        fullWidth
+        variant="outlined"
+        {...form.register("articleNumber")}
+      />
 
-        <TextField
-          title="Vikt"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.weight}
-          type="number"
-          fullWidth
-          variant="outlined"
-        />
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Vikt i gram
+      </FormLabel>
 
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Pris i kronor
-        </FormLabel>
+      <TextField
+        title="Vikt"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="number"
+        fullWidth
+        variant="outlined"
+        {...form.register("weight")}
+      />
 
-        <TextField
-          title="Pris"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.price}
-          type="number"
-          fullWidth
-          variant="outlined"
-        />
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Pris i kronor
+      </FormLabel>
 
-        <FormLabel
-          sx={{
-            textAlign: "left",
-            fontWeight: "bold",
-            color: "text.primary",
-          }}
-        >
-          {" "}
-          Beskriving
-        </FormLabel>
+      <TextField
+        title="Pris"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="number"
+        fullWidth
+        variant="outlined"
+        slotProps={{ htmlInput: { "data-cy": "product-price" } }}
+        {...form.register("price")}
+      />
 
-        <TextField
-          title="Beskrivning"
-          autoFocus
-          required
-          margin="normal"
-          id="imageURL"
-          name="imageURL"
-          defaultValue={product.description}
-          type="number"
-          fullWidth
-          variant="outlined"
-        />
-      </DialogContent>
-      <DialogActions>
-        <IconButton onClick={handleClose}>
-          <DeleteIcon />
-        </IconButton>
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+        }}
+      >
+        {" "}
+        Beskriving
+      </FormLabel>
+
+      <TextField
+        title="Beskrivning"
+        autoFocus
+        required
+        margin="normal"
+        id="imageURL"
+        type="text"
+        fullWidth
+        variant="outlined"
+        slotProps={{ htmlInput: { "data-cy": "product-description" } }}
+        {...form.register("description")}
+      />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Link href="/admin/">
+          <IconButton>
+            <DeleteIcon />
+          </IconButton>
+        </Link>
         <IconButton type="submit">
           <SaveIcon />
         </IconButton>
-      </DialogActions>
+      </Box>
     </Box>
   );
 }

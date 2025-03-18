@@ -5,10 +5,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-import AddToCartButton from "../components/add-to-cart-button";
+import AddToCartButton from "../../components/add-to-cart-button";
 
 import { Product } from "@prisma/client";
-
 
 type ProductCardProps = {
   product: Product;

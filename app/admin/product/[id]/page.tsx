@@ -1,13 +1,13 @@
 import { db } from "@/prisma/db";
 import { Dialog } from "@mui/material";
-import AddProductForm from "../../product-form";
+import ProductForm from "../../product-form";
 
-export default async function NewProductPage() {
-    const products = await db.product.findUnique();
-  
+export default async function EditProductPage() {
+  const products = await db.product.findUnique();
+
   return (
     <Dialog open>
-      <AddProductForm product={} />
+      <ProductForm product={products} />
     </Dialog>
   );
 }
