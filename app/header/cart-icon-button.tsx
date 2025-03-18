@@ -32,9 +32,9 @@ export default function MyDrawer() {
           alignItems: "center",
           justifyContent: "center",
         }}
-        data-cy="cart-items-count-badge"
       >
         <Badge
+          data-cy="cart-items-count-badge"
           invisible={cartCount === 0}
           badgeContent={cartCount}
           sx={{
@@ -112,13 +112,20 @@ export default function MyDrawer() {
             sx={{
               marginBottom: 2,
               fontFamily: "var(--font-lobster)",
-              paddingLeft: 2,
+              paddingLeft: 3,
             }}
           >
             Kundvagn
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              paddingLeft: 2,
+            }}
+          >
             <CartList />
             <Divider sx={{ marginY: 2 }} />
             <CartSummary />
