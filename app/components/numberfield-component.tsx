@@ -18,7 +18,6 @@ export default function PublicNumberField({
   return (
     <Box sx={{ pt: 1, pb: 0.5, pl: 0.5, pr: 0.5, border: "1px solid white" }}>
       <NumberField.Root
-        data-cy="product-quantity"
         id={id}
         value={quantity}
         style={{
@@ -61,6 +60,7 @@ export default function PublicNumberField({
               <MinusIcon />
             </NumberField.Decrement>
             <NumberField.Input
+              data-cy="product-quantity"
               style={{
                 height: "1.25rem",
                 width: "3rem",
