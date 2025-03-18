@@ -68,7 +68,7 @@ export default function CartProvider(props: PropsWithChildren) {
         return [...prevItems, newItem];
       }
     });
-    showToast("Produkten har lagts i kundvagnen!");
+    showToast("Produkten har lagts till i kundvagnen!");
   };
 
   const removeFromCart = (id: string) => {
