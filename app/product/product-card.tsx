@@ -9,7 +9,6 @@ import AddToCartButton from "../components/add-to-cart-button";
 
 import { Product } from "@prisma/client";
 
-
 type ProductCardProps = {
   product: Product;
 };

@@ -33,6 +33,7 @@ const ProductPage = ({ params }: Props) => {
         overflow: "visible",
         marginY: 2,
       }}
+      data-cy="product"
     >
       <GoBackButton />
       <Box
