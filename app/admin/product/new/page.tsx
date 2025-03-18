@@ -1,11 +1,10 @@
-import AddProductForm from "../../add-product-form";
+import { Dialog } from "@mui/material";
+import AddProductForm from "../../product-form";
 
-export default function NewProduct(){
+export default function NewProductPage() {
   return (
-    <>
-    <h2>Hello</h2>
-    <AddProductForm id={""} articleNumber={""} title={""} description={""} image={""} price={0} weight={0}  />
-    </>
-    
-  )
+    <Dialog open>
+      <AddProductForm />
+    </Dialog>
+  );
 }
