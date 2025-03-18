@@ -32,9 +32,9 @@ export default function MyDrawer() {
           alignItems: "center",
           justifyContent: "center",
         }}
-        data-cy="cart-items-count-badge"
       >
         <Badge
+          data-cy="cart-items-count-badge"
           invisible={cartCount === 0}
           badgeContent={cartCount}
           sx={{
