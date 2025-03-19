@@ -18,6 +18,17 @@ export async function deleteProduct(id: string) {
   revalidatePath("/");
 }
 
+export async function updateProduct(
+  articleNumber: string,
+  data: Prisma.ProductUpdateInput
+) {
+  await db.product.update({
+    where: { articleNumber },
+    data,
+  });
+  revalidatePath("/admin");
+  redirect("/admin");
+}
 
 export async function createOrder(userId: number, cartItems: CartItem[]) {
   if (!cartItems || !Array.isArray(cartItems)) {
