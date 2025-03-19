@@ -50,7 +50,6 @@ export default function CartProvider(props: PropsWithChildren) {
   const addToCart = (item: Product) => {
     console.log("Adding item to cart:", item); // Debugging line
 
-    // Uppdaterar cartItems
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.id === item.id
@@ -85,12 +84,11 @@ export default function CartProvider(props: PropsWithChildren) {
     if (toastMessage) {
       console.log("Toast message is shown:", toastMessage); // Debugging line
 
-      // Set a timer to remove the toast after 2000ms
       const toastTimer = setTimeout(() => {
         setToastMessage(null);
       }, 2000);
 
-      return () => clearTimeout(toastTimer); // Clean up the timeout if component unmounts or if message changes
+      return () => clearTimeout(toastTimer);
     }
   }, [toastMessage]);
 
