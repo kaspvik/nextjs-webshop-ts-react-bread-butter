@@ -9,7 +9,7 @@ interface Props {
 }
 
 const ProductPage = async ({ params }: Props) => {
-  const { slug } = await params;
+  const { slug } =  await params;
   if (!slug) {
     return <h1>Produkten hittades inte</h1>;
   }

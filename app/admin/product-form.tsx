@@ -57,7 +57,13 @@ export default function ProductForm({ product }: Props) {
         display: "flex",
         flexDirection: "column",
         padding: 2,
-        width: 350,
+        width: {
+          xs: 280,
+          sm: 400,
+          md: 500,
+          lg: 600,
+
+        }
       }}
       data-cy="product-form"
     >
@@ -68,8 +74,10 @@ export default function ProductForm({ product }: Props) {
           justifyContent: "center",
           margin: 2,
         }}
-      >
-        Lägg till en produkt
+        >
+        {isEdit ? "Redigera en produkt" : "Lägg till en produkt"}
+        
+       
       </Typography>
 
       <FormLabel
@@ -107,10 +115,8 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Titel"
-        
-        
         margin="normal"
-        id="imageURL"
+        id="Titel"
         type="text"
         fullWidth
         variant="outlined"
@@ -118,27 +124,7 @@ export default function ProductForm({ product }: Props) {
         {...form.register("title")}
       />
 
-      {/* <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-        }}
-      >
-        {" "}
-        Art Nr
-      </FormLabel>
-
-      <TextField
-        title="Artikelnummer"
-        autoFocus
-        margin="normal"
-        id="imageURL"
-        type="number"
-        fullWidth
-        variant="outlined"
-        {...form.register("articleNumber")}
-      /> */}
+      
 
       <FormLabel
         sx={{
@@ -155,7 +141,7 @@ export default function ProductForm({ product }: Props) {
         title="Vikt"
         
         margin="normal"
-        id="imageURL"
+        id="Vikt"
         type="number"
         fullWidth
         variant="outlined"
@@ -177,7 +163,7 @@ export default function ProductForm({ product }: Props) {
         title="Pris"
         
         margin="normal"
-        id="imageURL"
+        id="Pris"
         type="number"
         fullWidth
         variant="outlined"
@@ -200,7 +186,7 @@ export default function ProductForm({ product }: Props) {
         title="Beskrivning"
         
         margin="normal"
-        id="imageURL"
+        id="Beskrivning"
         type="text"
         fullWidth
         variant="outlined"

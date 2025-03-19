@@ -8,8 +8,7 @@ import { redirect } from "next/navigation";
 export async function createProduct(product: Prisma.ProductCreateInput) {
   //slumppad artikelnummer här
   await db.product.create({ data: product });
-  revalidatePath("/");
-  redirect("/admin");
+  revalidatePath("/admin");
 }
 
 export async function deleteProduct(id: string) {
@@ -25,6 +24,6 @@ export async function updateProduct(
     where: { articleNumber },
     data,
   });
-  revalidatePath("/");
+  revalidatePath("/admin");
   redirect("/admin");
 }
