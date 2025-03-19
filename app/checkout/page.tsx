@@ -11,6 +11,7 @@ export default function CheckoutPage() {
         backgroundColor: "background.paper",
         mt: 3,
         mb: 3,
+
         padding: { xs: 0, sm: 2, md: 4 },
         border: 1,
         borderRadius: 2,
