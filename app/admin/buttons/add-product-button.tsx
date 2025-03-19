@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function AddProductButton() {
   return (
-    <Link href="admin/product/new">
+    <Link href="admin/product/new" style={{textDecoration: "none", color: "#3E291E"}} >
       <Container
         sx={{
           display: "flex",
@@ -19,7 +19,7 @@ export default function AddProductButton() {
           padding: 2,
           borderRadius: "4px",
           gap: 1,
-          marginTop: 2,
+          marginBottom: 2
         }}
       >
         <Fab
@@ -28,7 +28,10 @@ export default function AddProductButton() {
             color: "#FAF2E9",
           }}
         >
-          <AddIcon data-cy="admin-add-product" />
+          <AddIcon data-cy="admin-add-product" sx={{
+            transition: "transform 0.3s",
+            "&:hover": { transform: "scale(1.5)", color: "#9C8173" },
+          }}/>
         </Fab>
         <Typography>Lägg till produkt</Typography>
       </Container>

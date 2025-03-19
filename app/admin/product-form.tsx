@@ -1,10 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SaveIcon from "@mui/icons-material/Save";
+import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
 import {
   Box,
+  Button,
   FormLabel,
   IconButton,
   TextField,
@@ -72,16 +72,26 @@ export default function ProductForm({ product }: Props) {
       }}
       data-cy="product-form"
     >
+      
+      
       <Typography
         variant="h1"
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           margin: 2,
         }}
-      >
+        >
+        <span></span>
         {isEdit ? "Redigera en produkt" : "Lägg till en produkt"}
+
+        <Link href="/admin/">
+          <IconButton >
+            <ClearRoundedIcon sx={{ fontSize: 30}} />
+          </IconButton>
+        </Link>
       </Typography>
+        
 
       <FormLabel
         sx={{
@@ -119,7 +129,7 @@ export default function ProductForm({ product }: Props) {
         }}
       >
         {" "}
-        Title
+        Produktnamn
       </FormLabel>
 
       <TextField
@@ -134,7 +144,7 @@ export default function ProductForm({ product }: Props) {
         helperText={
           errors.title ? (
             <span data-cy="product-title-error">
-              {"Titel får inte vara tom"}
+              {"Produktnamn får inte vara tom"}
             </span>
           ) : null
         }
@@ -226,16 +236,21 @@ export default function ProductForm({ product }: Props) {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          justifyContent:"center"
         }}
       >
-        <Link href="/admin/">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Link>
-        <IconButton type="submit">
-          <SaveIcon />
-        </IconButton>
+        
+        <Button sx={{
+          mt: 3,
+          width: 200,
+          height: 50,
+          bgcolor: "primary.main",
+          color: "text.primary",
+          "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+          }} 
+      type="submit">
+        Spara
+        </Button>
       </Box>
     </Box>
   );

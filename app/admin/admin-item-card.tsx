@@ -21,23 +21,31 @@ export default function AdminItem({ product }: ProductCardProps) {
         backgroundColor: "#FAF2E9",
         padding: 2,
         borderRadius: 2,
-        boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
+        boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.4)",
         gap: 1,
       }}
     >
+      <Box sx={{
+        width: { xs: "100px", md: "150px" },
+        height: { xs: "100px", md: "150px" },
+        
+
+      }}>
       {/* Bild */}
       <Box
         component="img"
         src={product.image}
         alt={product.title}
         sx={{
-          width: { xs: "120px", md: "150px" },
-          height: { xs: "120px", md: "150px" },
           borderRadius: { xs: "50%", md: "20px" },
           padding: 0.5,
           border: { xs: "2px solid black", md: "none" },
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
         }}
       />
+      </Box>
 
       {/* Produktinformation */}
       <Box sx={{ flex: 1, flexWrap: "wrap" }}>
