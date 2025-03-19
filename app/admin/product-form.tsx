@@ -91,6 +91,7 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-image" } }}
+        {...form.register("image")}
       />
 
       <FormLabel
@@ -106,8 +107,8 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Titel"
-        autoFocus
-        required
+        
+        
         margin="normal"
         id="imageURL"
         type="text"
@@ -152,8 +153,7 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Vikt"
-        autoFocus
-        required
+        
         margin="normal"
         id="imageURL"
         type="number"
@@ -175,8 +175,7 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Pris"
-        autoFocus
-        required
+        
         margin="normal"
         id="imageURL"
         type="number"
@@ -199,8 +198,7 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Beskrivning"
-        autoFocus
-        required
+        
         margin="normal"
         id="imageURL"
         type="text"
