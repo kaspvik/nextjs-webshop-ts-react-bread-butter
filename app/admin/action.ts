@@ -26,6 +26,29 @@ export async function createOrder(cartItems: CartItem[]) {
   });
   return order;
 }
+export async function createUser(formData: FormData) {
+  try {
+    const name = formData.get("name")?.toString();
+    const address = formData.get("address")?.toString();
+    const zipcode = formData.get("zipcode")?.toString();
+    const city = formData.get("city")?.toString();
+    const email = formData.get("email")?.toString();
+    const phone = formData.get("phone")?.toString();
+
+    if (!name || !address || !zipcode || !city || !email || !phone) {
+      return { error: "All fields are required!" };
+    }
+
+    const user = await db.user.create({
+      data: { name, address, zipcode, city, email, phone },
+    });
+
+    return { success: true, user };
+  } catch (error) {
+    console.error("Error creating user:", error);
+    return { error: "Something went wrong!" };
+  }
+}
 
 export async function getOrderById(id: string) {
   const order = await db.order.findUnique({

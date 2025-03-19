@@ -15,7 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
-import { createOrder } from "../admin/action";
+import { createOrder, createUser } from "../admin/action";
 import { useCart } from "../provider";
 
 const customerSchema = z.object({
@@ -65,7 +65,7 @@ export default function CustomerForm() {
     return `${Date.now()}`;
   };
   const orderNr = generateOrderNumber();
-  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const result = customerSchema.safeParse(formData);
 
@@ -81,18 +81,23 @@ export default function CustomerForm() {
       setErrors(newErrors);
       console.log("Formuläret innehåller fel, avbryter!");
       return;
-    } else {
-      console.log("Formuläret är korrekt! Visar bekräftelse... ");
+    }
+    try {
+      const formDataObj = new FormData();
+      Object.entries(formData).forEach(([key, value]) =>
+        formDataObj.append(key, value)
+      );
+
+      await createUser(formDataObj); // Pass the correctly formatted FormData
+
       createOrder(cartItems);
-      // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
+
       setOpen(true);
       setTimeout(() => {
-        console.log("Navigerar till /confirmation...");
-
-        router.push(`/confirmation/${orderNr}`);
+        router.push(`/confirmation/${generateOrderNumber()}`);
       }, 2000);
+
       clearCart();
-      //tömma formuläret
       setFormData({
         name: "",
         address: "",
@@ -101,6 +106,8 @@ export default function CustomerForm() {
         email: "",
         phone: "",
       });
+    } catch (error) {
+      console.error("Error creating user:", error);
     }
   };
 
