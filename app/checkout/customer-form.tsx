@@ -2,20 +2,21 @@
 
 import {
   Box,
+  Button,
   Container,
+  Divider,
   FormControl,
+  FormHelperText,
   FormLabel,
+  Snackbar,
   TextField,
   Typography,
-  Button,
-  Divider,
-  Snackbar,
-  FormHelperText,
 } from "@mui/material";
-import { useState } from "react";
-import { useCart } from "../provider";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { z } from "zod";
+import { createOrder, createUser } from "../admin/action";
+import { useCart } from "../provider";
 
 const customerSchema = z.object({
   name: z.string().min(1, "Du måste fylla i ditt namn"),
@@ -28,6 +29,7 @@ const customerSchema = z.object({
 
 export default function CustomerForm() {
   const router = useRouter();
+  const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
   const [formData, setFormData] = useState({
@@ -63,7 +65,8 @@ export default function CustomerForm() {
     return `${Date.now()}`;
   };
   const orderNr = generateOrderNumber();
-  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const result = customerSchema.safeParse(formData);
 
@@ -79,18 +82,27 @@ export default function CustomerForm() {
       setErrors(newErrors);
       console.log("Formuläret innehåller fel, avbryter!");
       return;
-    } else {
-      console.log("Formuläret är korrekt! Visar bekräftelse... ");
+    }
 
-      // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
+    try {
+      const formDataObj = new FormData();
+      Object.entries(formData).forEach(([key, value]) =>
+        formDataObj.append(key, value)
+      );
+
+      const userResponse = await createUser(formDataObj);
+      if (!userResponse.success) {
+        throw new Error("User creation failed");
+      }
+
+      const order = await createOrder(userResponse.user.id, cartItems);
+
       setOpen(true);
       setTimeout(() => {
-        console.log("Navigerar till /confirmation...");
-
-        router.push(`/confirmation/${orderNr}`);
+        router.push(`/confirmation/${order.orderNr}`);
       }, 2000);
+
       clearCart();
-      //tömma formuläret
       setFormData({
         name: "",
         address: "",
@@ -99,6 +111,8 @@ export default function CustomerForm() {
         email: "",
         phone: "",
       });
+    } catch (error) {
+      console.error("Error creating user:", error);
     }
   };
 
