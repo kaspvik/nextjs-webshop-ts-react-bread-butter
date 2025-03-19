@@ -14,7 +14,7 @@ import { Prisma, Product } from "@prisma/client";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
-import { createProduct } from "./action";
+import { createProduct, updateProduct } from "./action";
 
 const ProductSchema = z.object({
   weight: z.coerce.number().optional(),
@@ -31,12 +31,22 @@ interface Props {
 export default function ProductForm({ product }: Props) {
   const isEdit = Boolean(product);
   const form = useForm<Prisma.ProductCreateInput>({
-    defaultValues: product,
+    defaultValues: product || {
+      title: "",
+      description: "",
+      image: "",
+      price: 0,
+      weight: undefined,
+    },
     resolver: zodResolver(ProductSchema),
   });
   const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
-    await createProduct(data);
-    form.reset();
+    if (isEdit) {
+      await updateProduct(product!.articleNumber, data);
+    } else {
+      await createProduct(data);
+      form.reset();
+    }
   };
 
   return (
@@ -47,7 +57,13 @@ export default function ProductForm({ product }: Props) {
         display: "flex",
         flexDirection: "column",
         padding: 2,
-        width: 350,
+        width: {
+          xs: 280,
+          sm: 400,
+          md: 500,
+          lg: 600,
+
+        }
       }}
       data-cy="product-form"
     >
@@ -58,8 +74,10 @@ export default function ProductForm({ product }: Props) {
           justifyContent: "center",
           margin: 2,
         }}
-      >
-        Lägg till en produkt
+        >
+        {isEdit ? "Redigera en produkt" : "Lägg till en produkt"}
+        
+       
       </Typography>
 
       <FormLabel
@@ -75,13 +93,12 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Bildadress"
-        autoFocus
-        required
         margin="normal"
         id="imageURL"
         type="url"
         fullWidth
         variant="outlined"
+        slotProps={{ htmlInput: { "data-cy": "product-image" } }}
         {...form.register("image")}
       />
 
@@ -98,10 +115,8 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Titel"
-        autoFocus
-        required
         margin="normal"
-        id="imageURL"
+        id="Titel"
         type="text"
         fullWidth
         variant="outlined"
@@ -109,28 +124,7 @@ export default function ProductForm({ product }: Props) {
         {...form.register("title")}
       />
 
-      <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-        }}
-      >
-        {" "}
-        Art Nr
-      </FormLabel>
-
-      <TextField
-        title="Artikelnummer"
-        autoFocus
-        required
-        margin="normal"
-        id="imageURL"
-        type="number"
-        fullWidth
-        variant="outlined"
-        {...form.register("articleNumber")}
-      />
+      
 
       <FormLabel
         sx={{
@@ -145,10 +139,9 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Vikt"
-        autoFocus
-        required
+        
         margin="normal"
-        id="imageURL"
+        id="Vikt"
         type="number"
         fullWidth
         variant="outlined"
@@ -168,10 +161,9 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Pris"
-        autoFocus
-        required
+        
         margin="normal"
-        id="imageURL"
+        id="Pris"
         type="number"
         fullWidth
         variant="outlined"
@@ -192,10 +184,9 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Beskrivning"
-        autoFocus
-        required
+        
         margin="normal"
-        id="imageURL"
+        id="Beskrivning"
         type="text"
         fullWidth
         variant="outlined"
