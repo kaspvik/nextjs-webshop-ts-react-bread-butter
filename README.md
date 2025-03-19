@@ -1,5 +1,5 @@
 # Bread & Butter
-A webshop project in Next.js using App Router. We're also using MUI, Prisma with sqlight and Zod.
+### A webshop project in Next.js using App Router. We're also using MUI, Prisma with sqlight and Zod.
 <img width="1000" alt="hero2" align="center" src="https://github.com/user-attachments/assets/fbb8dbe9-55d8-4c16-84b8-e85e04787365" />
 
 
