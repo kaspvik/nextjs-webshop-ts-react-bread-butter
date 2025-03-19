@@ -24,7 +24,7 @@ export const products: Product[] = [
     image: "/images/rustiktragbrod.png",
     title: "Rustikt rågbröd",
     description:
-      "Ett rustikt rågbröd som påminner om det farmor brukade baka när du var liten",
+      "Ett rustikt rågbröd som påminner om det farmor brukade baka när du var liten. Bakat med surdeg och en lång jästid för en djupare smak och en härligt seg och knaprig skorpa.",
     price: 50,
     weight: 700,
   },
@@ -34,7 +34,7 @@ export const products: Product[] = [
     image: "/images/brytbrod.png",
     title: "Brytbröd",
     description:
-      "Ett litet brytbröd med olivolja, passar perfekt till din krämiga soppa",
+      "Ett litet brytbröd med olivolja, perfekt att dela vid middagsbordet. Den luftiga inkråmet och den gyllene skorpan gör det till en favorit till soppor och sallader.",
     price: 40,
     weight: 500,
   },
@@ -43,7 +43,8 @@ export const products: Product[] = [
     articleNumber: "2345",
     image: "/images/levain.png",
     title: "Levain",
-    description: "Klassisk surdegs-Levain, precis så som du vill ha det",
+    description:
+      "Klassisk surdegs-Levain, precis så som du vill ha det – segt, saftigt och smakrikt. Perfekt till både frukost och som bas för en rustik smörgås med pålägg.",
     price: 65,
     weight: 600,
   },
@@ -52,7 +53,8 @@ export const products: Product[] = [
     articleNumber: "2346",
     image: "/images/litenlevain.png",
     title: "Liten Levain",
-    description: "Klassisk surdegs-Levain, den lite mindre modellen",
+    description:
+      "Klassisk surdegs-Levain, den lite mindre modellen som passar perfekt för en eller två personer. Samma fantastiska smak och textur, men i ett mer behändigt format.",
     price: 40,
     weight: 400,
   },
@@ -62,7 +64,7 @@ export const products: Product[] = [
     image: "/images/surdegslimpavete.png",
     title: "Surdegslimpa Vete",
     description:
-      "Häll vete i en påse, hur gott är inte detta bröd!? Jättegott.",
+      "En saftig surdegslimpa bakad på vetemjöl, med en knaprig yta och en mild, nötig smak. Perfekt att skiva tunt och rosta eller att njuta av som det är med smör och ost.",
     price: 60,
     weight: 620,
   },
@@ -72,7 +74,8 @@ export const products: Product[] = [
     image:
       "https://images.pexels.com/photos/2067430/pexels-photo-2067430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     title: "Surdegsbaguette",
-    description: "Oui oui, den är inte bara baguette, den är sur också!",
+    description:
+      "Oui oui, den är inte bara baguette, den är sur också! En krispig och luftig baguette med lång jästid som ger en djup och balanserad smak.",
     price: 50,
     weight: 550,
   },
@@ -83,7 +86,7 @@ export const products: Product[] = [
       "https://images.pexels.com/photos/7693917/pexels-photo-7693917.jpeg?auto=compress&cs=tinysrgb&w=600",
     title: "Frukostkombo",
     description:
-      "Den ena gillar ljust, den andra mörkt... Två goda fröbröd till frukost.",
+      "Den ena gillar ljust, den andra mörkt... Här får du två goda fröbröd som passar perfekt till frukostbordet. Ett balanserat val för den som vill ha variation på morgonen.",
     price: 100,
     weight: 1000,
   },
@@ -93,7 +96,8 @@ export const products: Product[] = [
     image:
       "https://images.pexels.com/photos/7175448/pexels-photo-7175448.jpeg?auto=compress&cs=tinysrgb&w=600",
     title: "Valnötsbröd",
-    description: "Vårt prisvinnande valnötsbröd låter det vattnas i munnen!",
+    description:
+      "Vårt prisvinnande valnötsbröd låter det vattnas i munnen! Fullproppat med rostade valnötter som ger en nötig, fyllig smak och en härligt krispig skorpa.",
     price: 65,
     weight: 650,
   },
@@ -104,7 +108,7 @@ export const products: Product[] = [
       "https://images.pexels.com/photos/31009555/pexels-photo-31009555/free-photo-of-rustikt-brod-med-keramiska-burkar-pa-traskiva.jpeg?auto=compress&cs=tinysrgb&w=1200",
     title: "Surdegsfralla",
     description:
-      "En vanlig j*vla fralla, fast bättre, såklart. Ha smör på, det blir gott.",
+      "En vanlig j*vla fralla, fast bättre, såklart. Luftig, krispig och med precis lagom tuggmotstånd – perfekt med smör och ost eller som bas till en matig macka.",
     price: 45,
     weight: 450,
   },
