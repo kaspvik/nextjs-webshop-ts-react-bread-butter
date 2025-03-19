@@ -121,4 +121,18 @@ export async function getOrderByOrderNr(orderNr: string) {
     console.error("Error fetching order:", error);
     throw new Error("Failed to fetch order");
   }
+<<<<<<<<< Temporary merge branch 1
+=========
+}
+export async function updateProduct(
+  articleNumber: string,
+  data: Prisma.ProductUpdateInput
+) {
+  await db.product.update({
+    where: { articleNumber },
+    data,
+  });
+  revalidatePath("/admin");
+  redirect("/admin");
+>>>>>>>>> Temporary merge branch 2
 }
