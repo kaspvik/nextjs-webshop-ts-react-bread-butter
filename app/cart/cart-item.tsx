@@ -15,6 +15,7 @@ export default function CartItemComponent({ cartItem }: Props) {
 
   return (
     <Card
+      data-cy="cart-item"
       sx={{
         width: "100%",
         position: "relative",

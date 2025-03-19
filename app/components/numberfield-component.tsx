@@ -60,6 +60,7 @@ export default function PublicNumberField({
               <MinusIcon />
             </NumberField.Decrement>
             <NumberField.Input
+              data-cy="product-quantity"
               style={{
                 height: "1.25rem",
                 width: "3rem",
