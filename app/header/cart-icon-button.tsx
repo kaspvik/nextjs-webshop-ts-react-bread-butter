@@ -1,5 +1,6 @@
 import { Close } from "@mui/icons-material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useRouter } from "next/navigation";
 import {
   Backdrop,
   Badge,
@@ -22,11 +23,16 @@ export default function MyDrawer() {
     setOpen(open);
   };
 
+  const router = useRouter();
+
   return (
     <>
       <IconButton
         data-cy="cart-link"
-        onClick={toggleDrawer(true)}
+        onClick={() => {
+          toggleDrawer(true);
+          router.push("/checkout");
+        }}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -49,15 +55,14 @@ export default function MyDrawer() {
               borderRadius: "50%",
             },
           }}
-        >
-          <ShoppingCartIcon
-            sx={{
-              fontSize: { xs: 23, sm: 28, md: 40 },
-              mx: { sm: 2 },
-              color: "text.primary",
-            }}
-          />
-        </Badge>
+        />
+        <ShoppingCartIcon
+          sx={{
+            fontSize: { xs: 23, sm: 28, md: 40 },
+            mx: { sm: 2 },
+            color: "text.primary",
+          }}
+        />
       </IconButton>
 
       {/* Backdrop for darkened background */}

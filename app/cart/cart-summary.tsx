@@ -50,7 +50,12 @@ export default function CartSummary() {
           </Button>
         </Link>
         <Link href="/checkout">
-          <Button variant="contained" color="primary" sx={{ color: "white" }}>
+          <Button
+            data-cy="cart-link"
+            variant="contained"
+            color="primary"
+            sx={{ color: "white" }}
+          >
             FORTSÄTT TILL KASSAN
           </Button>
         </Link>
