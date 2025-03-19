@@ -1,16 +1,24 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Inter } from "next/font/google";
+import { Lobster_Two, Roboto } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
-
-import Header from "./header/page";
-
 import Footer from "./footer/page";
-
+import Header from "./header/page";
+import CartProvider from "./provider";
 import theme from "./theme";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({
+  weight: ["300", "400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
+});
+const lobster = Lobster_Two({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-lobster",
+});
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
@@ -21,15 +29,27 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={[roboto.variable, lobster.className].join(" ")}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Header />
+            <CartProvider>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  minHeight: "100vh", // Makes sure page fills screen height
+                }}
+              >
+                <Header />
 
-            <main>{children}</main>
+                <Box component="main" sx={{ flex: "1" }}>
+                  {children}
+                </Box>
 
-            <Footer />
+                <Footer />
+              </Box>
+            </CartProvider>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

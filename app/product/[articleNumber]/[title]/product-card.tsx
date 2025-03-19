@@ -1,13 +1,11 @@
-import * as React from "react";
+import AddToCartButton from "@/app/components/add-to-cart-button";
+import { Box } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import { Box } from "@mui/material";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Product } from "@/data";
-import zIndex from "@mui/material/styles/zIndex";
+import { Product } from "@prisma/client";
 
 type ProductCardProps = {
   product: Product;
@@ -16,11 +14,12 @@ type ProductCardProps = {
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
+      data-cy="product"
       sx={{
         width: "100%",
-        maxWidth: 345,
+        maxWidth: 340,
         minHeight: 490,
-        backgroundColor: "#FAF2E9",
+        backgroundColor: "background.paper",
         boxShadow: "none",
         display: "grid",
         position: "relative",
@@ -33,17 +32,19 @@ export default async function ProductCard({ product }: ProductCardProps) {
       <Box
         sx={{
           position: "absolute",
-          top: "50%",
+          top: "46%",
           left: "50%",
           width: "200px",
           height: "200px",
-          backgroundColor: "#A0A596",
+          backgroundColor: "background.default",
           transform: "translate(-50%, -100%)",
           borderRadius: "0.25rem",
           zIndex: 0,
         }}
       />
+
       <CardMedia
+        component="img"
         sx={{
           height: 250,
           width: 150,
@@ -53,41 +54,53 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 1,
         }}
         image={product.image}
-        title={product.title}
+        alt={product.title}
       />
+
       <CardContent
         sx={{
-          border: "2px solid #9C8173",
+          border: "2px solid",
+          borderColor: "text.secondary",
           borderRadius: "0.25rem",
-          padding: "0.5rem",
-          margin: "0.5rem",
+          mx: "auto",
+          mt: "1rem",
+          mb: "1rem",
           zIndex: 1,
-          minWidth: "90%",
+          maxWidth: "90%",
+          minWidth: "312px",
+          minHeight: "233px",
         }}
       >
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography
+          data-cy="product-title"
+          gutterBottom
+          variant="h6"
+          component="div"
+        >
           {product.title}
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }}>
+        <Typography
+          data-cy="product-description"
+          variant="body2"
+          sx={{ color: "text.secondary" }}
+        >
           {product.description}
         </Typography>
         <Typography
+          data-cy="product-price"
           variant="body2"
           sx={{ color: "text.primary", mt: "0.5rem" }}
         >
           {product.price} kr
         </Typography>
         <CardActions>
-          <Button
-            size="small"
-            sx={{
-              backgroundColor: "#9C8173",
-              color: "#FAF2E9",
-              mx: "auto",
-            }}
-          >
-            Köp
-          </Button>
+          <Box sx={{ mx: "auto" }}>
+            <AddToCartButton
+              label="Köp"
+              data-cy="product-buy-button"
+              product={product}
+            ></AddToCartButton>
+          </Box>
         </CardActions>
       </CardContent>
     </Card>

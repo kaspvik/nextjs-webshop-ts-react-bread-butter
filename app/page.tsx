@@ -1,11 +1,13 @@
+import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { products } from "@/data";
-import { Product } from "@/data";
 import Link from "next/link";
-import ProductCard from "./product/product-card";
+import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
-export default function Home() {
+export default async function Home() {
+  const products = await db.product.findMany();
+
+  const id = "test";
   return (
     <Container
       sx={{
@@ -17,9 +19,12 @@ export default function Home() {
       }}
     >
       <Box
+        id={id}
         component="main"
         sx={{
           flexGrow: 1,
+          border: "2px solid #9C8173",
+          borderRadius: "0.5rem",
           padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
           bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
           margin: "2rem 0",
@@ -31,11 +36,14 @@ export default function Home() {
           direction="row"
           sx={{ justifyContent: "center", alignItems: "center" }}
           spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          columns={{ xs: 12, sm: 6, md: 4 }}
         >
-          {products.map((product: Product) => (
+          {products.map((product) => (
             <Link
-              href="/product/page/{"
+              key={product.id}
+              href={`/product/${product.articleNumber}/${encodeURIComponent(
+                product.title
+              )}`}
               style={{
                 textDecoration: "none",
                 color: "inherit",
@@ -43,9 +51,7 @@ export default function Home() {
                 justifyContent: "center",
               }}
             >
-              <Grid key={product.id} size={{ xs: 2, sm: 4, md: 6, lg: 8 }}>
-                <ProductCard key={product.id} product={product} />
-              </Grid>
+              <ProductCard product={product} />
             </Link>
           ))}
         </Grid>

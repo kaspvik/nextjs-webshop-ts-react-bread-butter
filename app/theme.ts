@@ -2,6 +2,15 @@
 import { createTheme } from "@mui/material";
 
 const theme = createTheme({
+  typography: {
+    h2: {
+      fontFamily: "var(--font-roboto)",
+    },
+    h1: {
+      fontSize: 32,
+      fontFamily: "var(--font-lobster)",
+    },
+  },
   palette: {
     primary: {
       main: "#BA9E8F",
@@ -18,6 +27,13 @@ const theme = createTheme({
   components: {
     MuiButtonBase: {
       styleOverrides: { root: { color: "white" } },
+    },
+    MuiTypography: {
+      defaultProps: {
+        variantMapping: {
+          h1: "h1",
+        },
+      },
     },
   },
 });
