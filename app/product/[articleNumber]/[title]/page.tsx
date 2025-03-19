@@ -8,7 +8,7 @@ interface Props {
   params: { articleNumber: string; title: string };
 }
 
-const ProductPage = ({ params }: Props) => {
+export default async function ProductPage  ({ params }: Props) {
   const { articleNumber, title } = params;
   if (!articleNumber) {
     return <h1>Produkten hittades inte</h1>;
@@ -118,4 +118,4 @@ const ProductPage = ({ params }: Props) => {
   );
 };
 
-export default ProductPage;
+
