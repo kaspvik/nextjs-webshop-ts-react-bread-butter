@@ -60,7 +60,7 @@ export default function Footer() {
             />
             <Typography variant="h6">Hitta hit:</Typography>
             <Typography variant="body2">
-              Lalalalalalalalalalalalalalalala, BATMAN
+              Brödbakargatan 4, 444 44 Brödinge
             </Typography>
           </Grid>
 
