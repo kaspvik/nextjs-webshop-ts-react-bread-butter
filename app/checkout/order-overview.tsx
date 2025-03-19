@@ -50,16 +50,30 @@ export default function OrderOverview() {
                     }}
                   >
                     <Box
-                      component="img"
-                      src={item.image}
-                      alt={item.title}
                       sx={{
-                        width: "50px",
-                        height: "50px",
+                        width: 50,
+                        height: 50,
                         borderRadius: "50%",
-                        display: { xs: "none", sm: "block" },
+
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
                       }}
-                    />
+                    >
+                      <Box
+                        component="img"
+                        src={item.image}
+                        alt={item.title}
+                        sx={{
+                          width: "100%",
+                          height: "100%",
+                          borderRadius: "50%",
+                          objectFit: "cover",
+                          display: { xs: "none", sm: "block" },
+                        }}
+                      />
+                    </Box>
                     {item.title}
                   </TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
