@@ -367,6 +367,7 @@ export default function CustomerForm() {
             maxWidth: "500px",
             backgroundColor: "background.default",
             mt: 2,
+            mb: { xs: 2, sm: 0 },
             mx: "auto",
             p: 3,
             display: "flex",
