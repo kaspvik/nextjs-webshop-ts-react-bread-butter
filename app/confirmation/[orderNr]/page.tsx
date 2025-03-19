@@ -1,8 +1,9 @@
 "use client";
 
 import { getOrderByOrderNr } from "@/app/admin/action";
-import Receipt from "@/app/components/receipt";
+import Receipt from "@/app/confirmation/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
+import { Shadows_Into_Light } from "next/font/google";
 import { useEffect, useState } from "react";
 
 export default function ConfirmationPage({
@@ -59,22 +60,21 @@ export default function ConfirmationPage({
         >
           Ditt ordernummer: {orderNr}
         </Typography>
-
+        <Typography
+          variant="h2"
+          sx={{ fontSize: "1.5rem", fontWeight: "500", pb: 2 }}
+        >
+          Kundinformation
+        </Typography>
         <Box
           sx={{
-            border: "1px solid #ccc",
+            boxShadow: 1,
             borderRadius: "8px",
             padding: "1.5rem",
             marginBottom: "2rem",
-            backgroundColor: "#f9f9f9",
+            backgroundColor: "background.paper",
           }}
         >
-          <Typography
-            variant="h2"
-            sx={{ fontSize: "1.5rem", fontWeight: "600" }}
-          >
-            Kundinformation
-          </Typography>
           <Typography>Namn: {customer.name}</Typography>
           <Typography>E-post: {customer.email}</Typography>
           <Typography>
@@ -94,7 +94,7 @@ export default function ConfirmationPage({
           component={Link}
           href="/"
         >
-          <Button>Till startsidan</Button>
+          <Button variant="contained">Till startsidan</Button>
         </Box>
       </Box>
     </Container>

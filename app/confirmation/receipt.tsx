@@ -43,9 +43,9 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
       <Typography
         variant="h2"
         component="p"
-        sx={{ fontSize: "2rem", fontWeight: "400", mb: "1.5rem" }}
+        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}
       >
-        Din beställning:
+        Din beställning
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="order-overview">
