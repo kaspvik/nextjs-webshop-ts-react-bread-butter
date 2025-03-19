@@ -67,6 +67,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           mb: "1rem",
           zIndex: 1,
           maxWidth: "90%",
+          minWidth: "312px",
         }}
       >
         <Typography
