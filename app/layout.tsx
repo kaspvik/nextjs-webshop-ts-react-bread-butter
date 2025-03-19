@@ -5,7 +5,6 @@ import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 import Footer from "./footer/page";
 import Header from "./header/page";
-import Hero from "./hero/page";
 import CartProvider from "./provider";
 import theme from "./theme";
 
@@ -46,7 +45,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 }}
               >
                 <Header />
-                <Hero />
+
                 <Box component="main" sx={{ flex: "1" }}>
                   {children}
                 </Box>
