@@ -17,11 +17,17 @@ export default function OrderOverview() {
   const { cartItems, totalSum } = useCart();
 
   return (
-    <Box sx={{ width: "100%", px: { xs: 1, sm: 2, md: 6 }, py: 3 }}>
+    <Box
+      sx={{
+        width: "100%",
+        px: { xs: 1, sm: 2, md: 6 },
+        py: 3,
+      }}
+    >
       <Typography variant="h1">Beställningsöversikt</Typography>
       <Box sx={{ backgroundColor: "background.default", mt: 2 }}>
-        <TableContainer>
-          <Table sx={{ minWidth: 360 }}>
+        <TableContainer sx={{ minWidth: 350 }}>
+          <Table>
             <TableHead>
               <TableRow>
                 <TableCell>Produkt</TableCell>
@@ -43,15 +49,17 @@ export default function OrderOverview() {
                       gap: "1rem",
                     }}
                   >
-                    <img
+                    <Box
+                      component="img"
                       src={item.image}
                       alt={item.title}
-                      style={{
+                      sx={{
                         width: "50px",
                         height: "50px",
                         borderRadius: "50%",
+                        display: { xs: "none", sm: "block" },
                       }}
-                    ></img>
+                    />
                     {item.title}
                   </TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
