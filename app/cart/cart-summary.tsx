@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Container, Typography, Link } from "@mui/material";
+import { Box, Button, Container, Link, Typography } from "@mui/material";
 import { useCart } from "../provider";
 
 export default function CartSummary() {
@@ -11,7 +11,7 @@ export default function CartSummary() {
         sx={{
           display: "flex",
           justifyContent: "space-between",
-          borderBottom: { xs: "none", sm: "2px solid #9C8173" },
+          borderBottom: { xs: "1px solid", sm: "2px solid #9C8173" },
           paddingBottom: { xs: 3, sm: 1 },
           paddingTop: { xs: 3, sm: 1 },
           bgcolor: { xs: "background.paper", sm: "transparen" },
@@ -50,7 +50,12 @@ export default function CartSummary() {
           </Button>
         </Link>
         <Link href="/checkout">
-          <Button variant="contained" color="primary" sx={{ color: "white" }}>
+          <Button
+            data-cy="cart-link"
+            variant="contained"
+            color="primary"
+            sx={{ color: "white" }}
+          >
             FORTSÄTT TILL KASSAN
           </Button>
         </Link>

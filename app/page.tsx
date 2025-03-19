@@ -2,7 +2,7 @@ import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
-import ProductCard from "./product/[slug]/product-card";
+import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
 export default async function Home() {
   const products = await db.product.findMany();
@@ -23,6 +23,8 @@ export default async function Home() {
         component="main"
         sx={{
           flexGrow: 1,
+          border: "2px solid #9C8173",
+          borderRadius: "0.5rem",
           padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
           bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
           margin: "2rem 0",
@@ -39,7 +41,9 @@ export default async function Home() {
           {products.map((product) => (
             <Link
               key={product.id}
-              href={`/product/${product.articleNumber}/${product.title}/`}
+              href={`/product/${product.articleNumber}/${encodeURIComponent(
+                product.title
+              )}`}
               style={{
                 textDecoration: "none",
                 color: "inherit",

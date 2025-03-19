@@ -2,20 +2,18 @@ import GoBackButton from "@/app/components/go-back-button";
 import { db } from "@/prisma/db";
 import { Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
-import AddToCartButton from "../../components/add-to-cart-button";
+import AddToCartButton from "../../../components/add-to-cart-button";
 
 interface Props {
-  params: Promise<{ slug: string }>;
+  params: { articleNumber: string; title: string };
 }
 
-const ProductPage = async ({ params }: Props) => {
-  const { slug } =  await params;
-  if (!slug) {
+export default async function ProductPage  ({ params }: Props) {
+  const { articleNumber, title } = params;
+  if (!articleNumber) {
     return <h1>Produkten hittades inte</h1>;
   }
-
-  // Ta ut articleNumber
-  const [articleNumber] = slug.split("-");
+  const decodedTitle = decodeURIComponent(title);
 
   // hitta produkt med articleNumber
 
@@ -85,14 +83,19 @@ const ProductPage = async ({ params }: Props) => {
           <Typography
             variant="h1"
             sx={{ fontSize: { sx: 40, sm: 40, md: 50 } }}
+            data-cy="product-title"
           >
             {product.title}
           </Typography>
-          <Typography variant="h6" sx={{ mt: 2 }}>
+          <Typography variant="h6" sx={{ mt: 2 }} data-cy="product-price">
             Pris: {product.price} kr
           </Typography>
 
-          <Typography variant="body1" sx={{ mt: 2 }}>
+          <Typography
+            variant="body1"
+            sx={{ mt: 2 }}
+            data-cy="product-description"
+          >
             {product.description}
           </Typography>
           <Typography variant="h6" sx={{ py: 2, fontSize: "15px" }}>
@@ -107,7 +110,7 @@ const ProductPage = async ({ params }: Props) => {
               mt: 2,
             }}
           >
-            <AddToCartButton product={product} />
+            <AddToCartButton product={product} data-cy="product-buy-button" />
           </Box>
         </Box>
       </Box>
@@ -115,4 +118,4 @@ const ProductPage = async ({ params }: Props) => {
   );
 };
 
-export default ProductPage;
+

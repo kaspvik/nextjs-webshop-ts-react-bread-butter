@@ -9,6 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CartList from "../cart/cart-list";
 import CartSummary from "../cart/cart-summary";
@@ -22,16 +23,18 @@ export default function MyDrawer() {
     setOpen(open);
   };
 
+  const router = useRouter();
+
   return (
     <>
       <IconButton
-        data-cy="cart-link"
         onClick={toggleDrawer(true)}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
+        data-cy="open-cart-sidebar"
       >
         <Badge
           data-cy="cart-items-count-badge"
@@ -112,13 +115,20 @@ export default function MyDrawer() {
             sx={{
               marginBottom: 2,
               fontFamily: "var(--font-lobster)",
-              paddingLeft: 2,
+              paddingLeft: 3,
             }}
           >
             Kundvagn
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 2,
+              paddingLeft: 2,
+            }}
+          >
             <CartList />
             <Divider sx={{ marginY: 2 }} />
             <CartSummary />

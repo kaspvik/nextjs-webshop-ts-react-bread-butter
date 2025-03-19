@@ -48,7 +48,9 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // methods
   const addToCart = (item: Product) => {
+    console.log("Adding item to cart:", item);
     setCartItems((prevItems) => {
+      console.log("Previous cart:", prevItems);
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.id === item.id
       );
@@ -59,16 +61,18 @@ export default function CartProvider(props: PropsWithChildren) {
           ...updatedItems[existingItemIndex],
           quantity: updatedItems[existingItemIndex].quantity + 1,
         };
+        console.log("Updated cart:", updatedItems);
         return updatedItems;
       } else {
         const newItem = {
           ...item,
           quantity: 1,
         };
+        console.log("New cart:", [...prevItems, newItem]);
         return [...prevItems, newItem];
       }
     });
-    showToast("Produkten har lagts i kundvagnen!");
+    showToast("Produkten har lagts till i kundvagnen!");
   };
 
   const removeFromCart = (id: string) => {
@@ -104,6 +108,11 @@ export default function CartProvider(props: PropsWithChildren) {
 
   //total items in cart
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+    console.log("cartCount updated:", cartCount);
+  }, [cartCount]); // Körs varje gång cartCount ändras
+
   //total price
   const totalSum = cartItems.reduce(
     (sum, item) => sum + item.quantity * item.price,
@@ -124,36 +133,38 @@ export default function CartProvider(props: PropsWithChildren) {
       }}
     >
       {props.children}
-      <Snackbar
-        open={!!toastMessage}
-        autoHideDuration={2000}
-        onClose={() => setToastMessage(null)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-        sx={{
-          width: "auto",
-          maxWidth: "350px",
-          borderRadius: "0.5rem",
-          boxShadow: "none",
-        }}
-      >
-        <Alert
+      {toastMessage && (
+        <Snackbar
+          open
+          autoHideDuration={2000}
           onClose={() => setToastMessage(null)}
-          severity="success"
-          variant="outlined"
+          anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           sx={{
-            width: "100%",
+            width: "auto",
+            maxWidth: "350px",
             borderRadius: "0.5rem",
-            borderColor: "success.main",
-            color: "success.main",
-            backgroundColor: "white",
-            fontSize: "1rem",
-            fontWeight: "bold",
-            padding: "6px 16px",
+            boxShadow: "none",
           }}
         >
-          <Typography variant="body1">{toastMessage}</Typography>
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={() => setToastMessage(null)}
+            severity="success"
+            variant="outlined"
+            sx={{
+              width: "100%",
+              borderRadius: "0.5rem",
+              borderColor: "success.main",
+              color: "success.main",
+              backgroundColor: "white",
+              fontSize: "1rem",
+              fontWeight: "bold",
+              padding: "6px 16px",
+            }}
+          >
+            <Typography variant="body1">{toastMessage}</Typography>
+          </Alert>
+        </Snackbar>
+      )}
     </CartContext.Provider>
   );
 }
