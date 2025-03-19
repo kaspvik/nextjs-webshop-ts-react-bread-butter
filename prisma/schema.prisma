@@ -19,3 +19,18 @@ model Product {
   price         Float
   weight        Int    @default(0)
 }
+
+model Order {
+  id String @id @default(cuid())
+  items OrderItem[]
+}
+
+model OrderItem {
+  id String @id @default(cuid())
+  image String
+  title String
+  price Float
+  quantity Int
+  orderId String
+  order Order @relation(fields: [orderId], references: [id])
+}

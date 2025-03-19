@@ -1,5 +1,5 @@
 "use client";
-import { Box, Container, Link, Typography, Button } from "@mui/material";
+import { Box, Button, Container, Link, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Paper from "@mui/material/Paper";
@@ -9,10 +9,7 @@ import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-
-interface Props {
-  params: { orderNr: string };
-}
+import { use } from "react";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -53,8 +50,18 @@ const rows = [
 
 const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
 
-export default async function ConfirmationPage({ params }: Props) {
-  const { orderNr } = await params;
+interface ParamsType {
+  orderNr: string;
+}
+
+interface Props {
+  params: ParamsType | Promise<ParamsType>;
+}
+
+export default function ConfirmationPage({ params }: Props) {
+  const unwrappedParams = "then" in params ? use(params) : params;
+  const { orderNr } = unwrappedParams;
+
   if (!orderNr) {
     return <h1>Beställningen hittades inte!</h1>;
   }

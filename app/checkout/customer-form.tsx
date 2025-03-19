@@ -2,20 +2,21 @@
 
 import {
   Box,
+  Button,
   Container,
+  Divider,
   FormControl,
+  FormHelperText,
   FormLabel,
+  Snackbar,
   TextField,
   Typography,
-  Button,
-  Divider,
-  Snackbar,
-  FormHelperText,
 } from "@mui/material";
-import { useState } from "react";
-import { useCart } from "../provider";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { z } from "zod";
+import { createOrder } from "../admin/action";
+import { useCart } from "../provider";
 
 const customerSchema = z.object({
   name: z.string().min(1, "Du måste fylla i ditt namn"),
@@ -28,6 +29,7 @@ const customerSchema = z.object({
 
 export default function CustomerForm() {
   const router = useRouter();
+  const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
   const [formData, setFormData] = useState({
@@ -81,7 +83,7 @@ export default function CustomerForm() {
       return;
     } else {
       console.log("Formuläret är korrekt! Visar bekräftelse... ");
-
+      createOrder(cartItems);
       // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
       setOpen(true);
       setTimeout(() => {
