@@ -121,6 +121,8 @@ export async function getOrderByOrderNr(orderNr: string) {
     console.error("Error fetching order:", error);
     throw new Error("Failed to fetch order");
   }
+<<<<<<<<< Temporary merge branch 1
+=========
 }
 export async function updateProduct(
   articleNumber: string,
@@ -132,4 +134,5 @@ export async function updateProduct(
   });
   revalidatePath("/admin");
   redirect("/admin");
+>>>>>>>>> Temporary merge branch 2
 }
