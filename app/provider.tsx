@@ -48,9 +48,9 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // methods
   const addToCart = (item: Product) => {
-    console.log("Adding item to cart:", item);
+    console.log("Adding item to cart:", item); // Debugging line
+
     setCartItems((prevItems) => {
-      console.log("Previous cart:", prevItems);
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.id === item.id
       );
@@ -61,19 +61,36 @@ export default function CartProvider(props: PropsWithChildren) {
           ...updatedItems[existingItemIndex],
           quantity: updatedItems[existingItemIndex].quantity + 1,
         };
-        console.log("Updated cart:", updatedItems);
         return updatedItems;
       } else {
         const newItem = {
           ...item,
           quantity: 1,
         };
-        console.log("New cart:", [...prevItems, newItem]);
         return [...prevItems, newItem];
       }
     });
+
+    // Sätt toast och visa
     showToast("Produkten har lagts till i kundvagnen!");
+
+    // Försäkra dig om att toasten syns först innan cartCount uppdateras (lite delay om det behövs)
+    setTimeout(() => {
+      setToastMessage(null); // Ta bort toasten efter kort tid
+    }, 2000);
   };
+
+  useEffect(() => {
+    if (toastMessage) {
+      console.log("Toast message is shown:", toastMessage); // Debugging line
+
+      const toastTimer = setTimeout(() => {
+        setToastMessage(null);
+      }, 2000);
+
+      return () => clearTimeout(toastTimer);
+    }
+  }, [toastMessage]);
 
   const removeFromCart = (id: string) => {
     setCartItems((prevCart) =>
@@ -160,6 +177,7 @@ export default function CartProvider(props: PropsWithChildren) {
               fontWeight: "bold",
               padding: "6px 16px",
             }}
+            data-cy="added-to-cart-toast"
           >
             <Typography variant="body1">{toastMessage}</Typography>
           </Alert>
