@@ -40,6 +40,9 @@ export default function ProductForm({ product }: Props) {
     },
     resolver: zodResolver(ProductSchema),
   });
+
+  const { register, formState: { errors } } = form;
+
   const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
     if (isEdit) {
       await updateProduct(product!.articleNumber, data);
@@ -99,6 +102,12 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-image" } }}
+        error={!!errors.image}
+        helperText={
+        errors.image ? (
+        <span data-cy="product-image-error">{errors.image.message}</span>
+        ) : null
+      }
         {...form.register("image")}
       />
 
@@ -121,7 +130,13 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-title" } }}
-        {...form.register("title")}
+        error={!!errors.description}
+        helperText={
+        errors.title ? (
+        <span data-cy="product-title-error">{errors.title.message}</span>
+        ) : null
+      }
+        {...register("title")}
       />
 
       
@@ -145,7 +160,8 @@ export default function ProductForm({ product }: Props) {
         type="number"
         fullWidth
         variant="outlined"
-        {...form.register("weight")}
+        
+        {...register("weight")}
       />
 
       <FormLabel
@@ -168,7 +184,13 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-price" } }}
-        {...form.register("price")}
+        error={!!errors.description}
+        helperText={
+        errors.price ? (
+        <span data-cy="product-price-error">{errors.price.message}</span>
+        ) : null
+      }
+        {...register("price")}
       />
 
       <FormLabel
@@ -191,7 +213,13 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-description" } }}
-        {...form.register("description")}
+        error={!!errors.description}
+        helperText={
+        errors.description ? (
+        <span data-cy="product-description-error">{errors.description.message}</span>
+    ) : null
+  }
+  {...register("description")}
       />
       <Box
         sx={{
