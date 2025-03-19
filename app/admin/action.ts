@@ -9,6 +9,7 @@ export async function createProduct(product: Prisma.ProductCreateInput) {
   //slumppad artikelnummer här
   await db.product.create({ data: product });
   revalidatePath("/admin");
+  redirect("/admin");
 }
 
 export async function deleteProduct(id: string) {
