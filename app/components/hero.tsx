@@ -6,12 +6,11 @@ const Hero = () => {
     <Box
       sx={{
         position: "relative",
-        height: "80vh", // Justera höjden på hero-sektionen
+        height: "80vh",
         overflow: "hidden",
         boxShadow: 4,
       }}
     >
-      {/* Hero background image */}
       <Box
         sx={{
           position: "absolute",
@@ -44,7 +43,6 @@ const Hero = () => {
         />
       </Box>
 
-      {/* Innehåll ovanpå hero-bilden */}
       <Box
         sx={{
           position: "absolute",
@@ -74,14 +72,8 @@ const Hero = () => {
             textShadow: "5px 5px 8px rgba(65, 6, 1, 0.5)",
           }}
         >
-          Ekologiskt och hantverks bröd direkt till din dörr
+          Ekologiskt hantverksbröd direkt till din dörr
         </Typography>
-        {/* <Button
-          variant="contained"
-          sx={{ marginTop: "2rem", backgroundColor: "primary.main" }}
-        >
-          Upptäck våra produkter
-        </Button> */}
       </Box>
     </Box>
   );
