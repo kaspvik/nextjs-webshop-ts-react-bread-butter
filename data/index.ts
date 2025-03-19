@@ -24,7 +24,7 @@ export const products: Product[] = [
     image: "/images/rustiktragbrod.png",
     title: "Rustikt rågbröd",
     description:
-      "Ett rustikt rågbröd som påminner om det farmor brukade baka när du var liten. Bakat med surdeg och en lång jästid för en djupare smak och en härligt seg och knaprig skorpa.",
+      "Ett rustikt rågbröd som påminner om det farmor brukade baka. Bakat med surdeg och en lång jästid för en djupare smak och en härligt seg och knaprig skorpa.",
     price: 50,
     weight: 700,
   },
