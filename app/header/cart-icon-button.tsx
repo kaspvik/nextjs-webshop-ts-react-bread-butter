@@ -1,6 +1,5 @@
 import { Close } from "@mui/icons-material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { useRouter } from "next/navigation";
 import {
   Backdrop,
   Badge,
@@ -10,6 +9,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CartList from "../cart/cart-list";
 import CartSummary from "../cart/cart-summary";
@@ -28,16 +28,13 @@ export default function MyDrawer() {
   return (
     <>
       <IconButton
-        data-cy="cart-link"
-        onClick={() => {
-          toggleDrawer(true);
-          router.push("/checkout");
-        }}
+        onClick={toggleDrawer(true)}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
+        data-cy="open-cart-sidebar"
       >
         <Badge
           data-cy="cart-items-count-badge"
@@ -55,14 +52,15 @@ export default function MyDrawer() {
               borderRadius: "50%",
             },
           }}
-        />
-        <ShoppingCartIcon
-          sx={{
-            fontSize: { xs: 23, sm: 28, md: 40 },
-            mx: { sm: 2 },
-            color: "text.primary",
-          }}
-        />
+        >
+          <ShoppingCartIcon
+            sx={{
+              fontSize: { xs: 23, sm: 28, md: 40 },
+              mx: { sm: 2 },
+              color: "text.primary",
+            }}
+          />
+        </Badge>
       </IconButton>
 
       {/* Backdrop for darkened background */}
