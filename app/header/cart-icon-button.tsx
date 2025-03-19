@@ -1,17 +1,17 @@
 import { Close } from "@mui/icons-material";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import {
   Backdrop,
-  Badge,
   Box,
   Divider,
   Drawer,
   IconButton,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import CartList from "../cart/cart-list";
 import CartSummary from "../cart/cart-summary";
+import CartBadge from "../components/cart-badge";
 import { useCart } from "../provider";
 
 export default function MyDrawer() {
@@ -22,42 +22,20 @@ export default function MyDrawer() {
     setOpen(open);
   };
 
+  const router = useRouter();
+
   return (
     <>
       <IconButton
-        data-cy="cart-link"
         onClick={toggleDrawer(true)}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}
+        data-cy="open-cart-sidebar"
       >
-        <Badge
-          data-cy="cart-items-count-badge"
-          invisible={cartCount === 0}
-          badgeContent={cartCount}
-          sx={{
-            "& .MuiBadge-badge": {
-              backgroundColor: "background.paper",
-              color: "text.primary",
-              fontSize: { xs: "0.8rem", md: "1rem" },
-              height: { xs: 16, sm: 18, md: 25 },
-              minWidth: { xs: 15, md: 25 },
-              top: { xs: -2, md: 0 },
-              right: { xs: 0, sm: 15, md: 20 },
-              borderRadius: "50%",
-            },
-          }}
-        >
-          <ShoppingCartIcon
-            sx={{
-              fontSize: { xs: 23, sm: 28, md: 40 },
-              mx: { sm: 2 },
-              color: "text.primary",
-            }}
-          />
-        </Badge>
+        <CartBadge />
       </IconButton>
 
       {/* Backdrop for darkened background */}

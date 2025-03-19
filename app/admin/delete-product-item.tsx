@@ -4,7 +4,7 @@ import { Product } from "@/data";
 import { Delete } from "@mui/icons-material";
 import { Alert, IconButton, Snackbar } from "@mui/material";
 import { useState } from "react";
-import ConfirmDeleteProduct from "./confirm-delete-button";
+import ConfirmDeleteProduct from "./buttons/confirm-delete-button";
 
 type ProductCardProps = {
   product: Product;

@@ -15,6 +15,7 @@ export default function CartItemComponent({ cartItem }: Props) {
 
   return (
     <Card
+      data-cy="cart-item"
       sx={{
         width: "100%",
         position: "relative",
@@ -59,7 +60,7 @@ export default function CartItemComponent({ cartItem }: Props) {
                 objectFit: "cover",
               }}
               image={cartItem.image}
-              title="levain"
+              title={cartItem.title}
             />
           </Box>
 

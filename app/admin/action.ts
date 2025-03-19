@@ -2,12 +2,22 @@
 
 import { CartItem } from "@/data";
 import { db } from "@/prisma/db";
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+
+export async function createProduct(product: Prisma.ProductCreateInput) {
+  //slumppad artikelnummer här
+  await db.product.create({ data: product });
+  revalidatePath("/admin");
+  redirect("/admin");
+}
 
 export async function deleteProduct(id: string) {
   await db.product.delete({ where: { id: id } });
   revalidatePath("/");
 }
+
 
 export async function createOrder(userId: number, cartItems: CartItem[]) {
   if (!cartItems || !Array.isArray(cartItems)) {
@@ -100,4 +110,14 @@ export async function getOrderByOrderNr(orderNr: string) {
     console.error("Error fetching order:", error);
     throw new Error("Failed to fetch order");
   }
+export async function updateProduct(
+  articleNumber: string,
+  data: Prisma.ProductUpdateInput
+) {
+  await db.product.update({
+    where: { articleNumber },
+    data,
+  });
+  revalidatePath("/admin");
+  redirect("/admin");
 }

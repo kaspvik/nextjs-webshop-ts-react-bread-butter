@@ -2,7 +2,7 @@ import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
-import ProductCard from "./product/product-card";
+import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
 export default async function Home() {
   const products = await db.product.findMany();
