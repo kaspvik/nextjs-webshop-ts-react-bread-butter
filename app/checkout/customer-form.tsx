@@ -48,16 +48,18 @@ export default function CustomerForm() {
     // uppdatera värdet när användaren skriveer i fältet
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // "slår upp" villken validering som gäller för det här fältet
-    const fieldSchema = customerSchema.shape[name as keyof typeof formData];
-    if (fieldSchema) {
-      // pga validera bara ett fält
-      const result = fieldSchema.safeParse(value);
-      // uppdatera errors att hålla error message
-      setErrors((prev) => ({
-        ...prev,
-        [name]: result.success ? "" : result.error.issues[0].message,
-      }));
+    // Validerar hela schemat
+    const result = customerSchema.safeParse({ ...formData, [name]: value });
+    if (result.success) {
+      setErrors({});
+    } else {
+      const newErrors: { [key: string]: string } = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        newErrors[field] = issue.message;
+      });
+
+      setErrors(newErrors);
     }
   };
 
@@ -72,14 +74,18 @@ export default function CustomerForm() {
 
     if (!result.success) {
       // konvertera zod felen till objekt att lagra namnen på fälten
-      const newErrors: { [key: string]: string } = {};
-      result.error.issues.forEach((issue) => {
-        const field = issue.path[0] as string;
-        newErrors[field] = issue.message;
-      });
+      const newErrors = result.error.flatten().fieldErrors;
+      setErrors(
+        Object.keys(newErrors).reduce((acc, key) => {
+          const typedKey = key as keyof typeof newErrors;
+          acc[typedKey] = newErrors[typedKey]?.[0] ?? ""; // första error meddelandet
+          // acc (short for accumulator) is the object that collects and stores the formatted errors.
+          return acc;
+        }, {} as Record<keyof typeof formData, string>) // extra fluff för typescript
+      );
 
       // om det fanns nåt fel
-      setErrors(newErrors);
+
       console.log("Formuläret innehåller fel, avbryter!");
       return;
     }
@@ -165,7 +171,7 @@ export default function CustomerForm() {
               helperText={
                 errors.name ? (
                   <FormHelperText data-cy="customer-name-error">
-                    {"Du måste fylla i ditt namn"}
+                    {errors.name}
                   </FormHelperText>
                 ) : null
               }
@@ -199,7 +205,7 @@ export default function CustomerForm() {
               helperText={
                 errors.address ? (
                   <FormHelperText data-cy="customer-address-error">
-                    {"Du måste fylla i en adress"}
+                    {errors.address}
                   </FormHelperText>
                 ) : null
               }
@@ -240,7 +246,7 @@ export default function CustomerForm() {
                 helperText={
                   errors.zipcode ? (
                     <FormHelperText data-cy="customer-zipcode-error">
-                      {"Du måste fylla i en postkod"}
+                      {errors.zipcode}
                     </FormHelperText>
                   ) : null
                 }
@@ -273,7 +279,7 @@ export default function CustomerForm() {
                 helperText={
                   errors.city ? (
                     <FormHelperText data-cy="customer-city-error">
-                      {"Du måste fylla i en stad"}
+                      {errors.city}
                     </FormHelperText>
                   ) : null
                 }
@@ -315,7 +321,7 @@ export default function CustomerForm() {
               helperText={
                 errors.email ? (
                   <FormHelperText data-cy="customer-email-error">
-                    {"Du måste fylla i en e-post adress"}
+                    {errors.email}
                   </FormHelperText>
                 ) : null
               }
@@ -348,7 +354,7 @@ export default function CustomerForm() {
               helperText={
                 errors.phone ? (
                   <FormHelperText data-cy="customer-phone-error">
-                    {"Du måste fylla i ett telefonnummer"}
+                    {errors.phone}
                   </FormHelperText>
                 ) : null
               }
