@@ -8,6 +8,7 @@ const Hero = () => {
         position: "relative",
         height: "80vh", // Justera höjden på hero-sektionen
         overflow: "hidden",
+        boxShadow: 4,
       }}
     >
       {/* Hero background image */}
@@ -19,7 +20,7 @@ const Hero = () => {
           width: "100%",
           height: "100%",
           overflow: "hidden",
-          animation: "zoomIn 3s ease-out forwards", // Animationen appliceras direkt här
+          animation: "zoomIn 4s ease-out forwards", // Animationen appliceras direkt här
           "@keyframes zoomIn": {
             "0%": {
               transform: "scale(1)", // Startar utan zoom
@@ -29,15 +30,17 @@ const Hero = () => {
             },
           },
           "& img": {
-            objectFit: "cover", // Gör så att bilden inte blir förvrängd
-            objectPosition: "center", // Behåller bildens centrering
+            objectFit: "cover",
+            objectPosition: "center",
           },
         }}
       >
         <Image
-          src="/images/hero3.jpg" // Bilden finns i public/images/hero1.jpg
+          src="/images/hero3.jpg"
           alt="Hero image"
-          layout="fill" // Bilden täcker hela hero-sektionen
+          priority={true} // Viktig bild, Next.js optimerar laddning
+          quality={90} // Förbättrar bildkvaliteten
+          layout="fill"
         />
       </Box>
 
@@ -54,15 +57,24 @@ const Hero = () => {
       >
         <Typography
           variant="h1"
-          sx={{ fontSize: "60px", fontWeight: "bold", color: "text.primary" }}
+          sx={{
+            fontSize: "60px",
+            fontWeight: "bold",
+            color: "background.paper",
+            textShadow: "3px 3px 6px rgba(65, 6, 1, 0.5)",
+          }}
         >
-          Välkommen till vårt bageri
+          Välkommen till Bread&Butter
         </Typography>
         <Typography
           variant="h5"
-          sx={{ marginTop: "1rem", color: "text.primary", fontFamily: "" }}
+          sx={{
+            marginTop: "1rem",
+            color: "background.paper",
+            textShadow: "5px 5px 8px rgba(65, 6, 1, 0.5)",
+          }}
         >
-          Ekologiskt och hantverksmässigt bröd direkt till din dörr
+          Ekologiskt och hantverks bröd direkt till din dörr
         </Typography>
         {/* <Button
           variant="contained"
