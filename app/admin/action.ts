@@ -9,9 +9,21 @@ export async function deleteProduct(id: string) {
   revalidatePath("/");
 }
 
-export async function createOrder(cartItems: CartItem[]) {
+export async function createOrder(userId: number, cartItems: CartItem[]) {
+  if (!cartItems || !Array.isArray(cartItems)) {
+    throw new Error("cartItems must be a valid array");
+  }
+
+  const orderNr = `${Date.now()}`;
+
   const order = await db.order.create({
     data: {
+      user: {
+        connect: {
+          id: userId,
+        },
+      },
+      orderNr,
       items: {
         create: cartItems.map((item) => ({
           image: item.image,
@@ -21,9 +33,9 @@ export async function createOrder(cartItems: CartItem[]) {
         })),
       },
     },
-    //inkluderar related records, alltså alla items
     include: { items: true },
   });
+
   return order;
 }
 export async function createUser(formData: FormData) {
@@ -57,8 +69,35 @@ export async function getOrderById(id: string) {
     },
     include: {
       items: true,
+      user: true,
     },
   });
 
   return order;
+}
+
+export async function getOrderByOrderNr(orderNr: string) {
+  try {
+    const order = await db.order.findFirst({
+      where: {
+        orderNr: orderNr,
+      },
+      include: {
+        items: true,
+        user: true,
+      },
+    });
+
+    if (!order) {
+      throw new Error("Order not found");
+    }
+
+    return {
+      customer: order.user,
+      items: order.items,
+    };
+  } catch (error) {
+    console.error("Error fetching order:", error);
+    throw new Error("Failed to fetch order");
+  }
 }

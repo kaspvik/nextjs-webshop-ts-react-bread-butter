@@ -65,6 +65,7 @@ export default function CustomerForm() {
     return `${Date.now()}`;
   };
   const orderNr = generateOrderNumber();
+
   const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const result = customerSchema.safeParse(formData);
@@ -82,19 +83,23 @@ export default function CustomerForm() {
       console.log("Formuläret innehåller fel, avbryter!");
       return;
     }
+
     try {
       const formDataObj = new FormData();
       Object.entries(formData).forEach(([key, value]) =>
         formDataObj.append(key, value)
       );
 
-      await createUser(formDataObj); // Pass the correctly formatted FormData
+      const userResponse = await createUser(formDataObj);
+      if (!userResponse.success) {
+        throw new Error("User creation failed");
+      }
 
-      createOrder(cartItems);
+      const order = await createOrder(userResponse.user.id, cartItems);
 
       setOpen(true);
       setTimeout(() => {
-        router.push(`/confirmation/${generateOrderNumber()}`);
+        router.push(`/confirmation/${order.orderNr}`);
       }, 2000);
 
       clearCart();

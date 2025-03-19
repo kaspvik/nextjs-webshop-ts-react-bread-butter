@@ -1,70 +1,34 @@
 "use client";
+
+import { getOrderByOrderNr } from "@/app/admin/action";
+import Receipt from "@/app/components/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import { use } from "react";
+export default function ConfirmationPage({
+  params,
+}: {
+  params: { orderNr: string };
+}) {
+  const { orderNr } = params;
+  const [order, setOrder] = useState<any>(null);
+  const [error, setError] = useState<string | null>(null);
 
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.background,
-    color: theme.palette.text,
-    fontSize: 20,
-    fontWeight: "400",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 16,
-  },
-}));
+  useEffect(() => {
+    getOrderByOrderNr(orderNr)
+      .then(setOrder)
+      .catch(() => setError("Kunde inte hämta beställningen."));
+  }, [orderNr]);
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  // hide last border
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+  if (error) return <h1>{error}</h1>;
+  if (!order) return <h1>Laddar beställning...</h1>;
 
-function createData(
-  image: string,
-  title: string,
-  quantity: number,
-  price: number
-) {
-  return { image, title, quantity, price };
-}
+  const { customer, items } = order;
+  const totalSum = items.reduce(
+    (sum: number, item: any) => sum + item.quantity * item.price,
+    0
+  );
 
-const rows = [
-  createData("/images/rustiktragbrod.png", "Rustikt rågbröd", 3, 50),
-  createData("/images/levain.png", "Levain", 2, 65),
-  createData("/images/brytbrod.png", "Brytbröd", 1, 40),
-];
-
-const totalSum = rows.reduce((sum, row) => sum + row.quantity * row.price, 0);
-
-interface ParamsType {
-  orderNr: string;
-}
-
-interface Props {
-  params: ParamsType | Promise<ParamsType>;
-}
-
-export default function ConfirmationPage({ params }: Props) {
-  const unwrappedParams = "then" in params ? use(params) : params;
-  const { orderNr } = unwrappedParams;
-
-  if (!orderNr) {
-    return <h1>Beställningen hittades inte!</h1>;
-  }
   return (
     <Container
       sx={{
@@ -77,8 +41,8 @@ export default function ConfirmationPage({ params }: Props) {
       <Box
         component="main"
         sx={{
-          padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
-          bgcolor: "background.paper", //Funktion för att hämta våra färger från theme.
+          padding: 4,
+          bgcolor: "background.paper",
           border: "2px solid #9C8173",
           borderRadius: "0.5rem",
           margin: "2rem 0",
@@ -96,77 +60,37 @@ export default function ConfirmationPage({ params }: Props) {
           Ditt ordernummer: {orderNr}
         </Typography>
 
-        <Typography
-          variant="h2"
-          component="p"
-          sx={{ fontSize: "2rem", fontWeight: "400", mb: "1.5rem" }}
+        <Box
+          sx={{
+            border: "1px solid #ccc",
+            borderRadius: "8px",
+            padding: "1.5rem",
+            marginBottom: "2rem",
+            backgroundColor: "#f9f9f9",
+          }}
         >
-          Din beställning:{" "}
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 700 }} aria-label="order-overview">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Produkt</StyledTableCell>
-                <StyledTableCell align="right">Antal</StyledTableCell>
-                <StyledTableCell align="right">Pris</StyledTableCell>
-                <StyledTableCell align="right">Summa</StyledTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <StyledTableRow key={row.title}>
-                  <StyledTableCell
-                    component="th"
-                    scope="row"
-                    sx={{
-                      fontWeight: "bold",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "1rem",
-                    }}
-                  >
-                    <img
-                      src={row.image}
-                      alt={row.title}
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        borderRadius: "50%",
-                      }}
-                    ></img>
-                    {row.title}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">
-                    {row.quantity}
-                  </StyledTableCell>
-                  <StyledTableCell align="right">{row.price}</StyledTableCell>
-                  <StyledTableCell align="right">
-                    {(row.quantity * row.price).toFixed(2)}
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))}
-              <StyledTableRow>
-                <StyledTableCell colSpan={3} align="right">
-                  <strong>Totalt</strong>
-                </StyledTableCell>
-                <StyledTableCell align="right">
-                  <strong>{totalSum.toFixed(2)} kr</strong>
-                </StyledTableCell>
-              </StyledTableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
+          <Typography
+            variant="h2"
+            sx={{ fontSize: "1.5rem", fontWeight: "600" }}
+          >
+            Kundinformation
+          </Typography>
+          <Typography>Namn: {customer.name}</Typography>
+          <Typography>E-post: {customer.email}</Typography>
+          <Typography>
+            Adress: {customer.address}, {customer.zipcode} {customer.city}
+          </Typography>
+          <Typography>Telefon: {customer.phone}</Typography>
+        </Box>
+
+        <Receipt items={items} totalSum={totalSum} />
+
         <Typography sx={{ marginTop: "2rem" }}>
           Separat kvitto kommer skickas till din e-mail. Tack för att du har
           handlat på Bread & Butter!
         </Typography>
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center", // Centrerar knappen horisontellt
-            mt: 3, // Lägg till marginal om du vill
-          }}
+          sx={{ display: "flex", justifyContent: "center", mt: 3 }}
           component={Link}
           href="/"
         >
