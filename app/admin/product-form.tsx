@@ -40,6 +40,12 @@ export default function ProductForm({ product }: Props) {
     },
     resolver: zodResolver(ProductSchema),
   });
+
+  const {
+    register,
+    formState: { errors },
+  } = form;
+
   const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
     if (isEdit) {
       await updateProduct(product!.articleNumber, data);
@@ -62,8 +68,7 @@ export default function ProductForm({ product }: Props) {
           sm: 400,
           md: 500,
           lg: 600,
-
-        }
+        },
       }}
       data-cy="product-form"
     >
@@ -74,10 +79,8 @@ export default function ProductForm({ product }: Props) {
           justifyContent: "center",
           margin: 2,
         }}
-        >
+      >
         {isEdit ? "Redigera en produkt" : "Lägg till en produkt"}
-        
-       
       </Typography>
 
       <FormLabel
@@ -99,6 +102,12 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-image" } }}
+        error={!!errors.image}
+        helperText={
+          errors.image ? (
+            <span data-cy="product-image-error">{"Ange en giltig Url"}</span>
+          ) : null
+        }
         {...form.register("image")}
       />
 
@@ -121,10 +130,16 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-title" } }}
-        {...form.register("title")}
+        error={!!errors.description}
+        helperText={
+          errors.title ? (
+            <span data-cy="product-title-error">
+              {"Titel får inte vara tom"}
+            </span>
+          ) : null
+        }
+        {...register("title")}
       />
-
-      
 
       <FormLabel
         sx={{
@@ -139,13 +154,12 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Vikt"
-        
         margin="normal"
         id="Vikt"
         type="number"
         fullWidth
         variant="outlined"
-        {...form.register("weight")}
+        {...register("weight")}
       />
 
       <FormLabel
@@ -161,14 +175,21 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Pris"
-        
         margin="normal"
         id="Pris"
         type="number"
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-price" } }}
-        {...form.register("price")}
+        error={!!errors.description}
+        helperText={
+          errors.price ? (
+            <span data-cy="product-price-error">
+              {"Du måste skriva in ett pris över 0:-"}
+            </span>
+          ) : null
+        }
+        {...register("price")}
       />
 
       <FormLabel
@@ -184,14 +205,21 @@ export default function ProductForm({ product }: Props) {
 
       <TextField
         title="Beskrivning"
-        
         margin="normal"
         id="Beskrivning"
         type="text"
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-description" } }}
-        {...form.register("description")}
+        error={!!errors.description}
+        helperText={
+          errors.description ? (
+            <span data-cy="product-description-error">
+              {"Besrkivningen får inte vara tom"}
+            </span>
+          ) : null
+        }
+        {...register("description")}
       />
       <Box
         sx={{
