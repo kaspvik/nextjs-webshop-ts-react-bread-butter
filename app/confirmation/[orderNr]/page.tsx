@@ -1,7 +1,7 @@
 "use client";
 
 import { getOrderByOrderNr } from "@/app/admin/action";
-import Receipt from "@/app/components/receipt";
+import Receipt from "@/app/confirmation/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 
@@ -94,7 +94,7 @@ export default function ConfirmationPage({
           component={Link}
           href="/"
         >
-          <Button>Till startsidan</Button>
+          <Button variant="contained">Till startsidan</Button>
         </Box>
       </Box>
     </Container>
