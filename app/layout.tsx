@@ -22,8 +22,11 @@ const lobster = Lobster_Two({
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
-  title: "Webbshoppen",
-  description: "Dina favoritprodukter online till en bra pris...",
+  title: "Bread&Butter",
+  description:
+    "Upptäck vårt breda utbud av ekologiskt bröd bakat med kärlek och noggrant utvalda ingredienser. Från klassiska surdegsbröd till nyskapande smaker - allt vi gör är både hållbart och fantastiskt gott.",
+  keywords:
+    "ekologiskt bröd, hantverksbröd, surdegsbröd, nybakat bröd, hållbar bakning, handgjort bröd, bageri, ekologiskt, brödleverans, naturliga ingredienser",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
