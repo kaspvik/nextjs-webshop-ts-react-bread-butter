@@ -180,7 +180,7 @@ export default function CustomerForm() {
                 color: "text.primary",
               }}
             >
-              Adress
+              Leveransadress
             </FormLabel>
             <TextField
               size="small"
@@ -192,7 +192,6 @@ export default function CustomerForm() {
               fullWidth
               id="address"
               name="address"
-              placeholder="Leveransadress"
               value={formData.address}
               onChange={handleChange}
               autoComplete="street-address"
@@ -234,7 +233,6 @@ export default function CustomerForm() {
                 }}
                 id="zipcode"
                 name="zipcode"
-                placeholder="Postkod"
                 value={formData.zipcode}
                 onChange={handleChange}
                 autoComplete="postal-code"
@@ -268,7 +266,6 @@ export default function CustomerForm() {
                 }}
                 id="city"
                 name="city"
-                placeholder="Stad"
                 value={formData.city}
                 onChange={handleChange}
                 autoComplete="address-level2"
@@ -311,7 +308,6 @@ export default function CustomerForm() {
               fullWidth
               id="email"
               name="email"
-              placeholder="E-post"
               value={formData.email}
               onChange={handleChange}
               autoComplete="email"
@@ -345,7 +341,6 @@ export default function CustomerForm() {
               fullWidth
               id="phone"
               name="phone"
-              placeholder="Telefonnummer"
               value={formData.phone}
               onChange={handleChange}
               autoComplete="tel"
