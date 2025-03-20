@@ -25,8 +25,8 @@ export default function OrderOverview() {
       }}
     >
       <Typography variant="h1">Beställningsöversikt</Typography>
-      <Box sx={{ backgroundColor: "background.default", mt: 2 }}>
-        <TableContainer sx={{ minWidth: 350 }}>
+      <Box sx={{ backgroundColor: "background.default", mt: 2, minWidth: 340 }}>
+        <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
