@@ -52,9 +52,17 @@ export default function AdminItem({ product }: ProductCardProps) {
         <Typography variant="h6" data-cy="product-title">
           {product.title}
         </Typography>
+        
+        <Box sx={{
+          display:"flex",
+          flexDirection:"row",
+        }}>
+        <Typography variant="body2">Art Nr: </Typography>
+
         <Typography variant="body2" data-cy="product-id">
-          {product.articleNumber}
+          {product.articleNumber} 
         </Typography>
+        </Box>
         <Typography variant="body2">Vikt: {product.weight} g</Typography>
         <Typography variant="body2" data-cy="product-price">
           {product.price} kr
