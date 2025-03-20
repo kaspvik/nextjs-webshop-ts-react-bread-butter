@@ -71,7 +71,11 @@ export default function CartProvider(props: PropsWithChildren) {
 
     // Sätt toast och visa
     showToast("Produkten har lagts till i kundvagnen!");
+
+    
   };
+
+  
 
   const removeFromCart = (id: string) => {
     setCartItems((prevCart) =>
@@ -85,18 +89,13 @@ export default function CartProvider(props: PropsWithChildren) {
   };
 
   const updateQuantity = (id: string, amount: number) => {
-    // tar den befintliga cart och hämtar det senaste värdet för den
-    setCartItems((prevCart) =>
-      // mappar ut de cartItems (item) som ligger i cart
-      prevCart.map((item) =>
-        // kollar om något item i cart är samma som det vi skickade in
-        item.id === id
-          ? // uppdaterar quantity: lägger ut allt i item, tar quantity och plussar på amount. Math.max ser till att den inte kan bli mindre än 1.
-            { ...item, quantity: Math.max(1, item.quantity + amount) }
-          : // om inget id matchar behåller vi item som det var
-            item
-      )
-    );
+    setCartItems((prevCart) => {
+      return prevCart
+        .map((item) =>
+          item.id === id ? { ...item, quantity: item.quantity + amount } : item
+        )
+        .filter((item) => item.quantity !== 0); // Ta bort produkter som är exakt 0
+    });
   };
 
   const clearCart = () => {
@@ -106,6 +105,10 @@ export default function CartProvider(props: PropsWithChildren) {
 
   //total items in cart
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  useEffect(() => {
+    console.log("cartCount updated:", cartCount);
+  }, [cartCount]); // Körs varje gång cartCount ändras
 
   //total price
   const totalSum = cartItems.reduce(
@@ -131,6 +134,7 @@ export default function CartProvider(props: PropsWithChildren) {
         <Snackbar
           open
           autoHideDuration={2000}
+          
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           sx={{
             width: "auto",
@@ -140,6 +144,7 @@ export default function CartProvider(props: PropsWithChildren) {
           }}
         >
           <Alert
+            
             severity="success"
             variant="outlined"
             sx={{
