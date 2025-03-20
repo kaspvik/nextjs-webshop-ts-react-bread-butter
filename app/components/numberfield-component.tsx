@@ -59,20 +59,27 @@ export default function PublicNumberField({
             >
               <MinusIcon />
             </NumberField.Decrement>
-            <NumberField.Input
+            <div
               data-cy="product-quantity"
               style={{
                 height: "1.25rem",
                 width: "3rem",
                 border: "1px solid #000000",
                 textAlign: "center",
+                lineHeight: "1.25rem",
                 fontSize: "1rem",
                 backgroundColor: "#FAF2E9",
                 color: "#111827",
                 fontVariantNumeric: "tabular-nums",
                 boxShadow: "0 4px 5px -2px grey",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
               }}
-            />
+            >
+              {quantity}
+            </div>
+
             <NumberField.Increment
               onClick={() => updateQuantity(id, 1)}
               data-cy="increase-quantity-button"
