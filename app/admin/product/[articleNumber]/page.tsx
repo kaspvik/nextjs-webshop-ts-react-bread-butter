@@ -15,7 +15,7 @@ export default async function EditProductPage({ params }: Props) {
 
   if (!product) return <main>404</main>;
   return (
-    <Dialog open>
+    <Dialog disableScrollLock open>
       <ProductForm product={product} />
     </Dialog>
   );
