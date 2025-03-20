@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import { Prisma, Product } from "@prisma/client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
 import { createProduct, updateProduct } from "./action";
@@ -30,6 +31,7 @@ interface Props {
 
 export default function ProductForm({ product }: Props) {
   const isEdit = Boolean(product);
+  const router = useRouter();
   const form = useForm<Prisma.ProductCreateInput>({
     defaultValues: product || {
       title: "",
@@ -52,7 +54,9 @@ export default function ProductForm({ product }: Props) {
     } else {
       await createProduct(data);
       form.reset();
+      
     }
+    router.push("/admin");
   };
 
   return (
