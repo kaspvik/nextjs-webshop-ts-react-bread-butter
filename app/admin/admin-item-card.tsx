@@ -15,7 +15,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       key={product.id}
       sx={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: { xs:"column",  sm:"row",},
         alignItems: "center",
         justifyContent: "space-between",
         backgroundColor: "#FAF2E9",
@@ -23,6 +23,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         borderRadius: 2,
         boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.4)",
         gap: 1,
+        flexWrap: {xs:"wrap", md:"nowrap"}
       }}
     >
       <Box sx={{
@@ -39,7 +40,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         sx={{
           borderRadius: { xs: "50%", md: "20px" },
           padding: 0.5,
-          border: { xs: "2px solid black", md: "none" },
+          border: { xs: "2px solid #9C8173", md: "none" },
           width: "100%",
           height: "100%",
           objectFit: "cover",
@@ -48,11 +49,13 @@ export default function AdminItem({ product }: ProductCardProps) {
       </Box>
 
       {/* Produktinformation */}
-      <Box sx={{ flex: 1, flexWrap: "wrap" }}>
+      <Box sx={{ flex: 1, flexWrap: "wrap",
+        width: {xs: "100%" }
+       }}>
         <Typography variant="h6" data-cy="product-title">
           {product.title}
         </Typography>
-        
+
         <Box sx={{
           display:"flex",
           flexDirection:"row",
@@ -85,8 +88,8 @@ export default function AdminItem({ product }: ProductCardProps) {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
-          alignSelf: "flex-start",
+          flexDirection: { xs:"row",  sm:"column",},
+          alignSelf: {xs:"center", sm: "flex-start",},
           justifyContent: "flex-start",
           gap: 2,
         }}
