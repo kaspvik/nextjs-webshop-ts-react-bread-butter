@@ -62,6 +62,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           border: "2px solid",
           borderColor: "text.secondary",
           borderRadius: "0.25rem",
+          backgroundColor: "#e5ded5", // vil vi ha?????
           mx: "auto",
           mt: "1rem",
           mb: "1rem",

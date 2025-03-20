@@ -3,7 +3,6 @@
 import { getOrderByOrderNr } from "@/app/admin/action";
 import Receipt from "@/app/confirmation/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
-import { Shadows_Into_Light } from "next/font/google";
 import { useEffect, useState } from "react";
 
 export default function ConfirmationPage({
@@ -90,11 +89,25 @@ export default function ConfirmationPage({
           handlat på Bread & Butter!
         </Typography>
         <Box
-          sx={{ display: "flex", justifyContent: "center", mt: 3 }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            mt: 3,
+            textDecoration: "none",
+          }}
           component={Link}
           href="/"
         >
-          <Button variant="contained">Till startsidan</Button>
+          <Button
+            variant="contained"
+            sx={{
+              bgcolor: "primary.main",
+              color: "text.primary",
+              "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+            }}
+          >
+            Till startsidan
+          </Button>
         </Box>
       </Box>
     </Container>
