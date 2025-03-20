@@ -13,7 +13,18 @@ export default function PublicNumberField({
   const { cartItems, updateQuantity } = useCart();
   const cartItem = cartItems.find((cartItem) => cartItem.id === id); // find product in cart
 
-  const quantity = cartItem?.quantity || 1; // default to 1 if not found
+   const quantity = cartItem?.quantity || 0; // default to 1 if not found
+
+  // const quantity = cartItem?.quantity;
+
+  // const { removeFromCart } = useCart();
+  
+
+  // useEffect(() => {
+  //   if (quantity === 0) {
+  //     removeFromCart(cartItem.id);
+  //   }
+  // }, [quantity, cartItem?.id, removeFromCart]);
 
   return (
     <Box sx={{ pt: 1, pb: 0.5, pl: 0.5, pr: 0.5, border: "1px solid white" }}>
@@ -26,7 +37,7 @@ export default function PublicNumberField({
           alignItems: "flex-start",
           gap: "0.25rem",
         }}
-      >
+        >
         <Box
           sx={{
             display: "flex",
@@ -35,7 +46,7 @@ export default function PublicNumberField({
           }}
         >
           <Typography variant="h6" sx={{ align: "center" }} data-cy="product-price">
-            {quantity * price} kr
+            {price * quantity} kr
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
             <NumberField.Decrement
