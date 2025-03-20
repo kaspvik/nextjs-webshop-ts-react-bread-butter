@@ -17,7 +17,7 @@ export default function CartItemComponent({ cartItem }: Props) {
     <Card
       data-cy="cart-item"
       sx={{
-        width: { xs: "310px", sm: "100%" },
+        maxWidth: { xs: "295px", sm: "100%" },
         position: "relative",
         padding: 1,
         my: 2,
@@ -35,6 +35,7 @@ export default function CartItemComponent({ cartItem }: Props) {
         <Box
           sx={{
             display: "flex",
+            flexDirection: {xs: "column", sm: "row"},
             alignItems: "center",
             mb: 1,
           }}
