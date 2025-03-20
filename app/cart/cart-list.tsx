@@ -2,7 +2,6 @@
 
 import { Box } from "@mui/material";
 import { useCart } from "../provider";
-import { CartItem } from "@/data";
 import CartItemComponent from "./cart-item";
 
 export default function CartList() {
@@ -15,7 +14,7 @@ export default function CartList() {
         overflowY: { xs: "visible", sm: "auto" },
         maxHeight: { xs: "none", sm: "100%" },
         width: "100%",
-        minWidth: "320px",
+        maxWidth: { xs: "300px", sm: "100%" },      
       }}
     >
       {cartItems.map((cartItem) => (

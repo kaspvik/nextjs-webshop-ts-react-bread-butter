@@ -2,14 +2,13 @@
 
 import {
   Box,
-  Container,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
+  Typography
 } from "@mui/material";
 import { useCart } from "../provider";
 
@@ -29,7 +28,7 @@ export default function OrderOverview() {
         sx={{
           backgroundColor: "background.default",
           mt: 2,
-          width: { xs: "310px", sm: "100%" },
+          maxWidth: { xs: "310px", sm: "100%" },
         }}
       >
         <TableContainer>
