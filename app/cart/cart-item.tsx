@@ -1,9 +1,9 @@
 "use client";
+import { CartItem } from "@/data";
 import { Delete } from "@mui/icons-material";
 import { Box, Button, Card, Typography } from "@mui/material";
 import CardMedia from "@mui/material/CardMedia";
 import PublicNumberField from "../components/numberfield-component";
-import { CartItem } from "@/data";
 import { useCart } from "../provider";
 
 interface Props {
@@ -61,6 +61,7 @@ export default function CartItemComponent({ cartItem }: Props) {
                 objectFit: "cover",
                 padding: 0.5,
                 border: "2px solid #9C8173",
+                
               }}
               image={cartItem.image}
               title={cartItem.title}
@@ -73,6 +74,7 @@ export default function CartItemComponent({ cartItem }: Props) {
             }}
           >
             <Typography
+            data-cy="product-title"
               gutterBottom
               variant="body2"
               component="div"

@@ -34,7 +34,7 @@ export default function PublicNumberField({
             alignItems: "center",
           }}
         >
-          <Typography variant="h6" sx={{ align: "center" }}>
+          <Typography variant="h6" sx={{ align: "center" }} data-cy="product-price">
             {quantity * price} kr
           </Typography>
           <NumberField.Group style={{ display: "flex" }}>
