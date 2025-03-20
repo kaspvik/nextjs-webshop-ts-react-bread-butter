@@ -17,7 +17,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
       data-cy="product"
       sx={{
         width: "100%",
-        maxWidth: 340,
+        maxWidth: 320,
         minHeight: 490,
         backgroundColor: "background.paper",
         boxShadow: "none",
