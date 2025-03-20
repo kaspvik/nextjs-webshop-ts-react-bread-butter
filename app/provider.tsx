@@ -48,8 +48,6 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // methods
   const addToCart = (item: Product) => {
-    console.log("Adding item to cart:", item); // Debugging line
-
     setCartItems((prevItems) => {
       const existingItemIndex = prevItems.findIndex(
         (cartItem) => cartItem.id === item.id
