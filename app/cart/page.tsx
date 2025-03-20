@@ -17,7 +17,7 @@ export default function CartPage() {
         sx={{
           fontFamily: "var(--font-lobster)",
           fontSize: 35,
-          paddingLeft: { xs: 3, sm: 0 },
+          paddingLeft: 0,
           paddingTop: 2,
         }}
       >

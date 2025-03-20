@@ -13,17 +13,20 @@ export default function CheckoutPage() {
         mb: 3,
 
         padding: { xs: 0, sm: 2, md: 4 },
-        border: 1,
+        border: 2,
         borderRadius: 2,
         borderColor: "text.secondary",
       }}
     >
-      <Typography variant="h1" sx={{ ml: { xs: 1, sm: 3, md: 6 } }}>
+      <Typography
+        variant="h1"
+        sx={{ mt: { xs: 2 }, ml: { xs: 1, sm: 3, md: 6 } }}
+      >
         Kassa
       </Typography>
 
       <Box
-        sx={{ width: "100%", py: 3, px: { xs: 1, sm: 2, md: 6 }, mx: "auto" }}
+        sx={{ width: "95%", py: 3, px: { xs: 0, sm: 2, md: 6 }, mx: "auto" }}
       >
         <CartList />
       </Box>

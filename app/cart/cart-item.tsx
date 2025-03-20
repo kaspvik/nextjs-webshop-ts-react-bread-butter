@@ -21,6 +21,7 @@ export default function CartItemComponent({ cartItem }: Props) {
         position: "relative",
         padding: 1,
         my: 2,
+        boxShadow: 2,
       }}
     >
       <Box
@@ -40,8 +41,8 @@ export default function CartItemComponent({ cartItem }: Props) {
         >
           <Box
             sx={{
-              width: 90,
-              height: 90,
+              width: 100,
+              height: 100,
               borderRadius: "50%",
               padding: 0.5,
               mr: 2,
@@ -58,6 +59,8 @@ export default function CartItemComponent({ cartItem }: Props) {
                 height: "100%",
                 borderRadius: "50%",
                 objectFit: "cover",
+                padding: 0.5,
+                border: "2px solid #9C8173",
               }}
               image={cartItem.image}
               title={cartItem.title}
@@ -71,9 +74,14 @@ export default function CartItemComponent({ cartItem }: Props) {
           >
             <Typography
               gutterBottom
-              variant="body1"
+              variant="body2"
               component="div"
-              sx={{ fontWeight: "bold", mb: 0.5, paddingBottom: 0.5 }}
+              sx={{
+                fontSize: "1rem",
+                fontWeight: "bold",
+                mb: 0.5,
+                paddingBottom: 0.5,
+              }}
             >
               {cartItem.title}
             </Typography>
@@ -81,7 +89,7 @@ export default function CartItemComponent({ cartItem }: Props) {
               {cartItem.weight} gram
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-              {cartItem.price} kr.
+              {cartItem.price} kr/ styck
             </Typography>
           </Box>
         </Box>
