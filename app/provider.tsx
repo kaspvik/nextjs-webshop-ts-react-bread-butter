@@ -71,11 +71,7 @@ export default function CartProvider(props: PropsWithChildren) {
 
     // Sätt toast och visa
     showToast("Produkten har lagts till i kundvagnen!");
-
-    
   };
-
-  
 
   const removeFromCart = (id: string) => {
     setCartItems((prevCart) =>
@@ -134,7 +130,6 @@ export default function CartProvider(props: PropsWithChildren) {
         <Snackbar
           open
           autoHideDuration={2000}
-          
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           sx={{
             width: "auto",
@@ -144,7 +139,7 @@ export default function CartProvider(props: PropsWithChildren) {
           }}
         >
           <Alert
-            
+            onClose={() => setToastMessage(null)}
             severity="success"
             variant="outlined"
             sx={{
