@@ -17,7 +17,7 @@ export default function CartItemComponent({ cartItem }: Props) {
     <Card
       data-cy="cart-item"
       sx={{
-        width: "100%",
+        width: { xs: "310px", sm: "100%" },
         position: "relative",
         padding: 1,
         my: 2,
@@ -61,7 +61,6 @@ export default function CartItemComponent({ cartItem }: Props) {
                 objectFit: "cover",
                 padding: 0.5,
                 border: "2px solid #9C8173",
-                
               }}
               image={cartItem.image}
               title={cartItem.title}
@@ -74,7 +73,7 @@ export default function CartItemComponent({ cartItem }: Props) {
             }}
           >
             <Typography
-            data-cy="product-title"
+              data-cy="product-title"
               gutterBottom
               variant="body2"
               component="div"
@@ -88,10 +87,10 @@ export default function CartItemComponent({ cartItem }: Props) {
               {cartItem.title}
             </Typography>
             <Typography variant="body2" sx={{ mb: 0.5 }}>
-              {cartItem.weight} gram
+              {cartItem.weight} g
             </Typography>
             <Typography variant="body2" sx={{ fontWeight: "medium" }}>
-              {cartItem.price} kr/ styck
+              {cartItem.price} kr
             </Typography>
           </Box>
         </Box>

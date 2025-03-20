@@ -25,15 +25,27 @@ export default function OrderOverview() {
       }}
     >
       <Typography variant="h1">Beställningsöversikt</Typography>
-      <Box sx={{ backgroundColor: "background.default", mt: 2, minWidth: 340 }}>
+      <Box
+        sx={{
+          backgroundColor: "background.default",
+          mt: 2,
+          width: { xs: "310px", sm: "100%" },
+        }}
+      >
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell>Produkt</TableCell>
-                <TableCell align="right">Antal</TableCell>
-                <TableCell align="right">Pris/ styck</TableCell>
-                <TableCell align="right">Delsumma</TableCell>
+                <TableCell sx={{ p: 1 }}>Produkt</TableCell>
+                <TableCell align="right" sx={{ p: 1 }}>
+                  Antal
+                </TableCell>
+                <TableCell align="right" sx={{ p: 1 }}>
+                  Pris/ st
+                </TableCell>
+                <TableCell align="right" sx={{ p: 1 }}>
+                  Delsumma
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -46,7 +58,7 @@ export default function OrderOverview() {
                       fontWeight: "bold",
                       display: "flex",
                       alignItems: "center",
-                      gap: "1rem",
+                      gap: "0.5rem",
                     }}
                   >
                     <Box

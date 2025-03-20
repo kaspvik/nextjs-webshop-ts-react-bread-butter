@@ -15,7 +15,7 @@ export default function CartList() {
         overflowY: { xs: "visible", sm: "auto" },
         maxHeight: { xs: "none", sm: "100%" },
         width: "100%",
-        minWidth: "340px",
+        minWidth: "320px",
       }}
     >
       {cartItems.map((cartItem) => (
