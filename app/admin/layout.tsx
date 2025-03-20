@@ -18,14 +18,18 @@ export default async function AdminLayout({
         gap: 2,
         bgcolor: "background.paper",
         marginTop: 2,
+        marginBottom: 2,
+        borderRadius: 2,
+        padding: 4,
+        border: "2px solid #9C8173",
       }}
     >
       <AddProductButton />
       {products.map((product) => (
         <AdminItem key={product.id} product={product} />
       ))}
-
       {children}
+
     </Container>
   );
 }

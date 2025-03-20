@@ -3,7 +3,7 @@ import AddProductForm from "../../product-form";
 
 export default function NewProductPage() {
   return (
-    <Dialog open>
+    <Dialog disableScrollLock open>
       <AddProductForm />
     </Dialog>
   );
