@@ -5,7 +5,7 @@ import { useCart } from "../provider";
 const CartBadge = () => {
   const { cartCount } = useCart(); // Dynamically get the cart count
 
-  console.log("Rendering CartBadge with cartCount:", cartCount); // Debugging line
+ 
 
   return (
     <Badge
