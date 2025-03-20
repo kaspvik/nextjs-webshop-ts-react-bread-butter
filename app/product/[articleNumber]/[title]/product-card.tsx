@@ -37,7 +37,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           width: "200px",
           height: "200px",
           backgroundColor: "background.default",
-          transform: "translate(-50%, -100%)",
+          transform: "translate(-50%, -110%)",
           borderRadius: "0.25rem",
           zIndex: 0,
         }}

@@ -2,20 +2,21 @@
 
 import {
   Box,
+  Button,
   Container,
+  Divider,
   FormControl,
+  FormHelperText,
   FormLabel,
+  Snackbar,
   TextField,
   Typography,
-  Button,
-  Divider,
-  Snackbar,
-  FormHelperText,
 } from "@mui/material";
-import { useState } from "react";
-import { useCart } from "../provider";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { z } from "zod";
+import { createOrder, createUser } from "../admin/action";
+import { useCart } from "../provider";
 
 const customerSchema = z.object({
   name: z.string().min(1, "Du måste fylla i ditt namn"),
@@ -28,6 +29,7 @@ const customerSchema = z.object({
 
 export default function CustomerForm() {
   const router = useRouter();
+  const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
   const [formData, setFormData] = useState({
@@ -46,16 +48,18 @@ export default function CustomerForm() {
     // uppdatera värdet när användaren skriveer i fältet
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // "slår upp" villken validering som gäller för det här fältet
-    const fieldSchema = customerSchema.shape[name as keyof typeof formData];
-    if (fieldSchema) {
-      // pga validera bara ett fält
-      const result = fieldSchema.safeParse(value);
-      // uppdatera errors att hålla error message
-      setErrors((prev) => ({
-        ...prev,
-        [name]: result.success ? "" : result.error.issues[0].message,
-      }));
+    // Validerar hela schemat
+    const result = customerSchema.safeParse({ ...formData, [name]: value });
+    if (result.success) {
+      setErrors({});
+    } else {
+      const newErrors: { [key: string]: string } = {};
+      result.error.issues.forEach((issue) => {
+        const field = issue.path[0] as string;
+        newErrors[field] = issue.message;
+      });
+
+      setErrors(newErrors);
     }
   };
 
@@ -63,34 +67,48 @@ export default function CustomerForm() {
     return `${Date.now()}`;
   };
   const orderNr = generateOrderNumber();
-  const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const result = customerSchema.safeParse(formData);
 
     if (!result.success) {
       // konvertera zod felen till objekt att lagra namnen på fälten
-      const newErrors: { [key: string]: string } = {};
-      result.error.issues.forEach((issue) => {
-        const field = issue.path[0] as string;
-        newErrors[field] = issue.message;
-      });
+      const newErrors = result.error.flatten().fieldErrors;
+      setErrors(
+        Object.keys(newErrors).reduce((acc, key) => {
+          const typedKey = key as keyof typeof newErrors;
+          acc[typedKey] = newErrors[typedKey]?.[0] ?? ""; // första error meddelandet
+          // acc (short for accumulator) is the object that collects and stores the formatted errors.
+          return acc;
+        }, {} as Record<keyof typeof formData, string>) // extra fluff för typescript
+      );
 
       // om det fanns nåt fel
-      setErrors(newErrors);
+
       console.log("Formuläret innehåller fel, avbryter!");
       return;
-    } else {
-      console.log("Formuläret är korrekt! Visar bekräftelse... ");
+    }
 
-      // visar en bekräftelse och omdirigerar användaren till nästa sida efter 2 sek
+    try {
+      const formDataObj = new FormData();
+      Object.entries(formData).forEach(([key, value]) =>
+        formDataObj.append(key, value)
+      );
+
+      const userResponse = await createUser(formDataObj);
+      if (!userResponse.success) {
+        throw new Error("User creation failed");
+      }
+
+      const order = await createOrder(userResponse.user.id, cartItems);
+
       setOpen(true);
       setTimeout(() => {
-        console.log("Navigerar till /confirmation...");
-
-        router.push(`/confirmation/${orderNr}`);
+        router.push(`/confirmation/${order.orderNr}`);
       }, 2000);
+
       clearCart();
-      //tömma formuläret
       setFormData({
         name: "",
         address: "",
@@ -99,6 +117,8 @@ export default function CustomerForm() {
         email: "",
         phone: "",
       });
+    } catch (error) {
+      console.error("Error creating user:", error);
     }
   };
 
@@ -151,7 +171,7 @@ export default function CustomerForm() {
               helperText={
                 errors.name ? (
                   <FormHelperText data-cy="customer-name-error">
-                    {"Du måste fylla i ditt namn"}
+                    {errors.name}
                   </FormHelperText>
                 ) : null
               }
@@ -166,7 +186,7 @@ export default function CustomerForm() {
                 color: "text.primary",
               }}
             >
-              Adress
+              Leveransadress
             </FormLabel>
             <TextField
               size="small"
@@ -178,7 +198,6 @@ export default function CustomerForm() {
               fullWidth
               id="address"
               name="address"
-              placeholder="Leveransadress"
               value={formData.address}
               onChange={handleChange}
               autoComplete="street-address"
@@ -186,7 +205,7 @@ export default function CustomerForm() {
               helperText={
                 errors.address ? (
                   <FormHelperText data-cy="customer-address-error">
-                    {"Du måste fylla i en adress"}
+                    {errors.address}
                   </FormHelperText>
                 ) : null
               }
@@ -220,7 +239,6 @@ export default function CustomerForm() {
                 }}
                 id="zipcode"
                 name="zipcode"
-                placeholder="Postkod"
                 value={formData.zipcode}
                 onChange={handleChange}
                 autoComplete="postal-code"
@@ -228,7 +246,7 @@ export default function CustomerForm() {
                 helperText={
                   errors.zipcode ? (
                     <FormHelperText data-cy="customer-zipcode-error">
-                      {"Du måste fylla i en postkod"}
+                      {errors.zipcode}
                     </FormHelperText>
                   ) : null
                 }
@@ -254,7 +272,6 @@ export default function CustomerForm() {
                 }}
                 id="city"
                 name="city"
-                placeholder="Stad"
                 value={formData.city}
                 onChange={handleChange}
                 autoComplete="address-level2"
@@ -262,7 +279,7 @@ export default function CustomerForm() {
                 helperText={
                   errors.city ? (
                     <FormHelperText data-cy="customer-city-error">
-                      {"Du måste fylla i en stad"}
+                      {errors.city}
                     </FormHelperText>
                   ) : null
                 }
@@ -297,7 +314,6 @@ export default function CustomerForm() {
               fullWidth
               id="email"
               name="email"
-              placeholder="E-post"
               value={formData.email}
               onChange={handleChange}
               autoComplete="email"
@@ -305,7 +321,7 @@ export default function CustomerForm() {
               helperText={
                 errors.email ? (
                   <FormHelperText data-cy="customer-email-error">
-                    {"Du måste fylla i en e-post adress"}
+                    {errors.email}
                   </FormHelperText>
                 ) : null
               }
@@ -331,7 +347,6 @@ export default function CustomerForm() {
               fullWidth
               id="phone"
               name="phone"
-              placeholder="Telefonnummer"
               value={formData.phone}
               onChange={handleChange}
               autoComplete="tel"
@@ -339,7 +354,7 @@ export default function CustomerForm() {
               helperText={
                 errors.phone ? (
                   <FormHelperText data-cy="customer-phone-error">
-                    {"Du måste fylla i ett telefonnummer"}
+                    {errors.phone}
                   </FormHelperText>
                 ) : null
               }
