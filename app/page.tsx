@@ -2,7 +2,7 @@ import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
-import Hero from "./hero/page";
+import Hero from "./components/hero";
 import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
 export default async function Home() {

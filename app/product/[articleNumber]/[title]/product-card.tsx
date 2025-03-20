@@ -62,6 +62,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           border: "2px solid",
           borderColor: "text.secondary",
           borderRadius: "0.25rem",
+          // backgroundColor: "#e5ded5",
           mx: "auto",
           mt: "1rem",
           mb: "1rem",
@@ -95,11 +96,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
         </Typography>
         <CardActions>
           <Box sx={{ mx: "auto" }}>
-            <AddToCartButton
-              label="Köp"
-              data-cy="product-buy-button"
-              product={product}
-            ></AddToCartButton>
+            <AddToCartButton label="Köp" product={product}></AddToCartButton>
           </Box>
         </CardActions>
       </CardContent>

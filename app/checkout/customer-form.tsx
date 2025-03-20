@@ -364,7 +364,15 @@ export default function CustomerForm() {
             type="submit"
             variant="contained"
             onClick={handleSubmit}
-            sx={{ color: "text.primary", mt: 3, width: 200, mx: "auto", py: 2 }}
+            sx={{
+              bgcolor: "primary.main",
+              color: "text.primary",
+              "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+              mt: 3,
+              width: 200,
+              mx: "auto",
+              py: 2,
+            }}
           >
             Fortsätt till betalning
           </Button>
