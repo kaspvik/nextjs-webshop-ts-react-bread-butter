@@ -31,7 +31,7 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // läser in cartItems från LocalStorage vid varje omladdning av sidan
   useEffect(() => {
-    const cart = localStorage.getItem("cartItems");
+    const cart = localStorage.getItem("cart");
     if (cart) {
       setCartItems(JSON.parse(cart));
     }
@@ -39,7 +39,7 @@ export default function CartProvider(props: PropsWithChildren) {
 
   // Uppdatera localStorage varje gång cartItems ändras (t.ex läggs till i cart, tas bort från cart etc)
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   const showToast = (message: string) => {
@@ -73,24 +73,7 @@ export default function CartProvider(props: PropsWithChildren) {
 
     // Sätt toast och visa
     showToast("Produkten har lagts till i kundvagnen!");
-
-    // Försäkra dig om att toasten syns först innan cartCount uppdateras (lite delay om det behövs)
-    setTimeout(() => {
-      setToastMessage(null); // Ta bort toasten efter kort tid
-    }, 2000);
   };
-
-  useEffect(() => {
-    if (toastMessage) {
-      console.log("Toast message is shown:", toastMessage); // Debugging line
-
-      const toastTimer = setTimeout(() => {
-        setToastMessage(null);
-      }, 2000);
-
-      return () => clearTimeout(toastTimer);
-    }
-  }, [toastMessage]);
 
   const removeFromCart = (id: string) => {
     setCartItems((prevCart) =>
@@ -120,15 +103,11 @@ export default function CartProvider(props: PropsWithChildren) {
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem("cartItems");
+    localStorage.removeItem("cart");
   };
 
   //total items in cart
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
-
-  useEffect(() => {
-    console.log("cartCount updated:", cartCount);
-  }, [cartCount]); // Körs varje gång cartCount ändras
 
   //total price
   const totalSum = cartItems.reduce(
@@ -154,7 +133,6 @@ export default function CartProvider(props: PropsWithChildren) {
         <Snackbar
           open
           autoHideDuration={2000}
-          onClose={() => setToastMessage(null)}
           anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
           sx={{
             width: "auto",
@@ -164,7 +142,6 @@ export default function CartProvider(props: PropsWithChildren) {
           }}
         >
           <Alert
-            onClose={() => setToastMessage(null)}
             severity="success"
             variant="outlined"
             sx={{
