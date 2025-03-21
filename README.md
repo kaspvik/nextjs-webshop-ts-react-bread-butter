@@ -30,6 +30,10 @@ Using Zod validation on customer delivery form; products overview and continue t
 
 Confirmation page with delivery- and order details
 
+<img width="500" alt="admin" src="https://github.com/user-attachments/assets/aecc0e54-737a-4059-8485-a8aee499eacf" />
+
+Admin page where you can edit, add and delete products from the webshop.
+
 ## Run and test the project
 
 #### Install 
