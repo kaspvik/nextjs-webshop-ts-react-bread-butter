@@ -97,7 +97,7 @@ We haven't deployed our project on Vercel yet because the sqlight database is no
 **Home**
 
 - [x] Ska ha en övergripande layout med header, main & footer.
-- [x] Startsidan ska lista samtliga produkter.
+- [x] Startsidan ska lista samtliga produkter..
 - [x] Det ska gå att lägga till produkter i kundvagnen (header + toast).
 - [x] Det ska gå att klicka på en produkt och komma till en detaljsida.
 - [x] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
