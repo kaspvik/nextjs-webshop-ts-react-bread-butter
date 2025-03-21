@@ -35,7 +35,7 @@ const Hero = () => {
         }}
       >
         <Image
-          src="/images/hero3.jpg"
+          src="/images/hero.jpg"
           alt="Hero image"
           priority={true} // Viktig bild, Next.js optimerar laddning
           quality={90} // Förbättrar bildkvaliteten
