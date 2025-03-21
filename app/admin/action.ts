@@ -3,13 +3,14 @@
 import { CartItem } from "@/data";
 import { db } from "@/prisma/db";
 import { Prisma } from "@prisma/client";
+import { customAlphabet } from "nanoid";
 import { revalidatePath } from "next/cache";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
-  //slumppad artikelnummer här
+  const nanoid = customAlphabet("1234567890", 4);
+  product.articleNumber = nanoid();
   await db.product.create({ data: product });
   revalidatePath("/admin");
-  // redirect("/admin");
 }
 
 export async function deleteProduct(id: string) {
@@ -26,7 +27,6 @@ export async function updateProduct(
     data,
   });
   revalidatePath("/admin");
-  // redirect("/admin");
 }
 
 export async function createOrder(userId: number, cartItems: CartItem[]) {

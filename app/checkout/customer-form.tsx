@@ -106,7 +106,7 @@ export default function CustomerForm() {
       setOpen(true);
       setTimeout(() => {
         router.push(`/confirmation/${order.orderNr}`);
-      }, 2000);
+      }, 1000);
 
       clearCart();
       setFormData({
