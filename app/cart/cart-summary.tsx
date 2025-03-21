@@ -44,6 +44,7 @@ export default function CartSummary() {
               padding: "6px 16px",
               border: "1px solid #9C8173",
               "&:hover": { backgroundColor: "#E8DACD", color: "text.primary" },
+              mb: { xs: 1, sm: 8 },
             }}
           >
             FORTSÄTT HANDLA
@@ -58,6 +59,7 @@ export default function CartSummary() {
               bgcolor: "primary.main",
               color: "text.primary",
               "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+              mb: { xs: 8, sm: 8 },
             }}
           >
             FORTSÄTT TILL KASSAN
