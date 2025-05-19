@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -21,30 +21,30 @@ model Product {
 }
 
 model Order {
-  id String @id @default(cuid())
+  id      String      @id @default(cuid())
   orderNr String?
-  userId Int?
-  user User? @relation(fields: [userId], references: [id])
-  items OrderItem[]
+  userId  Int?
+  user    User?       @relation(fields: [userId], references: [id])
+  items   OrderItem[]
 }
 
 model OrderItem {
-  id String @id @default(cuid())
-  image String
-  title String
-  price Float
+  id       String @id @default(cuid())
+  image    String
+  title    String
+  price    Float
   quantity Int
-  orderId String
-  order Order @relation(fields: [orderId], references: [id])
+  orderId  String
+  order    Order  @relation(fields: [orderId], references: [id])
 }
 
 model User {
-  id      Int    @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   name    String
   address String
   zipcode String
   city    String
   email   String
   phone   String
-  orders Order[]
+  orders  Order[]
 }
