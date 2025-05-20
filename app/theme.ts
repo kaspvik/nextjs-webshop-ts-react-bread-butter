@@ -4,24 +4,24 @@ import { createTheme } from "@mui/material";
 const theme = createTheme({
   typography: {
     h2: {
-      fontFamily: "var(--font-roboto)",
+      fontFamily: "var(--font-tomorrow)",
     },
     h1: {
       fontSize: 32,
-      fontFamily: "var(--font-lobster)",
+      fontFamily: "var(--font-monoton)",
     },
   },
   palette: {
     primary: {
-      main: "#BA9E8F",
+      main: "#f2f2f2",
     },
     background: {
-      default: "#A0A596",
+      default: "#C8C8C8",
       paper: "#FAF2E9",
     },
     text: {
-      primary: "#3E291E",
-      secondary: "#9C8173",
+      primary: "#1A535C",
+      secondary: "#000000",
     },
   },
   components: {
