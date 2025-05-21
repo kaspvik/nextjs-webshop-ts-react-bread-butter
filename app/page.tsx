@@ -28,7 +28,6 @@ export default async function Home() {
           component="main"
           sx={{
             flexGrow: 1,
-
             padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
             bgcolor: "background.default", //Funktion för att hämta våra färger från theme.
             margin: "2rem 0",

@@ -41,9 +41,7 @@ export default async function ProductPage({ params }: Props) {
         component="main"
         sx={{
           padding: 4,
-          bgcolor: "background.paper",
-          border: "2px solid #9C8173",
-          borderRadius: "0.5rem",
+          bgcolor: "",
           margin: "2rem 0",
           width: "100%",
           justifyContent: "center",
