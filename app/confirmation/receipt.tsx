@@ -43,18 +43,17 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
       <Typography
         variant="h2"
         component="p"
-        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}
-      >
-        Din beställning
+        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}>
+        Your order:
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="order-overview">
           <TableHead>
             <TableRow>
-              <StyledTableCell>Produkt</StyledTableCell>
-              <StyledTableCell align="right">Antal</StyledTableCell>
-              <StyledTableCell align="right">Pris</StyledTableCell>
-              <StyledTableCell align="right">Summa</StyledTableCell>
+              <StyledTableCell>Product</StyledTableCell>
+              <StyledTableCell align="right">Number</StyledTableCell>
+              <StyledTableCell align="right">Price</StyledTableCell>
+              <StyledTableCell align="right">Amount</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -68,8 +67,7 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
-                  }}
-                >
+                  }}>
                   <img
                     src={item.image}
                     alt={item.title}
@@ -90,7 +88,7 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
             ))}
             <StyledTableRow>
               <StyledTableCell colSpan={3} align="right">
-                <strong>Totalt</strong>
+                <strong>Total</strong>
               </StyledTableCell>
               <StyledTableCell align="right">
                 <strong>{totalSum.toFixed(2)} kr</strong>

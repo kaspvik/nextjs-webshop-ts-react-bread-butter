@@ -128,7 +128,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       },
     }}
       >
-      Update
+      Update:
       </Button>
         </Box>
 
