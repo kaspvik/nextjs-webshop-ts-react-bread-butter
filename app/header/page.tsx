@@ -5,6 +5,7 @@ import { AppBar, Box, IconButton, Toolbar, Typography } from "@mui/material";
 
 import Link from "next/link";
 import CartIconButton from "./cart-icon-button";
+import Nav from "./nav";
 
 const Header = () => {
   return (
@@ -53,6 +54,7 @@ const Header = () => {
             />
           </IconButton>
           <CartIconButton />
+          <Nav />
         </Box>
       </Toolbar>
     </AppBar>
