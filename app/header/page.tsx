@@ -23,7 +23,7 @@ const Header = () => {
             textDecoration: "none",
             textShadow: "3px 3px 6px rgba(255, 245, 203, 0.5)",
             color: "text.primary",
-            fontSize: { sx: 30, sm: 45, md: 60 },
+            fontSize: { sx: 30, sm: 40, md: 60 },
           }}
           component={Link}
           href="/">
