@@ -34,7 +34,7 @@ export default function Footer() {
           color="text.primary"
           paddingBottom={5}
           gutterBottom>
-          Kontakta Oss
+          Contact Us
         </Typography>
 
         <Grid
@@ -55,9 +55,9 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h5">Hitta hit:</Typography>
+            <Typography variant="h5">Find us:</Typography>
             <Typography variant="h6">
-              Brödbakargatan 4, 444 44 Brödinge
+              Vinylgatan 12, 414 66 Gothenburg
             </Typography>
           </Grid>
 
@@ -70,8 +70,8 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h5">Öppettider:</Typography>
-            <Typography variant="h6">Mon - Sön: 07:00 - 16:00</Typography>
+            <Typography variant="h5">Open Hours:</Typography>
+            <Typography variant="h6">Mon - Sun: 07:00 - 16:00</Typography>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -84,7 +84,7 @@ export default function Footer() {
               }}
             />
             <Typography variant="h5">Email:</Typography>
-            <Typography variant="h6">info@bread&butter.com</Typography>
+            <Typography variant="h6">info@surf&sound.com</Typography>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -96,7 +96,7 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h5">Telefon:</Typography>
+            <Typography variant="h5">Telephone:</Typography>
             <Typography variant="h6">031-44 44 44</Typography>
           </Grid>
         </Grid>
