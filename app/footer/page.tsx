@@ -27,15 +27,13 @@ export default function Footer() {
         px: 2,
         height: "auto",
         boxShadow: "0px -5px 10px rgba(0, 0, 0, 0.15)",
-      }}
-    >
+      }}>
       <Box id="contact" sx={{ maxWidth: 900, mx: "auto", textAlign: "center" }}>
         <Typography
-          variant="h4"
+          variant="h3"
           color="text.primary"
           paddingBottom={5}
-          gutterBottom
-        >
+          gutterBottom>
           Kontakta Oss
         </Typography>
 
@@ -47,8 +45,7 @@ export default function Footer() {
             display: "flex",
             flexWrap: "wrap",
             textAlign: "center",
-          }}
-        >
+          }}>
           <Grid item xs={12} sm={6} md={3}>
             <LocationOn
               sx={{
@@ -58,8 +55,8 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h6">Hitta hit:</Typography>
-            <Typography variant="body2">
+            <Typography variant="h5">Hitta hit:</Typography>
+            <Typography variant="h6">
               Brödbakargatan 4, 444 44 Brödinge
             </Typography>
           </Grid>
@@ -73,11 +70,8 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h6">Öppettider:</Typography>
-            <Typography variant="body2">
-              <b>Bread&Butter</b> <br />
-              Mon - Sön: 07:00 - 16:00 <br />
-            </Typography>
+            <Typography variant="h5">Öppettider:</Typography>
+            <Typography variant="h6">Mon - Sön: 07:00 - 16:00</Typography>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -89,8 +83,8 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h6">Email:</Typography>
-            <Typography variant="body2">info@bread&butter.com</Typography>
+            <Typography variant="h5">Email:</Typography>
+            <Typography variant="h6">info@bread&butter.com</Typography>
           </Grid>
 
           <Grid item xs={12} sm={6} md={3}>
@@ -102,8 +96,8 @@ export default function Footer() {
                 "&:hover": { transform: "scale(1.5)" },
               }}
             />
-            <Typography variant="h6">Telefon:</Typography>
-            <Typography variant="body2">031-44 44 44</Typography>
+            <Typography variant="h5">Telefon:</Typography>
+            <Typography variant="h6">031-44 44 44</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -117,8 +111,7 @@ export default function Footer() {
           justifyContent: "center",
           gap: 2,
           paddingTop: 2,
-        }}
-      >
+        }}>
         <IconButton
           component={Link}
           href="#"
@@ -128,8 +121,7 @@ export default function Footer() {
           sx={{
             transition: "transform 0.3s",
             "&:hover": { transform: "scale(1.5)", color: "#1877f2" },
-          }}
-        >
+          }}>
           <Facebook sx={{ fontSize: 30 }} />
         </IconButton>
 
@@ -142,8 +134,7 @@ export default function Footer() {
           sx={{
             transition: "transform 0.3s",
             "&:hover": { transform: "scale(1.5)", color: "black" },
-          }}
-        >
+          }}>
           <GitHub sx={{ fontSize: 30 }} />
         </IconButton>
 
@@ -156,8 +147,7 @@ export default function Footer() {
           sx={{
             transition: "transform 0.3s",
             "&:hover": { transform: "scale(1.5)", color: "#0077b5" },
-          }}
-        >
+          }}>
           <LinkedIn sx={{ fontSize: 30 }} />
         </IconButton>
 
@@ -170,8 +160,7 @@ export default function Footer() {
           sx={{
             transition: "transform 0.3s",
             "&:hover": { transform: "scale(1.5)", color: "#e11d74" },
-          }}
-        >
+          }}>
           <Instagram sx={{ fontSize: 30 }} />
         </IconButton>
       </Box>
