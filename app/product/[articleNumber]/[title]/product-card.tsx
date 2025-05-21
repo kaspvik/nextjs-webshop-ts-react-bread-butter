@@ -14,12 +14,10 @@ type ProductCardProps = {
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
-      data-cy="product"
       sx={{
         width: "100%",
         maxWidth: 320,
         minHeight: 490,
-        backgroundColor: "background.paper",
         boxShadow: "none",
         display: "grid",
         position: "relative",
@@ -28,20 +26,6 @@ export default async function ProductCard({ product }: ProductCardProps) {
           boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
         },
       }}>
-      <Box
-        sx={{
-          position: "absolute",
-          top: "46%",
-          left: "50%",
-          width: "200px",
-          height: "200px",
-          backgroundColor: "background.default",
-          transform: "translate(-50%, -110%)",
-          borderRadius: "0.25rem",
-          zIndex: 0,
-        }}
-      />
-
       <CardMedia
         component="img"
         sx={{
