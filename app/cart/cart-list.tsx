@@ -14,15 +14,10 @@ export default function CartList() {
         overflowY: { xs: "visible", sm: "auto" },
         maxHeight: { xs: "none", sm: "100%" },
         width: "100%",
-        maxWidth: { xs: "300px", sm: "100%" },      
-      }}
-    >
+        maxWidth: { xs: "300px", sm: "100%" },
+      }}>
       {cartItems.map((cartItem) => (
-        <CartItemComponent
-          data-cy="cart-item"
-          key={cartItem.id}
-          cartItem={cartItem}
-        />
+        <CartItemComponent key={cartItem.id} cartItem={cartItem} />
       ))}
     </Box>
   );

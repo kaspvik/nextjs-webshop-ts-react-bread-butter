@@ -81,7 +81,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
         </Typography>
         <CardActions>
           <Box sx={{ mx: "auto" }}>
-            <AddToCartButton label="Köp" product={product} />
+            <AddToCartButton label="Buy" product={product} />
           </Box>
         </CardActions>
       </CardContent>

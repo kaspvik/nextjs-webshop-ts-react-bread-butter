@@ -14,8 +14,7 @@ const GoBackButton = () => {
         top: { xs: "-12px", sm: "-15px", md: "-15px", lg: "-12px" },
         left: { xs: "5px", sm: "15px", md: "15px", lg: "15px" },
         zIndex: 100,
-      }}
-    >
+      }}>
       {" "}
       <ArrowBackIcon
         sx={{
@@ -26,10 +25,9 @@ const GoBackButton = () => {
       <Typography
         sx={{
           color: "text.primary",
-          fontFamily: "var(--font-roboto)",
-        }}
-      >
-        Tillbaka
+          fontFamily: "var(--font-tomorrow)",
+        }}>
+        Go back
       </Typography>
     </IconButton>
   );

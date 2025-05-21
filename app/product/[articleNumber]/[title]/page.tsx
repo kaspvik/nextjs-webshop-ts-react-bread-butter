@@ -22,7 +22,7 @@ export default async function ProductPage({ params }: Props) {
   });
 
   if (!product) {
-    return <h2>Produkten hittades inte</h2>;
+    return <h2>Product not found</h2>;
   }
 
   return (
@@ -81,7 +81,7 @@ export default async function ProductPage({ params }: Props) {
             {product.title}
           </Typography>
           <Typography variant="h5" sx={{ mt: 2 }}>
-            Pris: {product.price} kr
+            Price: {product.price} kr
           </Typography>
 
           <Typography variant="h6" sx={{ mt: 2 }}>
