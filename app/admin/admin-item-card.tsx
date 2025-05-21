@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Product } from "@/data";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 import EditButton from "./buttons/edit-admin-button";
 import DeleteButton from "./delete-product-item";
 
@@ -27,9 +27,9 @@ export default function AdminItem({ product }: ProductCardProps) {
 
     try {
       localStorage.setItem(`product-stock-${product.id}`, stock.toString());
-      alert("Lager uppdaterat!");
+      alert("Stock updated!");
     } catch (error) {
-      alert("Något gick fel vid uppdatering");
+      alert("Something went wrong during the update. Please try again.");
     }
   };
 
@@ -37,6 +37,7 @@ export default function AdminItem({ product }: ProductCardProps) {
 
   return (
     <Container
+      data-cy="product"
       key={product.id}
       sx={{
         display: "flex",
@@ -50,7 +51,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         gap: 1,
         flexWrap: { xs: "wrap", md: "nowrap" },
       }}
-      >
+    >
       <Box
         sx={{
           width: { xs: "100px", md: "150px" },
@@ -72,7 +73,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         />
       </Box>
 
-<Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
+      <Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
         <Typography variant="h6" data-cy="product-title">
           {product.title}
         </Typography>
@@ -84,13 +85,13 @@ export default function AdminItem({ product }: ProductCardProps) {
           </Typography>
         </Box>
 
-        <Typography variant="body2">Vikt: {product.weight} g</Typography>
+        <Typography variant="body2">Weight: {product.weight} g</Typography>
         <Typography variant="body2" data-cy="product-price">
-          {product.price} kr
+          {product.price} sek
         </Typography>
 
         <Typography variant="body2" sx={{ marginTop: 1 }}>
-          I lager: {stock} st
+          In stock: {stock} pcs
         </Typography>
 
         <Box
@@ -112,27 +113,33 @@ export default function AdminItem({ product }: ProductCardProps) {
               border: "1px solid #ccc",
             }}
           />
-          <button
-            onClick={updateStock}
-            style={{
-              padding: "6px 12px",
-              backgroundColor: "#1976d2",
-              color: "white",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer",
-            }}
-          >
-            Update:
-          </button>
+          <Button
+          onClick={updateStock}
+          sx={{
+            padding: "2px 12px",
+            backgroundColor: "#3E291E",
+            color: "white",
+            borderRadius: "4px",
+            textTransform: "none",
+              transition: "transform 0.2s ease-in-out",
+              '&:hover': {
+              backgroundColor: "#2b1f16",
+            transform: "scale(1.05)",
+      },
+    }}
+      >
+      Update:
+      </Button>
         </Box>
 
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
           Description:
         </Typography>
         <Typography
-          variant="h6"
-          sx={{ borderColor: "text.secondary", borderRadius: "4px" }}>
+          variant="body2"
+          sx={{ borderColor: "text.secondary", borderRadius: "4px" }}
+          data-cy="product-description"
+        >
           {product.description}
         </Typography>
       </Box>
@@ -144,7 +151,8 @@ export default function AdminItem({ product }: ProductCardProps) {
           alignSelf: { xs: "center", sm: "flex-start" },
           justifyContent: "flex-start",
           gap: 2,
-        }}>
+        }}
+      >
         <EditButton product={product} />
         <DeleteButton product={product} />
       </Box>

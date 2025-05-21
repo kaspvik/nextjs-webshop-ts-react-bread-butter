@@ -23,9 +23,9 @@ export const products: Product[] = [
     id: "1234",
     articleNumber: "1234",
     image: "/images/rustiktragbrod.png",
-    title: "Rustikt rågbröd",
+    title: "Rustic rye bread.",
     description:
-      "Ett rustikt rågbröd som påminner om det farmor brukade baka. Bakat med surdeg och en lång jästid för en djupare smak och en härligt seg och knaprig skorpa.",
+      "A rustic rye bread reminiscent of the kind grandma used to bake. Made with sourdough and a long fermentation time for a deeper flavor and a wonderfully chewy and crunchy crust.",
     price: 50,
     weight: 700,
   },
@@ -33,9 +33,9 @@ export const products: Product[] = [
     id: "1356",
     articleNumber: "1356",
     image: "/images/brytbrod.png",
-    title: "Brytbröd",
+    title: "Tear-and-share bread",
     description:
-      "Ett litet brytbröd med olivolja, perfekt att dela vid middagsbordet. Den luftiga inkråmet och den gyllene skorpan gör det till en favorit till soppor och sallader.",
+      "A small pull-apart bread with olive oil, perfect for sharing at the dinner table. Its airy crumb and golden crust make it a favorite alongside soups and salads.",
     price: 40,
     weight: 500,
   },
@@ -45,7 +45,7 @@ export const products: Product[] = [
     image: "/images/levain.png",
     title: "Levain",
     description:
-      "Klassisk surdegs-Levain, precis så som du vill ha det – segt, saftigt och smakrikt. Perfekt till både frukost och som bas för en rustik smörgås med pålägg.",
+      "Classic sourdough Levain, just the way you like it — chewy, moist, and full of flavor. Perfect for breakfast or as a base for a rustic sandwich with your favorite toppings.",
     price: 65,
     weight: 600,
   },
@@ -53,9 +53,9 @@ export const products: Product[] = [
     id: "2346",
     articleNumber: "2346",
     image: "/images/litenlevain.png",
-    title: "Liten Levain",
+    title: "Small Levain",
     description:
-      "Klassisk surdegs-Levain, den lite mindre modellen som passar perfekt för en eller två personer. Samma fantastiska smak och textur, men i ett mer behändigt format.",
+      "Classic sourdough Levain, the slightly smaller version perfect for one or two people. Same fantastic flavor and texture, but in a more convenient size.",
     price: 40,
     weight: 400,
   },
@@ -63,9 +63,9 @@ export const products: Product[] = [
     id: "3456",
     articleNumber: "3456",
     image: "/images/surdegslimpavete.png",
-    title: "Surdegslimpa Vete",
+    title: "Sourdough Wheat Loaf",
     description:
-      "En saftig surdegslimpa bakad på vetemjöl, med en knaprig yta och en mild, nötig smak. Perfekt att skiva tunt och rosta eller att njuta av som det är med smör och ost.",
+      "A moist sourdough loaf made with wheat flour, featuring a crispy crust and a mild, nutty flavor. Perfect for slicing thin and toasting or enjoying as is with butter and cheese.",
     price: 60,
     weight: 620,
   },
@@ -74,9 +74,9 @@ export const products: Product[] = [
     articleNumber: "4567",
     image:
       "https://images.pexels.com/photos/2067430/pexels-photo-2067430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    title: "Surdegsbaguette",
+    title: "Sourdough Baguette",
     description:
-      "Oui oui, den är inte bara baguette, den är sur också! En krispig och luftig baguette med lång jästid som ger en djup och balanserad smak.",
+      "Oui oui, it’s not just a baguette — it’s sour too! A crispy and airy baguette with a long fermentation time that delivers a deep and balanced flavor.",
     price: 50,
     weight: 550,
   },
@@ -85,9 +85,9 @@ export const products: Product[] = [
     articleNumber: "5678",
     image:
       "https://images.pexels.com/photos/7693917/pexels-photo-7693917.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Frukostkombo",
+    title: "Breakfast combo",
     description:
-      "Den ena gillar ljust, den andra mörkt... Här får du två goda fröbröd som passar perfekt till frukostbordet. Ett balanserat val för den som vill ha variation på morgonen.",
+      "One prefers light, the other dark... Here you get two tasty seed breads that are perfect for the breakfast table. A balanced choice for those who want variety in the morning.",
     price: 100,
     weight: 1000,
   },
@@ -96,9 +96,9 @@ export const products: Product[] = [
     articleNumber: "6789",
     image:
       "https://images.pexels.com/photos/7175448/pexels-photo-7175448.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Valnötsbröd",
+    title: "Walnut Bread",
     description:
-      "Vårt prisvinnande valnötsbröd låter det vattnas i munnen! Fullproppat med rostade valnötter som ger en nötig, fyllig smak och en härligt krispig skorpa.",
+      "Our award-winning walnut bread will make your mouth water! Packed with roasted walnuts that give a nutty, rich flavor and a wonderfully crispy crust.",
     price: 65,
     weight: 650,
   },
@@ -107,9 +107,9 @@ export const products: Product[] = [
     articleNumber: "1357",
     image:
       "https://images.pexels.com/photos/31009555/pexels-photo-31009555/free-photo-of-rustikt-brod-med-keramiska-burkar-pa-traskiva.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    title: "Surdegsfralla",
+    title: "Sourdough roll",
     description:
-      "En vanlig j*vla fralla, fast bättre, såklart. Luftig, krispig och med precis lagom tuggmotstånd – perfekt med smör och ost eller som bas till en matig macka.",
+      "Just a regular damn roll, but better, of course. Airy, crispy, and with just the right chew — perfect with butter and cheese or as the base for a hearty sandwich.",
     price: 45,
     weight: 450,
   },

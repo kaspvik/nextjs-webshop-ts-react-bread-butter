@@ -33,7 +33,7 @@ export default function AddProductButton() {
             "&:hover": { transform: "scale(1.5)", color: "#9C8173" },
           }}/>
         </Fab>
-        <Typography>Lägg till produkt</Typography>
+        <Typography>Add product</Typography>
       </Container>
     </Link>
   );
