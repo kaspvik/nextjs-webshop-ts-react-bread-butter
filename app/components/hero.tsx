@@ -41,8 +41,8 @@ const Hero = () => {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          width: 500,
-          height: 500,
+          width: "clamp(400px, 40vw, 500px)",
+          height: "clamp(400px, 40vw, 500px)",
         }}>
         <Box
           sx={{
@@ -59,8 +59,8 @@ const Hero = () => {
           <Image
             src="/images/logo.png"
             alt="CD"
-            layout="fill"
-            objectFit="contain"
+            fill
+            style={{ objectFit: "contain" }}
           />
         </Box>
       </Box>
