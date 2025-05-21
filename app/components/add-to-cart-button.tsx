@@ -28,8 +28,8 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
       size="large"
       sx={{
         mt: 3,
-        bgcolor: "primary.main",
-        color: "text.primary",
+        bgcolor: "#4ECDC4",
+        color: "#ffffff",
         fontFamily: "var(--font-tomorrow)",
         "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
       }}>

@@ -37,10 +37,10 @@ export default function CartSummary() {
         <Link href="/">
           <Button
             sx={{
-              backgroundColor: "#FAF2E9",
-              color: "#9C8173",
+              backgroundColor: "#ffffff",
+              color: "#000000",
               padding: "6px 16px",
-              border: "1px solid #9C8173",
+              border: "1px solid #000000",
               "&:hover": { backgroundColor: "#E8DACD", color: "text.primary" },
               mb: { xs: 1, sm: 8 },
             }}>
@@ -53,8 +53,8 @@ export default function CartSummary() {
             variant="contained"
             color="primary"
             sx={{
-              bgcolor: "primary.main",
-              color: "text.primary",
+              bgcolor: "#4ECDC4",
+              color: "#000000",
               "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
               mb: { xs: 8, sm: 8 },
             }}>

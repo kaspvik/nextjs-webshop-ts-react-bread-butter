@@ -33,8 +33,7 @@ export default function MyDrawer() {
           alignItems: "center",
           justifyContent: "center",
         }}
-        data-cy="open-cart-sidebar"
-      >
+        data-cy="open-cart-sidebar">
         <CartBadge />
       </IconButton>
 
@@ -60,18 +59,16 @@ export default function MyDrawer() {
           maxWidth: 320,
           maxHeight: "80vh",
           overflowY: "auto",
-        }}
-      >
+        }}>
         <Box
           sx={{
             width: "100%",
             paddingY: 3,
-            backgroundColor: "background.paper",
+            backgroundColor: "primary.dark",
             display: "flex",
             flexDirection: "column",
             gap: 2,
-          }}
-        >
+          }}>
           {/* Close button */}
           <IconButton
             onClick={toggleDrawer(false)}
@@ -80,8 +77,7 @@ export default function MyDrawer() {
               top: 10,
               right: 10,
               color: "text.primary",
-            }}
-          >
+            }}>
             <Close />
           </IconButton>
 
@@ -91,9 +87,8 @@ export default function MyDrawer() {
               marginBottom: 2,
               fontFamily: "var(--font-lobster)",
               paddingLeft: 3,
-            }}
-          >
-            Kundvagn
+            }}>
+            Shopping cart
           </Typography>
 
           <Box
@@ -102,8 +97,7 @@ export default function MyDrawer() {
               flexDirection: "column",
               gap: 2,
               paddingLeft: 2,
-            }}
-          >
+            }}>
             <CartList />
             <Divider sx={{ marginY: 2 }} />
             <CartSummary />

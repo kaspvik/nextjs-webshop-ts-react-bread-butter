@@ -14,8 +14,7 @@ const Header = () => {
         padding: { xs: 2, sm: 3, md: 4 },
         bgcolor: "background.default",
         zIndex: 1100,
-      }}
-    >
+      }}>
       <Toolbar>
         <Typography
           variant="h1"
@@ -27,9 +26,8 @@ const Header = () => {
             fontSize: { sx: 30, sm: 45, md: 60 },
           }}
           component={Link}
-          href="/"
-        >
-          Bread&Butter
+          href="/">
+          SURF & SOUND
         </Typography>
         <Box
           sx={{
@@ -37,14 +35,12 @@ const Header = () => {
             justifyContent: "flex-end",
             alignItems: "center",
             gap: 2,
-          }}
-        >
+          }}>
           <IconButton
             data-cy="admin-link"
             color="inherit"
             component={Link}
-            href="/admin"
-          >
+            href="/admin">
             <AccountCircleIcon
               sx={{
                 fontSize: { sx: 20, md: 40 },
