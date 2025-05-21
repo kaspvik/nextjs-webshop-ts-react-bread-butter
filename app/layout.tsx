@@ -1,6 +1,6 @@
 import { Box, CssBaseline, ThemeProvider } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import { Lobster_Two, Roboto } from "next/font/google";
+import { Monoton, Tomorrow } from "next/font/google";
 import type { Metadata } from "next/types";
 import { PropsWithChildren } from "react";
 import Footer from "./footer/page";
@@ -8,31 +8,30 @@ import Header from "./header/page";
 import CartProvider from "./provider";
 import theme from "./theme";
 
-const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
+const tomorrow = Tomorrow({
+  weight: ["500"],
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-roboto",
+  variable: "--font-tomorrow",
 });
-const lobster = Lobster_Two({
-  weight: ["400", "700"],
+const monoton = Monoton({
+  weight: ["400"],
   subsets: ["latin"],
-  variable: "--font-lobster",
+  variable: "--font-monoton",
 });
 
 /* Beskriv din hemsida för sökmotorerna */
 export const metadata: Metadata = {
-  title: "Bread&Butter",
+  title: "Surf&Sound",
   description:
-    "Upptäck vårt breda utbud av ekologiskt bröd bakat med kärlek och noggrant utvalda ingredienser. Från klassiska surdegsbröd till nyskapande smaker - allt vi gör är både hållbart och fantastiskt gott.",
-  keywords:
-    "ekologiskt bröd, hantverksbröd, surdegsbröd, nybakat bröd, hållbar bakning, handgjort bröd, bageri, ekologiskt, brödleverans, naturliga ingredienser",
+    "Welcome to Surf & Sound! Music for the ears - prices for the wallet",
+  keywords: "CD, music, surf, 1992, sounds, nice price, hits",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
   return (
     <html lang="en">
-      <body className={[roboto.variable, lobster.className].join(" ")}>
+      <body className={`${tomorrow.variable} ${monoton.variable}`}>
         <AppRouterCacheProvider>
           <ThemeProvider theme={theme}>
             <CssBaseline />
@@ -42,8 +41,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
                   display: "flex",
                   flexDirection: "column",
                   minHeight: "100vh", // Makes sure page fills screen height
-                }}
-              >
+                }}>
                 <Header />
 
                 <Box component="main" sx={{ flex: "1" }}>
