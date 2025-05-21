@@ -10,7 +10,6 @@ export interface Product {
   description: string;
   price: number;
   weight: number;
-  stock?: number; 
 }
 
 export interface CartItem extends Product {
@@ -113,4 +112,4 @@ export const products: Product[] = [
     price: 45,
     weight: 450,
   },
-]; 
+];
