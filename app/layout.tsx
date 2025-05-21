@@ -9,7 +9,7 @@ import CartProvider from "./provider";
 import theme from "./theme";
 
 const tomorrow = Tomorrow({
-  weight: ["500"],
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
   variable: "--font-tomorrow",

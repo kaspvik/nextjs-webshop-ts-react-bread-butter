@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import ClearRoundedIcon from '@mui/icons-material/ClearRounded';
+import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
 import {
   Box,
   Button,
@@ -54,7 +54,6 @@ export default function ProductForm({ product }: Props) {
     } else {
       await createProduct(data);
       form.reset();
-      
     }
     router.push("/admin");
   };
@@ -73,43 +72,37 @@ export default function ProductForm({ product }: Props) {
           md: 500,
           lg: 600,
         },
-      }}
-      data-cy="product-form"
-    >
-      
-      
+      }}>
       <Typography
-        variant="h1"
+        variant="h4"
         sx={{
           display: "flex",
           justifyContent: "space-between",
           margin: 2,
-        }}
-        >
+        }}>
         <span></span>
-        {isEdit ? "Redigera en produkt" : "Lägg till en produkt"}
+        {isEdit ? "Edit Product" : "Add Product"}
 
         <Link href="/admin/">
-          <IconButton >
-            <ClearRoundedIcon sx={{ fontSize: 30}} />
+          <IconButton>
+            <ClearRoundedIcon sx={{ fontSize: 30 }} />
           </IconButton>
         </Link>
       </Typography>
-        
 
       <FormLabel
         sx={{
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
-        }}
-      >
+          fontFamily: "var(--font-tomorrow)",
+        }}>
         {" "}
-        Bildadress
+        Image URL
       </FormLabel>
 
       <TextField
-        title="Bildadress"
+        title="Image URL"
         margin="normal"
         id="imageURL"
         type="url"
@@ -118,9 +111,7 @@ export default function ProductForm({ product }: Props) {
         slotProps={{ htmlInput: { "data-cy": "product-image" } }}
         error={!!errors.image}
         helperText={
-          errors.image ? (
-            <span data-cy="product-image-error">{"Ange en giltig Url"}</span>
-          ) : null
+          errors.image ? <span>{"Please enter a valid URL"}</span> : null
         }
         {...form.register("image")}
       />
@@ -130,10 +121,10 @@ export default function ProductForm({ product }: Props) {
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
-        }}
-      >
+          fontFamily: "var(--font-tomorrow)",
+        }}>
         {" "}
-        Produktnamn
+        Product Name
       </FormLabel>
 
       <TextField
@@ -146,11 +137,7 @@ export default function ProductForm({ product }: Props) {
         slotProps={{ htmlInput: { "data-cy": "product-title" } }}
         error={!!errors.description}
         helperText={
-          errors.title ? (
-            <span data-cy="product-title-error">
-              {"Produktnamn får inte vara tom"}
-            </span>
-          ) : null
+          errors.title ? <span>{"Product name cannot be empty"}</span> : null
         }
         {...register("title")}
       />
@@ -160,8 +147,8 @@ export default function ProductForm({ product }: Props) {
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
-        }}
-      >
+          fontFamily: "var(--font-tomorrow)",
+        }}>
         {" "}
         Vikt i gram
       </FormLabel>
@@ -181,10 +168,10 @@ export default function ProductForm({ product }: Props) {
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
-        }}
-      >
+          fontFamily: "var(--font-tomorrow)",
+        }}>
         {" "}
-        Pris i kronor
+        Price in SEK
       </FormLabel>
 
       <TextField
@@ -198,9 +185,7 @@ export default function ProductForm({ product }: Props) {
         error={!!errors.description}
         helperText={
           errors.price ? (
-            <span data-cy="product-price-error">
-              {"Du måste skriva in ett pris över 0:-"}
-            </span>
+            <span>{"You must enter a price above 0:-"}</span>
           ) : null
         }
         {...register("price")}
@@ -211,14 +196,14 @@ export default function ProductForm({ product }: Props) {
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
-        }}
-      >
+          fontFamily: "var(--font-tomorrow)",
+        }}>
         {" "}
-        Beskriving
+        Description
       </FormLabel>
 
       <TextField
-        title="Beskrivning"
+        title="Description"
         margin="normal"
         id="Beskrivning"
         type="text"
@@ -228,9 +213,7 @@ export default function ProductForm({ product }: Props) {
         error={!!errors.description}
         helperText={
           errors.description ? (
-            <span data-cy="product-description-error">
-              {"Besrkivningen får inte vara tom"}
-            </span>
+            <span>{"The description cannot be empty."}</span>
           ) : null
         }
         {...register("description")}
@@ -240,20 +223,20 @@ export default function ProductForm({ product }: Props) {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent:"center"
-        }}
-      >
-        
-        <Button sx={{
-          mt: 3,
-          width: 200,
-          height: 50,
-          bgcolor: "primary.main",
-          color: "text.primary",
-          "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
-          }} 
-      type="submit">
-        Spara
+          justifyContent: "center",
+        }}>
+        <Button
+          sx={{
+            mt: 3,
+            width: 200,
+            height: 50,
+            bgcolor: "primary.main",
+            color: "text.primary",
+            fontFamily: "var(--font-tomorrow)",
+            "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+          }}
+          type="submit">
+          Save
         </Button>
       </Box>
     </Box>

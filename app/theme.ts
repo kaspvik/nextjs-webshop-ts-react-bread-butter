@@ -3,12 +3,28 @@ import { createTheme } from "@mui/material";
 
 const theme = createTheme({
   typography: {
-    h2: {
-      fontFamily: "var(--font-tomorrow)",
-    },
     h1: {
       fontSize: 32,
       fontFamily: "var(--font-monoton)",
+    },
+    h2: {
+      fontFamily: "var(--font-tomorrow)",
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: "var(--font-tomorrow)",
+    },
+    h4: {
+      fontFamily: "var(--font-tomorrow)",
+    },
+    h5: {
+      fontFamily: "var(--font-tomorrow)",
+      fontWeight: 600,
+    },
+    h6: {
+      fontFamily: "var(--font-tomorrow)",
+      fontSize: 16,
+      fontWeight: 400,
     },
   },
   palette: {

@@ -1,8 +1,8 @@
 import { Box, Container, Typography } from "@mui/material";
-import CustomerForm from "./customer-form";
-import OrderOverview from "./order-overview";
 import CartList from "../cart/cart-list";
 import GoBackButton from "../components/go-back-button";
+import CustomerForm from "./customer-form";
+import OrderOverview from "./order-overview";
 
 export default function CheckoutPage() {
   return (
@@ -19,18 +19,15 @@ export default function CheckoutPage() {
           border: 2,
           borderRadius: 2,
           borderColor: "text.secondary",
-        }}
-      >
+        }}>
         <Typography
-          variant="h1"
-          sx={{ mt: { xs: 2 }, ml: { xs: 1, sm: 3, md: 6 } }}
-        >
-          Kassa
+          variant="h4"
+          sx={{ mt: { xs: 2 }, ml: { xs: 1, sm: 3, md: 6 } }}>
+          Cart
         </Typography>
 
         <Box
-          sx={{ width: "95%", py: 3, px: { xs: 0, sm: 2, md: 6 }, mx: "auto" }}
-        >
+          sx={{ width: "95%", py: 3, px: { xs: 0, sm: 2, md: 6 }, mx: "auto" }}>
           <CartList />
         </Box>
         <OrderOverview />

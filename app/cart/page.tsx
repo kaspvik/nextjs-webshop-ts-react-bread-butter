@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Link,
-  Typography,
-} from "@mui/material";
-import CartItem from "./cart-item";
+import { Box, Container, Divider, Typography } from "@mui/material";
 import CartList from "./cart-list";
 import CartSummary from "./cart-summary";
 
@@ -19,9 +11,8 @@ export default function CartPage() {
           fontSize: 35,
           paddingLeft: 0,
           paddingTop: 2,
-        }}
-      >
-        Kundvagn
+        }}>
+        Shopping cart
       </Typography>
       <Container
         sx={{
@@ -33,8 +24,7 @@ export default function CartPage() {
           border: { xs: "transparent", sm: "2px solid #9C8173" },
           borderRadius: "0.5rem",
           height: { xs: "auto", sm: "700px" },
-        }}
-      >
+        }}>
         <CartList />
 
         <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -50,8 +40,7 @@ export default function CartPage() {
             flex: { xs: "none", sm: 1 },
             p: 2,
             width: "100%",
-          }}
-        >
+          }}>
           <CartSummary />
         </Box>
       </Container>

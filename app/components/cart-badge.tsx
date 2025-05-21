@@ -5,11 +5,8 @@ import { useCart } from "../provider";
 const CartBadge = () => {
   const { cartCount } = useCart(); // Dynamically get the cart count
 
- 
-
   return (
     <Badge
-      data-cy="cart-items-count-badge"
       badgeContent={cartCount}
       invisible={cartCount === 0}
       sx={{
@@ -23,8 +20,7 @@ const CartBadge = () => {
           right: { xs: 0, sm: 15, md: 20 },
           borderRadius: "50%",
         },
-      }}
-    >
+      }}>
       <ShoppingCartIcon
         sx={{
           fontSize: { xs: 23, sm: 28, md: 40 },

@@ -37,7 +37,6 @@ export default function AdminItem({ product }: ProductCardProps) {
 
   return (
     <Container
-      data-cy="product"
       key={product.id}
       sx={{
         display: "flex",
@@ -51,7 +50,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         gap: 1,
         flexWrap: { xs: "wrap", md: "nowrap" },
       }}
-    >
+      >
       <Box
         sx={{
           width: { xs: "100px", md: "150px" },
@@ -73,7 +72,7 @@ export default function AdminItem({ product }: ProductCardProps) {
         />
       </Box>
 
-      <Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
+<Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
         <Typography variant="h6" data-cy="product-title">
           {product.title}
         </Typography>
@@ -124,18 +123,16 @@ export default function AdminItem({ product }: ProductCardProps) {
               cursor: "pointer",
             }}
           >
-            Uppdatera
+            Update:
           </button>
         </Box>
 
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
-          Beskrivning:
+          Description:
         </Typography>
         <Typography
-          variant="body2"
-          sx={{ borderColor: "text.secondary", borderRadius: "4px" }}
-          data-cy="product-description"
-        >
+          variant="h6"
+          sx={{ borderColor: "text.secondary", borderRadius: "4px" }}>
           {product.description}
         </Typography>
       </Box>
@@ -147,8 +144,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           alignSelf: { xs: "center", sm: "flex-start" },
           justifyContent: "flex-start",
           gap: 2,
-        }}
-      >
+        }}>
         <EditButton product={product} />
         <DeleteButton product={product} />
       </Box>
