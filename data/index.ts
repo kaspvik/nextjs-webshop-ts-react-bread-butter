@@ -1,7 +1,3 @@
-/**
- * Beskriver en produkt som ska säljas på sidan.
- * OBS: Kan utökas men inte ändras pga cypress.
- **/
 export interface Product {
   id: string;
   articleNumber: string;
@@ -9,108 +5,122 @@ export interface Product {
   title: string;
   description: string;
   price: number;
-  weight: number;
-  stock?: number; 
+  stock?: number;
+  categoryId: string; // Genre
 }
 
 export interface CartItem extends Product {
   quantity: number;
 }
 
-/* Lägg till era produkter här */
 export const products: Product[] = [
   {
-    id: "1234",
-    articleNumber: "1234",
-    image: "/images/rustiktragbrod.png",
-    title: "Rustic rye bread.",
+    id: "cd001",
+    articleNumber: "cd001",
+    image: "/images/nevermind.jpg",
+    title: "Nirvana - Nevermind",
     description:
-      "A rustic rye bread reminiscent of the kind grandma used to bake. Made with sourdough and a long fermentation time for a deeper flavor and a wonderfully chewy and crunchy crust.",
-    price: 50,
-    weight: 700,
+      "One of the most iconic grunge albums of the 90s, featuring hits like 'Smells Like Teen Spirit' and 'Come As You Are'.",
+    price: 129,
+    categoryId: "1",
+  },
+
+  {
+    id: "cd002",
+    articleNumber: "cd002",
+    image: "/images/the_pogues.jpg",
+    title: "The Pogues - If I should fall from grace with God",
+    description: "",
+    price: 119,
+    categoryId: "Celtic, Punkfolk, PunkCeltic, Rockfolk, Rock",
   },
   {
-    id: "1356",
-    articleNumber: "1356",
-    image: "/images/brytbrod.png",
-    title: "Tear-and-share bread",
-    description:
-      "A small pull-apart bread with olive oil, perfect for sharing at the dinner table. Its airy crumb and golden crust make it a favorite alongside soups and salads.",
-    price: 40,
-    weight: 500,
+    id: "cd003",
+    articleNumber: "cd003",
+    image: "/images/Toto_Toto_IV.jpg",
+    title: "Toto - Toto IV",
+    description: "",
+    price: 109,
+    categoryId: "",
   },
   {
-    id: "2345",
-    articleNumber: "2345",
-    image: "/images/levain.png",
-    title: "Levain",
+    id: "cd006",
+    articleNumber: "cd006",
+    image: "/images/automatic.jpg",
+    title: "R.E.M. - Automatic for the People",
     description:
-      "Classic sourdough Levain, just the way you like it — chewy, moist, and full of flavor. Perfect for breakfast or as a base for a rustic sandwich with your favorite toppings.",
-    price: 65,
-    weight: 600,
+      "A melancholic and beautiful album with songs like 'Everybody Hurts' and 'Man on the Moon'. A 1992 essential.",
+    price: 119,
+    categoryId: "Alternative Rock",
   },
   {
-    id: "2346",
-    articleNumber: "2346",
-    image: "/images/litenlevain.png",
-    title: "Small Levain",
+    id: "cd007",
+    articleNumber: "cd007",
+    image: "/images/the_chronic.jpg",
+    title: "Dr. Dre - The Chronic",
     description:
-      "Classic sourdough Levain, the slightly smaller version perfect for one or two people. Same fantastic flavor and texture, but in a more convenient size.",
-    price: 40,
-    weight: 400,
+      "The debut album that defined G-funk. A groundbreaking record featuring Snoop Dogg and the classic 'Nuthin' but a 'G' Thang'.",
+    price: 139,
+    categoryId: "Hip-Hop",
   },
   {
-    id: "3456",
-    articleNumber: "3456",
-    image: "/images/surdegslimpavete.png",
-    title: "Sourdough Wheat Loaf",
+    id: "cd008",
+    articleNumber: "cd008",
+    image: "/images/ten.jpg",
+    title: "Pearl Jam - Ten",
     description:
-      "A moist sourdough loaf made with wheat flour, featuring a crispy crust and a mild, nutty flavor. Perfect for slicing thin and toasting or enjoying as is with butter and cheese.",
-    price: 60,
-    weight: 620,
+      "Pearl Jam’s breakthrough album with tracks like 'Alive' and 'Jeremy'. One of the most influential rock albums of the 90s.",
+    price: 125,
+    categoryId: "Grunge",
   },
   {
-    id: "4567",
-    articleNumber: "4567",
-    image:
-      "https://images.pexels.com/photos/2067430/pexels-photo-2067430.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    title: "Sourdough Baguette",
+    id: "cd009",
+    articleNumber: "cd009",
+    image: "/images/dangerous.jpg",
+    title: "Michael Jackson - Dangerous",
     description:
-      "Oui oui, it’s not just a baguette — it’s sour too! A crispy and airy baguette with a long fermentation time that delivers a deep and balanced flavor.",
-    price: 50,
-    weight: 550,
+      "Pop perfection from the King of Pop, featuring hits like 'Black or White' and 'Remember the Time'.",
+    price: 149,
+    categoryId: "Pop",
   },
   {
-    id: "5678",
-    articleNumber: "5678",
-    image:
-      "https://images.pexels.com/photos/7693917/pexels-photo-7693917.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Breakfast combo",
+    id: "cd0010",
+    articleNumber: "cd0010",
+    image: "/images/metallica_black.jpg",
+    title: "Metallica - Metallica (The Black Album)",
     description:
-      "One prefers light, the other dark... Here you get two tasty seed breads that are perfect for the breakfast table. A balanced choice for those who want variety in the morning.",
-    price: 100,
-    weight: 1000,
+      "Metallica’s most commercially successful album with heavy classics like 'Enter Sandman' and 'Nothing Else Matters'.",
+    price: 129,
+    categoryId: "Heavy Metal",
   },
   {
-    id: "6789",
-    articleNumber: "6789",
-    image:
-      "https://images.pexels.com/photos/7175448/pexels-photo-7175448.jpeg?auto=compress&cs=tinysrgb&w=600",
-    title: "Walnut Bread",
+    id: "cd0011",
+    articleNumber: "cd0011",
+    image: "/images/oooh_on_the_tlc_tip.jpg",
+    title: "TLC - Ooooooohhh... On the TLC Tip",
     description:
-      "Our award-winning walnut bread will make your mouth water! Packed with roasted walnuts that give a nutty, rich flavor and a wonderfully crispy crust.",
-    price: 65,
-    weight: 650,
+      "Debut album from the energetic R&B group TLC. Features the hit 'Ain't 2 Proud 2 Beg'.",
+    price: 109,
+    categoryId: "R&B",
   },
   {
-    id: "1357",
-    articleNumber: "1357",
-    image:
-      "https://images.pexels.com/photos/31009555/pexels-photo-31009555/free-photo-of-rustikt-brod-med-keramiska-burkar-pa-traskiva.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    title: "Sourdough roll",
+    id: "cd0012",
+    articleNumber: "cd0012",
+    image: "/images/core.jpg",
+    title: "Stone Temple Pilots - Core",
     description:
-      "Just a regular damn roll, but better, of course. Airy, crispy, and with just the right chew — perfect with butter and cheese or as the base for a hearty sandwich.",
-    price: 45,
-    weight: 450,
+      "Grunge meets alt rock in this strong debut, with songs like 'Plush' and 'Sex Type Thing'.",
+    price: 119,
+    categoryId: "Alternative Rock",
   },
-]; 
+  {
+    id: "cd0013",
+    articleNumber: "cd0013",
+    image: "/images/whitney_bodyguard.jpg",
+    title: "Whitney Houston - The Bodyguard (Soundtrack)",
+    description:
+      "One of the best-selling soundtracks of all time, led by the powerful ballad 'I Will Always Love You'.",
+    price: 139,
+    categoryId: "Pop",
+  },
+];
