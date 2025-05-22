@@ -1,6 +1,7 @@
 "use client";
+import { useState, useEffect } from "react";
 import { Product } from "@/data";
-import { Box, Container, Typography } from "@mui/material";
+import { Box, Container, Typography, Button } from "@mui/material";
 import EditButton from "./buttons/edit-admin-button";
 import DeleteButton from "./delete-product-item";
 
@@ -9,13 +10,38 @@ type ProductCardProps = {
 };
 
 export default function AdminItem({ product }: ProductCardProps) {
+  const [stock, setStock] = useState(product.stock ?? 0);
+  const [hasMounted, setHasMounted] = useState(false);
+
+
+  useEffect(() => {
+    setHasMounted(true);
+    const stored = localStorage.getItem(`product-stock-${product.id}`);
+    if (stored) {
+      setStock(parseInt(stored));
+    }
+  }, [product.id]);
+
+  const updateStock = () => {
+    if (!hasMounted) return;
+
+    try {
+      localStorage.setItem(`product-stock-${product.id}`, stock.toString());
+      alert("Stock updated!");
+    } catch (error) {
+      alert("Something went wrong during the update. Please try again.");
+    }
+  };
+
+  if (!hasMounted) return null; 
+
   return (
     <Container
       data-cy="product"
       key={product.id}
       sx={{
         display: "flex",
-        flexDirection: { xs:"column",  sm:"row",},
+        flexDirection: { xs: "column", sm: "row" },
         alignItems: "center",
         justifyContent: "space-between",
         backgroundColor: "#FAF2E9",
@@ -23,57 +49,91 @@ export default function AdminItem({ product }: ProductCardProps) {
         borderRadius: 2,
         boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.4)",
         gap: 1,
-        flexWrap: {xs:"wrap", md:"nowrap"}
+        flexWrap: { xs: "wrap", md: "nowrap" },
       }}
     >
-      <Box sx={{
-        width: { xs: "100px", md: "150px" },
-        height: { xs: "100px", md: "150px" },
-        
-
-      }}>
-      {/* Bild */}
       <Box
-        component="img"
-        src={product.image}
-        alt={product.title}
         sx={{
-          borderRadius: { xs: "50%", md: "20px" },
-          padding: 0.5,
-          border: { xs: "2px solid #9C8173", md: "none" },
-          width: "100%",
-          height: "100%",
-          objectFit: "cover",
+          width: { xs: "100px", md: "150px" },
+          height: { xs: "100px", md: "150px" },
         }}
-      />
+      >
+        <Box
+          component="img"
+          src={product.image}
+          alt={product.title}
+          sx={{
+            borderRadius: { xs: "50%", md: "20px" },
+            padding: 0.5,
+            border: { xs: "2px solid #9C8173", md: "none" },
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+          }}
+        />
       </Box>
 
-      {/* Produktinformation */}
-      <Box sx={{ flex: 1, flexWrap: "wrap",
-        width: {xs: "100%" }
-       }}>
+      <Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
         <Typography variant="h6" data-cy="product-title">
           {product.title}
         </Typography>
 
-        <Box sx={{
-          display:"flex",
-          flexDirection:"row",
-        }}>
-        <Typography variant="body2">Art Nr: </Typography>
-
-        <Typography variant="body2" data-cy="product-id">
-          {product.articleNumber} 
-        </Typography>
+        <Box sx={{ display: "flex", flexDirection: "row" }}>
+          <Typography variant="body2">Art Nr: </Typography>
+          <Typography variant="body2" data-cy="product-id">
+            {product.articleNumber}
+          </Typography>
         </Box>
-        <Typography variant="body2">Vikt: {product.weight} g</Typography>
+
+        <Typography variant="body2">Weight: {product.weight} g</Typography>
         <Typography variant="body2" data-cy="product-price">
-          {product.price} kr
+          {product.price} sek
         </Typography>
 
-        {/* Beskrivning */}
+        <Typography variant="body2" sx={{ marginTop: 1 }}>
+          In stock: {stock} pcs
+        </Typography>
+
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            marginTop: 1,
+            gap: 1,
+          }}
+        >
+          <input
+            type="number"
+            value={stock}
+            onChange={(e) => setStock(Number(e.target.value))}
+            style={{
+              width: "70px",
+              padding: "4px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+          />
+          <Button
+          onClick={updateStock}
+          sx={{
+            padding: "2px 12px",
+            backgroundColor: "#3E291E",
+            color: "white",
+            borderRadius: "4px",
+            textTransform: "none",
+              transition: "transform 0.2s ease-in-out",
+              '&:hover': {
+              backgroundColor: "#2b1f16",
+            transform: "scale(1.05)",
+      },
+    }}
+      >
+      Update:
+      </Button>
+        </Box>
+
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
-          Beskrivning:
+          Description:
         </Typography>
         <Typography
           variant="body2"
@@ -84,18 +144,16 @@ export default function AdminItem({ product }: ProductCardProps) {
         </Typography>
       </Box>
 
-      {/* Redigera & Ta bort-knappar (ikon för mobil, knapp för desktop) */}
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs:"row",  sm:"column",},
-          alignSelf: {xs:"center", sm: "flex-start",},
+          flexDirection: { xs: "row", sm: "column" },
+          alignSelf: { xs: "center", sm: "flex-start" },
           justifyContent: "flex-start",
           gap: 2,
         }}
       >
         <EditButton product={product} />
-
         <DeleteButton product={product} />
       </Box>
     </Container>

@@ -70,7 +70,7 @@ export default function CartProvider(props: PropsWithChildren) {
     });
 
     // Sätt toast och visa
-    showToast("Produkten har lagts till i kundvagnen!");
+    showToast("The product has been added to the shopping cart!");
   };
 
   const removeFromCart = (id: string) => {
@@ -123,8 +123,7 @@ export default function CartProvider(props: PropsWithChildren) {
         removeFromCart,
         clearCart,
         showToast,
-      }}
-    >
+      }}>
       {props.children}
       {toastMessage && (
         <Snackbar
@@ -136,8 +135,7 @@ export default function CartProvider(props: PropsWithChildren) {
             maxWidth: "350px",
             borderRadius: "0.5rem",
             boxShadow: "none",
-          }}
-        >
+          }}>
           <Alert
             onClose={() => setToastMessage(null)}
             severity="success"
@@ -152,9 +150,8 @@ export default function CartProvider(props: PropsWithChildren) {
               fontWeight: "bold",
               padding: "6px 16px",
             }}
-            data-cy="added-to-cart-toast"
-          >
-            <Typography variant="body1">{toastMessage}</Typography>
+            data-cy="added-to-cart-toast">
+            <Typography variant="h6">{toastMessage}</Typography>
           </Alert>
         </Snackbar>
       )}

@@ -14,12 +14,10 @@ type ProductCardProps = {
 export default async function ProductCard({ product }: ProductCardProps) {
   return (
     <Card
-      data-cy="product"
       sx={{
         width: "100%",
         maxWidth: 320,
         minHeight: 490,
-        backgroundColor: "background.paper",
         boxShadow: "none",
         display: "grid",
         position: "relative",
@@ -27,22 +25,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           transform: "scale(1.02)",
           boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
         },
-      }}
-    >
-      <Box
-        sx={{
-          position: "absolute",
-          top: "46%",
-          left: "50%",
-          width: "200px",
-          height: "200px",
-          backgroundColor: "background.default",
-          transform: "translate(-50%, -110%)",
-          borderRadius: "0.25rem",
-          zIndex: 0,
-        }}
-      />
-
+      }}>
       <CardMedia
         component="img"
         sx={{
@@ -70,33 +53,19 @@ export default async function ProductCard({ product }: ProductCardProps) {
           maxWidth: "90%",
           minWidth: "312px",
           minHeight: "233px",
-        }}
-      >
-        <Typography
-          data-cy="product-title"
-          gutterBottom
-          variant="h6"
-          component="div"
-        >
+        }}>
+        <Typography gutterBottom variant="h5" component="div">
           {product.title}
         </Typography>
-        <Typography
-          data-cy="product-description"
-          variant="body2"
-          sx={{ color: "text.secondary" }}
-        >
+        <Typography variant="h6" sx={{ color: "text.secondary" }}>
           {product.description}
         </Typography>
-        <Typography
-          data-cy="product-price"
-          variant="body2"
-          sx={{ color: "text.primary", mt: "0.5rem" }}
-        >
+        <Typography variant="h5" sx={{ color: "text.primary", mt: "0.5rem" }}>
           {product.price} kr
         </Typography>
         <CardActions>
           <Box sx={{ mx: "auto" }}>
-            <AddToCartButton label="Köp" product={product} />
+            <AddToCartButton label="Buy" product={product} />
           </Box>
         </CardActions>
       </CardContent>

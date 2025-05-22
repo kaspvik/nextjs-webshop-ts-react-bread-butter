@@ -10,7 +10,7 @@ interface AddToCartButtonProps {
 }
 
 const AddToCartButton: React.FC<AddToCartButtonProps> = ({
-  label = "Lägg i kundvagn",
+  label = "Add to cart",
   product,
 }) => {
   const { addToCart, showToast } = useCart();
@@ -19,7 +19,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
     event.stopPropagation();
     event.preventDefault();
     addToCart(product);
-    showToast("Produkten har lagts till i kundvagnen!");
+    showToast("The product has been added to the shopping cart!");
   };
 
   return (
@@ -28,12 +28,11 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({
       size="large"
       sx={{
         mt: 3,
-        bgcolor: "primary.main",
-        color: "text.primary",
+        bgcolor: "#4ECDC4",
+        color: "#ffffff",
+        fontFamily: "var(--font-tomorrow)",
         "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
-      }}
-      data-cy="product-buy-button"
-    >
+      }}>
       {label}
     </Button>
   );

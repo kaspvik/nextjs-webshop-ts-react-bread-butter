@@ -8,7 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
 } from "@mui/material";
 import { useCart } from "../provider";
 
@@ -21,29 +21,35 @@ export default function OrderOverview() {
         width: "100%",
         px: { xs: 1, sm: 2, md: 6 },
         py: 3,
-      }}
-    >
-      <Typography variant="h1">Beställningsöversikt</Typography>
+      }}>
+      <Typography variant="h4">Order overview</Typography>
       <Box
         sx={{
           backgroundColor: "background.default",
           mt: 2,
           maxWidth: { xs: "310px", sm: "100%" },
-        }}
-      >
+        }}>
         <TableContainer>
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ p: 1 }}>Produkt</TableCell>
-                <TableCell align="right" sx={{ p: 1 }}>
-                  Antal
+                <TableCell sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  Product
                 </TableCell>
-                <TableCell align="right" sx={{ p: 1 }}>
-                  Pris/ st
+                <TableCell
+                  align="right"
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  Number
                 </TableCell>
-                <TableCell align="right" sx={{ p: 1 }}>
-                  Delsumma
+                <TableCell
+                  align="right"
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  Price/ unit
+                </TableCell>
+                <TableCell
+                  align="right"
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  Subtotal
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -58,8 +64,7 @@ export default function OrderOverview() {
                       display: "flex",
                       alignItems: "center",
                       gap: "0.5rem",
-                    }}
-                  >
+                    }}>
                     <Box
                       component="img"
                       src={item.image}
@@ -84,9 +89,9 @@ export default function OrderOverview() {
               ))}
               <TableRow>
                 <TableCell colSpan={3} align="right">
-                  <strong>Totalt</strong>
+                  <h5>Total</h5>
                 </TableCell>
-                <TableCell align="right" data-cy="total-price">
+                <TableCell align="right">
                   <strong>{totalSum.toFixed(2)} kr</strong>
                 </TableCell>
               </TableRow>
