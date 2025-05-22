@@ -1,17 +1,4 @@
-export interface Product {
-  id: string;
-  articleNumber: string;
-  image: string;
-  title: string;
-  description: string;
-  price: number;
-  stock?: number;
-  categoryId: string; // Genre
-}
-
-export interface CartItem extends Product {
-  quantity: number;
-}
+import { Product } from "@prisma/client";
 
 export const products: Product[] = [
   {
@@ -22,9 +9,8 @@ export const products: Product[] = [
     description:
       "One of the most iconic grunge albums of the 90s, featuring hits like 'Smells Like Teen Spirit' and 'Come As You Are'.",
     price: 129,
-    categoryId: "1",
+    categoryId: "c001",
   },
-
   {
     id: "cd002",
     articleNumber: "cd002",
@@ -32,7 +18,7 @@ export const products: Product[] = [
     title: "The Pogues - If I should fall from grace with God",
     description: "",
     price: 119,
-    categoryId: "Celtic, Punkfolk, PunkCeltic, Rockfolk, Rock",
+    categoryId: "c002",
   },
   {
     id: "cd003",
@@ -41,7 +27,7 @@ export const products: Product[] = [
     title: "Toto - Toto IV",
     description: "",
     price: 109,
-    categoryId: "",
+    categoryId: "c003",
   },
   {
     id: "cd006",
@@ -51,7 +37,7 @@ export const products: Product[] = [
     description:
       "A melancholic and beautiful album with songs like 'Everybody Hurts' and 'Man on the Moon'. A 1992 essential.",
     price: 119,
-    categoryId: "Alternative Rock",
+    categoryId: "c004",
   },
   {
     id: "cd007",
@@ -61,7 +47,7 @@ export const products: Product[] = [
     description:
       "The debut album that defined G-funk. A groundbreaking record featuring Snoop Dogg and the classic 'Nuthin' but a 'G' Thang'.",
     price: 139,
-    categoryId: "Hip-Hop",
+    categoryId: "c005",
   },
   {
     id: "cd008",
@@ -71,7 +57,7 @@ export const products: Product[] = [
     description:
       "Pearl Jam’s breakthrough album with tracks like 'Alive' and 'Jeremy'. One of the most influential rock albums of the 90s.",
     price: 125,
-    categoryId: "Grunge",
+    categoryId: "c001",
   },
   {
     id: "cd009",
@@ -81,7 +67,7 @@ export const products: Product[] = [
     description:
       "Pop perfection from the King of Pop, featuring hits like 'Black or White' and 'Remember the Time'.",
     price: 149,
-    categoryId: "Pop",
+    categoryId: "c006",
   },
   {
     id: "cd0010",
@@ -91,7 +77,7 @@ export const products: Product[] = [
     description:
       "Metallica’s most commercially successful album with heavy classics like 'Enter Sandman' and 'Nothing Else Matters'.",
     price: 129,
-    categoryId: "Heavy Metal",
+    categoryId: "c007",
   },
   {
     id: "cd0011",
@@ -101,7 +87,7 @@ export const products: Product[] = [
     description:
       "Debut album from the energetic R&B group TLC. Features the hit 'Ain't 2 Proud 2 Beg'.",
     price: 109,
-    categoryId: "R&B",
+    categoryId: "c008",
   },
   {
     id: "cd0012",
@@ -111,7 +97,7 @@ export const products: Product[] = [
     description:
       "Grunge meets alt rock in this strong debut, with songs like 'Plush' and 'Sex Type Thing'.",
     price: 119,
-    categoryId: "Alternative Rock",
+    categoryId: "c004",
   },
   {
     id: "cd0013",
@@ -121,6 +107,6 @@ export const products: Product[] = [
     description:
       "One of the best-selling soundtracks of all time, led by the powerful ballad 'I Will Always Love You'.",
     price: 139,
-    categoryId: "Pop",
+    categoryId: "c006",
   },
 ];
