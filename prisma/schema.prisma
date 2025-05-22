@@ -11,13 +11,27 @@ datasource db {
 }
 
 model Product {
-  id            String @id @default(cuid())
-  articleNumber String @unique @default(cuid())
+  id            String    @id @default(cuid())
+  articleNumber String    @unique @default(cuid())
   title         String
   description   String
   image         String
   price         Float
-  weight        Int    @default(0)
+  Category      Category? @relation(fields: [categoryId], references: [id])
+  categoryId    String?
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String
+  description String
+  Product     Product[]
+}
+
+model ProductCategory {
+  id         String @id @default(cuid())
+  productId  String
+  categoryId String
 }
 
 model Order {
@@ -40,10 +54,7 @@ model OrderItem {
 
 model User {
   id            String    @id @default(cuid())
-  name          String
-  address       String
-  zipcode       String
-  city          String
+  role          Boolean
   email         String
   phone         String
   orders        Order[]
@@ -53,8 +64,21 @@ model User {
   updatedAt     DateTime
   sessions      Session[]
   accounts      Account[]
+  Address       Address[]
 
   @@map("user")
+}
+
+model Address {
+  id       String @id @default(cuid())
+  name     String
+  address1 String
+  city     String
+  zipcode  String
+  userId   String
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("address")
 }
 
 model Session {
