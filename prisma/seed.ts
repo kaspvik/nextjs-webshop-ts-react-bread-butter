@@ -9,6 +9,23 @@ async function main() {
       create: product,
     });
   }
+  await db.order.upsert({
+    where: { orderNr: "1" },
+    update: {},
+    create: {
+      orderNr: "1",
+      user: {
+        create: {
+          name: "jim",
+          email: "jim.bothen@gmail.com",
+          emailVerified: true,
+        },
+      },
+      items: {
+        create: [{ title: "abc", image: "mdow", price: 123, quantity: 4 }],
+      },
+    },
+  });
 }
 
 main()

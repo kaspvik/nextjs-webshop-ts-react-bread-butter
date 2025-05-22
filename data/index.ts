@@ -9,11 +9,17 @@ export interface Product {
   title: string;
   description: string;
   price: number;
-  stock?: number; 
+  stock?: number;
 }
 
 export interface CartItem extends Product {
   quantity: number;
+}
+
+export interface Order {
+  id: string;
+  orderNr: string;
+  userID: string;
 }
 
 /* Lägg till era produkter här */
@@ -103,4 +109,27 @@ export const products: Product[] = [
       "Just a regular damn roll, but better, of course. Airy, crispy, and with just the right chew — perfect with butter and cheese or as the base for a hearty sandwich.",
     price: 45,
   },
-]; 
+];
+
+export const orders: Order[] = [
+  {
+    id: "1401",
+    orderNr: "1501",
+    userID: "1601",
+  },
+  {
+    id: "1402",
+    orderNr: "1502",
+    userID: "1602",
+  },
+  {
+    id: "1403",
+    orderNr: "1503",
+    userID: "1603",
+  },
+  {
+    id: "1404",
+    orderNr: "1504",
+    userID: "1604",
+  },
+];
