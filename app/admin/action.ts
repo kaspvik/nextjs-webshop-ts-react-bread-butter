@@ -5,6 +5,8 @@ import { db } from "@/prisma/db";
 import { Prisma } from "@prisma/client";
 import { customAlphabet } from "nanoid";
 import { revalidatePath } from "next/cache";
+import { headers } from "next/headers";
+import { auth } from "../auth";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
   const nanoid = customAlphabet("1234567890", 4);
@@ -33,6 +35,10 @@ export async function createOrder(userId: number, cartItems: CartItem[]) {
   if (!cartItems || !Array.isArray(cartItems)) {
     throw new Error("cartItems must be a valid array");
   }
+
+  const session = await auth.api.getSession({
+    headers: await headers(), // you need to pass the headers object.
+  });
 
   const orderNr = `${Date.now()}`;
 
