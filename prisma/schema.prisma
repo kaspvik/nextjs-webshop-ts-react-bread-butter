@@ -36,9 +36,9 @@ model ProductCategory {
 
 model Order {
   id      String      @id @default(cuid())
-  orderNr String?
-  userId  String?
-  user    User?       @relation(fields: [userId], references: [id])
+  orderNr String      @unique
+  userId  String
+  user    User        @relation(fields: [userId], references: [id])
   items   OrderItem[]
 }
 
@@ -59,8 +59,8 @@ model User {
   email         String
   emailVerified Boolean
   image         String?
-  createdAt     DateTime
-  updatedAt     DateTime
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @default(now())
 
   orders   Order[]
   sessions Session[]
