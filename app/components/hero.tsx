@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Image from "next/image";
 
 const Hero = () => {
@@ -9,8 +9,8 @@ const Hero = () => {
         height: "90vh",
         overflow: "hidden",
         boxShadow: 4,
-      }}
-    >
+      }}>
+      {/* Bakgrundsbild */}
       <Box
         sx={{
           position: "absolute",
@@ -19,61 +19,50 @@ const Hero = () => {
           width: "100%",
           height: "100%",
           overflow: "hidden",
-          animation: "zoomIn 4s ease-out forwards", // Animationen appliceras direkt här
-          "@keyframes zoomIn": {
-            "0%": {
-              transform: "scale(1)", // Startar utan zoom
-            },
-            "100%": {
-              transform: "scale(1.1)", // Zoomar in till 1.1
-            },
-          },
+
           "& img": {
             objectFit: "cover",
             objectPosition: "center",
           },
-        }}
-      >
+        }}>
         <Image
-          src="/images/hero.jpg"
+          src="/images/hero.png"
           alt="Hero image"
-          priority={true} // Viktig bild, Next.js optimerar laddning
-          quality={90} // Förbättrar bildkvaliteten
+          priority
+          quality={90}
           layout="fill"
         />
       </Box>
 
+      {/* Snurrande CD + text */}
       <Box
         sx={{
           position: "absolute",
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
-          color: "white",
-          textAlign: "center",
-        }}
-      >
-        <Typography
-          variant="h1"
+          width: "clamp(400px, 40vw, 500px)",
+          height: "clamp(400px, 40vw, 500px)",
+        }}>
+        <Box
           sx={{
-            fontSize: "60px",
-            fontWeight: "bold",
-            color: "background.paper",
-            textShadow: "3px 3px 6px rgba(65, 6, 1, 0.5)",
-          }}
-        >
-          Välkommen till Bread&Butter
-        </Typography>
-        <Typography
-          variant="h5"
-          sx={{
-            marginTop: "1rem",
-            color: "background.paper",
-            textShadow: "5px 5px 8px rgba(65, 6, 1, 0.5)",
-          }}
-        >
-          Ekologiskt hantverksbröd direkt till din dörr
-        </Typography>
+            width: "100%",
+            height: "100%",
+            borderRadius: "50%",
+            animation: "spin 20s linear infinite",
+            position: "relative",
+            "@keyframes spin": {
+              "0%": { transform: "rotate(0deg)" },
+              "100%": { transform: "rotate(360deg)" },
+            },
+          }}>
+          <Image
+            src="/images/logo.png"
+            alt="CD"
+            fill
+            style={{ objectFit: "contain" }}
+          />
+        </Box>
       </Box>
     </Box>
   );
