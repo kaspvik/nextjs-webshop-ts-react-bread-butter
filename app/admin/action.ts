@@ -31,14 +31,12 @@ export async function updateProduct(
   revalidatePath("/admin");
 }
 
-export async function createOrder(userId: number, cartItems: CartItem[]) {
-  if (!cartItems || !Array.isArray(cartItems)) {
-    throw new Error("cartItems must be a valid array");
-  }
+export async function createOrder(cartItems: CartItem[]) {
+  const session = await auth.api.getSession({ headers: await headers() });
 
-  const session = await auth.api.getSession({
-    headers: await headers(), // you need to pass the headers object.
-  });
+  if (!session?.user?.id) {
+    throw new Error("User must be logged in to create an order");
+  }
 
   const orderNr = `${Date.now()}`;
 
@@ -46,7 +44,7 @@ export async function createOrder(userId: number, cartItems: CartItem[]) {
     data: {
       user: {
         connect: {
-          id: userId,
+          id: session.user.id,
         },
       },
       orderNr,
@@ -63,29 +61,6 @@ export async function createOrder(userId: number, cartItems: CartItem[]) {
   });
 
   return order;
-}
-export async function createUser(formData: FormData) {
-  try {
-    const name = formData.get("name")?.toString();
-    const address = formData.get("address")?.toString();
-    const zipcode = formData.get("zipcode")?.toString();
-    const city = formData.get("city")?.toString();
-    const email = formData.get("email")?.toString();
-    const phone = formData.get("phone")?.toString();
-
-    if (!name || !address || !zipcode || !city || !email || !phone) {
-      return { error: "All fields are required!" };
-    }
-
-    const user = await db.user.create({
-      data: { name, address, zipcode, city, email, phone },
-    });
-
-    return { success: true, user };
-  } catch (error) {
-    console.error("Error creating user:", error);
-    return { error: "Something went wrong!" };
-  }
 }
 
 export async function getOrderById(id: string) {
@@ -125,5 +100,48 @@ export async function getOrderByOrderNr(orderNr: string) {
   } catch (error) {
     console.error("Error fetching order:", error);
     throw new Error("Failed to fetch order");
+  }
+}
+
+export async function saveAddress(formData: {
+  name: string;
+  address: string;
+  zipcode: string;
+  city: string;
+  email: string;
+  phone: string;
+}) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.id) {
+    throw new Error("User must be logged in to save address");
+  }
+
+  const existingAddress = await db.address.findFirst({
+    where: { userId: session.user.id },
+  });
+
+  if (existingAddress) {
+    await db.address.update({
+      where: { id: existingAddress.id },
+      data: {
+        name: formData.name,
+        address1: formData.address,
+        zipcode: formData.zipcode,
+        city: formData.city,
+      },
+    });
+  } else {
+    await db.address.create({
+      data: {
+        name: formData.name,
+        address1: formData.address,
+        zipcode: formData.zipcode,
+        city: formData.city,
+        user: {
+          connect: { id: session.user.id },
+        },
+      },
+    });
   }
 }

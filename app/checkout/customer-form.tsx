@@ -15,7 +15,7 @@ import {
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
-import { createOrder, createUser } from "../admin/action";
+import { createOrder, saveAddress } from "../admin/action";
 import { useCart } from "../provider";
 
 const customerSchema = z.object({
@@ -93,17 +93,9 @@ export default function CustomerForm() {
     }
 
     try {
-      const formDataObj = new FormData();
-      Object.entries(formData).forEach(([key, value]) =>
-        formDataObj.append(key, value)
-      );
+      await saveAddress(formData);
 
-      const userResponse = await createUser(formDataObj);
-      if (!userResponse.success) {
-        throw new Error("User creation failed");
-      }
-
-      const order = await createOrder(userResponse.user.id, cartItems);
+      const order = await createOrder(cartItems);
 
       setOpen(true);
       setTimeout(() => {
@@ -120,7 +112,7 @@ export default function CustomerForm() {
         phone: "",
       });
     } catch (error) {
-      console.error("Error creating user:", error);
+      console.error("Checkout error:", error);
     }
   };
 
@@ -143,7 +135,8 @@ export default function CustomerForm() {
             flexDirection: "column",
             alignItems: "center",
             gap: 2,
-          }}>
+          }}
+        >
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -151,7 +144,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Name
             </FormLabel>
             <TextField
@@ -183,7 +177,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Delivery address
             </FormLabel>
             <TextField
@@ -215,7 +210,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}>
+            }}
+          >
             <FormControl fullWidth>
               <FormLabel
                 sx={{
@@ -223,7 +219,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 Zipcode
               </FormLabel>
               <TextField
@@ -256,7 +253,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 City
               </FormLabel>
               <TextField
@@ -289,7 +287,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}></Box>
+            }}
+          ></Box>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -297,7 +296,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Email
             </FormLabel>
             <TextField
@@ -330,7 +330,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Phonenumber
             </FormLabel>
             <TextField
@@ -369,7 +370,8 @@ export default function CustomerForm() {
               mx: "auto",
               py: 2,
               fontFamily: "var(--font-tomorrow)",
-            }}>
+            }}
+          >
             Proceed to payment
           </Button>
           <Snackbar
@@ -393,7 +395,8 @@ export default function CustomerForm() {
             flexDirection: "column",
 
             gap: 2,
-          }}>
+          }}
+        >
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h6">Subtotal:</Typography>
             <Typography variant="h6">{totalSum.toFixed(2)}</Typography>
