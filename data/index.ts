@@ -9,7 +9,6 @@ export interface Product {
   title: string;
   description: string;
   price: number;
-  weight: number;
   stock?: number; 
 }
 
@@ -27,7 +26,6 @@ export const products: Product[] = [
     description:
       "A rustic rye bread reminiscent of the kind grandma used to bake. Made with sourdough and a long fermentation time for a deeper flavor and a wonderfully chewy and crunchy crust.",
     price: 50,
-    weight: 700,
   },
   {
     id: "1356",
@@ -37,7 +35,6 @@ export const products: Product[] = [
     description:
       "A small pull-apart bread with olive oil, perfect for sharing at the dinner table. Its airy crumb and golden crust make it a favorite alongside soups and salads.",
     price: 40,
-    weight: 500,
   },
   {
     id: "2345",
@@ -47,7 +44,6 @@ export const products: Product[] = [
     description:
       "Classic sourdough Levain, just the way you like it — chewy, moist, and full of flavor. Perfect for breakfast or as a base for a rustic sandwich with your favorite toppings.",
     price: 65,
-    weight: 600,
   },
   {
     id: "2346",
@@ -57,7 +53,6 @@ export const products: Product[] = [
     description:
       "Classic sourdough Levain, the slightly smaller version perfect for one or two people. Same fantastic flavor and texture, but in a more convenient size.",
     price: 40,
-    weight: 400,
   },
   {
     id: "3456",
@@ -67,7 +62,6 @@ export const products: Product[] = [
     description:
       "A moist sourdough loaf made with wheat flour, featuring a crispy crust and a mild, nutty flavor. Perfect for slicing thin and toasting or enjoying as is with butter and cheese.",
     price: 60,
-    weight: 620,
   },
   {
     id: "4567",
@@ -78,7 +72,6 @@ export const products: Product[] = [
     description:
       "Oui oui, it’s not just a baguette — it’s sour too! A crispy and airy baguette with a long fermentation time that delivers a deep and balanced flavor.",
     price: 50,
-    weight: 550,
   },
   {
     id: "5678",
@@ -89,7 +82,6 @@ export const products: Product[] = [
     description:
       "One prefers light, the other dark... Here you get two tasty seed breads that are perfect for the breakfast table. A balanced choice for those who want variety in the morning.",
     price: 100,
-    weight: 1000,
   },
   {
     id: "6789",
@@ -100,7 +92,6 @@ export const products: Product[] = [
     description:
       "Our award-winning walnut bread will make your mouth water! Packed with roasted walnuts that give a nutty, rich flavor and a wonderfully crispy crust.",
     price: 65,
-    weight: 650,
   },
   {
     id: "1357",
@@ -111,6 +102,5 @@ export const products: Product[] = [
     description:
       "Just a regular damn roll, but better, of course. Airy, crispy, and with just the right chew — perfect with butter and cheese or as the base for a hearty sandwich.",
     price: 45,
-    weight: 450,
   },
 ]; 

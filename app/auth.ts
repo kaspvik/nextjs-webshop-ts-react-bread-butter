@@ -3,6 +3,11 @@ import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 
 export const auth = betterAuth({
+  user: {
+    additionalFields: {
+      isAdmin: { type: "boolean" }
+    }
+  },
   database: prismaAdapter(db, {
     provider: "postgresql", // or "mysql", "postgresql", ...etc
   }),
