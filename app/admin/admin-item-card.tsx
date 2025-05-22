@@ -127,6 +127,7 @@ export default function AdminItem({ product }: ProductCardProps) {
             transform: "scale(1.05)",
       },
     }}
+    
       >
       Update:
       </Button>

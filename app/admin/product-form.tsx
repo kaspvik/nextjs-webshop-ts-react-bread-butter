@@ -1,193 +1,169 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
+import React from "react";
 import {
   Box,
   Button,
+  FormControl,
   FormLabel,
-  IconButton,
+  MenuItem,
+  Select,
   TextField,
   Typography,
 } from "@mui/material";
-import { Prisma, Product } from "@prisma/client";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { SubmitHandler, useForm } from "react-hook-form";
-import z from "zod";
-import { createProduct, updateProduct } from "./action";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 
-const ProductSchema = z.object({
-  weight: z.coerce.number().optional(),
-  description: z.string().min(1),
-  title: z.string().min(1),
-  image: z.string().url(),
-  price: z.coerce.number().min(1),
+const schema = z.object({
+  title: z.string().min(1, "Du måste ange en titel"),
+  description: z.string().min(1, "Du måste ange en beskrivning"),
+  category: z.string().min(1, "Du måste ange en kategori"),
+  price: z.coerce.number().min(1, "Du måste ange ett pris över 0"),
+  stock: z.coerce.number().min(0, "Lager måste vara 0 eller mer"),
 });
 
-interface Props {
-  product?: Product;
-}
+type FormData = z.infer<typeof schema>;
 
-export default function ProductForm({ product }: Props) {
-  const isEdit = Boolean(product);
-  const router = useRouter();
-  const form = useForm<Prisma.ProductCreateInput>({
-    defaultValues: product || {
-      title: "",
-      description: "",
-      image: "",
-      price: 0,
-      weight: undefined,
-    },
-    resolver: zodResolver(ProductSchema),
-  });
+type Props = {
+  categories: string[];
+  onSubmit: (data: FormData) => void;
+  isSubmitting: boolean;
+};
 
+export const ProductForm = ({
+  categories,
+  onSubmit,
+  isSubmitting,
+}: Props) => {
   const {
     register,
+    handleSubmit,
     formState: { errors },
-  } = form;
-
-  const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
-    if (isEdit) {
-      await updateProduct(product!.articleNumber, data);
-    } else {
-      await createProduct(data);
-      form.reset();
-    }
-    router.push("/admin");
-  };
+  } = useForm<FormData>({
+    resolver: zodResolver(schema),
+  });
 
   return (
     <Box
       component="form"
-      onSubmit={form.handleSubmit(onSubmit)}
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        padding: 2,
-        width: {
-          xs: 280,
-          sm: 400,
-          md: 500,
-          lg: 600,
-        },
-      }}>
+      onSubmit={handleSubmit(onSubmit)}
+      sx={{ mt: 3 }}
+      noValidate
+    >
       <Typography
-        variant="h4"
+        variant="h5"
         sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          margin: 2,
-        }}>
-        <span></span>
-        {isEdit ? "Edit Product" : "Add Product"}
-
-        <Link href="/admin/">
-          <IconButton>
-            <ClearRoundedIcon sx={{ fontSize: 30 }} />
-          </IconButton>
-        </Link>
+          fontWeight: "bold",
+          color: "text.primary",
+          fontFamily: "var(--font-tomorrow)",
+          mb: 2,
+        }}
+      >
+        Create New Product
       </Typography>
 
+      <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormLabel
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            color: "text.primary",
+            fontFamily: "var(--font-tomorrow)",
+          }}
+        >
+          Title
+        </FormLabel>
+        <TextField
+          margin="normal"
+          id="title"
+          fullWidth
+          variant="outlined"
+          slotProps={{ htmlInput: { "data-cy": "product-title" } }}
+          error={!!errors.title}
+          helperText={errors.title?.message}
+          {...register("title")}
+        />
+      </FormControl>
+
+      <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormLabel
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            color: "text.primary",
+            fontFamily: "var(--font-tomorrow)",
+          }}
+        >
+          Description
+        </FormLabel>
+        <TextField
+          margin="normal"
+          id="description"
+          fullWidth
+          multiline
+          rows={4}
+          variant="outlined"
+          slotProps={{ htmlInput: { "data-cy": "product-description" } }}
+          error={!!errors.description}
+          helperText={errors.description?.message}
+          {...register("description")}
+        />
+      </FormControl>
+
+      <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormLabel
+          sx={{
+            textAlign: "left",
+            fontWeight: "bold",
+            color: "text.primary",
+            fontFamily: "var(--font-tomorrow)",
+          }}
+        >
+          Category
+        </FormLabel>
+        <Select
+          fullWidth
+          defaultValue=""
+          id="category"
+          {...register("category")}
+          error={!!errors.category}
+          data-cy="product-category"
+        >
+          {categories.map((cat) => (
+            <MenuItem key={cat} value={cat}>
+              {cat}
+            </MenuItem>
+          ))}
+        </Select>
+        {errors.category && (
+          <Typography color="error" variant="caption">
+            {errors.category.message}
+          </Typography>
+        )}
+      </FormControl>
+
       <FormLabel
         sx={{
           textAlign: "left",
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        Image URL
-      </FormLabel>
-
-      <TextField
-        title="Image URL"
-        margin="normal"
-        id="imageURL"
-        type="url"
-        fullWidth
-        variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-image" } }}
-        error={!!errors.image}
-        helperText={
-          errors.image ? <span>{"Please enter a valid URL"}</span> : null
-        }
-        {...form.register("image")}
-      />
-
-      <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-          fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        Product Name
-      </FormLabel>
-
-      <TextField
-        title="Titel"
-        margin="normal"
-        id="Titel"
-        type="text"
-        fullWidth
-        variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-title" } }}
-        error={!!errors.description}
-        helperText={
-          errors.title ? <span>{"Product name cannot be empty"}</span> : null
-        }
-        {...register("title")}
-      />
-
-      <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-          fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        Vikt i gram
-      </FormLabel>
-
-      <TextField
-        title="Vikt"
-        margin="normal"
-        id="Vikt"
-        type="number"
-        fullWidth
-        variant="outlined"
-        {...register("weight")}
-      />
-
-      <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-          fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
+        }}
+      >
         Price in SEK
       </FormLabel>
 
       <TextField
         title="Pris"
         margin="normal"
-        id="Pris"
+        id="price"
         type="number"
         fullWidth
         variant="outlined"
         slotProps={{ htmlInput: { "data-cy": "product-price" } }}
-        error={!!errors.description}
-        helperText={
-          errors.price ? (
-            <span>{"You must enter a price above 0:-"}</span>
-          ) : null
-        }
+        error={!!errors.price}
+        helperText={errors.price?.message}
         {...register("price")}
       />
 
@@ -197,48 +173,34 @@ export default function ProductForm({ product }: Props) {
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        Description
+        }}
+      >
+        Stock Quantity
       </FormLabel>
 
       <TextField
-        title="Description"
+        title="Stock"
         margin="normal"
-        id="Beskrivning"
-        type="text"
+        id="stock"
+        type="number"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-description" } }}
-        error={!!errors.description}
-        helperText={
-          errors.description ? (
-            <span>{"The description cannot be empty."}</span>
-          ) : null
-        }
-        {...register("description")}
+        slotProps={{ htmlInput: { "data-cy": "product-stock" } }}
+        error={!!errors.stock}
+        helperText={errors.stock?.message}
+        {...register("stock")}
       />
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}>
-        <Button
-          sx={{
-            mt: 3,
-            width: 200,
-            height: 50,
-            bgcolor: "primary.main",
-            color: "text.primary",
-            fontFamily: "var(--font-tomorrow)",
-            "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
-          }}
-          type="submit">
-          Save
-        </Button>
-      </Box>
+
+      <Button
+        type="submit"
+        fullWidth
+        variant="contained"
+        sx={{ mt: 3, mb: 2 }}
+        disabled={isSubmitting}
+        data-cy="product-submit"
+      >
+        {isSubmitting ? "Submitting..." : "Create Product"}
+      </Button>
     </Box>
   );
-}
+};
