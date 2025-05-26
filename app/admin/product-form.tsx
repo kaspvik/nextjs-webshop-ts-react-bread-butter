@@ -39,7 +39,6 @@ export default function ProductForm({ product }: Props) {
       description: "",
       image: "",
       price: 0,
-      weight: undefined,
       stock: 0,
     },
     resolver: zodResolver(ProductSchema),

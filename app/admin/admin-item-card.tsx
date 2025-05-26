@@ -1,6 +1,6 @@
 "use client";
 import { updateProductStock } from "@/app/admin/action";
-import { Product } from "@/data";
+import { Product } from "@prisma/client";
 import { Box, Button, Container, Typography } from "@mui/material";
 import { useState, useTransition } from "react";
 import EditButton from "./buttons/edit-admin-button";
