@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { updateProductStock } from "@/app/admin/action";
 import { Product } from "@/data";
-import { Box, Container, Typography, Button } from "@mui/material";
+import { Box, Button, Container, Typography } from "@mui/material";
+import { useState, useTransition } from "react";
 import EditButton from "./buttons/edit-admin-button";
 import DeleteButton from "./delete-product-item";
 
@@ -11,29 +12,14 @@ type ProductCardProps = {
 
 export default function AdminItem({ product }: ProductCardProps) {
   const [stock, setStock] = useState(product.stock ?? 0);
-  const [hasMounted, setHasMounted] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
-
-  useEffect(() => {
-    setHasMounted(true);
-    const stored = localStorage.getItem(`product-stock-${product.id}`);
-    if (stored) {
-      setStock(parseInt(stored));
-    }
-  }, [product.id]);
-
-  const updateStock = () => {
-    if (!hasMounted) return;
-
-    try {
-      localStorage.setItem(`product-stock-${product.id}`, stock.toString());
+  const handleUpdateStock = () => {
+    startTransition(() => {
+      updateProductStock(product.id, stock);
       alert("Stock updated!");
-    } catch (error) {
-      alert("Something went wrong during the update. Please try again.");
-    }
+    });
   };
-
-  if (!hasMounted) return null; 
 
   return (
     <Container
@@ -94,14 +80,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           In stock: {stock} pcs
         </Typography>
 
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            marginTop: 1,
-            gap: 1,
-          }}
-        >
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
           <input
             type="number"
             value={stock}
@@ -114,22 +93,23 @@ export default function AdminItem({ product }: ProductCardProps) {
             }}
           />
           <Button
-          onClick={updateStock}
-          sx={{
-            padding: "2px 12px",
-            backgroundColor: "#3E291E",
-            color: "white",
-            borderRadius: "4px",
-            textTransform: "none",
+            onClick={handleUpdateStock}
+            disabled={isPending}
+            sx={{
+              padding: "2px 12px",
+              backgroundColor: "#3E291E",
+              color: "white",
+              borderRadius: "4px",
+              textTransform: "none",
               transition: "transform 0.2s ease-in-out",
-              '&:hover': {
-              backgroundColor: "#2b1f16",
-            transform: "scale(1.05)",
-      },
-    }}
-      >
-      Update:
-      </Button>
+              "&:hover": {
+                backgroundColor: "#2b1f16",
+                transform: "scale(1.05)",
+              },
+            }}
+          >
+            {isPending ? "Updating..." : "Update"}
+          </Button>
         </Box>
 
         <Typography variant="subtitle2" sx={{ marginTop: 1 }}>

@@ -152,11 +152,11 @@ export async function updateProductStock(productId: string, stock: number) {
       where: { id: productId },
       data: { stock },
     });
-    
-    revalidatePath('/admin');
+
+    revalidatePath("/admin");
     return { success: true };
   } catch (error) {
-    console.error('Error updating stock:', error);
-    return { success: false, error: 'Failed to update stock' };
+    console.error("Error updating stock:", error);
+    return { success: false, error: "Failed to update stock" };
   }
 }
