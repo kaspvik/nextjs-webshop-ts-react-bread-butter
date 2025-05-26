@@ -19,6 +19,7 @@ model Product {
   price         Float
   Category      Category? @relation(fields: [categoryId], references: [id])
   categoryId    String?
+  stock         Int?
 }
 
 model Category {

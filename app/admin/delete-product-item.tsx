@@ -1,6 +1,6 @@
 "use client";
 
-import { Product } from "@/data";
+import { Product } from "@prisma/client";
 import { Delete } from "@mui/icons-material";
 import { Alert, IconButton, Snackbar } from "@mui/material";
 import { useState } from "react";

@@ -145,3 +145,18 @@ export async function saveAddress(formData: {
     });
   }
 }
+
+export async function updateProductStock(productId: string, stock: number) {
+  try {
+    await db.product.update({
+      where: { id: productId },
+      data: { stock },
+    });
+
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Error updating stock:", error);
+    return { success: false, error: "Failed to update stock" };
+  }
+}
