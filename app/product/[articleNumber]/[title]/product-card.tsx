@@ -9,7 +9,11 @@ import { Product } from "@prisma/client";
 
 type ProductCardProps = {
   product: Product & {
-    categories: { id: string; name: string }[];
+    Category: {
+      id: string;
+      name: string;
+      description: string;
+    } | null;
   };
 };
 
@@ -31,11 +35,10 @@ export default async function ProductCard({ product }: ProductCardProps) {
       <CardMedia
         component="img"
         sx={{
-          height: 250,
-          width: 150,
+          height: 300,
+          width: 300,
           mx: "auto",
           mt: "1rem",
-          borderRadius: "0.25rem",
           zIndex: 1,
         }}
         image={product.image}
@@ -47,7 +50,6 @@ export default async function ProductCard({ product }: ProductCardProps) {
           border: "2px solid",
           borderColor: "text.secondary",
           borderRadius: "0.25rem",
-          // backgroundColor: "#e5ded5",
           mx: "auto",
           mt: "1rem",
           mb: "1rem",
@@ -64,6 +66,9 @@ export default async function ProductCard({ product }: ProductCardProps) {
         </Typography>
         <Typography variant="h5" sx={{ color: "text.primary", mt: "0.5rem" }}>
           {product.price} kr
+        </Typography>
+        <Typography variant="h6" color="text.secondary" sx={{ mt: "0.5rem" }}>
+          {product.Category ? product.Category.name : "No Category"}
         </Typography>
         <CardActions>
           <Box sx={{ mx: "auto" }}>
