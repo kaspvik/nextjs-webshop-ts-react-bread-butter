@@ -3,10 +3,10 @@ import { categories } from "./categories";
 import { products } from "./products";
 
 async function main() {
-  for (const { id, ...category } of categories) {
+  for (const category of categories) {
     await db.category.upsert({
-      where: { name: category.name },
-      update: category,
+      where: { id: category.id },
+      update: {},
       create: category,
     });
   }
