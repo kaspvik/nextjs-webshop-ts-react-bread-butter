@@ -19,6 +19,7 @@ export default async function ProductPage({ params }: Props) {
 
   const product = await db.product.findUnique({
     where: { articleNumber: articleNumber },
+    include: { Category: true },
   });
 
   if (!product) {
@@ -85,8 +86,8 @@ export default async function ProductPage({ params }: Props) {
           <Typography variant="h6" sx={{ mt: 2 }}>
             {product.description}
           </Typography>
-          <Typography variant="h6" sx={{ py: 2, fontSize: "15px" }}>
-            Genre: {product.categoryId} g
+          <Typography variant="h6" color="text.secondary" sx={{ mt: "0.5rem" }}>
+            {product.Category ? product.Category.name : "No Category"}
           </Typography>
 
           <Box
