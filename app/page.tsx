@@ -1,7 +1,9 @@
 import { db } from "@/prisma/db";
+import { categories } from "@/prisma/seed/categories";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
+import CategorySection from "./components/category-section";
 import Hero from "./components/hero";
 import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
@@ -12,14 +14,14 @@ export default async function Home() {
   return (
     <>
       <Hero />
+      <CategorySection categories={categories} />
       <Container
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           minHeight: "100vh",
-        }}
-      >
+        }}>
         <Box
           id={id}
           component="main"
@@ -29,15 +31,13 @@ export default async function Home() {
             bgcolor: "background.default",
             margin: "2rem 0",
             width: "100%",
-          }}
-        >
+          }}>
           <Grid
             container
             direction="row"
             sx={{ justifyContent: "center", alignItems: "center" }}
             spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 12, sm: 6, md: 4 }}
-          >
+            columns={{ xs: 12, sm: 6, md: 4 }}>
             {products.map((product) => (
               <Link
                 key={product.id}
@@ -49,8 +49,7 @@ export default async function Home() {
                   color: "inherit",
                   display: "flex",
                   justifyContent: "center",
-                }}
-              >
+                }}>
                 <ProductCard product={product} />
               </Link>
             ))}
