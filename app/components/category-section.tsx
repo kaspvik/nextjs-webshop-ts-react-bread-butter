@@ -24,7 +24,7 @@ export default function CategorySection({ categories }: Props) {
       params.set("categoryId", categoryId);
     }
 
-    router.push(`/?${params.toString()}`);
+    router.push(`/?${params.toString()}`, { scroll: false });
   };
 
   return (
