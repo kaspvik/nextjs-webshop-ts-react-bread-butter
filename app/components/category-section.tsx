@@ -28,7 +28,16 @@ export default function CategorySection({ categories }: Props) {
   };
 
   return (
-    <Stack direction="row" spacing={2} sx={{ mb: 4, flexWrap: "wrap" }}>
+    <Stack
+      direction="row"
+      spacing={2}
+      sx={{
+        mt: 2,
+        flexWrap: "wrap",
+        justifyContent: "center",
+        alignItems: "center",
+        p: 2,
+      }}>
       <Button
         onClick={() => handleClick("all")}
         variant="outlined"
