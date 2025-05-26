@@ -7,14 +7,26 @@ import CategorySection from "./components/category-section";
 import Hero from "./components/hero";
 import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
-export default async function Home() {
+type Props = {
+  searchParams: {
+    categoryId?: string;
+  };
+};
+
+export default async function Home({ searchParams }: Props) {
+  const { categoryId } = searchParams;
+
   const products = await db.product.findMany({
+    where: categoryId
+      ? {
+          categoryId: categoryId,
+        }
+      : {},
     include: {
       Category: true,
     },
   });
 
-  const id = "test";
   return (
     <>
       <Hero />
@@ -27,7 +39,6 @@ export default async function Home() {
           minHeight: "100vh",
         }}>
         <Box
-          id={id}
           component="main"
           sx={{
             flexGrow: 1,
