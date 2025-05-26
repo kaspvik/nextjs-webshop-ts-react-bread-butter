@@ -1,4 +1,5 @@
 import { db } from "../db";
+import { categories } from "./categories";
 import { products } from "./products";
 
 async function main() {

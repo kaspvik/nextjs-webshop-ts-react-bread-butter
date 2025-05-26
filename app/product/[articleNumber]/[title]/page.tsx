@@ -86,7 +86,7 @@ export default async function ProductPage({ params }: Props) {
             {product.description}
           </Typography>
           <Typography variant="h6" sx={{ py: 2, fontSize: "15px" }}>
-            Genre: {product.weight} g
+            Genre: {product.categoryId} g
           </Typography>
 
           <Box

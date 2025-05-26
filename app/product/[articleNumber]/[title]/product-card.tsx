@@ -8,7 +8,9 @@ import Typography from "@mui/material/Typography";
 import { Product } from "@prisma/client";
 
 type ProductCardProps = {
-  product: Product;
+  product: Product & {
+    categories: { id: string; name: string }[];
+  };
 };
 
 export default async function ProductCard({ product }: ProductCardProps) {
