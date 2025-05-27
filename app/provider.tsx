@@ -153,8 +153,7 @@ export default function CartProvider(props: PropsWithChildren) {
               fontSize: "1rem",
               fontWeight: "bold",
               padding: "6px 16px",
-            }}
-            data-cy="added-to-cart-toast">
+            }}>
             <Typography variant="h6">{toastMessage}</Typography>
           </Alert>
         </Snackbar>

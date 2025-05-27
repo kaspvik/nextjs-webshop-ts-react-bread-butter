@@ -109,7 +109,6 @@ export default function ProductForm({ product }: Props) {
         type="url"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-image" } }}
         error={!!errors.image}
         helperText={
           errors.image ? <span>{"Please enter a valid URL"}</span> : null
@@ -135,7 +134,6 @@ export default function ProductForm({ product }: Props) {
         type="text"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-title" } }}
         error={!!errors.stock}
         helperText={
           errors.title ? <span>{"Product name cannot be empty"}</span> : null
@@ -182,7 +180,6 @@ export default function ProductForm({ product }: Props) {
         type="number"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-price" } }}
         error={!!errors.description}
         helperText={
           errors.price ? (
@@ -210,7 +207,6 @@ export default function ProductForm({ product }: Props) {
         type="text"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-description" } }}
         error={!!errors.description}
         helperText={
           errors.description ? (

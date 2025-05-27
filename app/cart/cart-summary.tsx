@@ -49,7 +49,6 @@ export default function CartSummary() {
         </Link>
         <Link href="/checkout">
           <Button
-            data-cy="cart-link"
             variant="contained"
             color="primary"
             sx={{

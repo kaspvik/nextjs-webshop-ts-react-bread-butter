@@ -135,8 +135,7 @@ export default function CustomerForm() {
             flexDirection: "column",
             alignItems: "center",
             gap: 2,
-          }}
-        >
+          }}>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -144,13 +143,11 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}
-            >
+              }}>
               Name
             </FormLabel>
             <TextField
               size="small"
-              slotProps={{ htmlInput: { "data-cy": "customer-name" } }}
               sx={{
                 backgroundColor: "background.paper",
                 borderRadius: "0.5rem",
@@ -177,13 +174,11 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}
-            >
+              }}>
               Delivery address
             </FormLabel>
             <TextField
               size="small"
-              slotProps={{ htmlInput: { "data-cy": "customer-address" } }}
               sx={{
                 backgroundColor: "background.paper",
                 borderRadius: "0.5rem",
@@ -197,9 +192,7 @@ export default function CustomerForm() {
               error={Boolean(errors.address)}
               helperText={
                 errors.address ? (
-                  <FormHelperText data-cy="customer-address-error">
-                    {errors.address}
-                  </FormHelperText>
+                  <FormHelperText>{errors.address}</FormHelperText>
                 ) : null
               }
             />
@@ -210,8 +203,7 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}
-          >
+            }}>
             <FormControl fullWidth>
               <FormLabel
                 sx={{
@@ -219,13 +211,11 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}
-              >
+                }}>
                 Zipcode
               </FormLabel>
               <TextField
                 size="small"
-                slotProps={{ htmlInput: { "data-cy": "customer-zipcode" } }}
                 sx={{
                   backgroundColor: "background.paper",
                   borderRadius: "0.5rem",
@@ -239,9 +229,7 @@ export default function CustomerForm() {
                 error={Boolean(errors.zipcode)}
                 helperText={
                   errors.zipcode ? (
-                    <FormHelperText data-cy="customer-zipcode-error">
-                      {errors.zipcode}
-                    </FormHelperText>
+                    <FormHelperText>{errors.zipcode}</FormHelperText>
                   ) : null
                 }
               />
@@ -253,13 +241,11 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}
-              >
+                }}>
                 City
               </FormLabel>
               <TextField
                 size="small"
-                slotProps={{ htmlInput: { "data-cy": "customer-city" } }}
                 sx={{
                   backgroundColor: "background.paper",
                   borderRadius: "0.5rem",
@@ -273,9 +259,7 @@ export default function CustomerForm() {
                 error={Boolean(errors.city)}
                 helperText={
                   errors.city ? (
-                    <FormHelperText data-cy="customer-city-error">
-                      {errors.city}
-                    </FormHelperText>
+                    <FormHelperText>{errors.city}</FormHelperText>
                   ) : null
                 }
               />
@@ -287,8 +271,7 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}
-          ></Box>
+            }}></Box>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -296,13 +279,11 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}
-            >
+              }}>
               Email
             </FormLabel>
             <TextField
               size="small"
-              slotProps={{ htmlInput: { "data-cy": "customer-email" } }}
               sx={{
                 backgroundColor: "background.paper",
                 borderRadius: "0.5rem",
@@ -316,9 +297,7 @@ export default function CustomerForm() {
               error={Boolean(errors.email)}
               helperText={
                 errors.email ? (
-                  <FormHelperText data-cy="customer-email-error">
-                    {errors.email}
-                  </FormHelperText>
+                  <FormHelperText>{errors.email}</FormHelperText>
                 ) : null
               }
             />
@@ -330,13 +309,11 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}
-            >
+              }}>
               Phonenumber
             </FormLabel>
             <TextField
               size="small"
-              slotProps={{ htmlInput: { "data-cy": "customer-phone" } }}
               sx={{
                 backgroundColor: "background.paper",
                 borderRadius: "0.5rem",
@@ -350,9 +327,7 @@ export default function CustomerForm() {
               error={Boolean(errors.phone)}
               helperText={
                 errors.phone ? (
-                  <FormHelperText data-cy="customer-phone-error">
-                    {errors.phone}
-                  </FormHelperText>
+                  <FormHelperText>{errors.phone}</FormHelperText>
                 ) : null
               }
             />
@@ -370,8 +345,7 @@ export default function CustomerForm() {
               mx: "auto",
               py: 2,
               fontFamily: "var(--font-tomorrow)",
-            }}
-          >
+            }}>
             Proceed to payment
           </Button>
           <Snackbar
@@ -395,8 +369,7 @@ export default function CustomerForm() {
             flexDirection: "column",
 
             gap: 2,
-          }}
-        >
+          }}>
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h6">Subtotal:</Typography>
             <Typography variant="h6">{totalSum.toFixed(2)}</Typography>
