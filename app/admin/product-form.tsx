@@ -23,6 +23,7 @@ const ProductSchema = z.object({
   title: z.string().min(1),
   image: z.string().url(),
   price: z.coerce.number().min(1),
+  stock: z.coerce.number().min(0).default(0),
 });
 
 interface Props {
@@ -38,7 +39,7 @@ export default function ProductForm({ product }: Props) {
       description: "",
       image: "",
       price: 0,
-      weight: undefined,
+      stock: 0,
     },
     resolver: zodResolver(ProductSchema),
   });
@@ -108,7 +109,6 @@ export default function ProductForm({ product }: Props) {
         type="url"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-image" } }}
         error={!!errors.image}
         helperText={
           errors.image ? <span>{"Please enter a valid URL"}</span> : null
@@ -134,8 +134,7 @@ export default function ProductForm({ product }: Props) {
         type="text"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-title" } }}
-        error={!!errors.description}
+        error={!!errors.stock}
         helperText={
           errors.title ? <span>{"Product name cannot be empty"}</span> : null
         }
@@ -181,7 +180,6 @@ export default function ProductForm({ product }: Props) {
         type="number"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-price" } }}
         error={!!errors.description}
         helperText={
           errors.price ? (
@@ -209,7 +207,6 @@ export default function ProductForm({ product }: Props) {
         type="text"
         fullWidth
         variant="outlined"
-        slotProps={{ htmlInput: { "data-cy": "product-description" } }}
         error={!!errors.description}
         helperText={
           errors.description ? (
@@ -218,6 +215,36 @@ export default function ProductForm({ product }: Props) {
         }
         {...register("description")}
       />
+
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+          fontFamily: "var(--font-tomorrow)",
+        }}>
+        {" "}
+        In stock
+      </FormLabel>
+
+      <TextField
+        title="Stock"
+        margin="normal"
+        id="stock"
+        type="number"
+        fullWidth
+        variant="outlined"
+        
+        error={!!errors.description}
+        helperText={
+          errors.description ? (
+            <span>{"funka nu dååå"}</span>
+          ) : null
+        }
+        {...register("stock")}
+      />
+
+
       <Box
         sx={{
           display: "flex",

@@ -8,7 +8,13 @@ import Typography from "@mui/material/Typography";
 import { Product } from "@prisma/client";
 
 type ProductCardProps = {
-  product: Product;
+  product: Product & {
+    Category: {
+      id: string;
+      name: string;
+      description: string;
+    } | null;
+  };
 };
 
 export default async function ProductCard({ product }: ProductCardProps) {
@@ -29,15 +35,14 @@ export default async function ProductCard({ product }: ProductCardProps) {
       <CardMedia
         component="img"
         sx={{
-          height: 250,
-          width: 150,
+          height: 300,
+          width: 300,
           mx: "auto",
           mt: "1rem",
-          borderRadius: "0.25rem",
           zIndex: 1,
         }}
         image={product.image}
-        alt={product.title}
+        alt={product.album}
       />
 
       <CardContent
@@ -45,7 +50,6 @@ export default async function ProductCard({ product }: ProductCardProps) {
           border: "2px solid",
           borderColor: "text.secondary",
           borderRadius: "0.25rem",
-          // backgroundColor: "#e5ded5",
           mx: "auto",
           mt: "1rem",
           mb: "1rem",
@@ -55,13 +59,19 @@ export default async function ProductCard({ product }: ProductCardProps) {
           minHeight: "233px",
         }}>
         <Typography gutterBottom variant="h5" component="div">
-          {product.title}
+          {product.artist}
+        </Typography>
+        <Typography gutterBottom variant="h6" component="div">
+          {product.album}
         </Typography>
         <Typography variant="h6" sx={{ color: "text.secondary" }}>
           {product.description}
         </Typography>
         <Typography variant="h5" sx={{ color: "text.primary", mt: "0.5rem" }}>
           {product.price} kr
+        </Typography>
+        <Typography variant="h6" color="text.secondary" sx={{ mt: "0.5rem" }}>
+          {product.Category ? product.Category.name : "No Category"}
         </Typography>
         <CardActions>
           <Box sx={{ mx: "auto" }}>

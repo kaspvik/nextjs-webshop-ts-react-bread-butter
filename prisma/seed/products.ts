@@ -1,0 +1,136 @@
+import { Product } from "@prisma/client";
+
+export const products: Product[] = [
+  {
+    id: "cd001",
+    articleNumber: "cd001",
+    image: "/images/nevermind.jpg",
+    artist: "Nirvana",
+    album: "Nevermind",
+    description:
+      "The album that accidentally made flannel shirts cool and made Kurt Cobain the voice of a generation—whether he liked it or not.",
+    price: 129,
+    categoryId: "c001",
+    stock: 0,
+  },
+  {
+    id: "cd002",
+    articleNumber: "cd002",
+    image: "/images/the_pogues.jpg",
+    artist: "The Pogues",
+    album: "If I Should Fall from Grace with God",
+    description:
+      "Irish punk folk chaos at its finest—like a pub fight put to music, but with accordions and feelings.",
+    price: 119,
+    categoryId: "c002",
+    stock: 0,
+  },
+  {
+    id: "cd003",
+    articleNumber: "cd003",
+    image: "/images/Toto_Toto_IV.jpg",
+    artist: "Toto",
+    album: "Toto IV",
+    description:
+      "You’ve heard 'Africa' 3000 times but somehow still don't know the lyrics—blame Toto for making elevator music this catchy.",
+    price: 109,
+    categoryId: "c003",
+    stock: 0,
+  },
+  {
+    id: "cd006",
+    articleNumber: "cd006",
+    image: "/images/automatic.jpg",
+    artist: "R.E.M.",
+    album: "Automatic for the People",
+    description:
+      "An album for when you’re sad, but want to feel like an intellectual about it. Existential dread never sounded so tuneful.",
+    price: 119,
+    categoryId: "c004",
+    stock: 0,
+  },
+  {
+    id: "cd007",
+    articleNumber: "cd007",
+    image: "/images/the_chronic.jpg",
+    artist: "Dr. Dre",
+    album: "The Chronic",
+    description:
+      "Laid the blueprint for West Coast hip hop and gave us Snoop Dogg—because apparently the world needed a rapper who also loves Martha Stewart.",
+    price: 139,
+    categoryId: "c005",
+    stock: 0,
+  },
+  {
+    id: "cd008",
+    articleNumber: "cd008",
+    image: "/images/ten.jpg",
+    artist: "Pearl Jam",
+    album: "Ten",
+    description:
+      "The album where Eddie Vedder invented a new language that’s mostly vowels and angst. Still iconic, somehow.",
+    price: 125,
+    categoryId: "c001",
+    stock: 0,
+  },
+  {
+    id: "cd009",
+    articleNumber: "cd009",
+    image: "/images/dangerous.jpg",
+    artist: "Michael Jackson",
+    album: "Dangerous",
+    description:
+      "The King of Pop in full 90s mode—before TikTok dances, he *was* the dance. Also made us believe morphing CGI was the future.",
+    price: 149,
+    categoryId: "c006",
+    stock: 0,
+  },
+  {
+    id: "cd0010",
+    articleNumber: "cd0010",
+    image: "/images/metallica_black.jpg",
+    artist: "Metallica",
+    album: "Metallica (The Black Album)",
+    description:
+      "The moment Metallica said 'what if we slowed down... and made all the money?' Still heavy, still brooding, still Metallica.",
+    price: 129,
+    categoryId: "c007",
+    stock: 0,
+  },
+  {
+    id: "cd0011",
+    articleNumber: "cd0011",
+    image: "/images/oooh_on_the_tlc_tip.jpg",
+    artist: "TLC",
+    album: "Ooooooohhh... On the TLC Tip",
+    description:
+      "Three women told us to stop creeping, start scrubbing, and to hydrate our skin. R&B with a side of sass and life coaching.",
+    price: 109,
+    categoryId: "c008",
+    stock: 0,
+  },
+  {
+    id: "cd0012",
+    articleNumber: "cd0012",
+    image: "/images/core.jpg",
+    artist: "Stone Temple Pilots",
+    album: "Core",
+    description:
+      "For when you want to feel edgy but still radio-friendly. Grunge-lite for the alt-rock soul who showers regularly.",
+    price: 119,
+    categoryId: "c004",
+    stock: 0,
+  },
+  {
+    id: "cd0013",
+    articleNumber: "cd0013",
+    image: "/images/whitney_bodyguard.jpg",
+    artist: "Whitney Houston",
+    album: "The Bodyguard (Soundtrack)",
+    description:
+      "An album so powerful it made everyone think they could hit that high note. (Spoiler: you can’t. Stop trying.)",
+    price: 139,
+    categoryId: "c006",
+    stock: 0,
+  },
+];

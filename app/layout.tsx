@@ -40,8 +40,13 @@ export default function RootLayout({ children }: PropsWithChildren) {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  minHeight: "100vh", // Makes sure page fills screen height
-                }}>
+                  minHeight: "100vh",
+                  backgroundImage: "url('/images/hero.png')",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
                 <Header />
 
                 <Box component="main" sx={{ flex: "1" }}>

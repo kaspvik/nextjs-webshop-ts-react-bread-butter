@@ -1,35 +1,49 @@
 import { db } from "@/prisma/db";
+import { categories } from "@/prisma/seed/categories";
 import { Box, Container } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import Link from "next/link";
+import CategorySection from "./components/category-section";
 import Hero from "./components/hero";
 import ProductCard from "./product/[articleNumber]/[title]/product-card";
 
-export default async function Home() {
-  const products = await db.product.findMany();
+type Props = {
+  searchParams: {
+    categoryId?: string;
+  };
+};
 
-  const id = "test";
+export default async function Home({ searchParams }: Props) {
+  const { categoryId } = searchParams;
+
+  const products = await db.product.findMany({
+    where: categoryId
+      ? {
+          categoryId: categoryId,
+        }
+      : {},
+    include: {
+      Category: true,
+    },
+  });
+
   return (
     <>
       <Hero />
+      <CategorySection categories={categories} />
       <Container
         sx={{
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           minHeight: "100vh",
-          backgroundImage: "url('/images/hero.png')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
         }}>
         <Box
-          id={id}
           component="main"
           sx={{
             flexGrow: 1,
-            padding: 4, //Mått vi förmodligen vill använda i hela appen. (1=8px)
-            bgcolor: "background.default", //Funktion för att hämta våra färger från theme.
+            padding: 4,
+            bgcolor: "background.default",
             margin: "2rem 0",
             width: "100%",
           }}>

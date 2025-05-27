@@ -1,11 +1,20 @@
-import { products } from "@/data";
-import { db } from "./db";
+import { db } from "../db";
+import { categories } from "./categories";
+import { products } from "./products";
 
 async function main() {
+  for (const category of categories) {
+    await db.category.upsert({
+      where: { id: category.id },
+      update: {},
+      create: category,
+    });
+  }
+
   for (const { id, ...product } of products) {
     await db.product.upsert({
       where: { articleNumber: product.articleNumber },
-      update: {},
+      update: product,
       create: product,
     });
   }

@@ -1,7 +1,7 @@
 "use client";
 
-import { CartItem, Product } from "@/data";
 import { Alert, Snackbar, Typography } from "@mui/material";
+import { Product } from "@prisma/client";
 import {
   createContext,
   PropsWithChildren,
@@ -9,6 +9,10 @@ import {
   useEffect,
   useState,
 } from "react";
+
+export interface CartItem extends Product {
+  quantity: number;
+}
 
 interface ContextValues {
   cartItems: CartItem[];
@@ -149,8 +153,7 @@ export default function CartProvider(props: PropsWithChildren) {
               fontSize: "1rem",
               fontWeight: "bold",
               padding: "6px 16px",
-            }}
-            data-cy="added-to-cart-toast">
+            }}>
             <Typography variant="h6">{toastMessage}</Typography>
           </Alert>
         </Snackbar>
