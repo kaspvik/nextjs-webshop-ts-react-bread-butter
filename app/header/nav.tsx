@@ -1,28 +1,32 @@
 "use client";
 
 import { Button } from "@mui/material";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { signOut, useSession } from "../auth-client";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import SignInModal from "../signin/providers/signin-modal";
+
+
 
 export default function Nav() {
   const pathname = usePathname();
   const { data } = useSession();
+  const [showModal, setShowModal] = useState(false);
 
   const showSignInButton = pathname !== "/signin";
-
 
   return (
     <nav className="flex gap-4">
       {data ? (
-        <>
-          <button onClick={() => signOut()}>Signout</button>
-        </>
+        <button onClick={() => signOut()}>Signout</button>
       ) : (
         showSignInButton && (
-          <Button component={Link} href="/signin" color="inherit">
-            Sign in
-          </Button>
+          <>
+            <Button color="inherit" onClick={() => setShowModal(true)}>
+              Sign in
+            </Button>
+            {showModal && <SignInModal onClose={() => setShowModal(false)} />}
+          </>
         )
       )}
     </nav>
