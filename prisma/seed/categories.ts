@@ -8,7 +8,7 @@ export const categories: Category[] = [
   },
   {
     id: "c002",
-    name: "Celtic, Punkfolk, PunkCeltic, Rockfolk, Rock",
+    name: "Punkfolk",
     description: "",
   },
   {
