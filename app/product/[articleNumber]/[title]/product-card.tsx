@@ -42,7 +42,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           zIndex: 1,
         }}
         image={product.image}
-        alt={product.title}
+        alt={product.album}
       />
 
       <CardContent
@@ -59,7 +59,10 @@ export default async function ProductCard({ product }: ProductCardProps) {
           minHeight: "233px",
         }}>
         <Typography gutterBottom variant="h5" component="div">
-          {product.title}
+          {product.artist}
+        </Typography>
+        <Typography gutterBottom variant="h6" component="div">
+          {product.album}
         </Typography>
         <Typography variant="h6" sx={{ color: "text.secondary" }}>
           {product.description}
