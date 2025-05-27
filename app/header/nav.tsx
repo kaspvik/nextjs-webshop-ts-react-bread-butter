@@ -1,12 +1,10 @@
 "use client";
 
 import { Button } from "@mui/material";
-import { signOut, useSession } from "../auth-client";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import SignInModal from "../signin/providers/signin-modal";
-
-
+import { signOut, useSession } from "../auth-client";
+import SignInModal from "../signin/signin-modal";
 
 export default function Nav() {
   const pathname = usePathname();

@@ -2,8 +2,8 @@
 
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
-import FacebookButton from "./facebook-button";
-import GithubButton from "./github-button";
+import FacebookButton from "./providers/facebook-button";
+import GithubButton from "./providers/github-button";
 
 interface SignInModalProps {
   onClose: () => void;
@@ -17,7 +17,16 @@ export default function SignInModal({ onClose }: SignInModalProps) {
           <CloseButton onClick={onClose}>✕</CloseButton>
         </TitleBar>
         <Content>
-          <Typography>Sign in</Typography>
+          <Typography
+            sx={{
+              marginBottom: "20px",
+              textAlign: "center",
+              width: "60%",
+              fontWeight: "bold",
+            }}
+          >
+            Sign in to Surf & Sound to get more out of your experience!
+          </Typography>
           <GithubButton />
           <FacebookButton />
         </Content>
@@ -52,8 +61,12 @@ const Window = styled.div`
 `;
 
 const TitleBar = styled.div`
-  background: linear-gradient(to right, #0e518b, #1f639e, #739bbd);
-  padding: 4px 8px;
+  margin-top: 2px;
+  margin-left: 2.5px;
+  
+  width: 99%;
+  background: linear-gradient(to right, #0f5796, #1f639e, #729bc0);
+  padding: 5px 8px;
   display: flex;
   justify-content: right;
   align-items: center;
@@ -65,10 +78,13 @@ const CloseButton = styled.div`
   color: black;
   padding: 0 4px;
   cursor: pointer;
+  :hover {
+    background: #b0b0b0;
+  }
 `;
 
 const Content = styled.div`
-flex-grow: 1;
+  flex-grow: 1;
   padding: 16px;
   display: flex;
   flex-direction: column;
