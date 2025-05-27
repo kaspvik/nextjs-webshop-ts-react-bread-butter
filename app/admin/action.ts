@@ -1,6 +1,5 @@
 "use server";
 
-import { CartItem } from "@/data";
 import { db } from "@/prisma/db";
 import { Prisma } from "@prisma/client";
 import { customAlphabet } from "nanoid";
@@ -8,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
+import { CartItem } from "../provider";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
   const nanoid = customAlphabet("1234567890", 4);
@@ -52,7 +52,7 @@ export async function createOrder(cartItems: CartItem[]) {
       items: {
         create: cartItems.map((item) => ({
           image: item.image,
-          title: item.title,
+          artist: item.artist,
           price: item.price,
           quantity: item.quantity,
         })),

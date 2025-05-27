@@ -47,7 +47,7 @@ model Order {
 model OrderItem {
   id       String @id @default(cuid())
   image    String
-  title    String
+  artist   String
   price    Float
   quantity Int
   orderId  String
