@@ -16,7 +16,7 @@ export async function seedOrders() {
       items: {
         create: [
           {
-            title: "Nirvana - Nevermind",
+            artist: "Nirvana",
             image: "mdow",
             price: 123,
             quantity: 2,
@@ -40,7 +40,7 @@ export async function seedOrders() {
       items: {
         create: [
           {
-            title: "Stone Temple Pilots - Core ",
+            artist: "Stone Temple Pilots",
             image: "mdow",
             price: 119,
             quantity: 1,
@@ -62,9 +62,7 @@ export async function seedOrders() {
         },
       },
       items: {
-        create: [
-          { title: "Toto - Toto IV", image: "mdow", price: 109, quantity: 3 },
-        ],
+        create: [{ artist: "Toto", image: "mdow", price: 109, quantity: 3 }],
       },
     },
   });
