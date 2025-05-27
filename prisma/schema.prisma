@@ -13,7 +13,8 @@ datasource db {
 model Product {
   id            String    @id @default(cuid())
   articleNumber String    @unique @default(cuid())
-  title         String
+  artist        String
+  album         String
   description   String
   image         String
   price         Float
