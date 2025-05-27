@@ -8,7 +8,7 @@ export const products: Product[] = [
     artist: "Nirvana",
     album: "Nevermind",
     description:
-      "One of the most iconic grunge albums of the 90s, featuring hits like 'Smells Like Teen Spirit' and 'Come As You Are'.",
+      "The album that accidentally made flannel shirts cool and made Kurt Cobain the voice of a generation—whether he liked it or not.",
     price: 129,
     categoryId: "c001",
     stock: 0,
@@ -19,7 +19,8 @@ export const products: Product[] = [
     image: "/images/the_pogues.jpg",
     artist: "The Pogues",
     album: "If I Should Fall from Grace with God",
-    description: "",
+    description:
+      "Irish punk folk chaos at its finest—like a pub fight put to music, but with accordions and feelings.",
     price: 119,
     categoryId: "c002",
     stock: 0,
@@ -30,7 +31,8 @@ export const products: Product[] = [
     image: "/images/Toto_Toto_IV.jpg",
     artist: "Toto",
     album: "Toto IV",
-    description: "",
+    description:
+      "You’ve heard 'Africa' 3000 times but somehow still don't know the lyrics—blame Toto for making elevator music this catchy.",
     price: 109,
     categoryId: "c003",
     stock: 0,
@@ -42,7 +44,7 @@ export const products: Product[] = [
     artist: "R.E.M.",
     album: "Automatic for the People",
     description:
-      "A melancholic and beautiful album with songs like 'Everybody Hurts' and 'Man on the Moon'. A 1992 essential.",
+      "An album for when you’re sad, but want to feel like an intellectual about it. Existential dread never sounded so tuneful.",
     price: 119,
     categoryId: "c004",
     stock: 0,
@@ -54,7 +56,7 @@ export const products: Product[] = [
     artist: "Dr. Dre",
     album: "The Chronic",
     description:
-      "The debut album that defined G-funk. A groundbreaking record featuring Snoop Dogg and the classic 'Nuthin' but a 'G' Thang'.",
+      "Laid the blueprint for West Coast hip hop and gave us Snoop Dogg—because apparently the world needed a rapper who also loves Martha Stewart.",
     price: 139,
     categoryId: "c005",
     stock: 0,
@@ -66,7 +68,7 @@ export const products: Product[] = [
     artist: "Pearl Jam",
     album: "Ten",
     description:
-      "Pearl Jam’s breakthrough album with tracks like 'Alive' and 'Jeremy'. One of the most influential rock albums of the 90s.",
+      "The album where Eddie Vedder invented a new language that’s mostly vowels and angst. Still iconic, somehow.",
     price: 125,
     categoryId: "c001",
     stock: 0,
@@ -78,7 +80,7 @@ export const products: Product[] = [
     artist: "Michael Jackson",
     album: "Dangerous",
     description:
-      "Pop perfection from the King of Pop, featuring hits like 'Black or White' and 'Remember the Time'.",
+      "The King of Pop in full 90s mode—before TikTok dances, he *was* the dance. Also made us believe morphing CGI was the future.",
     price: 149,
     categoryId: "c006",
     stock: 0,
@@ -90,7 +92,7 @@ export const products: Product[] = [
     artist: "Metallica",
     album: "Metallica (The Black Album)",
     description:
-      "Metallica’s most commercially successful album with heavy classics like 'Enter Sandman' and 'Nothing Else Matters'.",
+      "The moment Metallica said 'what if we slowed down... and made all the money?' Still heavy, still brooding, still Metallica.",
     price: 129,
     categoryId: "c007",
     stock: 0,
@@ -102,7 +104,7 @@ export const products: Product[] = [
     artist: "TLC",
     album: "Ooooooohhh... On the TLC Tip",
     description:
-      "Debut album from the energetic R&B group TLC. Features the hit 'Ain't 2 Proud 2 Beg'.",
+      "Three women told us to stop creeping, start scrubbing, and to hydrate our skin. R&B with a side of sass and life coaching.",
     price: 109,
     categoryId: "c008",
     stock: 0,
@@ -114,7 +116,7 @@ export const products: Product[] = [
     artist: "Stone Temple Pilots",
     album: "Core",
     description:
-      "Grunge meets alt rock in this strong debut, with songs like 'Plush' and 'Sex Type Thing'.",
+      "For when you want to feel edgy but still radio-friendly. Grunge-lite for the alt-rock soul who showers regularly.",
     price: 119,
     categoryId: "c004",
     stock: 0,
@@ -126,7 +128,7 @@ export const products: Product[] = [
     artist: "Whitney Houston",
     album: "The Bodyguard (Soundtrack)",
     description:
-      "One of the best-selling soundtracks of all time, led by the powerful ballad 'I Will Always Love You'.",
+      "An album so powerful it made everyone think they could hit that high note. (Spoiler: you can’t. Stop trying.)",
     price: 139,
     categoryId: "c006",
     stock: 0,
