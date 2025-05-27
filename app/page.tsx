@@ -57,7 +57,7 @@ export default async function Home({ searchParams }: Props) {
               <Link
                 key={product.id}
                 href={`/product/${product.articleNumber}/${encodeURIComponent(
-                  product.title
+                  product.album
                 )}`}
                 style={{
                   textDecoration: "none",
@@ -71,6 +71,21 @@ export default async function Home({ searchParams }: Props) {
           </Grid>
         </Box>
       </Container>
+
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+          backgroundImage: "url('/images/crt-noise.gif')",
+          opacity: 9,
+          mixBlendMode: "screen",
+        }}
+      />
     </>
   );
 }
