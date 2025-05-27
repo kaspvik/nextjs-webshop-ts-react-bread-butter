@@ -1,6 +1,6 @@
 "use client";
 
-import { Container, Paper, Typography } from "@mui/material";
+import { Box, Container, Paper, Typography } from "@mui/material";
 import GithubButton from "./providers/github-button";
 
 export default function SignInPage() {
@@ -12,8 +12,7 @@ export default function SignInPage() {
         justifyContent: "center",
         alignItems: "center",
         minHeight: "100vh",
-      }}
-    >
+      }}>
       <Paper
         elevation={4}
         sx={{
@@ -21,8 +20,7 @@ export default function SignInPage() {
           textAlign: "center",
           width: "100%",
           bgcolor: "background.paper",
-        }}
-      >
+        }}>
         <Typography variant="h4" gutterBottom>
           Sign in to Surf & Sound
         </Typography>
@@ -35,6 +33,20 @@ export default function SignInPage() {
           <GithubButton />
         </div>
       </Paper>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+          backgroundImage: "url('/images/crt-noise.gif')",
+          opacity: 9,
+          mixBlendMode: "screen",
+        }}
+      />
     </Container>
   );
 }
