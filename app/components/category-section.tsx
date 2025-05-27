@@ -1,7 +1,8 @@
 "use client";
 
-import { Button, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
+import StyledButton from "./styled-button";
 
 type Category = {
   id: string;
@@ -38,20 +39,21 @@ export default function CategorySection({ categories }: Props) {
         alignItems: "center",
         p: 2,
       }}>
-      <Button
+      <StyledButton
         onClick={() => handleClick("all")}
         variant="outlined"
-        color="secondary">
+        color="secondary"
+        emoji="🎸">
         All genres
-      </Button>
+      </StyledButton>
       {categories.map((category) => (
-        <Button
+        <StyledButton
           key={category.id}
           color="secondary"
           onClick={() => handleClick(category.id)}
           variant="outlined">
           {category.name}
-        </Button>
+        </StyledButton>
       ))}
     </Stack>
   );
