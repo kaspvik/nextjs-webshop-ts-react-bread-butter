@@ -216,35 +216,6 @@ export default function ProductForm({ product }: Props) {
         {...register("description")}
       />
 
-      <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-          fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        In stock
-      </FormLabel>
-
-      <TextField
-        title="Stock"
-        margin="normal"
-        id="stock"
-        type="number"
-        fullWidth
-        variant="outlined"
-        
-        error={!!errors.description}
-        helperText={
-          errors.description ? (
-            <span>{"funka nu dååå"}</span>
-          ) : null
-        }
-        {...register("stock")}
-      />
-
-
       <Box
         sx={{
           display: "flex",
