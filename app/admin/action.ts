@@ -6,6 +6,7 @@ import { Prisma } from "@prisma/client";
 import { customAlphabet } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { auth } from "../auth";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
@@ -158,5 +159,25 @@ export async function updateProductStock(productId: string, stock: number) {
   } catch (error) {
     console.error("Error updating stock:", error);
     return { success: false, error: "Failed to update stock" };
+  }
+}
+export async function navigateToUserPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session) {
+    redirect("/");
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      isAdmin: true,
+    },
+  });
+
+  if (user?.isAdmin) {
+    redirect("/admin");
+  } else {
+    redirect("/user");
   }
 }
