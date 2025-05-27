@@ -1,12 +1,13 @@
 "use server";
 
-import { CartItem } from "@/data";
 import { db } from "@/prisma/db";
 import { Prisma } from "@prisma/client";
 import { customAlphabet } from "nanoid";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { auth } from "../auth";
+import { CartItem } from "../provider";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
   const nanoid = customAlphabet("1234567890", 4);
@@ -51,7 +52,7 @@ export async function createOrder(cartItems: CartItem[]) {
       items: {
         create: cartItems.map((item) => ({
           image: item.image,
-          title: item.title,
+          artist: item.artist,
           price: item.price,
           quantity: item.quantity,
         })),
@@ -158,5 +159,25 @@ export async function updateProductStock(productId: string, stock: number) {
   } catch (error) {
     console.error("Error updating stock:", error);
     return { success: false, error: "Failed to update stock" };
+  }
+}
+export async function navigateToUserPage() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session) {
+    redirect("/");
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: {
+      isAdmin: true,
+    },
+  });
+
+  if (user?.isAdmin) {
+    redirect("/admin");
+  } else {
+    redirect("/user");
   }
 }
