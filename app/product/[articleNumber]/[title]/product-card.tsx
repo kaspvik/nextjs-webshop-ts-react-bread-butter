@@ -64,9 +64,20 @@ export default async function ProductCard({ product }: ProductCardProps) {
         <Typography gutterBottom variant="h6" component="div">
           {product.album}
         </Typography>
-        <Typography variant="h6" sx={{ color: "text.secondary" }}>
+        <Typography
+          variant="h6"
+          sx={{
+            color: "text.secondary",
+            height: "7.6em",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+          }}>
           {product.description}
         </Typography>
+
         <Typography variant="h5" sx={{ color: "text.primary", mt: "0.5rem" }}>
           {product.price} kr
         </Typography>
