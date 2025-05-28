@@ -203,13 +203,11 @@ export async function getAllOrders() {
       include: {
         user: true,
         items: true,
+        deliveryAddress: true,
       },
     });
 
-    return ordersWithItems.map((order) => ({
-      ...order,
-      deliveryAddress: null,
-    }));
+    return ordersWithItems;
   } catch (error) {
     console.error("Error fetching orders with items:", error);
 
@@ -217,13 +215,13 @@ export async function getAllOrders() {
       const ordersWithoutItems = await db.order.findMany({
         include: {
           user: true,
+          deliveryAddress: true,
         },
       });
 
       return ordersWithoutItems.map((order) => ({
         ...order,
         items: [],
-        deliveryAddress: null,
       }));
     } catch (fallbackError) {
       console.error("Fallback error:", fallbackError);
