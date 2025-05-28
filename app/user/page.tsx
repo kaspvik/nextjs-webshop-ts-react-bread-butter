@@ -1,7 +1,7 @@
 "use server";
 
 import { db } from "@/prisma/db";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Container, Typography } from "@mui/material";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
@@ -41,13 +41,33 @@ export default async function UserPage() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-4">
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        bgcolor: "background.paper",
+        marginTop: 2,
+        marginBottom: 2,
+        borderRadius: 2,
+        padding: 4,
+        border: "2px solid #9C8173",
+      }}
+    >
       <h1 className="text-2xl font-bold mb-4">Your orders</h1>
       {orders.length === 0 ? (
         <p className="text-lg text-gray-600">No orders found.</p>
       ) : (
         orders.map((order) => (
-          <Card key={order.id} className="w-full max-w-xl">
+          <Card
+            key={order.id}
+            sx={{
+              backgroundColor: "#FAF2E9",
+              boxShadow: 2,
+              width: "full",
+              maxWidth: "xl",
+            }}
+          >
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Order number: {order.orderNr}
@@ -68,6 +88,6 @@ export default async function UserPage() {
           </Card>
         ))
       )}
-    </div>
+    </Container>
   );
 }
