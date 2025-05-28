@@ -21,14 +21,16 @@ export default function OrderOverview() {
         width: "100%",
         px: { xs: 1, sm: 2, md: 6 },
         py: 3,
-      }}>
+      }}
+    >
       <Typography variant="h4">Order overview</Typography>
       <Box
         sx={{
           backgroundColor: "background.default",
           mt: 2,
           maxWidth: { xs: "310px", sm: "100%" },
-        }}>
+        }}
+      >
         <TableContainer>
           <Table>
             <TableHead>
@@ -38,17 +40,20 @@ export default function OrderOverview() {
                 </TableCell>
                 <TableCell
                   align="right"
-                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}
+                >
                   Number
                 </TableCell>
                 <TableCell
                   align="right"
-                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}
+                >
                   Price/ unit
                 </TableCell>
                 <TableCell
                   align="right"
-                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}>
+                  sx={{ p: 1, fontFamily: "var(--font-tomorrow)" }}
+                >
                   Subtotal
                 </TableCell>
               </TableRow>
@@ -64,7 +69,8 @@ export default function OrderOverview() {
                       display: "flex",
                       alignItems: "center",
                       gap: "0.5rem",
-                    }}>
+                    }}
+                  >
                     <Box
                       component="img"
                       src={item.image}
