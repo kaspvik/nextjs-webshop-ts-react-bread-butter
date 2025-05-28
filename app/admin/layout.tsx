@@ -2,6 +2,7 @@ import { db } from "@/prisma/db";
 import { Box, Container } from "@mui/material";
 import AdminItem from "./admin-item-card";
 import AddProductButton from "./buttons/add-product-button";
+import ShowOrderButton from "./buttons/show-order-button";
 
 export default async function AdminLayout({
   children,
@@ -25,6 +26,7 @@ export default async function AdminLayout({
       }}
     >
       <AddProductButton />
+            <ShowOrderButton />
       {products.map((product) => (
         <AdminItem key={product.id} product={product} />
       ))}

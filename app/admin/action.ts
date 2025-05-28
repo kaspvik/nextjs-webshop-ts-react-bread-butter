@@ -224,3 +224,36 @@ export async function navigateToUserPage() {
     redirect("/user");
   }
 }
+
+export async function getAllOrders() {
+  try {
+    const ordersWithItems = await db.order.findMany({
+      include: {
+        user: true,
+        items: true,
+        deliveryAddress: true,
+      },
+    });
+
+    return ordersWithItems;
+  } catch (error) {
+    console.error("Error fetching orders with items:", error);
+
+    try {
+      const ordersWithoutItems = await db.order.findMany({
+        include: {
+          user: true,
+          deliveryAddress: true,
+        },
+      });
+
+      return ordersWithoutItems.map((order) => ({
+        ...order,
+        items: [],
+      }));
+    } catch (fallbackError) {
+      console.error("Fallback error:", fallbackError);
+      throw new Error("Failed to fetch orders");
+    }
+  }
+}
