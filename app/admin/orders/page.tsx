@@ -6,7 +6,7 @@ export default async function OrdersPage() {
   try {
     const orders = await getAllOrders();
     return (
-      <Dialog disableScrollLock open>
+      <Dialog disableScrollLock open fullWidth maxWidth="lg">
         <OrderTable orders={orders} />
       </Dialog>
     );

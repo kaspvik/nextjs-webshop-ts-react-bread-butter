@@ -1,6 +1,15 @@
 "use client";
-import { Box, Container, Typography } from "@mui/material";
+import StyledButton from "@/app/components/styled-button";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
 import { Address, Order, OrderItem, User } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 type OrderWithRelations = Order & {
   user: User | null;
@@ -13,112 +22,89 @@ type OrderTableProps = {
 };
 
 export default function OrderTable({ orders }: OrderTableProps) {
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("sv-SE", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-  };
+  const router = useRouter();
 
-  const formatProducts = (items: OrderItem[]) => {
-    return items
-      .map((item) => `${item.artist} (${item.quantity}st)`)
-      .join(", ");
-  };
+  const formatProducts = (items: OrderItem[]) =>
+    items.map((item) => `${item.artist} (${item.quantity}st)`).join(", ");
 
-  const formatAddress = (address: Address | null) => {
-    if (!address) return "No address";
-    return `${address.address1}, ${address.zipcode} ${address.city}`;
-  };
+  const formatAddress = (address: Address | null) =>
+    address
+      ? `${address.address1}, ${address.zipcode} ${address.city}`
+      : "No address";
 
   return (
     <Box sx={{ padding: 2 }}>
-      <Typography variant="h4" sx={{ marginBottom: 3, textAlign: "center" }}>
+      <Typography variant="h4" sx={{ textAlign: "center", mb: 2 }}>
         All Orders
       </Typography>
 
+      <Box sx={{ display: "flex", justifyContent: "center", mb: 3 }}>
+        <StyledButton variant="contained" onClick={() => router.push("/admin")}>
+          Back to Admin
+        </StyledButton>
+      </Box>
+
+      {orders.length > 0 && (
+        <Box
+          sx={{
+            display: { xs: "none", sm: "flex" },
+            gap: 3,
+            px: 2,
+            py: 1,
+            backgroundColor: "#eee",
+            borderRadius: 1,
+            fontWeight: 600,
+            mb: 1,
+          }}>
+          <Typography sx={{ minWidth: "120px", fontWeight: 600 }}>
+            Order
+          </Typography>
+          <Typography sx={{ minWidth: "200px", fontWeight: 600 }}>
+            Customer
+          </Typography>
+        </Box>
+      )}
+
       {orders.length === 0 ? (
-        <Typography variant="body1" sx={{ textAlign: "center", marginTop: 4 }}>
+        <Typography variant="h6" sx={{ textAlign: "center" }}>
           No orders could be found
         </Typography>
       ) : (
-        <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-          {orders.map((order) => (
-            <Container
-              key={order.id}
-              sx={{
-                display: "flex",
-                flexDirection: { xs: "column", sm: "row" },
-                alignItems: "center",
-                justifyContent: "space-between",
-                backgroundColor: "#FAF2E9",
-                padding: 2,
-                borderRadius: 2,
-                boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.4)",
-                gap: 1,
-                flexWrap: { xs: "wrap", md: "nowrap" },
-              }}>
-              <Box sx={{ minWidth: "120px" }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Order ID:
-                </Typography>
-                <Typography variant="body2">
+        orders.map((order) => (
+          <Accordion
+            key={order.id}
+            sx={{ backgroundColor: "#FAF2E9", boxShadow: 2 }}>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  gap: 3,
+                }}>
+                <Typography variant="h6" color="black" sx={{ fontWeight: 600 }}>
                   {order.orderNr || order.id.slice(-8)}
                 </Typography>
-              </Box>
-
-              <Box sx={{ minWidth: "100px" }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Date:
-                </Typography>
-                <Typography variant="body2">{formatDate(order.id)}</Typography>
-              </Box>
-
-              <Box sx={{ minWidth: "150px" }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Costumer:
-                </Typography>
-                <Typography variant="body2">
-                  {order.user?.name || "Unknown costumer"}
+                <Typography variant="h6" color="black">
+                  {order.user?.name || "Unknown customer"}
                 </Typography>
               </Box>
-
-              <Box sx={{ minWidth: "200px", flex: 1 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Address:
-                </Typography>
-                <Typography variant="body2">
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                <Typography variant="h6" color="black">
+                  <strong>Address:</strong>{" "}
                   {formatAddress(order.deliveryAddress)}
                 </Typography>
-              </Box>
-
-              <Box sx={{ minWidth: "180px" }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Email:
+                <Typography variant="h6" color="black">
+                  <strong>Email:</strong> {order.user?.email || "No email"}
                 </Typography>
-                <Typography variant="body2">
-                  {order.user?.email || "No email"}
+                <Typography variant="h6" color="black">
+                  <strong>Products:</strong> {formatProducts(order.items)}
                 </Typography>
               </Box>
-
-              <Box sx={{ minWidth: "250px", flex: 1 }}>
-                <Typography variant="body2" sx={{ fontWeight: 600 }}>
-                  Products:
-                </Typography>
-                <Typography
-                  variant="body2"
-                  sx={{
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    whiteSpace: "nowrap",
-                  }}>
-                  {formatProducts(order.items)}
-                </Typography>
-              </Box>
-            </Container>
-          ))}
-        </Box>
+            </AccordionDetails>
+          </Accordion>
+        ))
       )}
     </Box>
   );
