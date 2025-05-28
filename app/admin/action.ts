@@ -196,3 +196,24 @@ export async function navigateToUserPage() {
     redirect("/user");
   }
 }
+
+export async function getAllOrders() {
+  try {
+    const orders = await db.order.findMany();
+
+    const ordersWithUsers = await db.order.findMany({
+      include: {
+        user: true,
+      },
+    });
+
+    return ordersWithUsers.map((order) => ({
+      ...order,
+      items: [],
+      deliveryAddress: null,
+    }));
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw new Error("Failed to fetch orders");
+  }
+}
