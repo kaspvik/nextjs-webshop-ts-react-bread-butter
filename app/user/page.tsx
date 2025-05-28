@@ -3,10 +3,24 @@
 import { db } from "@/prisma/db";
 import { Card, CardContent, Typography } from "@mui/material";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import { auth } from "../auth";
 
 export default async function UserPage() {
   const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.id) {
+    redirect("/");
+  }
+
+  const user = await db.user.findUnique({
+    where: { id: session.user.id },
+    select: { isAdmin: true },
+  });
+
+  if (user?.isAdmin) {
+    redirect("/admin");
+  }
 
   if (!session || !session.user) {
     return (

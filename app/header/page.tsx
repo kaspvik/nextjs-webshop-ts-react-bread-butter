@@ -57,9 +57,9 @@ const Header = () => {
                   />
                 </IconButton>
               </form>
-              <CartIconButton />
             </>
           )}
+          <CartIconButton />
           <Nav />
         </Box>
       </Toolbar>

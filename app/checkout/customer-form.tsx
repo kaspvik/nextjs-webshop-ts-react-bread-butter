@@ -16,7 +16,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 import { createOrder, saveAddress } from "../admin/action";
+import { useSession } from "../auth-client";
 import { useCart } from "../provider";
+import CustomAlert from "./customer-alert";
 
 const customerSchema = z.object({
   name: z.string().min(1, "You must fill in your name."),
@@ -34,6 +36,8 @@ export default function CustomerForm() {
   const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
+  const { data: session } = useSession();
+  const [authError, setAuthError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -44,13 +48,13 @@ export default function CustomerForm() {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [stockErrorOpen, setStockErrorOpen] = useState(false);
+  const [stockErrorMessage, setStockErrorMessage] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    // uppdatera värdet när användaren skriveer i fältet
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Validerar hela schemat
     const result = customerSchema.safeParse({ ...formData, [name]: value });
     if (result.success) {
       setErrors({});
@@ -72,10 +76,18 @@ export default function CustomerForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    console.log("Session data:", session);
+    console.log("Session user:", session?.user);
+
+    if (!session?.user) {
+      setAuthError(true);
+      return;
+    }
+
     const result = customerSchema.safeParse(formData);
 
     if (!result.success) {
-      // konvertera zod felen till objekt att lagra namnen på fälten
       const newErrors = result.error.flatten().fieldErrors;
       setErrors(
         Object.keys(newErrors).reduce((acc, key) => {
@@ -87,21 +99,17 @@ export default function CustomerForm() {
       );
 
       // om det fanns nåt fel
-
       console.log("Formuläret innehåller fel, avbryter!");
       return;
     }
 
     try {
       await saveAddress(formData);
-
       const order = await createOrder(cartItems);
-
-      setOpen(true);
+      setOpen(true); // success snackbar
       setTimeout(() => {
         router.push(`/confirmation/${order.orderNr}`);
       }, 1000);
-
       clearCart();
       setFormData({
         name: "",
@@ -111,8 +119,13 @@ export default function CustomerForm() {
         email: "",
         phone: "",
       });
-    } catch (error) {
-      console.error("Checkout error:", error);
+    } catch (error: any) {
+      if (error instanceof Error) {
+        setStockErrorMessage(error.message);
+        setStockErrorOpen(true); // show your stock error snackbar
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
 
@@ -121,6 +134,14 @@ export default function CustomerForm() {
       <Typography variant="h4" sx={{ textAlign: "left", ml: { sx: 1, md: 2 } }}>
         Delivery & Payment
       </Typography>
+
+      {authError && (
+        <CustomAlert
+          message="You must be signed in to complete an order. Please sign in to continue shopping."
+          onClose={() => setAuthError(false)}
+        />
+      )}
+
       <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <Box
           component="form"
@@ -135,7 +156,8 @@ export default function CustomerForm() {
             flexDirection: "column",
             alignItems: "center",
             gap: 2,
-          }}>
+          }}
+        >
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -143,7 +165,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Name
             </FormLabel>
             <TextField
@@ -174,7 +197,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Delivery address
             </FormLabel>
             <TextField
@@ -203,7 +227,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}>
+            }}
+          >
             <FormControl fullWidth>
               <FormLabel
                 sx={{
@@ -211,7 +236,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 Zipcode
               </FormLabel>
               <TextField
@@ -241,7 +267,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 City
               </FormLabel>
               <TextField
@@ -271,7 +298,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}></Box>
+            }}
+          ></Box>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -279,7 +307,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Email
             </FormLabel>
             <TextField
@@ -309,7 +338,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Phonenumber
             </FormLabel>
             <TextField
@@ -345,14 +375,21 @@ export default function CustomerForm() {
               mx: "auto",
               py: 2,
               fontFamily: "var(--font-tomorrow)",
-            }}>
+            }}
+          >
             Proceed to payment
           </Button>
           <Snackbar
             open={open}
-            message="Beställning genomförd!"
+            message="Order placed!"
             autoHideDuration={2000}
             onClose={() => setOpen(false)}
+          />
+          <Snackbar
+            open={stockErrorOpen}
+            onClose={() => setStockErrorOpen(false)}
+            autoHideDuration={4000}
+            message={stockErrorMessage || "A stock issue occurred."}
           />
         </Box>
         <Box
@@ -369,7 +406,8 @@ export default function CustomerForm() {
             flexDirection: "column",
 
             gap: 2,
-          }}>
+          }}
+        >
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h6">Subtotal:</Typography>
             <Typography variant="h6">{totalSum.toFixed(2)}</Typography>
