@@ -1,5 +1,5 @@
 import { db } from "@/prisma/db";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import AdminItem from "./admin-item-card";
 import AddProductButton from "./buttons/add-product-button";
 
