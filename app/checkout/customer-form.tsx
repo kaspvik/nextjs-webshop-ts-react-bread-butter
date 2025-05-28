@@ -133,7 +133,7 @@ export default function CustomerForm() {
 
       {authError && (
         <CustomAlert
-          message="You must be a logged-in customer to complete an order. Please log in to continue."
+          message="You must be signed in to complete an order. Please sign in to continue shopping."
           onClose={() => setAuthError(false)}
         />
       )}
