@@ -1,5 +1,6 @@
 import { db } from "../db";
 import { categories } from "./categories";
+import { seedOrders } from "./orders";
 import { products } from "./products";
 
 async function main() {
@@ -18,6 +19,8 @@ async function main() {
       create: product,
     });
   }
+
+  await seedOrders();
 }
 
 main()
