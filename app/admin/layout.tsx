@@ -1,5 +1,5 @@
 import { db } from "@/prisma/db";
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import AdminItem from "./admin-item-card";
 import AddProductButton from "./buttons/add-product-button";
 
@@ -29,6 +29,21 @@ export default async function AdminLayout({
         <AdminItem key={product.id} product={product} />
       ))}
       {children}
+
+            <Box
+              sx={{
+                position: "fixed",
+                top: 0,
+                left: 0,
+                width: "100vw",
+                height: "100vh",
+                zIndex: 9999,
+                pointerEvents: "none",
+                backgroundImage: "url('/images/crt-noise.gif')",
+                opacity: 9,
+                mixBlendMode: "screen",
+              }}
+            />
 
     </Container>
   );

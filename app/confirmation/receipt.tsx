@@ -43,7 +43,8 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
       <Typography
         variant="h2"
         component="p"
-        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}>
+        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}
+      >
         Your order:
       </Typography>
       <TableContainer component={Paper}>
@@ -58,7 +59,7 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
           </TableHead>
           <TableBody>
             {items.map((item: any) => (
-              <StyledTableRow key={item.title}>
+              <StyledTableRow key={item.id}>
                 <StyledTableCell
                   component="th"
                   scope="row"
@@ -67,7 +68,8 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
-                  }}>
+                  }}
+                >
                   <img
                     src={item.image}
                     alt={item.title}
