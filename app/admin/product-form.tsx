@@ -18,13 +18,15 @@ import z from "zod";
 import { createProduct, updateProduct } from "./action";
 
 const ProductSchema = z.object({
+  artist: z.string().min(1),
   weight: z.coerce.number().optional(),
   description: z.string().min(1),
-  title: z.string().min(1),
+  album: z.string().optional(),
   image: z.string().url(),
   price: z.coerce.number().min(1),
   stock: z.coerce.number().min(0).default(0),
 });
+
 
 interface Props {
   product?: Product;
@@ -35,7 +37,7 @@ export default function ProductForm({ product }: Props) {
   const router = useRouter();
   const form = useForm<Prisma.ProductCreateInput>({
     defaultValues: product || {
-      title: "",
+      artist: "",
       description: "",
       image: "",
       price: 0,
@@ -117,29 +119,29 @@ export default function ProductForm({ product }: Props) {
       />
 
       <FormLabel
-        sx={{
-          textAlign: "left",
-          fontWeight: "bold",
-          color: "text.primary",
-          fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
-        Product Name
-      </FormLabel>
+  sx={{
+    textAlign: "left",
+    fontWeight: "bold",
+    color: "text.primary",
+    fontFamily: "var(--font-tomorrow)",
+  }}>
+  Artist
+</FormLabel>
 
-      <TextField
-        title="Titel"
-        margin="normal"
-        id="Titel"
-        type="text"
-        fullWidth
-        variant="outlined"
-        error={!!errors.stock}
-        helperText={
-          errors.title ? <span>{"Product name cannot be empty"}</span> : null
-        }
-        {...register("title")}
-      />
+<TextField
+  title="Artist"
+  margin="normal"
+  id="artist"
+  type="text"
+  fullWidth
+  variant="outlined"
+  error={!!errors.artist}
+  helperText={
+    errors.artist ? <span>{"Artist name cannot be empty"}</span> : null
+  }
+  {...register("artist")}
+/>
+
 
       <FormLabel
         sx={{
@@ -149,7 +151,7 @@ export default function ProductForm({ product }: Props) {
           fontFamily: "var(--font-tomorrow)",
         }}>
         {" "}
-        Vikt i gram
+        Album
       </FormLabel>
 
       <TextField
