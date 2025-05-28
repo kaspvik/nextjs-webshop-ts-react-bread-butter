@@ -1,61 +1,59 @@
+"use server";
+
 import { db } from "@/prisma/db";
 import { Card, CardContent, Typography } from "@mui/material";
+import { headers } from "next/headers";
+import { auth } from "../auth";
 
 export default async function UserPage() {
-  const orders = await db.order.findMany({
-    include: {
-      items: true,
-      user: true,
-      deliveryAddress: true,
-    },
-  });
+  const session = await auth.api.getSession({ headers: await headers() });
 
-  if (orders.length === 0) {
+  if (!session || !session.user) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-2xl font-bold">Alla ordrar</h1>
-        <p className="text-gray-700 mt-4">
-          Det finns inga ordrar i databasen ännu.
-        </p>
+        <h1 className="text-xl font-bold text-red-500">
+          You must be signed in to see your orders.
+        </h1>
       </div>
     );
   }
 
+  const orders = await db.order.findMany({
+    where: { userId: session.user.id },
+    include: {
+      items: true,
+      deliveryAddress: true,
+    },
+  });
+
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen p-6">
-      <h1 className="text-2xl font-bold mb-6">Alla ordrar</h1>
-      {orders.map((order) => (
-        <Card key={order.id} className="w-full max-w-2xl mb-6 shadow-md">
-          <CardContent>
-            <Typography variant="h6" gutterBottom>
-              Ordernummer: {order.orderNr}
-            </Typography>
-
-            <Typography variant="body2" color="textSecondary">
-              Användare: {order.user.name} ({order.user.email})
-            </Typography>
-
-            {order.deliveryAddress && (
-              <Typography variant="body2" color="textSecondary">
-                Leveransadress: {order.deliveryAddress.address1},{" "}
-                {order.deliveryAddress.city}
+    <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-4">
+      <h1 className="text-2xl font-bold mb-4">Your orders</h1>
+      {orders.length === 0 ? (
+        <p className="text-lg text-gray-600">No orders found.</p>
+      ) : (
+        orders.map((order) => (
+          <Card key={order.id} className="w-full max-w-xl">
+            <CardContent>
+              <Typography variant="h6" gutterBottom>
+                Order number: {order.orderNr}
               </Typography>
-            )}
-
-            <div className="mt-4">
-              {order.items.map((item) => (
-                <div key={item.id} className="border-t pt-3 mt-3">
-                  <Typography variant="subtitle1">{item.artist}</Typography>
-                  <Typography variant="body2">
-                    Antal: {item.quantity}
-                  </Typography>
-                  <Typography variant="body2">Pris: {item.price} kr</Typography>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      ))}
+              <Typography variant="body2" color="text.secondary" gutterBottom>
+                Delivery address: {order.deliveryAddress?.address1},{" "}
+                {order.deliveryAddress?.city}
+              </Typography>
+              <Typography variant="subtitle1">Products:</Typography>
+              <ul className="list-disc pl-5">
+                {order.items.map((item) => (
+                  <li key={item.id}>
+                    {item.artist} – {item.quantity} st – {item.price} SEK
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        ))
+      )}
     </div>
   );
 }
