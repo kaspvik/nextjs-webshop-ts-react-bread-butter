@@ -1,21 +1,5 @@
-import {
-  AccessTime,
-  Email,
-  Facebook,
-  GitHub,
-  Instagram,
-  LinkedIn,
-  LocationOn,
-  Phone,
-} from "@mui/icons-material";
-import {
-  Box,
-  Divider,
-  Grid,
-  IconButton,
-  Link,
-  Typography,
-} from "@mui/material";
+import { AccessTime, Email, LocationOn, Phone } from "@mui/icons-material";
+import { Box, Divider, Grid, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
@@ -104,7 +88,6 @@ export default function Footer() {
 
       <Divider sx={{ my: 4 }} />
 
-      {/* Social Media Links  */}
       <Box
         sx={{
           display: "flex",
@@ -112,57 +95,11 @@ export default function Footer() {
           gap: 2,
           paddingTop: 2,
         }}>
-        <IconButton
-          component={Link}
-          href="#"
-          // target="_blank"
-          // rel="noopener"
-          aria-label="Facebook"
-          sx={{
-            transition: "transform 0.3s",
-            "&:hover": { transform: "scale(1.5)", color: "#1877f2" },
-          }}>
-          <Facebook sx={{ fontSize: 30 }} />
-        </IconButton>
-
-        <IconButton
-          component={Link}
-          href="#"
-          // target="_blank"
-          // rel="noopener"
-          aria-label="Github"
-          sx={{
-            transition: "transform 0.3s",
-            "&:hover": { transform: "scale(1.5)", color: "black" },
-          }}>
-          <GitHub sx={{ fontSize: 30 }} />
-        </IconButton>
-
-        <IconButton
-          component={Link}
-          href="#"
-          // target="_blank"
-          // rel="noopener"
-          aria-label="LinkedIn"
-          sx={{
-            transition: "transform 0.3s",
-            "&:hover": { transform: "scale(1.5)", color: "#0077b5" },
-          }}>
-          <LinkedIn sx={{ fontSize: 30 }} />
-        </IconButton>
-
-        <IconButton
-          component={Link}
-          href="#"
-          // target="_blank"
-          // rel="noopener"
-          aria-label="Instagram"
-          sx={{
-            transition: "transform 0.3s",
-            "&:hover": { transform: "scale(1.5)", color: "#e11d74" },
-          }}>
-          <Instagram sx={{ fontSize: 30 }} />
-        </IconButton>
+        <img
+          src="/images/netscape-netcenter-personal-finance-1999.gif"
+          alt="Looking for a man in finance - advertisement from 1992"
+          style={{ width: "900px", height: "auto" }}
+        />
       </Box>
     </Box>
   );

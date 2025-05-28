@@ -89,42 +89,42 @@ We haven't deployed our project on Vercel yet because the sqlight database is no
 
 ## Criteria for grading
 
-- [x] Git & GitHub har använts
-- [x] Projektmappen innehåller en README.md fil
-- [x] Uppgiften lämnas in i tid!
-- [x] Ett designsystem används som exempelvis Shadcn eller MUI
+- [x] Alla sidor skall vara responsiva.
 
-**Home**
+- [x] Arbetet ska implementeras med NextJS.
 
-- [x] Ska ha en övergripande layout med header, main & footer.
-- [x] Startsidan ska lista samtliga produkter..
-- [x] Det ska gå att lägga till produkter i kundvagnen (header + toast).
-- [x] Det ska gå att klicka på en produkt och komma till en detaljsida.
-- [x] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
+- [?] Backenden ska ha validering på samtliga endpoints (även Server Actions).
 
-**Produkt**
+- [x] Skapa ett ER diagram som ska ha visats vid idégodkännandet.
 
-- [x] Ska ha en övergripande layout med header, main & footer.
-- [x] Detaljsidan ska visa all info om en produkt.
-- [x] Det ska gå att lägga till produkten i kundvagnen (header + toast).
-- [x] Sidan ska vara responsiv och gå att använda på mobil, tablet & desktop.
+- [x] Beskriv er företagsidé i en kort textuell presentation, detta ska ha visats vid idégodkännandet.
 
-**Kundvagn & Checkout**
+- [x] All data som programmet utnyttjar ska vara sparat i en SQL databas (produkter, beställningar, konton, mm) med undantaget av bilder.
 
-- [x] Ska ha en övergripande layout med header, main & footer.
-- [x] Det ska gå att gå till checkoutsidan och se innehållet i kundvagnen (knapp & url).
-- [x] Det ska gå att se det totala priset i kundvagnen.
-- [x] Det ska gå att ändra produkterna i kundvagnen (header + vyn + pris).
-- [x] Det ska gå att ange leveransuppgifter i ett formulär.
-- [x] Samtliga fält för checkoutsidans formulär ska ha valideringsregler.
-- [x] Formulären vid utcheckningen ska gå att automatiskt fyllas i.
-- [x] Bekräftelsesidan ska visa orderdetaljer och leveransuppgifter
+- [x?] Man ska kunna logga in som administratör i systemet.
 
-**Admin**
+- [x] Inga Lösenord får sparas i klartext i databasen.
 
-- [x] Det finns en admin-sida för produkthantering
-- [x] Det ska gå att se alla produkter på admin sidan
-- [x] Det går att lägga till produkter via admin sidan
-- [x] Det går att ta bort produkter via admin sidan
-- [x] Det går att redigera produkter via admin sidan
-- [x] Samtliga fält för adminsidans formulär ska ha valideringsregler
+- [ ] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen.
+
+- [x] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan.
+
+- [ ] Administratörer ska kunna se en lista på alla gjorda beställningar.
+
+- [x] Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera.
+
+- [x] Från hemsidan ska man kunna se en lista över alla produkter, och man ska kunna lista bara dom produkter som tillhör en kategori.
+
+- [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten.
+
+- [ ] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas.
+
+- [x] Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält.
+
+- [ ] När man är inloggad som kund ska man kunna se sina gjorda beställning och om det är skickade eller inte.
+
+- [x] Administratörer ska kunna redigera produkt.
+
+- [x] Administratörer ska kunna lägga till och ta bort produkter.
+
+- [ ] Administratörer ska kunna markera beställningar som skickade.

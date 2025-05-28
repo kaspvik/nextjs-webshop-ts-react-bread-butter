@@ -42,6 +42,9 @@ model Order {
   userId  String
   user    User        @relation(fields: [userId], references: [id])
   items   OrderItem[]
+
+  deliveryAddressId String?
+  deliveryAddress   Address?    @relation("OrderDeliveryAddress", fields: [deliveryAddressId], references: [id])
 }
 
 model OrderItem {
@@ -80,6 +83,7 @@ model Address {
   zipcode  String
   userId   String
   user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  ordersDelivered Order[] @relation("OrderDeliveryAddress")
 
   @@map("address")
 }

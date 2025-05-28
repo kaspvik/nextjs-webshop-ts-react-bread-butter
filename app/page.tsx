@@ -14,7 +14,7 @@ type Props = {
 };
 
 export default async function Home({ searchParams }: Props) {
-  const { categoryId } = searchParams;
+  const { categoryId } = await searchParams;
 
   const products = await db.product.findMany({
     where: categoryId
@@ -37,7 +37,8 @@ export default async function Home({ searchParams }: Props) {
           justifyContent: "center",
           alignItems: "center",
           minHeight: "100vh",
-        }}>
+        }}
+      >
         <Box
           component="main"
           sx={{
@@ -46,31 +47,49 @@ export default async function Home({ searchParams }: Props) {
             bgcolor: "background.default",
             margin: "2rem 0",
             width: "100%",
-          }}>
+          }}
+        >
           <Grid
             container
             direction="row"
             sx={{ justifyContent: "center", alignItems: "center" }}
             spacing={{ xs: 2, md: 3 }}
-            columns={{ xs: 12, sm: 6, md: 4 }}>
+            columns={{ xs: 12, sm: 6, md: 4 }}
+          >
             {products.map((product) => (
               <Link
                 key={product.id}
                 href={`/product/${product.articleNumber}/${encodeURIComponent(
-                  product.title
+                  product.album
                 )}`}
                 style={{
                   textDecoration: "none",
                   color: "inherit",
                   display: "flex",
                   justifyContent: "center",
-                }}>
+                }}
+              >
                 <ProductCard product={product} />
               </Link>
             ))}
           </Grid>
         </Box>
       </Container>
+
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+          backgroundImage: "url('/images/crt-noise.gif')",
+          opacity: 9,
+          mixBlendMode: "screen",
+        }}
+      />
     </>
   );
 }

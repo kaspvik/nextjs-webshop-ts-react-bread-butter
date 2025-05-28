@@ -77,7 +77,8 @@ export default function AdminItem({ product }: ProductCardProps) {
             </Typography>
           </Box>
 
-          <Typography variant="body2">Weight: {product.weight} g</Typography>
+          <Typography variant="body2">Artist: {product.artist}</Typography>
+          <Typography variant="body2">Album: {product.album}</Typography>
           <Typography variant="body2" data-cy="product-price">
             {product.price} sek
           </Typography>
@@ -163,7 +164,6 @@ export default function AdminItem({ product }: ProductCardProps) {
         </Box>
       </Container>
 
-     
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}

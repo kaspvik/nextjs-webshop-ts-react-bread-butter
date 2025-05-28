@@ -58,7 +58,7 @@ export default async function ProductPage({ params }: Props) {
           }}>
           <Image
             src={product.image.replace("public/", "/")}
-            alt={product.title}
+            alt={product.artist}
             width={400}
             height={600}
             style={{ width: "100%", height: "auto" }}
@@ -76,8 +76,13 @@ export default async function ProductPage({ params }: Props) {
           }}>
           <Typography
             variant="h2"
-            sx={{ fontSize: { sx: 40, sm: 40, md: 50 } }}>
-            {product.title}
+            sx={{ fontSize: { xs: 40, sm: 40, md: 50 } }}>
+            {product.artist}
+          </Typography>
+          <Typography
+            variant="h3"
+            sx={{ fontSize: { xs: 20, sm: 20, md: 30 } }}>
+            {product.album}
           </Typography>
           <Typography variant="h5" sx={{ mt: 2 }}>
             Price: {product.price} kr
@@ -101,6 +106,20 @@ export default async function ProductPage({ params }: Props) {
           </Box>
         </Box>
       </Box>
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+          backgroundImage: "url('/images/crt-noise.gif')",
+          opacity: 9,
+          mixBlendMode: "screen",
+        }}
+      />
     </Container>
   );
 }
