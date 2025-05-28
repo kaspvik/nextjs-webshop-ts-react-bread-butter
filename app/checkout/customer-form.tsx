@@ -80,7 +80,6 @@ export default function CustomerForm() {
 
     if (!session?.user) {
       setAuthError(true);
-      setTimeout(() => setAuthError(false), 5000);
       return;
     }
 

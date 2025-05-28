@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { Typography } from "@mui/material";
+import { RetroButton } from "../signin/providers/retro-buttons";
 
 interface CustomAlertProps {
   onClose: () => void;
@@ -14,16 +15,19 @@ export default function CustomAlert({ onClose, message }: CustomAlertProps) {
           <CloseButton onClick={onClose}>✕</CloseButton>
         </AlertTitleBar>
         <AlertContent>
-          <EmojiIcon>❌</EmojiIcon>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontWeight: "bold",
-              fontSize: "1rem",
-            }}
-          >
-            {message}
-          </Typography>
+          <RetroIcon>x</RetroIcon>
+          <BoxContainer>
+            <Typography
+              sx={{
+                textAlign: "center",
+                fontSize: "1rem",
+                paddingRight: "10px",
+              }}
+            >
+              {message}
+            </Typography>
+            <SmallRetroButton onClick={onClose}>Close</SmallRetroButton>
+          </BoxContainer>
         </AlertContent>
       </AlertWindow>
     </Overlay>
@@ -42,12 +46,17 @@ const Overlay = styled.div`
 
 const AlertWindow = styled.div`
   width: 100%;
-  max-width: 500px;
-  max-height: 200px;
+  max-width: 550px;
+  height: 100%;
+  max-height: 250px;
   background-color: #c0c0c0;
   box-shadow: 2px 2px black;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: 599px) {
+    max-width: 90%;
+  }
 `;
 
 const AlertTitleBar = styled.div`
@@ -76,12 +85,41 @@ const AlertContent = styled.div`
   flex-grow: 1;
   padding: 16px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 10px;
 `;
 
-const EmojiIcon = styled.div`
-  font-size: 2rem;
-  line-height: 1;
-  flex-shrink: 0;
+const BoxContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  & > *:not(:last-child) {
+    margin-bottom: 40px;
+  }
+`;
+
+const RetroIcon = styled.div`
+  width: 50px;
+  height: 40px;
+  border-radius: 50%;
+  background: red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  padding-left: 2px;
+  padding-bottom: 1px;
+  text-shadow: 0px 0px 0 #000, 0px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  box-shadow: 2px 1px 0px rgba(0, 0, 0, 0.6);
+  margin-bottom: 90px;
+`;
+
+const SmallRetroButton = styled(RetroButton)`
+  width: 20%;
 `;
