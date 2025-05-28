@@ -57,12 +57,16 @@ export async function createOrder(cartItems: CartItem[]) {
   for (const item of cartItems) {
     const product = await db.product.findUnique({
       where: { id: item.id },
-      select: { stock: true, artist: true },
+      select: { stock: true, artist: true, album: true },
     });
 
-    if (!product || product.stock === null || product.stock < item.quantity) {
+    if (!product || product.stock === null || product.stock === 0) {
       throw new Error(
-        `Unfortunately we are currently out of the CD by: ${item.artist}`
+        `Unfortunately we are currently out of stock for the CD ${item.album} by ${item.artist}`
+      );
+    } else if (product.stock < item.quantity) {
+      throw new Error(
+        `We only have ${product.stock} of the CD ${item.album} by ${item.artist}, which is less than the requested quantity (${item.quantity}).`
       );
     }
   }

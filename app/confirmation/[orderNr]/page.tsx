@@ -49,15 +49,15 @@ export default function ConfirmationPage({
           width: "100%",
         }}
       >
-        <Typography variant="h1" component="div" sx={{ textAlign: "center" }}>
+        <Typography variant="h2" component="div" sx={{ textAlign: "center" }}>
           Thank you for your order!
         </Typography>
         <Typography
-          variant="h1"
+          variant="h3"
           component="p"
           sx={{ textAlign: "center", fontSize: "1.25rem", padding: "1.5rem" }}
         >
-          Your ordern# : {orderNr}
+          Your order # : {orderNr}
         </Typography>
         <Typography
           variant="h2"
@@ -75,9 +75,9 @@ export default function ConfirmationPage({
           }}
         >
           <Typography>Name: {deliveryAddress?.name}</Typography>
-          <Typography>Name: {deliveryAddress?.address1}</Typography>
-          <Typography>Name: {deliveryAddress?.city}</Typography>
-          <Typography>Name: {deliveryAddress?.zipcode}</Typography>
+          <Typography>Address: {deliveryAddress?.address1}</Typography>
+          <Typography>City: {deliveryAddress?.city}</Typography>
+          <Typography>ZIP Code: {deliveryAddress?.zipcode}</Typography>
         </Box>
 
         <Receipt items={items} totalSum={totalSum} />
