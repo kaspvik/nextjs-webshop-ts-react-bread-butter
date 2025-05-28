@@ -41,14 +41,26 @@ export async function createOrder(cartItems: CartItem[]) {
 
   const orderNr = `${Date.now()}`;
 
+  const address = await db.address.findFirst({
+    where: { userId: session.user.id },
+    orderBy: { id: "desc" },
+  });
+
+  if (!address) {
+    throw new Error("No saved address found for this user");
+  }
+
   const order = await db.order.create({
     data: {
       user: {
+        connect: { id: session.user.id },
+      },
+      orderNr: Date.now().toString(),
+      deliveryAddress: {
         connect: {
-          id: session.user.id,
+          id: address.id,
         },
       },
-      orderNr,
       items: {
         create: cartItems.map((item) => ({
           image: item.image,
@@ -58,7 +70,10 @@ export async function createOrder(cartItems: CartItem[]) {
         })),
       },
     },
-    include: { items: true },
+    include: {
+      items: true,
+      deliveryAddress: true,
+    },
   });
 
   return order;
@@ -81,12 +96,11 @@ export async function getOrderById(id: string) {
 export async function getOrderByOrderNr(orderNr: string) {
   try {
     const order = await db.order.findFirst({
-      where: {
-        orderNr: orderNr,
-      },
+      where: { orderNr },
       include: {
         items: true,
         user: true,
+        deliveryAddress: true,
       },
     });
 
@@ -97,6 +111,7 @@ export async function getOrderByOrderNr(orderNr: string) {
     return {
       customer: order.user,
       items: order.items,
+      deliveryAddress: order.deliveryAddress,
     };
   } catch (error) {
     console.error("Error fetching order:", error);
