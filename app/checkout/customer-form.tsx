@@ -16,7 +16,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 import { createOrder, saveAddress } from "../admin/action";
+import { useSession } from "../auth-client";
 import { useCart } from "../provider";
+import CustomAlert from "./customer-alert";
 
 const customerSchema = z.object({
   name: z.string().min(1, "You must fill in your name."),
@@ -34,6 +36,8 @@ export default function CustomerForm() {
   const { cartItems } = useCart();
   const [open, setOpen] = useState(false);
   const { totalSum, clearCart } = useCart();
+  const { data: session } = useSession();
+  const [authError, setAuthError] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     address: "",
@@ -49,10 +53,8 @@ export default function CustomerForm() {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    // uppdatera värdet när användaren skriveer i fältet
     setFormData((prev) => ({ ...prev, [name]: value }));
 
-    // Validerar hela schemat
     const result = customerSchema.safeParse({ ...formData, [name]: value });
     if (result.success) {
       setErrors({});
@@ -74,10 +76,18 @@ export default function CustomerForm() {
 
   const handleSubmit = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault();
+
+    console.log("Session data:", session);
+    console.log("Session user:", session?.user);
+
+    if (!session?.user) {
+      setAuthError(true);
+      return;
+    }
+
     const result = customerSchema.safeParse(formData);
 
     if (!result.success) {
-      // konvertera zod felen till objekt att lagra namnen på fälten
       const newErrors = result.error.flatten().fieldErrors;
       setErrors(
         Object.keys(newErrors).reduce((acc, key) => {
@@ -89,7 +99,6 @@ export default function CustomerForm() {
       );
 
       // om det fanns nåt fel
-
       console.log("Formuläret innehåller fel, avbryter!");
       return;
     }
@@ -125,6 +134,14 @@ export default function CustomerForm() {
       <Typography variant="h4" sx={{ textAlign: "left", ml: { sx: 1, md: 2 } }}>
         Delivery & Payment
       </Typography>
+
+      {authError && (
+        <CustomAlert
+          message="You must be signed in to complete an order. Please sign in to continue shopping."
+          onClose={() => setAuthError(false)}
+        />
+      )}
+
       <Box sx={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
         <Box
           component="form"
