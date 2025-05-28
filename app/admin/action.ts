@@ -39,7 +39,11 @@ export async function createOrder(cartItems: CartItem[]) {
     throw new Error("User must be logged in to create an order");
   }
 
-  const orderNr = `${Date.now()}`;
+  const generateOrderNr = customAlphabet(
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    8
+  );
+  const orderNr = `ORD-${generateOrderNr()}`;
 
   const address = await db.address.findFirst({
     where: { userId: session.user.id },
@@ -50,12 +54,25 @@ export async function createOrder(cartItems: CartItem[]) {
     throw new Error("No saved address found for this user");
   }
 
+  for (const item of cartItems) {
+    const product = await db.product.findUnique({
+      where: { id: item.id },
+      select: { stock: true, artist: true },
+    });
+
+    if (!product || product.stock === null || product.stock < item.quantity) {
+      throw new Error(
+        `Unfortunately we are currently out of the CD by: ${item.artist}`
+      );
+    }
+  }
+
   const order = await db.order.create({
     data: {
       user: {
         connect: { id: session.user.id },
       },
-      orderNr: Date.now().toString(),
+      orderNr,
       deliveryAddress: {
         connect: {
           id: address.id,
@@ -75,6 +92,17 @@ export async function createOrder(cartItems: CartItem[]) {
       deliveryAddress: true,
     },
   });
+
+  for (const item of cartItems) {
+    await db.product.update({
+      where: { id: item.id },
+      data: {
+        stock: {
+          decrement: item.quantity,
+        },
+      },
+    });
+  }
 
   return order;
 }

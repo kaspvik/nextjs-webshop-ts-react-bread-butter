@@ -44,6 +44,8 @@ export default function CustomerForm() {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [stockErrorOpen, setStockErrorOpen] = useState(false);
+  const [stockErrorMessage, setStockErrorMessage] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -94,14 +96,11 @@ export default function CustomerForm() {
 
     try {
       await saveAddress(formData);
-
       const order = await createOrder(cartItems);
-
-      setOpen(true);
+      setOpen(true); // success snackbar
       setTimeout(() => {
         router.push(`/confirmation/${order.orderNr}`);
       }, 1000);
-
       clearCart();
       setFormData({
         name: "",
@@ -111,8 +110,13 @@ export default function CustomerForm() {
         email: "",
         phone: "",
       });
-    } catch (error) {
-      console.error("Checkout error:", error);
+    } catch (error: any) {
+      if (error instanceof Error) {
+        setStockErrorMessage(error.message);
+        setStockErrorOpen(true); // show your stock error snackbar
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
 
@@ -135,7 +139,8 @@ export default function CustomerForm() {
             flexDirection: "column",
             alignItems: "center",
             gap: 2,
-          }}>
+          }}
+        >
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -143,7 +148,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Name
             </FormLabel>
             <TextField
@@ -174,7 +180,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Delivery address
             </FormLabel>
             <TextField
@@ -203,7 +210,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}>
+            }}
+          >
             <FormControl fullWidth>
               <FormLabel
                 sx={{
@@ -211,7 +219,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 Zipcode
               </FormLabel>
               <TextField
@@ -241,7 +250,8 @@ export default function CustomerForm() {
                   fontWeight: "bold",
                   color: "text.primary",
                   fontFamily: "var(--font-tomorrow)",
-                }}>
+                }}
+              >
                 City
               </FormLabel>
               <TextField
@@ -271,7 +281,8 @@ export default function CustomerForm() {
               gap: 2,
               width: "100%",
               justifyContent: "space-between",
-            }}></Box>
+            }}
+          ></Box>
           <FormControl fullWidth>
             <FormLabel
               sx={{
@@ -279,7 +290,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Email
             </FormLabel>
             <TextField
@@ -309,7 +321,8 @@ export default function CustomerForm() {
                 fontWeight: "bold",
                 color: "text.primary",
                 fontFamily: "var(--font-tomorrow)",
-              }}>
+              }}
+            >
               Phonenumber
             </FormLabel>
             <TextField
@@ -345,14 +358,21 @@ export default function CustomerForm() {
               mx: "auto",
               py: 2,
               fontFamily: "var(--font-tomorrow)",
-            }}>
+            }}
+          >
             Proceed to payment
           </Button>
           <Snackbar
             open={open}
-            message="Beställning genomförd!"
+            message="Order placed!"
             autoHideDuration={2000}
             onClose={() => setOpen(false)}
+          />
+          <Snackbar
+            open={stockErrorOpen}
+            onClose={() => setStockErrorOpen(false)}
+            autoHideDuration={4000}
+            message={stockErrorMessage || "A stock issue occurred."}
           />
         </Box>
         <Box
@@ -369,7 +389,8 @@ export default function CustomerForm() {
             flexDirection: "column",
 
             gap: 2,
-          }}>
+          }}
+        >
           <Box display="flex" justifyContent="space-between">
             <Typography variant="h6">Subtotal:</Typography>
             <Typography variant="h6">{totalSum.toFixed(2)}</Typography>
