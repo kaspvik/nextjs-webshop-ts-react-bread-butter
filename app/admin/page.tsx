@@ -7,7 +7,7 @@ import { db } from "@/prisma/db";
 export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
-  const session = await auth.api.getSession({ headers: headers() });
+  const session = await auth.api.getSession({ headers: await headers() });
 
   if (!session?.user?.id) {
     redirect("/");
