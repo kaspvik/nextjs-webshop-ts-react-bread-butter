@@ -6,16 +6,14 @@ import Link from "next/link";
 
 export default function ShowOrderButton() {
   return (
-    <Link
-      href="admin/orders"
-      style={{ textDecoration: "none", color: "#3E291E" }}>
+    <Link href="admin/orders" style={{ textDecoration: "none" }}>
       <Container
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
         }}>
-        <StyledButton>See orders</StyledButton>
+        <StyledButton color="secondary">See orders</StyledButton>
       </Container>
     </Link>
   );
