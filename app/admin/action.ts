@@ -199,21 +199,35 @@ export async function navigateToUserPage() {
 
 export async function getAllOrders() {
   try {
-    const orders = await db.order.findMany();
-
-    const ordersWithUsers = await db.order.findMany({
+    const ordersWithItems = await db.order.findMany({
       include: {
         user: true,
+        items: true,
       },
     });
 
-    return ordersWithUsers.map((order) => ({
+    return ordersWithItems.map((order) => ({
       ...order,
-      items: [],
       deliveryAddress: null,
     }));
   } catch (error) {
-    console.error("Error fetching orders:", error);
-    throw new Error("Failed to fetch orders");
+    console.error("Error fetching orders with items:", error);
+
+    try {
+      const ordersWithoutItems = await db.order.findMany({
+        include: {
+          user: true,
+        },
+      });
+
+      return ordersWithoutItems.map((order) => ({
+        ...order,
+        items: [],
+        deliveryAddress: null,
+      }));
+    } catch (fallbackError) {
+      console.error("Fallback error:", fallbackError);
+      throw new Error("Failed to fetch orders");
+    }
   }
 }
