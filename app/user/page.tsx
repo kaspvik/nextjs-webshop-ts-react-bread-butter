@@ -24,10 +24,20 @@ export default async function UserPage() {
 
   if (!session || !session.user) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen">
-        <h1 className="text-xl font-bold text-red-500">
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+          padding: "1rem",
+          textAlign: "center",
+        }}
+      >
+        <Typography variant="h6" color="error" style={{ margin: 0 }}>
           You must be signed in to see your orders.
-        </h1>
+        </Typography>
       </div>
     );
   }
@@ -41,23 +51,45 @@ export default async function UserPage() {
   });
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen gap-6 p-4">
-      <h1 className="text-2xl font-bold mb-4">Your orders</h1>
+    <div
+      style={{
+        padding: "1rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        gap: "1rem",
+        maxWidth: "720px",
+        marginLeft: "auto",
+        marginRight: "auto",
+      }}
+    >
+      <Typography
+        variant="h5"
+        component="h1"
+        style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
+      >
+        Your orders
+      </Typography>
       {orders.length === 0 ? (
-        <p className="text-lg text-gray-600">No orders found.</p>
+        <Typography variant="body1" color="textSecondary" style={{ margin: 0 }}>
+          No orders found.
+        </Typography>
       ) : (
         orders.map((order) => (
-          <Card key={order.id} className="w-full max-w-xl">
+          <Card key={order.id} style={{ width: "100%" }}>
             <CardContent>
               <Typography variant="h6" gutterBottom>
                 Order number: {order.orderNr}
               </Typography>
-              <Typography variant="body2" color="text.secondary" gutterBottom>
+              <Typography variant="body2" color="textSecondary" gutterBottom>
                 Delivery address: {order.deliveryAddress?.address1},{" "}
                 {order.deliveryAddress?.city}
               </Typography>
-              <Typography variant="subtitle1">Products:</Typography>
-              <ul className="list-disc pl-5">
+              <Typography variant="subtitle1" gutterBottom>
+                Products:
+              </Typography>
+              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", marginTop: 0 }}>
                 {order.items.map((item) => (
                   <li key={item.id}>
                     {item.artist} – {item.quantity} st – {item.price} SEK
