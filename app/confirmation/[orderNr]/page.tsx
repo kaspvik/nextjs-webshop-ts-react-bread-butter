@@ -3,14 +3,14 @@
 import { getOrderByOrderNr } from "@/app/admin/action";
 import Receipt from "@/app/confirmation/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function ConfirmationPage({
   params,
 }: {
-  params: { orderNr: string };
+  params: Promise<{ orderNr: string }>;
 }) {
-  const { orderNr } = params;
+  const { orderNr } = React.use(params);
   const [order, setOrder] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
 
