@@ -6,7 +6,6 @@ import {
   Container,
   Divider,
   FormControl,
-  FormHelperText,
   FormLabel,
   Snackbar,
   TextField,
@@ -169,6 +168,7 @@ export default function CustomerForm() {
             >
               Name
             </FormLabel>
+
             <TextField
               size="small"
               sx={{
@@ -180,13 +180,9 @@ export default function CustomerForm() {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              error={Boolean(errors.name)}
               autoComplete="name"
-              helperText={
-                errors.name ? (
-                  <FormHelperText>{errors.name}</FormHelperText>
-                ) : null
-              }
+              error={Boolean(errors.name)}
+              helperText={errors.name || null}
             />
           </FormControl>
 
@@ -214,11 +210,7 @@ export default function CustomerForm() {
               onChange={handleChange}
               autoComplete="street-address"
               error={Boolean(errors.address)}
-              helperText={
-                errors.address ? (
-                  <FormHelperText>{errors.address}</FormHelperText>
-                ) : null
-              }
+              helperText={errors.address || null}
             />
           </FormControl>
           <Box
@@ -240,24 +232,21 @@ export default function CustomerForm() {
               >
                 Zipcode
               </FormLabel>
+
               <TextField
                 size="small"
                 sx={{
                   backgroundColor: "background.paper",
                   borderRadius: "0.5rem",
-                  flex: 1,
                 }}
+                fullWidth
                 id="zipcode"
                 name="zipcode"
                 value={formData.zipcode}
                 onChange={handleChange}
                 autoComplete="postal-code"
                 error={Boolean(errors.zipcode)}
-                helperText={
-                  errors.zipcode ? (
-                    <FormHelperText>{errors.zipcode}</FormHelperText>
-                  ) : null
-                }
+                helperText={errors.zipcode || null}
               />
             </FormControl>
             <FormControl fullWidth>
@@ -271,24 +260,21 @@ export default function CustomerForm() {
               >
                 City
               </FormLabel>
+
               <TextField
                 size="small"
                 sx={{
                   backgroundColor: "background.paper",
                   borderRadius: "0.5rem",
-                  flex: 1,
                 }}
+                fullWidth
                 id="city"
                 name="city"
                 value={formData.city}
                 onChange={handleChange}
                 autoComplete="address-level2"
                 error={Boolean(errors.city)}
-                helperText={
-                  errors.city ? (
-                    <FormHelperText>{errors.city}</FormHelperText>
-                  ) : null
-                }
+                helperText={errors.city || null}
               />
             </FormControl>
           </Box>
@@ -311,6 +297,7 @@ export default function CustomerForm() {
             >
               Email
             </FormLabel>
+
             <TextField
               size="small"
               sx={{
@@ -324,11 +311,7 @@ export default function CustomerForm() {
               onChange={handleChange}
               autoComplete="email"
               error={Boolean(errors.email)}
-              helperText={
-                errors.email ? (
-                  <FormHelperText>{errors.email}</FormHelperText>
-                ) : null
-              }
+              helperText={errors.email || null}
             />
           </FormControl>
           <FormControl fullWidth>
@@ -342,6 +325,7 @@ export default function CustomerForm() {
             >
               Phonenumber
             </FormLabel>
+
             <TextField
               size="small"
               sx={{
@@ -355,11 +339,7 @@ export default function CustomerForm() {
               onChange={handleChange}
               autoComplete="tel"
               error={Boolean(errors.phone)}
-              helperText={
-                errors.phone ? (
-                  <FormHelperText>{errors.phone}</FormHelperText>
-                ) : null
-              }
+              helperText={errors.phone || null}
             />
           </FormControl>
           <Button
