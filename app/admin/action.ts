@@ -10,6 +10,12 @@ import { auth } from "../auth";
 import { CartItem } from "../provider";
 
 export async function createProduct(product: Prisma.ProductCreateInput) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.isAdmin) {
+    throw new Error("Must be a logged in admin to create a product");
+  }
+
   const nanoid = customAlphabet("1234567890", 4);
   product.articleNumber = nanoid();
   await db.product.create({ data: product });
@@ -17,6 +23,11 @@ export async function createProduct(product: Prisma.ProductCreateInput) {
 }
 
 export async function deleteProduct(id: string) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.isAdmin) {
+    throw new Error("Must be a logged in admin to delete a product");
+  }
   await db.product.delete({ where: { id: id } });
   revalidatePath("/");
 }
@@ -25,6 +36,10 @@ export async function updateProduct(
   articleNumber: string,
   data: Prisma.ProductUpdateInput
 ) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session?.user?.isAdmin) {
+    throw new Error("Must be a logged in admin to update a product");
+  }
   await db.product.update({
     where: { articleNumber },
     data,
@@ -112,6 +127,11 @@ export async function createOrder(cartItems: CartItem[]) {
 }
 
 export async function getOrderById(id: string) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user) {
+    throw new Error("Error: Unable to load order");
+  }
   const order = await db.order.findUnique({
     where: {
       id: id,
@@ -126,6 +146,11 @@ export async function getOrderById(id: string) {
 }
 
 export async function getOrderByOrderNr(orderNr: string) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user) {
+    throw new Error("Error: Unable to load order");
+  }
   try {
     const order = await db.order.findFirst({
       where: { orderNr },
@@ -179,6 +204,12 @@ export async function saveAddress(formData: {
 }
 
 export async function updateProductStock(productId: string, stock: number) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.isAdmin) {
+    throw new Error("Unauthorized: must be logged in admin to update stock");
+  }
+
   try {
     await db.product.update({
       where: { id: productId },
@@ -214,6 +245,11 @@ export async function navigateToUserPage() {
 }
 
 export async function getAllOrders() {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user?.isAdmin) {
+    throw new Error("Error: Unablew to load orders");
+  }
   try {
     const ordersWithItems = await db.order.findMany({
       include: {
