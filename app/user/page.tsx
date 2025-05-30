@@ -89,13 +89,28 @@ export default async function UserPage() {
               <Typography variant="subtitle1" gutterBottom>
                 Products:
               </Typography>
-              <ul style={{ listStyleType: "disc", paddingLeft: "1.25rem", marginTop: 0 }}>
+              <ul
+                style={{
+                  listStyleType: "disc",
+                  paddingLeft: "1.25rem",
+                  marginTop: 0,
+                }}
+              >
                 {order.items.map((item) => (
                   <li key={item.id}>
-                    {item.artist} – {item.quantity} st – {item.price} SEK
+                    {item.artist} x {item.quantity} st –
+                    {item.quantity * item.price} SEK totalt
                   </li>
                 ))}
               </ul>
+              <Typography variant="subtitle1" style={{ marginTop: "0.5rem" }}>
+                Total:{" "}
+                {order.items.reduce(
+                  (sum, item) => sum + item.quantity * item.price,
+                  0
+                )}{" "}
+                SEK
+              </Typography>
             </CardContent>
           </Card>
         ))
