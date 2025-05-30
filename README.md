@@ -105,11 +105,11 @@ We haven't deployed our project on Vercel yet because the sqlight database is no
 
 - [x] Inga Lösenord får sparas i klartext i databasen.
 
-- [ ] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen.
+- [x] En besökare ska kunna beställa produkter från sidan, detta ska uppdatera lagersaldot i databasen.
 
 - [x] Administratörer ska kunna uppdatera antalet produkter i lager från admin delen av sidan.
 
-- [ ] Administratörer ska kunna se en lista på alla gjorda beställningar.
+- [x] Administratörer ska kunna se en lista på alla gjorda beställningar.
 
 - [x] Sidans produkter ska delas upp i kategorier, en produkt ska tillhöra minst en kategori, men kan tillhöra flera.
 
@@ -117,7 +117,7 @@ We haven't deployed our project on Vercel yet because the sqlight database is no
 
 - [x] Besökare ska kunna lägga produkterna i en kundkorg, som är sparad i local-storage på klienten.
 
-- [ ] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas.
+- [x] En besökare som gör en beställning ska få möjligheten att registrera sig samt logga in och måste vara inloggad som kund innan beställningen skapas.
 
 - [x] Checkoutflödet i frontendapplikationen ska ha validering på samtliga fält.
 
