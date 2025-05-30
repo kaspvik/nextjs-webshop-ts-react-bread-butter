@@ -40,7 +40,7 @@ model Order {
   id        String      @id @default(cuid())
   orderNr   String      @unique
   userId    String
-  isShipped Boolean
+  isShipped Boolean     @default(false)
   user      User        @relation(fields: [userId], references: [id])
   items     OrderItem[]
 
