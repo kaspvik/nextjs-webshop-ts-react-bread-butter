@@ -21,7 +21,7 @@ export default async function UserPage() {
   if (user?.isAdmin) {
     redirect("/admin");
   }
-
+  
   if (!session || !session.user) {
     return (
       <div
@@ -41,9 +41,11 @@ export default async function UserPage() {
       </div>
     );
   }
-
   const orders = await db.order.findMany({
     where: { userId: session.user.id },
+    orderBy: {
+      createdAt: "desc",
+    },
     include: {
       items: true,
       deliveryAddress: true,
@@ -71,49 +73,55 @@ export default async function UserPage() {
       >
         Your orders
       </Typography>
+
       {orders.length === 0 ? (
         <Typography variant="body1" color="textSecondary" style={{ margin: 0 }}>
           No orders found.
         </Typography>
       ) : (
-        orders.map((order) => (
-          <Card key={order.id} style={{ width: "100%" }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom>
-                Order number: {order.orderNr}
-              </Typography>
-              <Typography variant="body2" color="textSecondary" gutterBottom>
-                Delivery address: {order.deliveryAddress?.address1},{" "}
-                {order.deliveryAddress?.city}
-              </Typography>
-              <Typography variant="subtitle1" gutterBottom>
-                Products:
-              </Typography>
-              <ul
-                style={{
-                  listStyleType: "disc",
-                  paddingLeft: "1.25rem",
-                  marginTop: 0,
-                }}
-              >
-                {order.items.map((item) => (
-                  <li key={item.id}>
-                    {item.artist} x {item.quantity} st –
-                    {item.quantity * item.price} SEK totalt
-                  </li>
-                ))}
-              </ul>
-              <Typography variant="subtitle1" style={{ marginTop: "0.5rem" }}>
-                Total:{" "}
-                {order.items.reduce(
-                  (sum, item) => sum + item.quantity * item.price,
-                  0
-                )}{" "}
-                SEK
-              </Typography>
-            </CardContent>
-          </Card>
-        ))
+        orders.map((order) => {
+          const orderTotal = order.items.reduce(
+            (sum, item) => sum + item.quantity * item.price,
+            0
+          );
+
+          return (
+            <Card key={order.id} style={{ width: "100%" }}>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Order number: {order.orderNr}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  Beställd: {new Date(order.createdAt).toLocaleDateString("sv-SE")}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" gutterBottom>
+                  Delivery address: {order.deliveryAddress?.address1},{" "}
+                  {order.deliveryAddress?.city}
+                </Typography>
+                <Typography variant="subtitle1" gutterBottom>
+                  Products:
+                </Typography>
+                <ul
+                  style={{
+                    listStyleType: "disc",
+                    paddingLeft: "1.25rem",
+                    marginTop: 0,
+                  }}
+                >
+                  {order.items.map((item) => (
+                    <li key={item.id}>
+                      {item.artist} × {item.quantity} st –{" "}
+                      {item.quantity * item.price} SEK totalt
+                    </li>
+                  ))}
+                </ul>
+                <Typography variant="subtitle1" style={{ marginTop: "0.5rem" }}>
+                  Total: {orderTotal} SEK
+                </Typography>
+              </CardContent>
+            </Card>
+          );
+        })
       )}
     </div>
   );
