@@ -257,3 +257,18 @@ export async function getAllOrders() {
     }
   }
 }
+
+export async function toggleShipped(orderId: string) {
+  const order = await db.order.findUnique({ where: { id: orderId } });
+  if (!order) throw new Error("Order not found");
+
+  const updatedOrder = await db.order.update({
+    where: { id: orderId },
+    data: { isShipped: !order.isShipped },
+    select: { isShipped: true },
+  });
+
+  revalidatePath("/admin");
+
+  return updatedOrder.isShipped;
+}

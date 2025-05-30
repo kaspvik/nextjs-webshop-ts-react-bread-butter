@@ -37,14 +37,15 @@ model ProductCategory {
 }
 
 model Order {
-  id      String      @id @default(cuid())
-  orderNr String      @unique
-  userId  String
-  user    User        @relation(fields: [userId], references: [id])
-  items   OrderItem[]
+  id        String      @id @default(cuid())
+  orderNr   String      @unique
+  userId    String
+  isShipped Boolean
+  user      User        @relation(fields: [userId], references: [id])
+  items     OrderItem[]
 
   deliveryAddressId String?
-  deliveryAddress   Address?    @relation("OrderDeliveryAddress", fields: [deliveryAddressId], references: [id])
+  deliveryAddress   Address? @relation("OrderDeliveryAddress", fields: [deliveryAddressId], references: [id])
 }
 
 model OrderItem {
@@ -76,13 +77,13 @@ model User {
 }
 
 model Address {
-  id       String @id @default(cuid())
-  name     String
-  address1 String
-  city     String
-  zipcode  String
-  userId   String
-  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id              String  @id @default(cuid())
+  name            String
+  address1        String
+  city            String
+  zipcode         String
+  userId          String
+  user            User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   ordersDelivered Order[] @relation("OrderDeliveryAddress")
 
   @@map("address")
