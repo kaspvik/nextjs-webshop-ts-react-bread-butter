@@ -45,6 +45,8 @@ model Order {
 
   deliveryAddressId String?
   deliveryAddress   Address?    @relation("OrderDeliveryAddress", fields: [deliveryAddressId], references: [id])
+
+  createdAt  DateTime   @default(now())  
 }
 
 model OrderItem {
