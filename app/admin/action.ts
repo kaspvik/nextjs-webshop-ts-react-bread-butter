@@ -165,33 +165,17 @@ export async function saveAddress(formData: {
     throw new Error("User must be logged in to save address");
   }
 
-  const existingAddress = await db.address.findFirst({
-    where: { userId: session.user.id },
+  await db.address.create({
+    data: {
+      name: formData.name,
+      address1: formData.address,
+      zipcode: formData.zipcode,
+      city: formData.city,
+      user: {
+        connect: { id: session.user.id },
+      },
+    },
   });
-
-  if (existingAddress) {
-    await db.address.update({
-      where: { id: existingAddress.id },
-      data: {
-        name: formData.name,
-        address1: formData.address,
-        zipcode: formData.zipcode,
-        city: formData.city,
-      },
-    });
-  } else {
-    await db.address.create({
-      data: {
-        name: formData.name,
-        address1: formData.address,
-        zipcode: formData.zipcode,
-        city: formData.city,
-        user: {
-          connect: { id: session.user.id },
-        },
-      },
-    });
-  }
 }
 
 export async function updateProductStock(productId: string, stock: number) {
