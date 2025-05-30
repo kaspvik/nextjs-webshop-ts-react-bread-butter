@@ -18,6 +18,7 @@ interface ContextValues {
   cartItems: CartItem[];
   cartCount: number;
   totalSum: number;
+  isLoaded: boolean;
   //for the numberfield component
   updateQuantity: (id: string, amount: number) => void;
   addToCart: (item: Product) => void;
@@ -32,6 +33,7 @@ export default function CartProvider(props: PropsWithChildren) {
   // state
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [toastMessage, setToastMessage] = useState<string | null>(null); // Snackbar state
+  const [isLoaded, setIsLoaded] = useState(false);
 
   // läser in cartItems från LocalStorage vid varje omladdning av sidan
   useEffect(() => {
@@ -39,6 +41,7 @@ export default function CartProvider(props: PropsWithChildren) {
     if (cart) {
       setCartItems(JSON.parse(cart));
     }
+    setIsLoaded(true);
   }, []);
 
   // Uppdatera localStorage varje gång cartItems ändras (t.ex läggs till i cart, tas bort från cart etc)
@@ -122,12 +125,14 @@ export default function CartProvider(props: PropsWithChildren) {
         cartItems,
         cartCount,
         totalSum,
+        isLoaded,
         updateQuantity,
         addToCart,
         removeFromCart,
         clearCart,
         showToast,
-      }}>
+      }}
+    >
       {props.children}
       {toastMessage && (
         <Snackbar
@@ -139,7 +144,8 @@ export default function CartProvider(props: PropsWithChildren) {
             maxWidth: "350px",
             borderRadius: "0.5rem",
             boxShadow: "none",
-          }}>
+          }}
+        >
           <Alert
             onClose={() => setToastMessage(null)}
             severity="success"
@@ -153,7 +159,8 @@ export default function CartProvider(props: PropsWithChildren) {
               fontSize: "1rem",
               fontWeight: "bold",
               padding: "6px 16px",
-            }}>
+            }}
+          >
             <Typography variant="h6">{toastMessage}</Typography>
           </Alert>
         </Snackbar>

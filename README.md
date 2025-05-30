@@ -101,7 +101,7 @@ We haven't deployed our project on Vercel yet because the sqlight database is no
 
 - [x] All data som programmet utnyttjar ska vara sparat i en SQL databas (produkter, beställningar, konton, mm) med undantaget av bilder.
 
-- [x?] Man ska kunna logga in som administratör i systemet.
+- [x] Man ska kunna logga in som administratör i systemet.
 
 - [x] Inga Lösenord får sparas i klartext i databasen.
 
