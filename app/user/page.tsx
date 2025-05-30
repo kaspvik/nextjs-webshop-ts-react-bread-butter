@@ -1,5 +1,3 @@
-"use server";
-
 import { db } from "@/prisma/db";
 import { Card, CardContent, Typography } from "@mui/material";
 import { headers } from "next/headers";
@@ -21,7 +19,7 @@ export default async function UserPage() {
   if (user?.isAdmin) {
     redirect("/admin");
   }
-  
+
   if (!session || !session.user) {
     return (
       <div
@@ -92,7 +90,8 @@ export default async function UserPage() {
                   Order number: {order.orderNr}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" gutterBottom>
-                  Beställd: {new Date(order.createdAt).toLocaleDateString("sv-SE")}
+                  Beställd:{" "}
+                  {new Date(order.createdAt).toLocaleDateString("sv-SE")}
                 </Typography>
                 <Typography variant="body2" color="textSecondary" gutterBottom>
                   Delivery address: {order.deliveryAddress?.address1},{" "}
