@@ -53,6 +53,9 @@ const theme = createTheme({
       },
     },
   },
+  shape: {
+    borderRadius: 0,
+  },
 });
 
 export default theme;
