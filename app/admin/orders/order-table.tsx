@@ -86,7 +86,7 @@ export default function OrderTable({ orders }: OrderTableProps) {
         orders.map((order) => (
           <Accordion
             key={order.id}
-            sx={{ backgroundColor: "#FAF2E9", boxShadow: 2 }}
+            sx={{ backgroundColor: "#eee", boxShadow: 2 }}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Box
@@ -109,7 +109,12 @@ export default function OrderTable({ orders }: OrderTableProps) {
                   <Switch
                     checked={order.isShipped}
                     onChange={() => handleToggleShipped(order.id)}
-                    color="primary"
+                    color="success"
+                    sx={{
+                      "& .MuiSwitch-track": {
+                        borderRadius: 0,
+                      },
+                    }}
                     disabled={isPending}
                   />
                 </Box>
