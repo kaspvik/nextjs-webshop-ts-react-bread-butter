@@ -74,7 +74,7 @@ export default function OrderOverview() {
                     <Box
                       component="img"
                       src={item.image}
-                      alt={item.title}
+                      alt={item.artist}
                       sx={{
                         width: "50px",
                         height: "50px",
@@ -83,8 +83,7 @@ export default function OrderOverview() {
                         display: { xs: "none", sm: "block" },
                       }}
                     />
-
-                    {item.title}
+                    {item.artist} - {item.album}
                   </TableCell>
                   <TableCell align="right">{item.quantity}</TableCell>
                   <TableCell align="right">{item.price}</TableCell>
