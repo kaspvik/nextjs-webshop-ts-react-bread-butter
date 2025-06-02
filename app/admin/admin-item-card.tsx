@@ -71,13 +71,32 @@ export default function AdminItem({ product }: ProductCardProps) {
             </Typography>
           </Box>
 
-          <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            Artist: {product.artist}
-          </Typography>
-          <Typography variant="body1" sx={{ fontWeight: 600 }}>
-            Album: {product.album}
-          </Typography>
-          <Typography variant="body1">{product.price} sek</Typography>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Artist:{" "}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.artist}
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Album:{" "}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.album}
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Sek:{" "}
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.price}
+            </Typography>
+          </Box>
 
           <Typography variant="body1" sx={{ marginTop: 1, fontWeight: 600 }}>
             Description:
