@@ -31,6 +31,7 @@ export default function AdminItem({ product }: ProductCardProps) {
       <Container
         key={product.id}
         sx={{
+          position: "relative",
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
@@ -41,6 +42,18 @@ export default function AdminItem({ product }: ProductCardProps) {
           gap: 1,
           flexWrap: { xs: "wrap", md: "nowrap" },
         }}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: 8,
+            right: 8,
+            display: "flex",
+            gap: 1,
+          }}>
+          <EditButton product={product} />
+          <DeleteButton product={product} />
+        </Box>
+
         <Box
           sx={{
             width: { xs: "100px", md: "150px" },
@@ -64,7 +77,7 @@ export default function AdminItem({ product }: ProductCardProps) {
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Art Nr:{" "}
+              Art Nr:
             </Typography>
             <Typography variant="body1" sx={{ ml: 0.5 }}>
               {product.articleNumber}
@@ -73,7 +86,7 @@ export default function AdminItem({ product }: ProductCardProps) {
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Artist:{" "}
+              Artist:
             </Typography>
             <Typography variant="body1" sx={{ ml: 0.5 }}>
               {product.artist}
@@ -82,7 +95,7 @@ export default function AdminItem({ product }: ProductCardProps) {
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Album:{" "}
+              Album:
             </Typography>
             <Typography variant="body1" sx={{ ml: 0.5 }}>
               {product.album}
@@ -91,7 +104,7 @@ export default function AdminItem({ product }: ProductCardProps) {
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Typography variant="body1" sx={{ fontWeight: 600 }}>
-              Sek:{" "}
+              Sek:
             </Typography>
             <Typography variant="body1" sx={{ ml: 0.5 }}>
               {product.price}
@@ -106,24 +119,14 @@ export default function AdminItem({ product }: ProductCardProps) {
             sx={{ borderColor: "text.secondary", borderRadius: "4px" }}>
             {product.description}
           </Typography>
-        </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-            minWidth: "140px",
-          }}>
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: { xs: "column", sm: "row" },
+              alignItems: { xs: "flex-start", sm: "center" },
               gap: 1,
-              width: "100%",
-              alignItems: "center",
+              mt: 2,
             }}>
             <Typography variant="body1" sx={{ fontWeight: 600 }}>
               In stock:
@@ -135,7 +138,7 @@ export default function AdminItem({ product }: ProductCardProps) {
               style={{
                 width: "66px",
                 padding: "4px",
-                borderRadius: "4px",
+                borderRadius: "0px",
                 border: "1px solid #ccc",
                 textAlign: "center",
               }}
@@ -144,31 +147,14 @@ export default function AdminItem({ product }: ProductCardProps) {
               onClick={handleUpdateStock}
               disabled={isPending}
               sx={{
-                backgroundColor: "#9C8173",
+                backgroundColor: "#1A535C",
                 color: "white",
-                borderRadius: "4px",
                 textTransform: "none",
-                transition: "transform 0.2s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#2b1f16",
-                  transform: "scale(1.05)",
-                },
+                borderRadius: "0px",
+                minWidth: "90px",
               }}>
               {isPending ? "Updating..." : "Update"}
             </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "row", sm: "row" },
-              gap: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-            }}>
-            <EditButton product={product} />
-            <DeleteButton product={product} />
           </Box>
         </Box>
       </Container>
