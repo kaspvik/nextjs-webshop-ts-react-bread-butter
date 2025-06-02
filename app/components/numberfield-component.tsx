@@ -35,13 +35,15 @@ export default function PublicNumberField({
           flexDirection: "column",
           alignItems: "flex-start",
           gap: "0.25rem",
-        }}>
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-          }}>
+          }}
+        >
           <Typography variant="h6" sx={{ align: "center" }}>
             {price * quantity} kr
           </Typography>
@@ -54,15 +56,15 @@ export default function PublicNumberField({
                 height: "1.25rem",
                 alignItems: "center",
                 justifyContent: "center",
-                borderTopLeftRadius: "0.375rem",
-                borderBottomLeftRadius: "0.375rem",
+
                 border: "1px solid #000000",
                 backgroundColor: "transparent",
                 backgroundClip: "padding-box",
                 color: "#111827",
                 userSelect: "none",
                 boxShadow: "4px 4px 5px -2px grey",
-              }}>
+              }}
+            >
               <MinusIcon />
             </NumberField.Decrement>
             <div
@@ -80,7 +82,8 @@ export default function PublicNumberField({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-              }}>
+              }}
+            >
               {quantity}
             </div>
 
@@ -92,14 +95,14 @@ export default function PublicNumberField({
                 height: "1.25rem",
                 alignItems: "center",
                 justifyContent: "center",
-                borderTopRightRadius: "0.375rem",
-                borderBottomRightRadius: "0.375rem",
+
                 border: "1px solid #000000",
                 backgroundColor: "transparent",
                 color: "#111827",
                 userSelect: "none",
                 boxShadow: "0px 4px 5px -2px grey",
-              }}>
+              }}
+            >
               <PlusIcon />
             </NumberField.Increment>
           </NumberField.Group>
@@ -119,7 +122,8 @@ function PlusIcon(props: React.ComponentProps<"svg">) {
       stroke="currentcolor"
       strokeWidth="1.6"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}>
+      {...props}
+    >
       <path d="M0 5H5M10 5H5M5 5V0M5 5V10" />
     </svg>
   );
@@ -135,7 +139,8 @@ function MinusIcon(props: React.ComponentProps<"svg">) {
       stroke="currentcolor"
       strokeWidth="1.6"
       xmlns="http://www.w3.org/2000/svg"
-      {...props}>
+      {...props}
+    >
       <path d="M0 5H10" />
     </svg>
   );
