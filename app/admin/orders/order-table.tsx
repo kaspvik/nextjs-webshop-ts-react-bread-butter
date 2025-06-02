@@ -104,16 +104,21 @@ export default function OrderTable({ orders }: OrderTableProps) {
                     display: "flex",
                     flexDirection: { xs: "column", sm: "row" },
                     gap: 3,
+                    width: "100%",
                   }}
                 >
                   <Typography
                     variant="h6"
                     color="black"
-                    sx={{ fontWeight: 600 }}
+                    sx={{ fontWeight: 600, minWidth: "140px", flexShrink: 0 }}
                   >
                     {order.orderNr || order.id.slice(-8)}
                   </Typography>
-                  <Typography variant="h6" color="black">
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    sx={{ minWidth: "200px", flexGrow: 1 }}
+                  >
                     {order.user?.name || "Unknown customer"}
                   </Typography>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
