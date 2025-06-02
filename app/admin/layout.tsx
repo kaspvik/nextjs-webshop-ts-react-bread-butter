@@ -20,33 +20,39 @@ export default async function AdminLayout({
         bgcolor: "background.paper",
         marginTop: 2,
         marginBottom: 2,
-        borderRadius: 2,
+        borderRadius: 0,
         padding: 4,
-        border: "2px solid #9C8173",
-      }}
-    >
-      <AddProductButton />
-            <ShowOrderButton />
+      }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: 2,
+        }}>
+        <AddProductButton />
+        <ShowOrderButton />
+      </Box>
       {products.map((product) => (
         <AdminItem key={product.id} product={product} />
       ))}
       {children}
 
-            <Box
-              sx={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                width: "100vw",
-                height: "100vh",
-                zIndex: 9999,
-                pointerEvents: "none",
-                backgroundImage: "url('/images/crt-noise.gif')",
-                opacity: 9,
-                mixBlendMode: "screen",
-              }}
-            />
-
+      <Box
+        sx={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          zIndex: 9999,
+          pointerEvents: "none",
+          backgroundImage: "url('/images/crt-noise.gif')",
+          opacity: 9,
+          mixBlendMode: "screen",
+        }}
+      />
     </Container>
   );
 }

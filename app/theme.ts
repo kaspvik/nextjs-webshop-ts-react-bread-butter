@@ -24,6 +24,11 @@ const theme = createTheme({
     h6: {
       fontFamily: "var(--font-tomorrow)",
       fontSize: 16,
+      fontWeight: 600,
+    },
+    body1: {
+      fontFamily: "var(--font-tomorrow)",
+      fontSize: 14,
       fontWeight: 400,
     },
   },

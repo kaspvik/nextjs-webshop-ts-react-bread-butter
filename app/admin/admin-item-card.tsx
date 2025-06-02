@@ -1,7 +1,7 @@
 "use client";
 import { updateProductStock } from "@/app/admin/action";
-import { Product } from "@prisma/client";
 import { Box, Button, Container, Snackbar, Typography } from "@mui/material";
+import { Product } from "@prisma/client";
 import { useState, useTransition } from "react";
 import EditButton from "./buttons/edit-admin-button";
 import DeleteButton from "./delete-product-item";
@@ -29,35 +29,42 @@ export default function AdminItem({ product }: ProductCardProps) {
   return (
     <>
       <Container
-        data-cy="product"
         key={product.id}
         sx={{
+          position: "relative",
           display: "flex",
           flexDirection: { xs: "column", sm: "row" },
           alignItems: "center",
           justifyContent: "space-between",
-          backgroundColor: "#FAF2E9",
+          backgroundColor: "#eee",
           padding: 2,
-          borderRadius: 2,
           boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.4)",
           gap: 1,
           flexWrap: { xs: "wrap", md: "nowrap" },
-        }}
-      >
+        }}>
         <Box
           sx={{
-            width: { xs: "100px", md: "150px" },
-            height: { xs: "100px", md: "150px" },
-          }}
-        >
+            position: "absolute",
+            top: 8,
+            right: 8,
+            display: "flex",
+            gap: 1,
+          }}>
+          <EditButton product={product} />
+          <DeleteButton product={product} />
+        </Box>
+
+        <Box
+          sx={{
+            width: "190px",
+            height: "190px",
+          }}>
           <Box
             component="img"
             src={product.image}
-            alt={product.title}
+            alt={product.album}
             sx={{
-              borderRadius: { xs: "50%", md: "20px" },
               padding: 0.5,
-              border: { xs: "2px solid #9C8173", md: "none" },
               width: "100%",
               height: "100%",
               objectFit: "cover",
@@ -66,55 +73,62 @@ export default function AdminItem({ product }: ProductCardProps) {
         </Box>
 
         <Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
-          <Typography variant="h6" data-cy="product-title">
-            {product.title}
-          </Typography>
+          <Typography variant="h6">{product.album}</Typography>
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
-            <Typography variant="body2">Art Nr: </Typography>
-            <Typography variant="body2" data-cy="product-id" sx={{ ml: 0.5 }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Art Nr:
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
               {product.articleNumber}
             </Typography>
           </Box>
 
-          <Typography variant="body2">Artist: {product.artist}</Typography>
-          <Typography variant="body2">Album: {product.album}</Typography>
-          <Typography variant="body2" data-cy="product-price">
-            {product.price} sek
-          </Typography>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Artist:
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.artist}
+            </Typography>
+          </Box>
 
-          <Typography variant="subtitle2" sx={{ marginTop: 1 }}>
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Album:
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.album}
+            </Typography>
+          </Box>
+
+          <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
+              Sek:
+            </Typography>
+            <Typography variant="body1" sx={{ ml: 0.5 }}>
+              {product.price}
+            </Typography>
+          </Box>
+
+          <Typography variant="body1" sx={{ marginTop: 1, fontWeight: 600 }}>
             Description:
           </Typography>
           <Typography
-            variant="body2"
-            sx={{ borderColor: "text.secondary", borderRadius: "4px" }}
-            data-cy="product-description"
-          >
+            variant="body1"
+            sx={{ borderColor: "text.secondary", borderRadius: "4px" }}>
             {product.description}
           </Typography>
-        </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 2,
-            minWidth: "140px",
-          }}
-        >
           <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
+              flexDirection: "row",
+              alignItems: { xs: "flex-start", sm: "center" },
               gap: 1,
-              width: "100%",
-              alignItems: "center",
-            }}
-          >
-            <Typography variant="body2" sx={{ fontWeight: 600 }}>
+              mt: 2,
+            }}>
+            <Typography variant="body1" sx={{ fontWeight: 600 }}>
               In stock:
             </Typography>
             <input
@@ -124,7 +138,7 @@ export default function AdminItem({ product }: ProductCardProps) {
               style={{
                 width: "66px",
                 padding: "4px",
-                borderRadius: "4px",
+                borderRadius: "0px",
                 border: "1px solid #ccc",
                 textAlign: "center",
               }}
@@ -133,33 +147,14 @@ export default function AdminItem({ product }: ProductCardProps) {
               onClick={handleUpdateStock}
               disabled={isPending}
               sx={{
-                backgroundColor: "#9C8173",
+                backgroundColor: "#1A535C",
                 color: "white",
-                borderRadius: "4px",
                 textTransform: "none",
-                transition: "transform 0.2s ease-in-out",
-                "&:hover": {
-                  backgroundColor: "#2b1f16",
-                  transform: "scale(1.05)",
-                },
-              }}
-            >
+                borderRadius: "0px",
+                minWidth: "90px",
+              }}>
               {isPending ? "Updating..." : "Update"}
             </Button>
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: { xs: "row", sm: "column" },
-              gap: 1,
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
-            }}
-          >
-            <EditButton product={product} />
-            <DeleteButton product={product} />
           </Box>
         </Box>
       </Container>

@@ -65,7 +65,7 @@ export default async function ProductCard({ product }: ProductCardProps) {
           {product.album}
         </Typography>
         <Typography
-          variant="h6"
+          variant="body1"
           sx={{
             color: "text.secondary",
             height: "7.6em",

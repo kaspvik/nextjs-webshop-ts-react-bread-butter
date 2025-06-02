@@ -1,8 +1,8 @@
 "use client";
 
-import { Product } from "@prisma/client";
 import { Delete } from "@mui/icons-material";
 import { Alert, IconButton, Snackbar } from "@mui/material";
+import { Product } from "@prisma/client";
 import { useState } from "react";
 import ConfirmDeleteProduct from "./buttons/confirm-delete-button";
 
@@ -23,18 +23,16 @@ export default function DeleteButton({ product }: ProductCardProps) {
 
   return (
     <>
-      {/* Knapp som visar alert */}
-      <IconButton onClick={handleClick} sx={{ color: "#9C8173" }}>
+      <IconButton onClick={handleClick} sx={{ color: "#1A535C" }}>
         <Delete />
       </IconButton>
 
-      {/* Alert som visas vid klick */}
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert
           onClose={handleClose}
           severity="warning"
           sx={{ width: "100%", gap: 2 }}>
-          <p>Are you sure you want to delete {product.title} ?</p>
+          <p>Are you sure you want to delete {product.album} ?</p>
 
           <ConfirmDeleteProduct product={product} />
         </Alert>
