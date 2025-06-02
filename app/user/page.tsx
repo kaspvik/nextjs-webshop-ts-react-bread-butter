@@ -1,10 +1,18 @@
-"use server";
-
 import { db } from "@/prisma/db";
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Chip, Box } from "@mui/material";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { auth } from "../auth";
+
+function formatOrderDate(date: Date): string {
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit'
+  }).format(new Date(date));
+}
 
 export default async function UserPage() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -21,7 +29,7 @@ export default async function UserPage() {
   if (user?.isAdmin) {
     redirect("/admin");
   }
-  
+
   if (!session || !session.user) {
     return (
       <div
@@ -41,6 +49,7 @@ export default async function UserPage() {
       </div>
     );
   }
+
   const orders = await db.order.findMany({
     where: { userId: session.user.id },
     orderBy: {
@@ -67,61 +76,98 @@ export default async function UserPage() {
       }}
     >
       <Typography
-        variant="h5"
+        variant="h4"
         component="h1"
-        style={{ marginTop: "0.5rem", marginBottom: "0.5rem" }}
+        style={{ 
+          marginTop: "1rem", 
+          marginBottom: "1rem",
+          color: "#2c1810"
+        }}
       >
-        Your orders
+        Your Orders
       </Typography>
 
       {orders.length === 0 ? (
-        <Typography variant="body1" color="textSecondary" style={{ margin: 0 }}>
-          No orders found.
-        </Typography>
+        <Card style={{ width: "100%", textAlign: "center", padding: "2rem" }}>
+          <Typography variant="h6" color="textSecondary">
+            No orders found
+          </Typography>
+          <Typography variant="body2" color="textSecondary" style={{ marginTop: "0.5rem" }}>
+            When you place your first order, it will appear here.
+          </Typography>
+        </Card>
       ) : (
-        orders.map((order) => {
-          const orderTotal = order.items.reduce(
-            (sum, item) => sum + item.quantity * item.price,
-            0
-          );
 
-          return (
-            <Card key={order.id} style={{ width: "100%" }}>
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  Order number: {order.orderNr}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
-                  Beställd: {new Date(order.createdAt).toLocaleDateString("sv-SE")}
-                </Typography>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
-                  Delivery address: {order.deliveryAddress?.address1},{" "}
-                  {order.deliveryAddress?.city}
-                </Typography>
-                <Typography variant="subtitle1" gutterBottom>
-                  Products:
-                </Typography>
-                <ul
-                  style={{
-                    listStyleType: "disc",
-                    paddingLeft: "1.25rem",
-                    marginTop: 0,
-                  }}
-                >
-                  {order.items.map((item) => (
-                    <li key={item.id}>
-                      {item.artist} × {item.quantity} st –{" "}
-                      {item.quantity * item.price} SEK totalt
-                    </li>
-                  ))}
-                </ul>
-                <Typography variant="subtitle1" style={{ marginTop: "0.5rem" }}>
-                  Total: {orderTotal} SEK
-                </Typography>
-              </CardContent>
-            </Card>
-          );
-        })
+        <Box style={{ width: "100%" }}>
+          {orders.map((order) => {
+            const orderTotal = order.items.reduce(
+              (sum, item) => sum + item.quantity * item.price,
+              0
+            );
+
+            return (
+              <Card 
+                key={order.id} 
+                style={{ 
+                  width: "100%", 
+                  marginBottom: "1rem",
+                }}
+              >
+                <CardContent>
+                  <Box style={{ marginLeft: "1rem" }}>
+                    <Typography variant="h6" style={{ marginBottom: "0.5rem" }}>
+                      #{order.orderNr}
+                    </Typography>
+
+                    <Typography variant="body2" color="textSecondary" style={{ marginBottom: "0.5rem" }}>
+                      Ordered: {formatOrderDate(order.createdAt)}
+                    </Typography>
+
+                    <Typography variant="body2" color="textSecondary" style={{ marginBottom: "1rem" }}>
+                      Delivery address: {order.deliveryAddress?.address1}, {order.deliveryAddress?.city}
+                    </Typography>
+
+                    <Typography variant="subtitle2" style={{ marginBottom: "0.5rem", fontWeight: "bold" }}>
+                      Products: {order.items.length} items
+                    </Typography>
+
+                    {order.items.map((item) => (
+                      <Box key={item.id} style={{ 
+                        display: "flex", 
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        padding: "0.25rem 0",
+                        borderBottom: "1px solid #f0f0f0"
+                      }}>
+                        <Typography variant="body2">
+                          {item.artist} × {item.quantity} pcs
+                        </Typography>
+                        <Typography variant="body2" style={{ fontWeight: "bold" }}>
+                          {item.quantity * item.price} SEK
+                        </Typography>
+                      </Box>
+                    ))}
+
+                    <Box style={{ 
+                      display: "flex", 
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      padding: "0.75rem 0 0.25rem 0"
+                    }}>
+                      <Typography variant="subtitle1" style={{ fontWeight: "bold" }}>
+                        Total:
+                      </Typography>
+                      <Typography variant="subtitle1" style={{ fontWeight: "bold", color: "#2c1810" }}>
+                        {orderTotal} SEK
+                      </Typography>
+                    </Box>
+                  </Box>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </Box>
+
       )}
     </div>
   );

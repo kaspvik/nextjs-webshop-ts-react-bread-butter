@@ -1,27 +1,14 @@
-"use client";
-
 import { getOrderByOrderNr } from "@/app/admin/action";
 import Receipt from "@/app/confirmation/receipt";
 import { Box, Button, Container, Link, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
 
-export default function ConfirmationPage({
+export default async function ConfirmationPage({
   params,
 }: {
   params: Promise<{ orderNr: string }>;
 }) {
-  const { orderNr } = React.use(params);
-  const [order, setOrder] = useState<any>(null);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    getOrderByOrderNr(orderNr)
-      .then(setOrder)
-      .catch(() => setError("Could not fetch the order."));
-  }, [orderNr]);
-
-  if (error) return <h1>{error}</h1>;
-  if (!order) return <h1>Laddar beställning...</h1>;
+  const { orderNr } = await params;
+  const order = await getOrderByOrderNr(orderNr);
 
   const { items, deliveryAddress } = order;
   const totalSum = items.reduce(
