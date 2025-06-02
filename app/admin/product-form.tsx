@@ -19,14 +19,13 @@ import { createProduct, updateProduct } from "./action";
 
 const ProductSchema = z.object({
   artist: z.string().min(1),
-  weight: z.coerce.number().optional(),
+  album: z.string().optional(),            // Album finns i Prisma
   description: z.string().min(1),
-  album: z.string().optional(),
   image: z.string().url(),
   price: z.coerce.number().min(1),
   stock: z.coerce.number().min(0).default(0),
+  // Vikt är borttagen
 });
-
 
 interface Props {
   product?: Product;
@@ -35,9 +34,11 @@ interface Props {
 export default function ProductForm({ product }: Props) {
   const isEdit = Boolean(product);
   const router = useRouter();
+
   const form = useForm<Prisma.ProductCreateInput>({
     defaultValues: product || {
       artist: "",
+      album: "",
       description: "",
       image: "",
       price: 0,
@@ -75,14 +76,16 @@ export default function ProductForm({ product }: Props) {
           md: 500,
           lg: 600,
         },
-      }}>
+      }}
+    >
       <Typography
         variant="h4"
         sx={{
           display: "flex",
           justifyContent: "space-between",
           margin: 2,
-        }}>
+        }}
+      >
         <span></span>
         {isEdit ? "Edit Product" : "Add Product"}
 
@@ -99,8 +102,8 @@ export default function ProductForm({ product }: Props) {
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
+        }}
+      >
         Image URL
       </FormLabel>
 
@@ -112,36 +115,9 @@ export default function ProductForm({ product }: Props) {
         fullWidth
         variant="outlined"
         error={!!errors.image}
-        helperText={
-          errors.image ? <span>{"Please enter a valid URL"}</span> : null
-        }
-        {...form.register("image")}
+        helperText={errors.image ? <span>Please enter a valid URL</span> : null}
+        {...register("image")}
       />
-
-      <FormLabel
-  sx={{
-    textAlign: "left",
-    fontWeight: "bold",
-    color: "text.primary",
-    fontFamily: "var(--font-tomorrow)",
-  }}>
-  Artist
-</FormLabel>
-
-<TextField
-  title="Artist"
-  margin="normal"
-  id="artist"
-  type="text"
-  fullWidth
-  variant="outlined"
-  error={!!errors.artist}
-  helperText={
-    errors.artist ? <span>{"Artist name cannot be empty"}</span> : null
-  }
-  {...register("artist")}
-/>
-
 
       <FormLabel
         sx={{
@@ -149,19 +125,42 @@ export default function ProductForm({ product }: Props) {
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
+        }}
+      >
+        Artist
+      </FormLabel>
+
+      <TextField
+        title="Artist"
+        margin="normal"
+        id="artist"
+        type="text"
+        fullWidth
+        variant="outlined"
+        error={!!errors.artist}
+        helperText={errors.artist ? <span>Artist name cannot be empty</span> : null}
+        {...register("artist")}
+      />
+
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+          fontFamily: "var(--font-tomorrow)",
+        }}
+      >
         Album
       </FormLabel>
 
       <TextField
-        title="Vikt"
+        title="Album"
         margin="normal"
-        id="Vikt"
-        type="number"
+        id="album"
+        type="text"
         fullWidth
         variant="outlined"
-        {...register("weight")}
+        {...register("album")}
       />
 
       <FormLabel
@@ -170,24 +169,20 @@ export default function ProductForm({ product }: Props) {
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
+        }}
+      >
         Price in SEK
       </FormLabel>
 
       <TextField
-        title="Pris"
+        title="Price"
         margin="normal"
-        id="Pris"
+        id="price"
         type="number"
         fullWidth
         variant="outlined"
-        error={!!errors.description}
-        helperText={
-          errors.price ? (
-            <span>{"You must enter a price above 0:-"}</span>
-          ) : null
-        }
+        error={!!errors.price}
+        helperText={errors.price ? <span>You must enter a price above 0:-</span> : null}
         {...register("price")}
       />
 
@@ -197,25 +192,44 @@ export default function ProductForm({ product }: Props) {
           fontWeight: "bold",
           color: "text.primary",
           fontFamily: "var(--font-tomorrow)",
-        }}>
-        {" "}
+        }}
+      >
         Description
       </FormLabel>
 
       <TextField
         title="Description"
         margin="normal"
-        id="Beskrivning"
+        id="description"
         type="text"
         fullWidth
         variant="outlined"
         error={!!errors.description}
-        helperText={
-          errors.description ? (
-            <span>{"The description cannot be empty."}</span>
-          ) : null
-        }
+        helperText={errors.description ? <span>The description cannot be empty.</span> : null}
         {...register("description")}
+      />
+
+      <FormLabel
+        sx={{
+          textAlign: "left",
+          fontWeight: "bold",
+          color: "text.primary",
+          fontFamily: "var(--font-tomorrow)",
+        }}
+      >
+        Stock
+      </FormLabel>
+
+      <TextField
+        title="Stock"
+        margin="normal"
+        id="stock"
+        type="number"
+        fullWidth
+        variant="outlined"
+        error={!!errors.stock}
+        helperText={errors.stock ? <span>Stock cannot be negative.</span> : null}
+        {...register("stock")}
       />
 
       <Box
@@ -224,7 +238,8 @@ export default function ProductForm({ product }: Props) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
-        }}>
+        }}
+      >
         <Button
           sx={{
             mt: 3,
@@ -235,7 +250,8 @@ export default function ProductForm({ product }: Props) {
             fontFamily: "var(--font-tomorrow)",
             "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
           }}
-          type="submit">
+          type="submit"
+        >
           Save
         </Button>
       </Box>
