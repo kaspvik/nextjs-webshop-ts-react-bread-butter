@@ -1,6 +1,9 @@
-import styled from "@emotion/styled";
+"use client";
+
 import { Typography } from "@mui/material";
 import { RetroButton } from "../signin/providers/retro-buttons";
+import styled from "@emotion/styled";
+import ModalWindow from "../components/modal-window";
 
 interface CustomAlertProps {
   onClose: () => void;
@@ -9,77 +12,25 @@ interface CustomAlertProps {
 
 export default function CustomAlert({ onClose, message }: CustomAlertProps) {
   return (
-    <Overlay onClick={onClose}>
-      <AlertWindow onClick={(e) => e.stopPropagation()}>
-        <AlertTitleBar>
-          <CloseButton onClick={onClose}>✕</CloseButton>
-        </AlertTitleBar>
-        <AlertContent>
-          <RetroIcon>x</RetroIcon>
-          <BoxContainer>
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: "1rem",
-                paddingRight: "10px",
-              }}
-            >
-              {message}
-            </Typography>
-            <SmallRetroButton onClick={onClose}>Close</SmallRetroButton>
-          </BoxContainer>
-        </AlertContent>
-      </AlertWindow>
-    </Overlay>
+    <ModalWindow onClose={onClose}>
+      <AlertContent>
+        <RetroIcon>x</RetroIcon>
+        <BoxContainer>
+          <Typography
+            sx={{
+              textAlign: "center",
+              fontSize: "1rem",
+              paddingRight: "10px",
+            }}
+          >
+            {message}
+          </Typography>
+          <SmallRetroButton onClick={onClose}>Close</SmallRetroButton>
+        </BoxContainer>
+      </AlertContent>
+    </ModalWindow>
   );
 }
-
-const Overlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1300;
-`;
-
-const AlertWindow = styled.div`
-  width: 100%;
-  max-width: 550px;
-  height: 100%;
-  max-height: 250px;
-  background-color: #c0c0c0;
-  box-shadow: 2px 2px black;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 599px) {
-    max-width: 90%;
-  }
-`;
-
-const AlertTitleBar = styled.div`
-  margin-top: 2px;
-  margin-left: 2.5px;
-  width: 99%;
-  background: linear-gradient(to right, #0f5796, #1f639e, #729bc0);
-  padding: 5px 8px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-`;
-
-const CloseButton = styled.div`
-  background: #c0c0c0;
-  box-shadow: 2px 2px #403f3f;
-  color: black;
-  padding: 0 4px;
-  cursor: pointer;
-  :hover {
-    background: #b0b0b0;
-  }
-`;
 
 const AlertContent = styled.div`
   flex-grow: 1;
