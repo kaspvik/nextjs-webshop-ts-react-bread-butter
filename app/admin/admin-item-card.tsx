@@ -29,7 +29,6 @@ export default function AdminItem({ product }: ProductCardProps) {
   return (
     <>
       <Container
-        data-cy="product"
         key={product.id}
         sx={{
           display: "flex",
@@ -66,20 +65,20 @@ export default function AdminItem({ product }: ProductCardProps) {
         </Box>
 
         <Box sx={{ flex: 1, flexWrap: "wrap", width: "100%" }}>
-          <Typography variant="h6" data-cy="product-title">
+          <Typography variant="h6">
             {product.title}
           </Typography>
 
           <Box sx={{ display: "flex", flexDirection: "row" }}>
             <Typography variant="body2">Art Nr: </Typography>
-            <Typography variant="body2" data-cy="product-id" sx={{ ml: 0.5 }}>
+            <Typography variant="body2" sx={{ ml: 0.5 }}>
               {product.articleNumber}
             </Typography>
           </Box>
 
           <Typography variant="body2">Artist: {product.artist}</Typography>
           <Typography variant="body2">Album: {product.album}</Typography>
-          <Typography variant="body2" data-cy="product-price">
+          <Typography variant="body2">
             {product.price} sek
           </Typography>
 
@@ -89,7 +88,6 @@ export default function AdminItem({ product }: ProductCardProps) {
           <Typography
             variant="body2"
             sx={{ borderColor: "text.secondary", borderRadius: "4px" }}
-            data-cy="product-description"
           >
             {product.description}
           </Typography>
