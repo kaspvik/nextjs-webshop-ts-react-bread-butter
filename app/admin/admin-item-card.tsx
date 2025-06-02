@@ -56,8 +56,8 @@ export default function AdminItem({ product }: ProductCardProps) {
 
         <Box
           sx={{
-            width: { xs: "100px", md: "150px" },
-            height: { xs: "100px", md: "150px" },
+            width: "190px",
+            height: "190px",
           }}>
           <Box
             component="img"
@@ -123,7 +123,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
+              flexDirection: "row",
               alignItems: { xs: "flex-start", sm: "center" },
               gap: 1,
               mt: 2,
