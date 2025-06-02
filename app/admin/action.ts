@@ -96,6 +96,7 @@ export async function createOrder(cartItems: CartItem[]) {
           id: address.id,
         },
       },
+      createdAt: new Date(),
       items: {
         create: cartItems.map((item) => ({
           image: item.image,
