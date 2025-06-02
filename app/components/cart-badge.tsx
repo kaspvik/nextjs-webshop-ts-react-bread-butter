@@ -11,8 +11,8 @@ const CartBadge = () => {
       invisible={cartCount === 0}
       sx={{
         "& .MuiBadge-badge": {
-          backgroundColor: "background.paper",
-          color: "text.primary",
+          backgroundColor: "text.primary",
+          color: "#f2f2f2",
           fontSize: { xs: "0.8rem", md: "1rem" },
           height: { xs: 16, sm: 18, md: 25 },
           minWidth: { xs: 15, md: 25 },
@@ -20,7 +20,8 @@ const CartBadge = () => {
           right: { xs: 0, sm: 15, md: 20 },
           borderRadius: "50%",
         },
-      }}>
+      }}
+    >
       <ShoppingCartIcon
         sx={{
           fontSize: { xs: 23, sm: 28, md: 40 },

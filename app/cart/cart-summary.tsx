@@ -15,7 +15,8 @@ export default function CartSummary() {
           paddingBottom: { xs: 3, sm: 1 },
           paddingTop: { xs: 3, sm: 1 },
           bgcolor: { xs: "background.paper", sm: "transparen" },
-        }}>
+        }}
+      >
         <Typography variant="h5" sx={{ paddingX: 2 }}>
           Subtotal:
         </Typography>
@@ -33,7 +34,8 @@ export default function CartSummary() {
           gap: 2,
           paddingBottom: { xs: 3, sm: 0 },
           bgcolor: { xs: "background.paper", sm: "transparent" },
-        }}>
+        }}
+      >
         <Link href="/">
           <Button
             sx={{
@@ -43,7 +45,8 @@ export default function CartSummary() {
               border: "1px solid #000000",
               "&:hover": { backgroundColor: "#E8DACD", color: "text.primary" },
               mb: { xs: 1, sm: 8 },
-            }}>
+            }}
+          >
             CONTINUE SHOPPING
           </Button>
         </Link>
@@ -54,9 +57,10 @@ export default function CartSummary() {
             sx={{
               bgcolor: "#4ECDC4",
               color: "#000000",
-              "&:hover": { bgcolor: "primary.dark", color: "background.paper" },
+              "&:hover": { bgcolor: "text.primary", color: "primary.main" },
               mb: { xs: 8, sm: 8 },
-            }}>
+            }}
+          >
             PROCEED TO CHECKOUT
           </Button>
         </Link>
