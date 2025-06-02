@@ -161,7 +161,7 @@ export default function AdminItem({ product }: ProductCardProps) {
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "row", sm: "column" },
+              flexDirection: { xs: "row", sm: "row" },
               gap: 1,
               justifyContent: "center",
               alignItems: "center",
