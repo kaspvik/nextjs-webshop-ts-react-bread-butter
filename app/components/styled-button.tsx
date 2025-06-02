@@ -1,7 +1,7 @@
 "use client";
 import { Button, ButtonProps } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface NetscapeButtonProps extends ButtonProps {
   emoji?: string;
@@ -58,9 +58,15 @@ const StyledNetscapeButton: React.FC<NetscapeButtonProps> = ({
   children,
   ...props
 }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
   return (
     <StyledButtonRoot {...props}>
-      {emoji && <EmojiSpan>{emoji}</EmojiSpan>}
+      {hasMounted && emoji && <EmojiSpan>{emoji}</EmojiSpan>}
       {children}
     </StyledButtonRoot>
   );

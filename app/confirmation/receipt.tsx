@@ -2,38 +2,24 @@ import {
   Paper,
   Table,
   TableBody,
-  TableCell,
-  tableCellClasses,
   TableContainer,
   TableHead,
   TableRow,
   Typography,
 } from "@mui/material";
-import { styled } from "@mui/material/styles";
-
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.background,
-    color: theme.palette.text,
-    fontSize: 20,
-    fontWeight: "400",
-  },
-  [`&.${tableCellClasses.body}`]: {
-    fontSize: 16,
-  },
-}));
-
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
-    backgroundColor: theme.palette.action.hover,
-  },
-  "&:last-child td, &:last-child th": {
-    border: 0,
-  },
-}));
+import {
+  StyledTableCell,
+  StyledTableRow,
+} from "../components/styled-table-components";
 
 interface ReceiptProps {
-  items: Array<any>;
+  items: Array<{
+    id: string;
+    artist: string;
+    image: string;
+    quantity: number;
+    price: number;
+  }>;
   totalSum: number;
 }
 
@@ -58,7 +44,7 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {items.map((item: any) => (
+            {items.map((item) => (
               <StyledTableRow key={item.id}>
                 <StyledTableCell
                   component="th"
@@ -72,14 +58,14 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
                 >
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={item.artist}
                     style={{
                       width: "50px",
                       height: "50px",
                       borderRadius: "50%",
                     }}
                   />
-                  {item.title}
+                  {item.artist}
                 </StyledTableCell>
                 <StyledTableCell align="right">{item.quantity}</StyledTableCell>
                 <StyledTableCell align="right">{item.price}</StyledTableCell>

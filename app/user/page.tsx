@@ -1,5 +1,3 @@
-"use server";
-
 import { db } from "@/prisma/db";
 import { Card, CardContent, Typography, Chip, Box } from "@mui/material";
 import { headers } from "next/headers";
@@ -99,6 +97,7 @@ export default async function UserPage() {
           </Typography>
         </Card>
       ) : (
+
         <Box style={{ width: "100%" }}>
           {orders.map((order) => {
             const orderTotal = order.items.reduce(
@@ -168,6 +167,7 @@ export default async function UserPage() {
             );
           })}
         </Box>
+
       )}
     </div>
   );

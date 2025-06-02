@@ -8,7 +8,6 @@ import Link from "next/link";
 import { useSession } from "../auth-client";
 import CartIconButton from "./cart-icon-button";
 import Nav from "./nav";
-import { navigateToUserPage } from "../admin/action";
 
 const Header = () => {
   const { data } = useSession();
@@ -46,18 +45,16 @@ const Header = () => {
           }}
         >
           {data && (
-            <>
-              <form action={navigateToUserPage}>
-                <IconButton data-cy="admin-link" color="inherit" type="submit">
-                  <AccountCircleIcon
-                    sx={{
-                      fontSize: { sx: 20, md: 40 },
-                      color: "text.primary",
-                    }}
-                  />
-                </IconButton>
-              </form>
-            </>
+            <Link href={data?.user.isAdmin ? "/admin" : "/user"}>
+              <IconButton color="inherit" type="submit">
+                <AccountCircleIcon
+                  sx={{
+                    fontSize: { sx: 20, md: 40 },
+                    color: "text.primary",
+                  }}
+                />
+              </IconButton>
+            </Link>
           )}
           <CartIconButton />
           <Nav />
