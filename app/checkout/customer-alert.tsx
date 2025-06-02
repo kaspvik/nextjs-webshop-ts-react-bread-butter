@@ -1,9 +1,10 @@
 "use client";
 
-import { Typography } from "@mui/material";
-import { RetroButton } from "../signin/providers/retro-buttons";
 import styled from "@emotion/styled";
+import { Typography } from "@mui/material";
+import Image from "next/image";
 import ModalWindow from "../components/modal-window";
+import { RetroButton } from "../signin/providers/retro-buttons";
 
 interface CustomAlertProps {
   onClose: () => void;
@@ -14,17 +15,19 @@ export default function CustomAlert({ onClose, message }: CustomAlertProps) {
   return (
     <ModalWindow onClose={onClose}>
       <AlertContent>
-        <RetroIcon>x</RetroIcon>
+        <IconWrapper>
+          <Image
+            src="/images/error-icon.png"
+            alt="Error icon"
+            width={22}
+            height={22}
+          />
+        </IconWrapper>
         <BoxContainer>
-          <Typography
-            sx={{
-              textAlign: "center",
-              fontSize: "1rem",
-              paddingRight: "10px",
-            }}
-          >
+          <Typography variant="h6" align="center">
             {message}
           </Typography>
+
           <SmallRetroButton onClick={onClose}>Close</SmallRetroButton>
         </BoxContainer>
       </AlertContent>
@@ -33,44 +36,33 @@ export default function CustomAlert({ onClose, message }: CustomAlertProps) {
 }
 
 const AlertContent = styled.div`
-  flex-grow: 1;
-  padding: 16px;
+  position: relative;
+  padding: 32px 16px;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  flex-direction: column;
+`;
+
+const IconWrapper = styled.div`
+  position: absolute;
+  top: -59px;
+  left: -5px;
 `;
 
 const BoxContainer = styled.div`
   display: flex;
+  width: 75%;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  text-align: center;
 
   & > *:not(:last-child) {
-    margin-bottom: 40px;
+    margin-bottom: 24px;
   }
 `;
 
-const RetroIcon = styled.div`
-  width: 50px;
-  height: 40px;
-  border-radius: 50%;
-  background: red;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 28px;
-  font-weight: bold;
-  padding-left: 2px;
-  padding-bottom: 1px;
-  text-shadow: 0px 0px 0 #000, 0px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-  box-shadow: 2px 1px 0px rgba(0, 0, 0, 0.6);
-  margin-bottom: 90px;
-`;
-
 const SmallRetroButton = styled(RetroButton)`
-  width: 20%;
+  width: 30%;
+  font-weight: 300;
 `;
