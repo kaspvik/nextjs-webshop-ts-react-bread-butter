@@ -6,10 +6,13 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Switch,
   Typography,
 } from "@mui/material";
 import { Address, Order, OrderItem, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
+import { useTransition } from "react";
+import { toggleShipped } from "../action";
 
 type OrderWithRelations = Order & {
   user: User | null;
@@ -23,6 +26,15 @@ type OrderTableProps = {
 
 export default function OrderTable({ orders }: OrderTableProps) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+
+  const handleToggleShipped = (orderId: string) => {
+    startTransition(() => {
+      toggleShipped(orderId).catch((err) =>
+        console.error("Faied to toggle shipped:", err)
+      );
+    });
+  };
 
   const formatProducts = (items: OrderItem[]) =>
     items.map((item) => `${item.artist} (${item.quantity}st)`).join(", ");
@@ -55,7 +67,8 @@ export default function OrderTable({ orders }: OrderTableProps) {
             borderRadius: 1,
             fontWeight: 600,
             mb: 1,
-          }}>
+          }}
+        >
           <Typography sx={{ minWidth: "120px", fontWeight: 600 }}>
             Order
           </Typography>
@@ -70,41 +83,79 @@ export default function OrderTable({ orders }: OrderTableProps) {
           No orders could be found
         </Typography>
       ) : (
-        orders.map((order) => (
-          <Accordion
-            key={order.id}
-            sx={{ backgroundColor: "#FAF2E9", boxShadow: 2 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", sm: "row" },
-                  gap: 3,
-                }}>
-                <Typography variant="h6" color="black" sx={{ fontWeight: 600 }}>
-                  {order.orderNr || order.id.slice(-8)}
-                </Typography>
-                <Typography variant="h6" color="black">
-                  {order.user?.name || "Unknown customer"}
-                </Typography>
-              </Box>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                <Typography variant="h6" color="black">
-                  <strong>Address:</strong>{" "}
-                  {formatAddress(order.deliveryAddress)}
-                </Typography>
-                <Typography variant="h6" color="black">
-                  <strong>Email:</strong> {order.user?.email || "No email"}
-                </Typography>
-                <Typography variant="h6" color="black">
-                  <strong>Products:</strong> {formatProducts(order.items)}
-                </Typography>
-              </Box>
-            </AccordionDetails>
-          </Accordion>
-        ))
+        [...orders]
+          .sort((a, b) => {
+            if (a.isShipped !== b.isShipped) {
+              return a.isShipped ? -1 : 1;
+            }
+
+            return (
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+            );
+          })
+          .map((order) => (
+            <Accordion
+              key={order.id}
+              sx={{ backgroundColor: "#eee", boxShadow: 2 }}
+            >
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: { xs: "column", sm: "row" },
+                    gap: 3,
+                    width: "100%",
+                  }}
+                >
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    sx={{ fontWeight: 600, minWidth: "140px", flexShrink: 0 }}
+                  >
+                    {order.orderNr || order.id.slice(-8)}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    color="black"
+                    sx={{ minWidth: "200px", flexGrow: 1 }}
+                  >
+                    {order.user?.name || "Unknown customer"}
+                  </Typography>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                    <Typography variant="body1" color="black">
+                      Shipped:
+                    </Typography>
+                    <Switch
+                      checked={order.isShipped}
+                      onChange={() => handleToggleShipped(order.id)}
+                      onClick={(event) => event.stopPropagation()}
+                      color="success"
+                      sx={{
+                        "& .MuiSwitch-track": {
+                          borderRadius: 0,
+                        },
+                      }}
+                      disabled={isPending}
+                    />
+                  </Box>
+                </Box>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                  <Typography variant="h6" color="black">
+                    <strong>Address:</strong>{" "}
+                    {formatAddress(order.deliveryAddress)}
+                  </Typography>
+                  <Typography variant="h6" color="black">
+                    <strong>Email:</strong> {order.user?.email || "No email"}
+                  </Typography>
+                  <Typography variant="h6" color="black">
+                    <strong>Products:</strong> {formatProducts(order.items)}
+                  </Typography>
+                </Box>
+              </AccordionDetails>
+            </Accordion>
+          ))
       )}
     </Box>
   );
