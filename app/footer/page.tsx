@@ -34,9 +34,7 @@ export default function Footer() {
             <LocationOn
               sx={{
                 fontSize: 40,
-                color: "background.paper",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.5)" },
+                color: "#1A535C",
               }}
             />
             <Typography variant="h5">Find us:</Typography>
@@ -49,9 +47,7 @@ export default function Footer() {
             <AccessTime
               sx={{
                 fontSize: 40,
-                color: "background.paper",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.5)" },
+                color: "#1A535C",
               }}
             />
             <Typography variant="h5">Open Hours:</Typography>
@@ -62,9 +58,7 @@ export default function Footer() {
             <Email
               sx={{
                 fontSize: 40,
-                color: "background.paper",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.5)" },
+                color: "#1A535C",
               }}
             />
             <Typography variant="h5">Email:</Typography>
@@ -75,9 +69,7 @@ export default function Footer() {
             <Phone
               sx={{
                 fontSize: 40,
-                color: "background.paper",
-                transition: "transform 0.3s",
-                "&:hover": { transform: "scale(1.5)" },
+                color: "#1A535C",
               }}
             />
             <Typography variant="h5">Telephone:</Typography>

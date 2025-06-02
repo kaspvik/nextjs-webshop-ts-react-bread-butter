@@ -31,7 +31,8 @@ export default async function ProductCard({ product }: ProductCardProps) {
           transform: "scale(1.02)",
           boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
         },
-      }}>
+      }}
+    >
       <CardMedia
         component="img"
         sx={{
@@ -49,7 +50,6 @@ export default async function ProductCard({ product }: ProductCardProps) {
         sx={{
           border: "2px solid",
           borderColor: "text.secondary",
-          borderRadius: "0.25rem",
           mx: "auto",
           mt: "1rem",
           mb: "1rem",
@@ -57,13 +57,34 @@ export default async function ProductCard({ product }: ProductCardProps) {
           maxWidth: "90%",
           minWidth: "312px",
           minHeight: "233px",
-        }}>
-        <Typography gutterBottom variant="h5" component="div">
+        }}
+      >
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
           {product.artist}
         </Typography>
-        <Typography gutterBottom variant="h6" component="div">
+
+        <Typography
+          gutterBottom
+          variant="h6"
+          component="div"
+          sx={{
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
           {product.album}
         </Typography>
+
         <Typography
           variant="body1"
           sx={{
@@ -74,16 +95,19 @@ export default async function ProductCard({ product }: ProductCardProps) {
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
-          }}>
+          }}
+        >
           {product.description}
         </Typography>
 
         <Typography variant="h5" sx={{ color: "text.primary", mt: "0.5rem" }}>
           {product.price} kr
         </Typography>
+
         <Typography variant="h6" color="text.secondary" sx={{ mt: "0.5rem" }}>
           {product.Category ? product.Category.name : "No Category"}
         </Typography>
+
         <CardActions>
           <Box sx={{ mx: "auto" }}>
             <AddToCartButton label="Buy" product={product} />
@@ -92,4 +116,4 @@ export default async function ProductCard({ product }: ProductCardProps) {
       </CardContent>
     </Card>
   );
-}
+} 

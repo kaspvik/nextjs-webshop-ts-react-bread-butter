@@ -23,7 +23,9 @@ export default function OrderOverview() {
         py: 3,
       }}
     >
-      <Typography variant="h4">Order overview</Typography>
+      <Typography variant="h4" sx={{ fontFamily: "var(--font-tomorrow)" }}>
+        Order overview
+      </Typography>
       <Box
         sx={{
           backgroundColor: "background.default",
@@ -69,6 +71,7 @@ export default function OrderOverview() {
                       display: "flex",
                       alignItems: "center",
                       gap: "0.5rem",
+                      fontFamily: "var(--font-tomorrow)",
                     }}
                   >
                     <Box
@@ -79,25 +82,48 @@ export default function OrderOverview() {
                         width: "50px",
                         height: "50px",
                         borderRadius: "50%",
-
                         display: { xs: "none", sm: "block" },
                       }}
                     />
                     {item.artist} - {item.album}
                   </TableCell>
-                  <TableCell align="right">{item.quantity}</TableCell>
-                  <TableCell align="right">{item.price}</TableCell>
-                  <TableCell align="right">
+                  <TableCell
+                    align="right"
+                    sx={{ fontFamily: "var(--font-tomorrow)" }}
+                  >
+                    {item.quantity}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    sx={{ fontFamily: "var(--font-tomorrow)" }}
+                  >
+                    {item.price}
+                  </TableCell>
+                  <TableCell
+                    align="right"
+                    sx={{ fontFamily: "var(--font-tomorrow)" }}
+                  >
                     {(item.quantity * item.price).toFixed(2)}
                   </TableCell>
                 </TableRow>
               ))}
               <TableRow>
-                <TableCell colSpan={3} align="right">
-                  <h5>Total</h5>
+                <TableCell
+                  colSpan={3}
+                  align="right"
+                  sx={{ fontFamily: "var(--font-tomorrow)" }}
+                >
+                  <Typography variant="h6" sx={{ fontFamily: "var(--font-tomorrow)" }}>
+                    Total
+                  </Typography>
                 </TableCell>
-                <TableCell align="right">
-                  <strong>{totalSum.toFixed(2)} kr</strong>
+                <TableCell
+                  align="right"
+                  sx={{ fontFamily: "var(--font-tomorrow)" }}
+                >
+                  <Typography variant="h6" sx={{ fontFamily: "var(--font-tomorrow)" }}>
+                    {totalSum.toFixed(2)} kr
+                  </Typography>
                 </TableCell>
               </TableRow>
             </TableBody>
