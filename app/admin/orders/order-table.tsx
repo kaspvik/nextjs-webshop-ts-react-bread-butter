@@ -115,13 +115,16 @@ export default function OrderTable({ orders }: OrderTableProps) {
                       width: "100%",
                     }}
                   >
+                    {/* Endast ordernummer, utan datum */}
                     <Typography
                       variant="h6"
                       color="black"
                       sx={{ fontWeight: 600, minWidth: "140px", flexShrink: 0 }}
                     >
-                      {order.orderNr || order.id.slice(-8)} — {formattedDate}
+                      {order.orderNr || order.id.slice(-8)}
                     </Typography>
+
+                    {/* Kundens namn */}
                     <Typography
                       variant="h6"
                       color="black"
@@ -129,6 +132,8 @@ export default function OrderTable({ orders }: OrderTableProps) {
                     >
                       {order.user?.name || "Unknown customer"}
                     </Typography>
+
+                    {/* Switch för shipped */}
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                       <Typography variant="body1" color="black">
                         Shipped:
@@ -148,6 +153,7 @@ export default function OrderTable({ orders }: OrderTableProps) {
                     </Box>
                   </Box>
                 </AccordionSummary>
+
                 <AccordionDetails>
                   <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
                     <Typography variant="h6" color="black">
