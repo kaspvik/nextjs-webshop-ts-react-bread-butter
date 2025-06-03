@@ -1,22 +1,15 @@
 "use client";
 
+import styled from "@emotion/styled";
 import { zodResolver } from "@hookform/resolvers/zod";
-import ClearRoundedIcon from "@mui/icons-material/ClearRounded";
-import {
-  FormLabel,
-  IconButton,
-  TextField,
-  Typography,
-} from "@mui/material";
-import { Prisma, Product } from "@prisma/client";
-import Link from "next/link";
+import { FormLabel, TextField, Typography } from "@mui/material";
+import { Product } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import z from "zod";
-import { createProduct, updateProduct } from "./action";
 import TallModalWindow from "../components/tall-modal-window";
-import styled from "@emotion/styled";
 import { RetroButton } from "../signin/providers/retro-buttons";
+import { createProduct, updateProduct } from "./action";
 
 const ProductSchema = z.object({
   artist: z.string().min(1),
@@ -26,7 +19,6 @@ const ProductSchema = z.object({
   price: z.coerce.number().min(1),
   stock: z.coerce.number().min(0).default(0),
 });
-
 interface Props {
   product?: Product;
   onClose?: () => void;
@@ -36,7 +28,7 @@ export default function ProductForm({ product, onClose }: Props) {
   const isEdit = Boolean(product);
   const router = useRouter();
 
-  const form = useForm<Prisma.ProductCreateInput>({
+  const form = useForm<any>({
     defaultValues: product || {
       artist: "",
       album: "",
@@ -53,21 +45,21 @@ export default function ProductForm({ product, onClose }: Props) {
     formState: { errors },
   } = form;
 
-  const onSubmit: SubmitHandler<Prisma.ProductCreateInput> = async (data) => {
+  const onSubmit: SubmitHandler<any> = async (data) => {
     if (isEdit) {
       await updateProduct(product!.articleNumber, data);
     } else {
       await createProduct(data);
       form.reset();
     }
-    if (onClose && typeof onClose === 'function') {
+    if (onClose && typeof onClose === "function") {
       onClose();
     }
     router.push("/admin");
   };
 
   return (
-    <TallModalWindow onClose={onClose}>
+    <TallModalWindow onClose={onClose ?? (() => {})}>
       <FormContainer onSubmit={form.handleSubmit(onSubmit)}>
         <Typography
           variant="h4"
@@ -78,8 +70,7 @@ export default function ProductForm({ product, onClose }: Props) {
             marginTop: 2,
             marginBottom: 2,
             width: "100%",
-          }}
-        >
+          }}>
           <span></span>
           {isEdit ? "Edit Product" : "Add Product"}
         </Typography>
@@ -93,7 +84,9 @@ export default function ProductForm({ product, onClose }: Props) {
           fullWidth
           variant="outlined"
           error={!!errors.image}
-          helperText={errors.image ? <span>Please enter a valid URL</span> : null}
+          helperText={
+            errors.image ? <span>Please enter a valid URL</span> : null
+          }
           {...register("image")}
         />
 
@@ -106,7 +99,9 @@ export default function ProductForm({ product, onClose }: Props) {
           fullWidth
           variant="outlined"
           error={!!errors.artist}
-          helperText={errors.artist ? <span>Artist name cannot be empty</span> : null}
+          helperText={
+            errors.artist ? <span>Artist name cannot be empty</span> : null
+          }
           {...register("artist")}
         />
 
@@ -130,7 +125,9 @@ export default function ProductForm({ product, onClose }: Props) {
           fullWidth
           variant="outlined"
           error={!!errors.price}
-          helperText={errors.price ? <span>You must enter a price above 0:-</span> : null}
+          helperText={
+            errors.price ? <span>You must enter a price above 0:-</span> : null
+          }
           {...register("price")}
         />
 
@@ -143,7 +140,11 @@ export default function ProductForm({ product, onClose }: Props) {
           fullWidth
           variant="outlined"
           error={!!errors.description}
-          helperText={errors.description ? <span>The description cannot be empty.</span> : null}
+          helperText={
+            errors.description ? (
+              <span>The description cannot be empty.</span>
+            ) : null
+          }
           {...register("description")}
         />
 
@@ -156,7 +157,9 @@ export default function ProductForm({ product, onClose }: Props) {
           fullWidth
           variant="outlined"
           error={!!errors.stock}
-          helperText={errors.stock ? <span>Stock cannot be negative.</span> : null}
+          helperText={
+            errors.stock ? <span>Stock cannot be negative.</span> : null
+          }
           {...register("stock")}
         />
 
