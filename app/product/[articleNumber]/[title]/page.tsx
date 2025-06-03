@@ -5,11 +5,11 @@ import Image from "next/image";
 import AddToCartButton from "../../../components/add-to-cart-button";
 
 interface Props {
-  params: { articleNumber: string; title: string };
+  params: Promise<{ articleNumber: string; title: string }>;
 }
 
 export default async function ProductPage({ params }: Props) {
-  const { articleNumber, title } = params;
+  const { articleNumber, title } = await params;
   if (!articleNumber) {
     return <h1>Produkten hittades inte</h1>;
   }
