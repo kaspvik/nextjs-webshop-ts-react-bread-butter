@@ -18,7 +18,7 @@ export default function TallModalWindow({
     <FullScreenWrapper onClick={onClose}>
       <Window onClick={(e) => e.stopPropagation()}>
         <TitleBar>
-          <CloseButton href="/admin/" onClick={onClose}>
+          <CloseButton onClick={onClose}>
             <CloseIcon sx={{ fontSize: 20, color: "black" }} />
           </CloseButton>
         </TitleBar>
