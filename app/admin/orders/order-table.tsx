@@ -1,4 +1,5 @@
 "use client";
+
 import StyledButton from "@/app/components/styled-button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import {
@@ -13,6 +14,7 @@ import { Address, Order, OrderItem, User } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toggleShipped } from "../action";
+import { format } from "date-fns";
 
 type OrderWithRelations = Order & {
   user: User | null;
@@ -31,7 +33,7 @@ export default function OrderTable({ orders }: OrderTableProps) {
   const handleToggleShipped = (orderId: string) => {
     startTransition(() => {
       toggleShipped(orderId).catch((err) =>
-        console.error("Faied to toggle shipped:", err)
+        console.error("Failed to toggle shipped:", err)
       );
     });
   };
@@ -93,69 +95,78 @@ export default function OrderTable({ orders }: OrderTableProps) {
               new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
             );
           })
-          .map((order) => (
-            <Accordion
-              key={order.id}
-              sx={{ backgroundColor: "#eee", boxShadow: 2 }}
-            >
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: "column", sm: "row" },
-                    gap: 3,
-                    width: "100%",
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    color="black"
-                    sx={{ fontWeight: 600, minWidth: "140px", flexShrink: 0 }}
+          .map((order) => {
+            const formattedDate = format(
+              new Date(order.createdAt),
+              "yyyy-MM-dd HH:mm"
+            );
+
+            return (
+              <Accordion
+                key={order.id}
+                sx={{ backgroundColor: "#eee", boxShadow: 2 }}
+              >
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: { xs: "column", sm: "row" },
+                      gap: 3,
+                      width: "100%",
+                    }}
                   >
-                    {order.orderNr || order.id.slice(-8)}
-                  </Typography>
-                  <Typography
-                    variant="h6"
-                    color="black"
-                    sx={{ minWidth: "200px", flexGrow: 1 }}
-                  >
-                    {order.user?.name || "Unknown customer"}
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Typography variant="body1" color="black">
-                      Shipped:
+                    <Typography
+                      variant="h6"
+                      color="black"
+                      sx={{ fontWeight: 600, minWidth: "140px", flexShrink: 0 }}
+                    >
+                      {order.orderNr || order.id.slice(-8)} — {formattedDate}
                     </Typography>
-                    <Switch
-                      checked={order.isShipped}
-                      onChange={() => handleToggleShipped(order.id)}
-                      onClick={(event) => event.stopPropagation()}
-                      color="success"
-                      sx={{
-                        "& .MuiSwitch-track": {
-                          borderRadius: 0,
-                        },
-                      }}
-                      disabled={isPending}
-                    />
+                    <Typography
+                      variant="h6"
+                      color="black"
+                      sx={{ minWidth: "200px", flexGrow: 1 }}
+                    >
+                      {order.user?.name || "Unknown customer"}
+                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                      <Typography variant="body1" color="black">
+                        Shipped:
+                      </Typography>
+                      <Switch
+                        checked={order.isShipped}
+                        onChange={() => handleToggleShipped(order.id)}
+                        onClick={(event) => event.stopPropagation()}
+                        color="success"
+                        sx={{
+                          "& .MuiSwitch-track": {
+                            borderRadius: 0,
+                          },
+                        }}
+                        disabled={isPending}
+                      />
+                    </Box>
                   </Box>
-                </Box>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-                  <Typography variant="h6" color="black">
-                    <strong>Address:</strong>{" "}
-                    {formatAddress(order.deliveryAddress)}
-                  </Typography>
-                  <Typography variant="h6" color="black">
-                    <strong>Email:</strong> {order.user?.email || "No email"}
-                  </Typography>
-                  <Typography variant="h6" color="black">
-                    <strong>Products:</strong> {formatProducts(order.items)}
-                  </Typography>
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-          ))
+                </AccordionSummary>
+                <AccordionDetails>
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
+                    <Typography variant="h6" color="black">
+                      <strong>Address:</strong> {formatAddress(order.deliveryAddress)}
+                    </Typography>
+                    <Typography variant="h6" color="black">
+                      <strong>Email:</strong> {order.user?.email || "No email"}
+                    </Typography>
+                    <Typography variant="h6" color="black">
+                      <strong>Products:</strong> {formatProducts(order.items)}
+                    </Typography>
+                    <Typography variant="h6" color="black">
+                      <strong>Order date:</strong> {formattedDate}
+                    </Typography>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            );
+          })
       )}
     </Box>
   );
