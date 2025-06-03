@@ -91,7 +91,8 @@ export default function Footer() {
         <Image
           src="/images/netscape-netcenter-personal-finance-1999.gif"
           alt="Looking for a man in finance - advertisement from 1992"
-          style={{ width: "900px", height: "auto" }}
+          width={500}
+          height={100}
         />
       </Box>
     </Box>
