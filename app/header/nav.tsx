@@ -12,7 +12,9 @@ export default function Nav() {
   return (
     <nav className="flex gap-4">
       {data ? (
-        <StyledNetscapeButton color="inherit" onClick={() => signOut()}>Signout</StyledNetscapeButton>
+        <StyledNetscapeButton color="inherit" onClick={() => signOut()}>
+          Sign out
+        </StyledNetscapeButton>
       ) : (
         <>
           <StyledNetscapeButton
