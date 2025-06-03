@@ -1,5 +1,6 @@
 import { AccessTime, Email, LocationOn, Phone } from "@mui/icons-material";
 import { Box, Divider, Grid, Typography } from "@mui/material";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -87,7 +88,7 @@ export default function Footer() {
           gap: 2,
           paddingTop: 2,
         }}>
-        <img
+        <Image
           src="/images/netscape-netcenter-personal-finance-1999.gif"
           alt="Looking for a man in finance - advertisement from 1992"
           style={{ width: "900px", height: "auto" }}
