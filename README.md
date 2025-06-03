@@ -1,36 +1,4 @@
-# Bread & Butter
-
-### A webshop project in Next.js using App Router. We're also using MUI, Prisma with sqlight and Zod.
-
-<img width="1000" alt="hero2" align="center" src="https://github.com/user-attachments/assets/fbb8dbe9-55d8-4c16-84b8-e85e04787365" />
-
-## Features
-
-Some of the features presented in images below:
-
-<img width="500" alt="products" src="https://github.com/user-attachments/assets/983f03a8-040d-4557-ad34-e406197bc08e" />
-
-Shop products overview; add to cart or read more about the products
-
-<img width="500" alt="product-details" src="https://github.com/user-attachments/assets/aed14f46-4c83-4450-83b2-57a0cede5823" />
-
-Product details page; add to cart or go back to browse
-
-<img width="500" alt="cart" src="https://github.com/user-attachments/assets/1fc4f73d-ddd1-4bf2-90f5-c4cc95386623" />
-
-Cart aside with cart summary; proceed to checkout or continue shopping
-
-<img width="500" alt="zod" src="https://github.com/user-attachments/assets/c2581382-5dfb-40c0-9f79-f18392f21c6f" />
-
-Using Zod validation on customer delivery form; products overview and continue to payment option
-
-<img width="500" alt="confirmation" src="https://github.com/user-attachments/assets/8a8f2dff-49dd-46a1-9cd6-8c3216838c04" />
-
-Confirmation page with delivery- and order details
-
-<img width="500" alt="admin" src="https://github.com/user-attachments/assets/aecc0e54-737a-4059-8485-a8aee499eacf" />
-
-Admin page where you can edit, add and delete products from the web shop.
+# Surf & Sound
 
 ## Run and test the project
 
