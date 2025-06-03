@@ -1,5 +1,5 @@
 import {
-  Paper,
+  Box,
   Table,
   TableBody,
   TableContainer,
@@ -29,12 +29,11 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
       <Typography
         variant="h2"
         component="p"
-        sx={{ fontSize: "1.5rem", fontWeight: "500", mb: "1.5rem" }}
-      >
+        sx={{ fontSize: "1.5rem", fontWeight: "400", mb: "1.5rem" }}>
         Your order:
       </Typography>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 700 }} aria-label="order-overview">
+      <TableContainer component={"div"} sx={{ maxHeight: "30vh" }}>
+        <Table aria-label="order-overview">
           <TableHead>
             <TableRow>
               <StyledTableCell>Product</StyledTableCell>
@@ -54,17 +53,19 @@ export default function Receipt({ items, totalSum }: ReceiptProps) {
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
-                  }}
-                >
-                  <img
+                  }}>
+                  <Box
+                    component="img"
                     src={item.image}
                     alt={item.artist}
-                    style={{
+                    sx={{
                       width: "50px",
                       height: "50px",
                       borderRadius: "50%",
+                      display: { xs: "none", sm: "block" }, // Dölj på små skärmar
                     }}
                   />
+
                   {item.artist}
                 </StyledTableCell>
                 <StyledTableCell align="right">{item.quantity}</StyledTableCell>
