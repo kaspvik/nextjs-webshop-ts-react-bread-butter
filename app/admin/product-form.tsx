@@ -155,13 +155,13 @@ export default function ProductForm({ product }: Props) {
       </FormLabel>
 
       <TextField
-        title="Vikt"
+        title="Album"
         margin="normal"
-        id="Vikt"
-        type="number"
+        id="Album"
+        type="text"
         fullWidth
         variant="outlined"
-        {...register("weight")}
+        {...register("album")}
       />
 
       <FormLabel
