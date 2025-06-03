@@ -73,19 +73,15 @@ export default function ProductForm({ product, onClose }: Props) {
           variant="h4"
           sx={{
             display: "flex",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
+            marginTop: 2,
             marginBottom: 2,
             width: "100%",
           }}
         >
           <span></span>
           {isEdit ? "Edit Product" : "Add Product"}
-          <Link href="/admin/">
-            <IconButton onClick={onClose || (() => {})}>
-              <ClearRoundedIcon sx={{ fontSize: 30 }} />
-            </IconButton>
-          </Link>
         </Typography>
 
         <FormLabelStyled>Image URL</FormLabelStyled>

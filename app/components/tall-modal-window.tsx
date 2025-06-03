@@ -1,6 +1,8 @@
 "use client";
 
 import styled from "@emotion/styled";
+import CloseIcon from "@mui/icons-material/Close";
+import { IconButton } from "@mui/material";
 import { ReactNode } from "react";
 
 interface TallModalWindowProps {
@@ -8,11 +10,17 @@ interface TallModalWindowProps {
   children: ReactNode;
 }
 
-export default function TallModalWindow({ onClose, children }: TallModalWindowProps) {
+export default function TallModalWindow({
+  onClose,
+  children,
+}: TallModalWindowProps) {
   return (
     <FullScreenWrapper onClick={onClose}>
       <Window onClick={(e) => e.stopPropagation()}>
         <TitleBar>
+          <CloseButton href="/admin/" onClick={onClose}>
+            <CloseIcon sx={{ fontSize: 20, color: "black" }} />
+          </CloseButton>
         </TitleBar>
         <Content>{children}</Content>
       </Window>
@@ -51,9 +59,23 @@ const TitleBar = styled.div`
   background: linear-gradient(to right, #0f5796, #1f639e, #729bc0);
   padding: 5px 8px;
   display: flex;
-  justify-content: right;
+  justify-content: flex-end;
   align-items: center;
-  min-height: 30px;
+  min-height: 35px;
+`;
+
+const CloseButton = styled(IconButton)`
+  width: 25px;
+  height: 25px;
+  background: #c0c0c0;
+  box-shadow: 2px 2px #403f3f;
+  color: black;
+  padding: 0;
+  border-radius: 0;
+  cursor: pointer;
+  :hover {
+    background: #b0b0b0;
+  }
 `;
 
 const Content = styled.div`
