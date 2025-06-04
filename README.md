@@ -1,34 +1,35 @@
 # Surf & Sound 📀
 
-"Året är 1992, Waynes World och Charlie Moon
-går på biograferna. Janne Kemi är en finsk ultramiljonär som bestämt sig för att satsa på en ny e-handeln. Han vill investera i nya hemsidor. Han har anlitat er för att ta fram dessa sidor. Han har vissa specifika krav från sin IT avdelning som han bifogat som en kravspecifikation. Förutom det har ni fria händer att ta fram en grym idé och tjäna sjuka pengar (åt Janne).
-"
+##Uppgiftsbeskrivning:
+
+*Året är 1992, Waynes World och Charlie Moon
+går på biograferna. Janne Kemi är en finsk ultramiljonär som bestämt sig för att satsa på en ny e-handeln. Han vill investera i nya hemsidor. Han har anlitat er för att ta fram dessa sidor. Han har vissa specifika krav från sin IT avdelning som han bifogat som en kravspecifikation. Förutom det har ni fria händer att ta fram en grym idé och tjäna sjuka pengar (åt Janne).*
 
 #### För att möta uppdragsgivarens behov och krav har vi valt att utgå från en av våra befintliga webbplatser, Bread & Butter, och byta fokus från lyxbröd till en annan ikonisk produkt från det legendariska året 1992 – CD-skivor. Vi har utvecklat en webbshop-applikation med hjälp av Next.js, där applikationen hämtar och sparar data i en SQL-databas. 
 
 
-## Run and test the project
+## Kom igång med projektet:
 
-#### Install
+#### Installera:
 
-Run
+Kör
 
 ```bash
 npm install
 ```
 
-#### To run the development server:
+#### För att köra utvecklingsservern:
 
 ```bash
 npm run dev
 ```
 
-then open the Localhost port with your browser to see the result.
+öppna sedan Localhost-porten med din webbläsare för att se resultatet.
 
 
-### Using Prisma and sqlight db
+### Använda Prisma och SQLite-databasen:
 
-To synchronize the Prisma schema with the database schema
+Så här synkroniserar du Prisma-schemat med databasschemat
 
 ```bash
 npm run push
@@ -40,24 +41,23 @@ Define and pupulate the db with mock data
 npm run seed
 ```
 
-Open and view the data in Prisma Studio
+Öppna och visa data i Prisma Studio
 
 ```bash
 npm run studio
 ```
 
-## Learn More
+## Läs mer
 
-To learn more about Next.js, take a look at the following resources:
+För att lära dig mer om Next.js, ta en titt på följande resurser:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Next.js-dokumentation](https://nextjs.org/docs) - lär dig mer om Next.js funktioner och API.
+- [Lär dig Next.js](https://nextjs.org/learn) - en interaktiv Next.js-handledning.
 
-## Deploy on Vercel
+## Distribution på Vercel:
+[Klicka på mig!](https://nextjs-webshop-ts-react-bread-butter-illubht4h.vercel.app/)
 
-[Click me!](https://nextjs-webshop-ts-react-bread-butter-illubht4h.vercel.app/)
-
-## Criteria for grading and comments:
+## Betygskriterier samt kommentarer:
 
 - [x] Alla sidor skall vara responsiva. - *Vi har använt MUI som har inbyggt stöd för responsiva komponenter.*
 
