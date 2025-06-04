@@ -1,6 +1,6 @@
 # Surf & Sound 📀
 
-##Uppgiftsbeskrivning:
+## Uppgiftsbeskrivning:
 
 *Året är 1992, Waynes World och Charlie Moon
 går på biograferna. Janne Kemi är en finsk ultramiljonär som bestämt sig för att satsa på en ny e-handeln. Han vill investera i nya hemsidor. Han har anlitat er för att ta fram dessa sidor. Han har vissa specifika krav från sin IT avdelning som han bifogat som en kravspecifikation. Förutom det har ni fria händer att ta fram en grym idé och tjäna sjuka pengar (åt Janne).*
