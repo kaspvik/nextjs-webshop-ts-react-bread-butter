@@ -19,6 +19,7 @@ const ProductSchema = z.object({
   price: z.coerce.number().min(1),
   stock: z.coerce.number().min(0).default(0),
 });
+
 interface Props {
   product?: Product;
   onClose?: () => void;
@@ -45,6 +46,14 @@ export default function ProductForm({ product, onClose }: Props) {
     formState: { errors },
   } = form;
 
+  const handleClose = () => {
+    if (onClose && typeof onClose === "function") {
+      onClose();
+    } else {
+      router.push("/admin");
+    }
+  };
+
   const onSubmit: SubmitHandler<any> = async (data) => {
     if (isEdit) {
       await updateProduct(product!.articleNumber, data);
@@ -52,14 +61,11 @@ export default function ProductForm({ product, onClose }: Props) {
       await createProduct(data);
       form.reset();
     }
-    if (onClose && typeof onClose === "function") {
-      onClose();
-    }
-    router.push("/admin");
+    handleClose();
   };
 
   return (
-    <TallModalWindow onClose={onClose ?? (() => {})}>
+    <TallModalWindow onClose={handleClose}>
       <FormContainer onSubmit={form.handleSubmit(onSubmit)}>
         <Typography
           variant="h4"
